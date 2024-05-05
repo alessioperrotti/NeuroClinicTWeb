@@ -188,6 +188,7 @@ CREATE TABLE `Messaggio` (
   `Conten` varchar(300) NOT NULL,
   `User_Clin` varchar(20) NOT NULL,
   `User_Paz` varchar(20) NOT NULL,
+  `Letto` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`ID`),
   KEY `Messaggio_Paziente_FK` (`User_Paz`),
   KEY `Messaggio_Clinico_FK` (`User_Clin`),
@@ -334,4 +335,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-30 15:36:23
+-- Dump completed on 2024-05-05 17:11:15
