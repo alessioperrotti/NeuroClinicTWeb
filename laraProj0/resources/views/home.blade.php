@@ -51,7 +51,7 @@
 
 <body>
     <nav class="navbar">
-        <img src="logo_bianco.svg" height="auto">
+        <img src="images/logo_bianco.svg" height="auto">
         <div></div>
         <a>CHI SIAMO</a>
         <a>FAQ</a>
