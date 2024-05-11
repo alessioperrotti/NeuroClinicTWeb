@@ -10,7 +10,9 @@
 <body class="bg-cyan-50">
     <header>
         <div class="bg-cyan-600 h-[100px] flex items-center justify-center">
-            <img src="images/logo_bianco.svg" class="h-16" alt="Logo">  <!-- qui va aggiunto l'href alla homepage -->
+            <a href="{{ route('home') }}">
+                <img src="images/logo_bianco.svg" class="h-16" alt="Logo">  <!-- qui va aggiunto l'href alla homepage -->
+            </a>
         </div>
     </header>
     <div>
