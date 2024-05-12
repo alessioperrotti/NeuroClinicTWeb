@@ -19,7 +19,7 @@
             <div>
                 <nav class="space-x-4 text-white text-sm">
                     <a href="#who">CHI SIAMO</a>
-                    <a href="">FAQ</a>
+                    <a href="{{ route('faq') }}">FAQ</a>
                     <a href="">CONTATTACI</a>
                     <a href="{{ route('login') }}">AREA RISERVATA</a>
                 </nav>
@@ -44,8 +44,8 @@
             </p>
             <br>
             <p class="text-slate-700">La nostra missione è quella di essere un faro di speranza e di sostegno 
-                per coloro che affrontano sfide neurologiche, quali ictus, lesioni cerebrali traumatiche, sclerosi 
-                multipla, malattia di Parkinson, e altre condizioni neurologiche complesse. Ogni paziente è un 
+                per coloro che affrontano sfide neurologiche quali ictus, lesioni cerebrali traumatiche, sclerosi 
+                multipla, malattia di Parkinson, e altre condizioni complesse. Ogni paziente è un 
                 individuo unico, e ci sforziamo di offrire un trattamento personalizzato che tenga conto delle 
                 loro esigenze specifiche e dei loro obiettivi di riabilitazione.
             </p>
