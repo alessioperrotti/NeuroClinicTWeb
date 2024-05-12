@@ -3,6 +3,3 @@
 @section('title', 'Login')
 
 @section('content')
-<div>
-    
-</div>
