@@ -74,6 +74,12 @@
         </div>
     </div>
 
+    <footer>
+        <div class="bg-cyan-600 w-auto h-[250px]">
+
+        </div>
+    </footer>
+
     
 </body>
 </html>
