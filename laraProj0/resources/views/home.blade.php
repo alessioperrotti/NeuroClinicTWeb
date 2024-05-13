@@ -14,13 +14,15 @@
     <header class="fixed top-0 left-0 right-0 z-20">  <!-- sarebbe carino mettere un backdrop blur-->
         <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8">
             <div> 
-                <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
+                <a href="{{ route('home') }}">
+                    <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
+                </a>
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
                     <a href="#who">CHI SIAMO</a>
                     <a href="{{ route('faq') }}">FAQ</a>
-                    <a href="">CONTATTACI</a>
+                    <a href="#contact">CONTATTACI</a>
                     <a href="{{ route('login') }}">AREA RISERVATA</a>
                 </nav>
             </div>
@@ -73,10 +75,76 @@
             </p>
         </div>
     </div>
+    <div class="flex justify-center">
+        <hr class="h-[3px] rounded bg-cyan-500 mb-2 w-[70%]">
+    </div>
+    <div class="flex justify-between px-20 py-4">
+        <div class="items-center w-[300px] justify-center">
+            <div class="rounded-xl bg-white items-center p-8">
+                <h3 class="font-bold text-center text-3xl text-slate-700">"Eccellente"</h3>
+                <br>
+                <p class="text-center text-slate-400">Un servizio di altissima qualità e grande professionalità.
+                    Gli specialisti di NeuroClinic ci hanno permesso di ottenere risultati 
+                    in cui neanche noi speravamo più.
+                </p>
+            </div>
+        </div>
+        <div class="flex items-center w-[300px] justify-center">
+            <div class="rounded-xl bg-white items-center p-8">
+                <h3 class="font-bold text-center text-3xl text-slate-700">"Eccellente"</h3>
+                <br>
+                <p class="text-center text-slate-400">Un servizio di altissima qualità e grande professionalità.
+                    Gli specialisti di NeuroClinic ci hanno permesso di ottenere risultati 
+                    in cui neanche noi speravamo più.
+                </p>
+            </div>
+        </div>
+        <div class="flex items-center w-[300px] justify-center">
+            <div class="rounded-xl bg-white items-center p-8">
+                <h3 class="font-bold text-center text-3xl text-slate-700">"Eccellente"</h3>
+                <br>
+                <p class="text-center text-slate-400">Un servizio di altissima qualità e grande professionalità.
+                    Gli specialisti di NeuroClinic ci hanno permesso di ottenere risultati 
+                    in cui neanche noi speravamo più.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center">
+        <hr class="h-[3px] rounded bg-cyan-500 mb-4 mt-2 w-[70%]">
+    </div>
+    <h1 class="text-center font-bold text-4xl text-slate-700">Contattaci</h1>
+
+    <div class="flex justify-center">
+        <div class="bg-white rounded-xl m-6 h-96 w-[900px] flex justify-between">
+         <div class="bg-cyan-600 p-8 rounded-xl">
+            <br>
+            <h4 class="font-bold text-white">Come Contattarci</h4>
+            <ul style="list-style-type: circle">
+                <li><p class="text-white">Via e-mail scrivendo a<br>info@neuroclinic.it</p>
+                <li><p class="text-white">Per telefono chiamando il<br><a href="tel:0713230">071-3230</a></p>
+            </ul>
+            </p>
+            <br>
+            <h4 class="font-bold text-white">Dove Siamo</h4>
+            <ul style="list-style-type: circle">
+                <li><p class="text-white">Piazza Enrico Malatesta 1<br>60121, Ancona(AN)</p>
+            </ul>
+         </div>
+            <iframe loading="lazy" class="z-10 w-60" src="https://maps.app.goo.gl/ZLuLYaaCrH77iQjn9">Collegamento Google Maps</iframe>
+        </div>
+    </div>
 
     <footer>
-        <div class="bg-cyan-600 w-auto h-[250px]">
-
+        <div id="contact" class="bg-cyan-600 w-auto h-[200px] justify-between items-center flex p-8">
+            <div> 
+                <a href="{{ route('home') }}">
+                    <img src="images/logo_bianco.svg" class="h-20" alt="Logo">
+                </a>
+            </div>
+            <div>
+                <h4 class="font-bold text-white">Informazioni di Contatto</h4>
+            </div>
         </div>
     </footer>
 
