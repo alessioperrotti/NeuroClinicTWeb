@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <title>NeuroClinic | Home </title>
 </head>
 <body class="bg-cyan-50">
@@ -91,21 +92,19 @@
         </div>
         <div class="flex items-center w-[300px] justify-center">
             <div class="rounded-xl bg-white items-center p-8">
-                <h3 class="font-bold text-center text-3xl text-slate-700">"Eccellente"</h3>
+                <h3 class="font-bold text-center text-3xl text-slate-700">"Una garanzia"</h3>
                 <br>
-                <p class="text-center text-slate-400">Un servizio di altissima qualità e grande professionalità.
-                    Gli specialisti di NeuroClinic ci hanno permesso di ottenere risultati 
-                    in cui neanche noi speravamo più.
+                <p class="text-center text-slate-400">Io e la mia famiglia ci rivolgiamo a Neuro Clinic
+                    da anni ormai, date le tante esperienze positive.
                 </p>
             </div>
         </div>
         <div class="flex items-center w-[300px] justify-center">
             <div class="rounded-xl bg-white items-center p-8">
-                <h3 class="font-bold text-center text-3xl text-slate-700">"Eccellente"</h3>
+                <h3 class="font-bold text-center text-3xl text-slate-700">"Soddisfatto"</h3>
                 <br>
-                <p class="text-center text-slate-400">Un servizio di altissima qualità e grande professionalità.
-                    Gli specialisti di NeuroClinic ci hanno permesso di ottenere risultati 
-                    in cui neanche noi speravamo più.
+                <p class="text-center text-slate-400">Lo staff di Neuro Clinic è composto da ottime persone
+                    oltre che da grandi professionisti. Mi sono sentito a casa!
                 </p>
             </div>
         </div>
@@ -113,30 +112,32 @@
     <div class="flex justify-center">
         <hr class="h-[3px] rounded bg-cyan-500 mb-4 mt-2 w-[70%]">
     </div>
-    <h1 class="text-center font-bold text-4xl text-slate-700">Contattaci</h1>
+    <h1 id="contact" class="text-center font-bold text-4xl text-slate-700">Contattaci</h1>
 
     <div class="flex justify-center">
         <div class="bg-white rounded-xl m-6 h-96 w-[900px] flex justify-between">
-         <div class="bg-cyan-600 p-8 rounded-xl">
-            <br>
-            <h4 class="font-bold text-white">Come Contattarci</h4>
-            <ul style="list-style-type: circle">
-                <li><p class="text-white">Via e-mail scrivendo a<br>info@neuroclinic.it</p>
-                <li><p class="text-white">Per telefono chiamando il<br><a href="tel:0713230">071-3230</a></p>
-            </ul>
-            </p>
-            <br>
-            <h4 class="font-bold text-white">Dove Siamo</h4>
-            <ul style="list-style-type: circle">
-                <li><p class="text-white">Piazza Enrico Malatesta 1<br>60121, Ancona(AN)</p>
-            </ul>
-         </div>
-            <iframe loading="lazy" class="z-10 w-60" src="https://maps.app.goo.gl/ZLuLYaaCrH77iQjn9">Collegamento Google Maps</iframe>
+            <div class="bg-cyan-600 p-8 rounded-xl z-20">
+                <br>
+                <h4 class="font-bold text-white">Come Contattarci</h4>
+                <ul style="list-style-type: circle">
+                    <li><p class="text-white">Via e-mail scrivendo a<br><a href="mailto:info@neuroclinic.it">info@neuroclinic.it</a></p>
+                    <li><p class="text-white">Per telefono chiamando il<br><a href="tel:0713230">071-3230</a></p>
+                </ul>
+                </p>
+                <br>
+                <h4 class="font-bold text-white">Dove Siamo</h4>
+                <ul style="list-style-type: circle">
+                    <li><p class="text-white">Piazza Enrico Malatesta 1<br>60121, Ancona(AN)</p>
+                </ul>
+            </div>
+            <div>
+                <iframe class="rounded-xl z-10" width="650px" height="384px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d474.75925022760055!2d13.515433449069254!3d43.619141431873956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132d7fb952605377%3A0x440757e90c2d2cba!2sPiazza%20Enrico%20Malatesta%2C%201%2C%2060121%20Ancona%20AN!5e0!3m2!1sit!2sit!4v1715613705541!5m2!1sit!2sit" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </div>
 
     <footer>
-        <div id="contact" class="bg-cyan-600 w-auto h-[200px] justify-between items-center flex p-8">
+        <div class="bg-cyan-600 w-auto h-[200px] justify-between items-center flex p-8">
             <div> 
                 <a href="{{ route('home') }}">
                     <img src="images/logo_bianco.svg" class="h-20" alt="Logo">
