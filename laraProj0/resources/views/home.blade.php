@@ -21,7 +21,7 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="#who">CHI SIAMO</a>
+                    <a href="#who" style="scroll-margin-bottom: 70px">CHI SIAMO</a>
                     <a href="{{ route('faq') }}">FAQ</a>
                     <a href="#contact">CONTATTACI</a>
                     <a href="{{ route('login') }}">AREA RISERVATA</a>
@@ -144,7 +144,20 @@
                 </a>
             </div>
             <div>
-                <h4 class="font-bold text-white">Informazioni di Contatto</h4>
+                <h4 class="font-bold text-white text-xl mr-8">Informazioni di Contatto</h4>
+                <br>
+                <div class="flex items-center space-x-1">
+                    <img src="{{ url('images/location_pin.png')}}" class="h-4">
+                    <p class="font-sans text-white">Piazza Enrico Malatesta, 1 60121 Ancona (AN)</p>
+                </div>
+                <div class="flex items-center space-x-1">
+                    <img src="{{ url('images/phone.png')}}" class="h-4">
+                    <p class="font-sans text-white">Tel <a href="tel:3549783214">+39 354 978 3214</a></p>
+                </div>
+                <div class="flex items-center space-x-1">
+                    <img src="{{ url('images/email.png')}}" class="h-4">
+                    <p class="font-sans text-white">Email <a href="mailto:info@neuroclinic.it">info@neuroclinic.it</a></p>
+                </div>
             </div>
         </div>
     </footer>
