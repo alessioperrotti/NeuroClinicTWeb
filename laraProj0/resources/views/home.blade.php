@@ -29,7 +29,7 @@
             </div>
         </div>
     </header>
-    <div class="relative">
+    <div class="relative mt-[100px]">
         <img src="images/banner2.gif" alt="Banner Homepage">
         <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
             <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
