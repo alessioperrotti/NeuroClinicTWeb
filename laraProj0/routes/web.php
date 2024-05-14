@@ -27,3 +27,8 @@ Route::get('/faq', function () {
     return view('faq');
 })
 ->name('faq');
+
+Route::get('/home_paz',function () {
+    return view('homePaziente');
+})
+->name('homePaziente');
