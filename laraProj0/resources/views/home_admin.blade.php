@@ -18,7 +18,7 @@
                 <img src="images/medicine.svg" class="size-60" alt="Clinici">
             </a>
         </div>
-        <h2 class="p-2 text-3xl">Gestione clinici</h2>
+        <h2 class="p-2 text-3xl">Farmaci e attività<br>riabilitative</h2>
     </div>
     <div class="m-8 ">
         <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
@@ -26,7 +26,7 @@
                 <img src="images/dottore.svg" class="size-60" alt="Clinici">
             </a>
         </div>
-        <h2 class="p-2 text-3xl">Gestione clinici</h2>
+        <h2 class="p-2 text-3xl">Analisi dati</h2>
     </div>
 </div>
 
@@ -38,7 +38,7 @@
                 <img src="images/dottore.svg" class="size-60" alt="Clinici">
             </a>
         </div>
-        <h2 class="p-2 text-3xl">Gestione clinici</h2>
+        <h2 class="p-2 text-3xl">Gestione disturbi<br>motori</h2>
     </div>
     <div class="m-8 text-3xl">
         <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
@@ -46,7 +46,7 @@
                 <img src="images/dottore.svg" class="size-60" alt="Clinici">
             </a>
         </div>
-        <h2 class="p-2 text-3xl">Gestione clinici</h2>
+        <h2 class="p-2 text-3xl">Elimina pazienti</h2>
     </div>
     <div class="m-8">
         <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
