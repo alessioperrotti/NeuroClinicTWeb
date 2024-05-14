@@ -27,3 +27,12 @@ Route::get('/faq', function () {
     return view('faq');
 })
 ->name('faq');
+
+Route::get('/home_admin', function () {
+    return view('home_admin');
+})
+->name('home_admin');
+
+
+
+
