@@ -28,7 +28,7 @@ Route::get('/faq', function () {
 })
 ->name('faq');
 
-Route::get('/nuovo_clin', function () {
+Route::get('/home_admin/clinici/nuovo_clin', function () {
     return view('new_clinico');
 })
 ->name('Nuovo clinico');
