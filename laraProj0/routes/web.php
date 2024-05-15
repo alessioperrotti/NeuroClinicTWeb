@@ -39,3 +39,15 @@ Route::get('/home_admin/disturbi', function () {
 })
 ->name('Gestione disturbi');
 
+
+Route::get('/home_admin/clinici', function () {
+    return view('gestione_clinici');
+})
+->name('Gestione clinici');
+
+
+Route::get('/home_admin/farmaci_attivita', function () {
+    return view('gestione_farmaci_attivita');
+})
+->name('Gestione farmaci e attività');
+
