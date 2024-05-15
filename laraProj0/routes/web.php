@@ -34,10 +34,9 @@ Route::get('/home_admin', function () {
 ->name('home_admin');
 
 
-
-Route::get('/home_admin/farmaci_attivita', function () {
-    return view('farmaci_attivita');
+Route::get('/home_admin/lista_paz', function () {
+    return view('lista_paz');
 })
-->name('farmaci_attivita');
+->name('lista_paz');
 
 

@@ -14,7 +14,7 @@
     </div>
     <div class="m-8 ">
         <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
-            <a href="{{route('farmaci_attivita')}}">
+            <a href="">
                 <img src="images/medicina.svg" class="size-60" alt="Clinici">
             </a>
         </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="m-8 text-3xl">
         <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
-            <a href=>
+            <a href="{{route('lista_paz')}}">
                 <img src="images/elimina_paziente.svg" class="size-60" alt="Clinici">
             </a>
         </div>
