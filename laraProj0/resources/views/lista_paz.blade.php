@@ -9,7 +9,7 @@
 <div id="app" class=" text-lg container mx-auto p-4 w-full max-w-4xl">
     <div id="listaPazienti" class="mb-4">
 
-        <div class="flex  items-center bg-white p-2 rounded-lg mb-2">
+        <div class="flex justify-between items-center bg-white p-2 rounded-lg mb-2">
             <span class="font-bold">Mario Rossi</span>
             <div class="flex mr-2 gap-x-4">
                 
