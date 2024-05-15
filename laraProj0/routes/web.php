@@ -35,4 +35,9 @@ Route::get('/home_admin', function () {
 
 
 
+Route::get('/home_admin/farmaci_attivita', function () {
+    return view('farmaci_attivita');
+})
+->name('farmaci_attivita');
+
 
