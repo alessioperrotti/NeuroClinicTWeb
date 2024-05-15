@@ -33,3 +33,9 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 })
 ->name('Nuovo clinico');
 
+
+Route::get('/home_admin/disturbi', function () {
+    return view('gestione_disturbi');
+})
+->name('Gestione disturbi');
+
