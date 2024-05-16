@@ -27,3 +27,13 @@ Route::get('/faq', function () {
     return view('faq');
 })
 ->name('faq');
+
+Route::get('/home_paz',function () {
+    return view('homePaziente');
+})
+->name('homePaziente');
+
+Route::get('/home_paz/cambia_pwd', function () {
+    return view('cambiaPwdPaziente');
+})
+->name('cambiaPwdPaziente');
