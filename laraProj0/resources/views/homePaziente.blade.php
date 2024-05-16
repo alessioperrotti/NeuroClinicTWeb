@@ -14,13 +14,15 @@
 <body class="bg-cyan-50">
     <header class="fixed top-0 left-0 right-0 z-20">  
         <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8">
-            <div> 
-                <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
+            <div>
+                <a href="{{ route('home') }}"> 
+                    <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
+                </a>    
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a>CARTELLA CLINICA</a>
-                    <a>NUOVO EVENTO</a>
+                    <a href="">CARTELLA CLINICA</a>
+                    <a href="">NUOVO EVENTO</a>
                 </nav>
             </div>
         </div>
@@ -65,18 +67,18 @@
         </div>
     </div>
     <hr class="h-1 my-10 bg-cyan-600 m-28">
-    <div class="mx-64">
-        <div class="max-w-96 float-left   mb-10 ">
+    <div class="mx-96">
+        <div class="max-w-52 float-left   mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
-                <img src="images\cartella_clinica.png" alt="Cartella clinica">
+                <img src="{{ url('images\cartella_clinica.png') }}" alt="Cartella clinica">
             </button>
-            <p class="text-center text-4xl text-black">Cartella clinica</p>
+            <p class="mt-1 text-center text-2xl text-black">Cartella clinica</p>
         </div>
-        <div class="max-w-96 float-right mb-10 ">
+        <div class="max-w-52 float-right mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
-                <img src="laraProj0\public\images\nuovo_evento.png" alt="Nuovo evento">
+                <img src="{{ url('images\nuovo_evento.png') }}" alt="Nuovo evento">
             </button>
-            <p class="text-center text-4xl text-black">Nuovo evento</p>
+            <p class=" mt-1 text-center text-2xl text-black">Nuovo evento</p>
         </div>
     </div>
 </body>
