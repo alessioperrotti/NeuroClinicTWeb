@@ -40,3 +40,10 @@ Route::get('/home_admin/lista_paz', function () {
 ->name('lista_paz');
 
 
+Route::get('/home_admin/analisi_dati', function () {
+    return view('analisi_dati');
+})
+->name('analisi_dati');
+
+
+
