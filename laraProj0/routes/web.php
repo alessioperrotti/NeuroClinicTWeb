@@ -33,6 +33,11 @@ Route::get('/home_paz',function () {
 })
 ->name('homePaziente');
 
+Route::get('/home_clin',function () {
+    return view('homeClinico');
+})
+->name('homeClinico');
+
 Route::get('/home_paz/cambia_pwd', function () {
     return view('cambiaPwdPaziente');
 })
