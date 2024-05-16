@@ -13,7 +13,7 @@
 </head>
 <body class="bg-cyan-50">
     <header class="fixed top-0 left-0 right-0 z-20">  <!-- sarebbe carino mettere un backdrop blur-->
-        <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8">
+        <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8 backdrop-filter backdrop-blur-sm bg-opacity-90">
             <div> 
                 <a href="{{ route('home') }}">
                     <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
@@ -29,7 +29,7 @@
             </div>
         </div>
     </header>
-    <div class="relative mt-[100px]">
+    <div class="relative">
         <img src="{{ url('images/banner2.gif')}}" alt="Banner Homepage">
         <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
             <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
