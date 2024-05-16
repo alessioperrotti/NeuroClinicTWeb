@@ -8,16 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-<<<<<<< Updated upstream
-    <script src="https://cdn.tailwindcss.com"></script>
-=======
     <script src="https://cdn.tailwindcss.com"></script> 
->>>>>>> Stashed changes
     <title>NeuroClinic | Home </title>
 </head>
 <body class="bg-cyan-50">
     <header class="fixed top-0 left-0 right-0 z-20">  <!-- sarebbe carino mettere un backdrop blur-->
-        <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8">
+        <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8 backdrop-filter backdrop-blur-sm bg-opacity-90">
             <div> 
                 <a href="{{ route('home') }}">
                     <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
@@ -25,7 +21,7 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="#who">CHI SIAMO</a>
+                    <a href="#who" style="scroll-margin-bottom: 70px">CHI SIAMO</a>
                     <a href="{{ route('faq') }}">FAQ</a>
                     <a href="#contact">CONTATTACI</a>
                     <a href="{{ route('login') }}">AREA RISERVATA</a>
@@ -34,7 +30,7 @@
         </div>
     </header>
     <div class="relative">
-        <img src="images/banner2.gif" alt="Banner Homepage">
+        <img src="{{ url('images/banner2.gif')}}" alt="Banner Homepage">
         <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
             <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
         </div>
@@ -148,7 +144,20 @@
                 </a>
             </div>
             <div>
-                <h4 class="font-bold text-white">Informazioni di Contatto</h4>
+                <h4 class="font-bold text-white text-xl mr-8">Informazioni di Contatto</h4>
+                <br>
+                <div class="flex items-center space-x-1">
+                    <img src="{{ url('images/location_pin.png')}}" class="h-4">
+                    <p class="font-sans text-white">Piazza Enrico Malatesta, 1 60121 Ancona (AN)</p>
+                </div>
+                <div class="flex items-center space-x-1">
+                    <img src="{{ url('images/phone.png')}}" class="h-4">
+                    <p class="font-sans text-white">Tel <a href="tel:3549783214">+39 354 978 3214</a></p>
+                </div>
+                <div class="flex items-center space-x-1">
+                    <img src="{{ url('images/email.png')}}" class="h-4">
+                    <p class="font-sans text-white">Email <a href="mailto:info@neuroclinic.it">info@neuroclinic.it</a></p>
+                </div>
             </div>
         </div>
     </footer>
