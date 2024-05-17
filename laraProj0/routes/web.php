@@ -37,3 +37,8 @@ Route::get('/home_paz/cambia_pwd', function () {
     return view('cambiaPwdPaziente');
 })
 ->name('cambiaPwdPaziente');
+
+Route::get('/home_clin/nuovo_paz',function () {
+    return view('nuovoPaziente');
+})
+->name('nuovoPaziente');
