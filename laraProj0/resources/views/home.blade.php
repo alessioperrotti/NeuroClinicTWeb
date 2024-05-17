@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="h-[40px]"></div>
-    <div class="bg-white m-6 h-auto rounded-xl flex">
+    <div class="bg-white m-6 h-auto rounded-xl flex shadow-md">
         <div class="p-8">
             <h1 id="who" class="text-black font-extrabold text-2xl">Chi siamo</h1>
             <br>
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="h-[22px]"></div>
-    <div class="bg-white m-6 h-auto rounded-xl flex">
+    <div class="bg-white m-6 h-auto rounded-xl flex shadow-md">
         <div class="overflow-hidden rounded-xl">
             <img src="images/schermo.gif" alt="Gruppo di medici">
         </div>
@@ -81,7 +81,7 @@
     </div>
     <div class="flex justify-between px-20 py-4">
         <div class="items-center w-[300px] justify-center">
-            <div class="rounded-xl bg-white items-center p-8">
+            <div class="rounded-xl bg-white items-center shadow-md p-8">
                 <h3 class="font-bold text-center text-3xl text-slate-700">"Eccellente"</h3>
                 <br>
                 <p class="text-center text-slate-400">Un servizio di altissima qualità e grande professionalità.
@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="flex items-center w-[300px] justify-center">
-            <div class="rounded-xl bg-white items-center p-8">
+            <div class="rounded-xl bg-white items-center shadow-md p-8">
                 <h3 class="font-bold text-center text-3xl text-slate-700">"Una garanzia"</h3>
                 <br>
                 <p class="text-center text-slate-400">Io e la mia famiglia ci rivolgiamo a Neuro Clinic
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="flex items-center w-[300px] justify-center">
-            <div class="rounded-xl bg-white items-center p-8">
+            <div class="rounded-xl bg-white items-center shadow-md p-8">
                 <h3 class="font-bold text-center text-3xl text-slate-700">"Soddisfatto"</h3>
                 <br>
                 <p class="text-center text-slate-400">Lo staff di Neuro Clinic è composto da ottime persone
@@ -115,8 +115,8 @@
     <h1 id="contact" class="text-center font-bold text-4xl text-slate-700">Contattaci</h1>
 
     <div class="flex justify-center">
-        <div class="bg-white rounded-xl m-6 h-96 w-[900px] flex justify-between">
-            <div class="bg-cyan-600 p-8 rounded-xl z-20">
+        <div class="bg-white rounded-xl m-6 h-96 w-[900px] flex justify-between shadow-md">
+            <div class="bg-cyan-600 p-8 rounded-xl shadow-md z-20">
                 <br>
                 <h4 class="font-bold text-white">Come Contattarci</h4>
                 <ul style="list-style-type: circle">
