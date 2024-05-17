@@ -21,7 +21,7 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="#who" style="scroll-margin-bottom: 70px">CHI SIAMO</a>
+                    <a href="#who">CHI SIAMO</a>
                     <a href="{{ route('faq') }}">FAQ</a>
                     <a href="#contact">CONTATTACI</a>
                     <a href="{{ route('login') }}">AREA RISERVATA</a>
