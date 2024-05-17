@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="flex flex-col items-center justify-center gap-y-2">
-    <h1 class="text-5xl font-bold  mt-5 mb-8 gap-y-5">Inserimento nuovo clinico</h1>
+    <h1 class="text-5xl font-bold  mt-5 mb-8 gap-y-5">Inserimento nuovo paziente</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
         <form>
@@ -22,16 +22,28 @@
                     <input type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
                 </div>
                 <div>
-                    <label class="block text-gray-700">Ruolo</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Ruolo">
+                    <label class="block text-gray-700">Genere</label>
+                    <select class="block mt-1 w-full p-2 border border-gray-300 rounded-md">
+                        <option class="text-gray-700">Uomo</option>
+                        <option class="text-gray-700">Donna</option>
+                        <option class="text-gray-700">Altro</option>
+                    </select>
                 </div>
                 <div>
-                    <label class="block text-gray-700">Specializzazione</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Specializzazione">
+                    <label class="block text-gray-700">Indirizzo</label>
+                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Telefono</label>
+                    <input type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
+                </div>
+                <div>
+                    <label class="block text-gray-700">E-Mail</label>
+                    <input type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
                 </div>
                 <div>
                     <label class="block text-gray-700">Username</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
+                    <input type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
@@ -44,3 +56,4 @@
 @endsection
 
 <!-- non ha senso usare il tag button con type="button" -->
+<!-- per username settare massimo 20 caratteri -->
