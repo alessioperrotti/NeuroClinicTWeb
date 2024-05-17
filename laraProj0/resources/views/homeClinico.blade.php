@@ -19,7 +19,7 @@
             </a>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="">CARTELLE CLINICHE</a>
+                    <a href="{{ route('listaPazienti')}}">CARTELLE CLINICHE</a>
                     <a href="{{ route('nuovoPaziente')}}">REGISTRA PAZIENTE</a>
                     <a href="">LOGOUT</a>
                 </nav>
@@ -94,7 +94,9 @@
         </div>
         <div class="max-w-[200px] float-right mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
-                <img src="{{ url('images/nuovo_evento.png')}}" alt="Nuovo evento">
+                <a href="{{ route('listaPazienti')}}">
+                    <img src="{{ url('images/nuovo_evento.png')}}" alt="Nuovo evento">
+                </a>
             </button>
             <p class="text-center text-2xl text-black">Registra Paziente</p>
         </div>

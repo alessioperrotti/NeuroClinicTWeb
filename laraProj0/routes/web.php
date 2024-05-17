@@ -52,3 +52,8 @@ Route::get('/home_clin/aggiorna_clin',function () {
     return view('aggiornaClinico');
 })
 ->name('aggiornaClinico');
+
+Route::get('/home_clin/lista_paz',function () {
+    return view('listaPazienti');
+})
+->name('listaPazienti');
