@@ -19,9 +19,9 @@
             </a>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a>CARTELLE CLINICHE</a>
-                    <a>REGISTRA PAZIENTE</a>
-                    <a>LOGOUT</a>
+                    <a href="">CARTELLE CLINICHE</a>
+                    <a href="">REGISTRA PAZIENTE</a>
+                    <a href="">LOGOUT</a>
                 </nav>
             </div>
         </div>
@@ -32,16 +32,30 @@
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
         <br>
-        <p class="text-black font-bold text-base">Nome</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base basis-1/2">Nome</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('nomeClin')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Cognome</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base basis-1/2">Cognome</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('cognClin')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Data di nascita</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base basis-1/2">Data di nascita</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('dataClin')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Ruolo</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base basis-1/2">Ruolo</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('ruoloClin')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Specializzazione</p>
-        
+        <div class="flex">
+            <p class="text-black font-bold text-base basis-1/2">Specializzazione</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('specClin')</p>
+        </div>
         <br>
         <br>
         <div class=" flex justify-center items-center">
@@ -54,9 +68,15 @@
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Account</h1>
         <br>
-        <p class="text-black font-bold text-base">Username</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base basis-1/2">Username</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('userClin')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Password</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base basis-1/2">Password</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2 ">* * * * * * * * * *</p>
+        </div>
         <br>
         <div class=" flex justify-center items-center">
             <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 ">Cambia password</button>
