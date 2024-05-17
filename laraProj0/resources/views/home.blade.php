@@ -10,6 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script> 
     <title>NeuroClinic | Home </title>
+    <style>
+        .anchor::before {
+            content: "";
+            display: block;
+            height: 140px;
+            margin-top: -140px; /* Altezza dell'header */
+            visibility: hidden;
+        }
+    </style>    
 </head>
 <body class="bg-cyan-50">
     <header class="fixed top-0 left-0 right-0 z-20">  <!-- sarebbe carino mettere un backdrop blur-->
@@ -38,7 +47,7 @@
     <div class="h-[40px]"></div>
     <div class="bg-white m-6 h-auto rounded-xl flex shadow-md">
         <div class="p-8">
-            <h1 id="who" class="text-black font-extrabold text-2xl">Chi siamo</h1>
+            <h1 id="who" class="text-black font-extrabold text-2xl anchor">Chi siamo</h1>
             <br>
             <p class="text-slate-700">Siamo una clinica neuroriabilitativa dedicata al miglioramento 
                 della qualità della vita dei nostri pazienti attraverso terapie innovative e personalizzate. 
@@ -112,7 +121,7 @@
     <div class="flex justify-center">
         <hr class="h-[3px] rounded bg-cyan-500 mb-4 mt-2 w-[70%]">
     </div>
-    <h1 id="contact" class="text-center font-bold text-4xl text-slate-700">Contattaci</h1>
+    <h1 id="contact" class="text-center font-bold text-4xl text-slate-700 anchor">Contattaci</h1>
 
     <div class="flex justify-center">
         <div class="bg-white rounded-xl m-6 h-96 w-[900px] flex justify-between shadow-md">
