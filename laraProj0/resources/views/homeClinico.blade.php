@@ -20,7 +20,7 @@
             <div>
                 <nav class="space-x-4 text-white text-sm">
                     <a href="">CARTELLE CLINICHE</a>
-                    <a href="">REGISTRA PAZIENTE</a>
+                    <a href="{{ route('nuovoPaziente')}}">REGISTRA PAZIENTE</a>
                     <a href="">LOGOUT</a>
                 </nav>
             </div>
@@ -86,7 +86,9 @@
     <div class=" flex justify-center space-x-20">
         <div class="max-w-[200px] float-left   mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
-                <img src="{{ url('images/cartella_clinica.png')}}" alt="Cartella clinica">
+                <a href="{{ route('nuovoPaziente')}}">
+                    <img src="{{ url('images/cartella_clinica.png')}}" alt="Cartella clinica">
+                </a>
             </button>
             <p class="text-center text-2xl text-black">Cartelle cliniche</p>
         </div>
