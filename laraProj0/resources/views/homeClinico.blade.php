@@ -59,8 +59,8 @@
         <br>
         <br>
         <div class=" flex justify-center items-center">
-            <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 ">
-                Aggiorna i tuoi dati
+            <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
+                <a href="{{ route('aggiornaClinico')}}">Aggiorna i tuoi dati</a>
             </button>
         </div>
     </div>

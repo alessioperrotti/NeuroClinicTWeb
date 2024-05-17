@@ -47,3 +47,8 @@ Route::get('/home_clin/nuovo_paz',function () {
     return view('nuovoPaziente');
 })
 ->name('nuovoPaziente');
+
+Route::get('/home_clin/aggiorna_clin',function () {
+    return view('aggiornaClinico');
+})
+->name('aggiornaClinico');

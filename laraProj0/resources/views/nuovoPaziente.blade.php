@@ -23,7 +23,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Genere</label>
-                    <select class="block mt-1 w-full h-full p-2 border border-gray-300 rounded-md">
+                    <select class="block mt-1 w-full p-2 border border-gray-300 rounded-md">
                         <option class="text-gray-700">Uomo</option>
                         <option class="text-gray-700">Donna</option>
                         <option class="text-gray-700">Altro</option>
