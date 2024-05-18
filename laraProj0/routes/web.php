@@ -57,3 +57,8 @@ Route::get('/home_clin/lista_paz',function () {
     return view('listaPazienti');
 })
 ->name('listaPazienti');
+
+Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
+    return view('cartellaClin2');
+})
+->name('cartellaClin2');
