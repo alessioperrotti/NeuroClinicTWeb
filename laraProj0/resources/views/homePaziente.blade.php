@@ -23,6 +23,7 @@
                 <nav class="space-x-4 text-white text-sm">
                     <a href="">CARTELLA CLINICA</a>
                     <a href="">NUOVO EVENTO</a>
+                    <a href="{{ route('home') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
                 </nav>
             </div>
         </div>
@@ -33,51 +34,78 @@
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
         <br>
-        <p class="text-black font-bold text-base">Nome</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Nome</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('nomePaz')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Cognome</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Cognome</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('cognPaz')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Data di nascita</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Data di nascita</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('dataPaz')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Genere</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Genere</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('genPaz')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Indirizzo</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Indirizzo</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('indPaz')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Telefono</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Telefono</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('telPaz')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Indirizzo e-mail</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Indirizzo e-mail</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('mailPaz')</p>
+        </div>
         <br>
         <br>
-        <div class=" flex justify-center items-center">
-            <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 ">
+        <div class=" flex justify-center items-center"> 
+            <a class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">
                 Aggiorna i tuoi dati
-            </button>
+            </a>
         </div>
     </div>
     <hr class="h-1 my-10 bg-cyan-600 m-28">
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Account</h1>
         <br>
-        <p class="text-black font-bold text-base">Username</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Username</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('userPaz')</p>
+        </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
-        <p class="text-black font-bold text-base">Password</p>
+        <div class="flex">
+            <p class="text-black font-bold text-base">Password</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('pwdPaz')</p>
+        </div>
         <br>
         <div class=" flex justify-center items-center">
-            <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 ">Cambia password</button>
+            <a href="{{ route('cambiaPwdPaziente')}}" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">Cambia password</a>
         </div>
     </div>
     <hr class="h-1 my-10 bg-cyan-600 m-28">
     <div class="mx-96">
         <div class="max-w-52 float-left   mb-10 ">
-            <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
+            <a class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
                 <img src="{{ url('images\cartella_clinica.png') }}" alt="Cartella clinica">
-            </button>
+            </a>
             <p class="mt-1 text-center text-2xl text-black">Cartella clinica</p>
         </div>
         <div class="max-w-52 float-right mb-10 ">
-            <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
+            <a class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
                 <img src="{{ url('images\nuovo_evento.png') }}" alt="Nuovo evento">
-            </button>
+            </a>
             <p class=" mt-1 text-center text-2xl text-black">Nuovo evento</p>
         </div>
     </div>
