@@ -20,7 +20,7 @@
         <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2">
             <span class="font-bold">{{ $paziente->nome }}</span>
             <div class="flex mr-2 gap-x-4">
-                <a href="">
+                <a href="{{ route('cartellaClin2')}}">
                     <img src="{{ url('images/cartella_clinica.png') }}" alt="Modifica" class="h-10 inline-block">
                 </a>
             </div>

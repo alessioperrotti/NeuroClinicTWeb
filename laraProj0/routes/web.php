@@ -58,7 +58,13 @@ Route::get('/home_clin/lista_paz',function () {
 })
 ->name('listaPazienti');
 
+/*
 Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
     return view('cartellaClin2');
 })
-->name('cartellaClin2');
+->name('cartellaClin2'); */
+
+Route::get('/home_clin/lista_paz/cart_clinica',function () {
+    return view('cartellaClin3');
+})
+->name('cartellaClin2'); // rotta per sviluppo

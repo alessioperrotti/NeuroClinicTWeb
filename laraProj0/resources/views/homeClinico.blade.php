@@ -86,7 +86,7 @@
     <div class=" flex justify-center space-x-20">
         <div class="max-w-[200px] float-left   mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
-                <a href="{{ route('nuovoPaziente')}}">
+                <a href="{{ route('listaPazienti')}}">
                     <img src="{{ url('images/cartella_clinica.png')}}" alt="Cartella clinica">
                 </a>
             </button>
@@ -94,7 +94,8 @@
         </div>
         <div class="max-w-[200px] float-right mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
-                <a href="{{ route('listaPazienti')}}">
+                <a href="{{ route('nuovoPaziente')}}">
+                    <!-- cambiare immagine -->
                     <img src="{{ url('images/nuovo_evento.png')}}" alt="Nuovo evento">
                 </a>
             </button>
