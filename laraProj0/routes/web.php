@@ -37,3 +37,9 @@ Route::get('/home_paz/cambia_pwd', function () {
     return view('cambiaPwdPaziente');
 })
 ->name('cambiaPwdPaziente');
+
+// simo te l'ho gia definita cosi viene uguale alla mia (che è la 2)
+Route::get('/home_paz/cart_clinica',function () {
+    return view('cartellaClin1');
+})
+->name('cartellaClin1');
