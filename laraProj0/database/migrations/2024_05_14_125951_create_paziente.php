@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paziente', function (Blueprint $table) {
-            $table->string('username', 20);
+            $table->string('username', 20)->references('username')->on('user');
             $table->string('nome', 30);
             $table->string('cognome', 30);
             $table->date('data_nasc');
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('prov', 2);
             $table->string('telefono', 13);
             $table->string('email', 30);
-            $table->string('password', 30);
             $table->string('clinico', 20)->references('username')->on('clinico');
         });
     }

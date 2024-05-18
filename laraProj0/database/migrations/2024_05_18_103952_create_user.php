@@ -12,13 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clinico', function (Blueprint $table) {
-            $table->string('username', 20)->references('username')->on('user');
-            $table->string('nome', 30);
-            $table->string('cognome', 30);
-            $table->date('data_nasc');
-            $table->string('ruolo', 20);
-            $table->string('specializ', 30);
+        Schema::create('user', function (Blueprint $table) {
+            $table->string('username', 20);
+            $table->string('password', 20);
+            $table->string('usertype', 1);   //A per admin, P per paziente e C per clinico
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clinico');
+        Schema::dropIfExists('user');
     }
 };
