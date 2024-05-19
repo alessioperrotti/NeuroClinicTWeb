@@ -42,7 +42,7 @@
     </div>
     <div class="m-8 text-3xl">
         <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
-            <a href="{{route('lista_paz')}}">
+            <a href="{{route('listaPaz')}}">
                 <img src="images/elimina_paziente.svg" class="size-60" alt="Clinici">
             </a>
         </div>
