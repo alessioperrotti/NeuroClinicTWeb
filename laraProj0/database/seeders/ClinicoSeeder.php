@@ -31,7 +31,7 @@ class ClinicoSeeder extends Seeder
                     'specializ' => $faker->randomElement(['Neurologo', 'Ortopedico', 'Podologo', 
                         'Radiologo', 'Terapista del dolore', 'Fisiatra', 'Terapista della mano']),
                 ]);
-            } catch(\Exception) { continue;}
+            } catch(\Exception $e) { continue;}
         }
     }
 }
