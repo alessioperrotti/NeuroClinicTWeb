@@ -21,8 +21,8 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="{{ route('home_paz/nuovo_ep')}}">CARTELLA CLINICA</a>
-                    <a href="">NUOVO EVENTO</a>
+                    <a href="">CARTELLA CLINICA</a>
+                    <a href="{{ route('inserimentoNuovoEvento')}}">NUOVO EVENTO</a>
                     <a href="{{ route('home') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
                 </nav>
             </div>
@@ -97,14 +97,14 @@
     <hr class="h-1 my-10 bg-cyan-600 m-28">
     <div class="mx-96">
         <div class="max-w-52 float-left   mb-10 ">
-            <a class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
-                <img src="{{ url('images\cartella_clinica.png') }}" alt="Cartella clinica">
+            <a >
+                <img src="{{ asset('images\cartella_clinica.png') }}" alt="Cartella clinica" class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
             </a>
             <p class="mt-1 text-center text-2xl text-black">Cartella clinica</p>
         </div>
         <div class="max-w-52 float-right mb-10 ">
-            <a href="{{ route('home_paz/nuovo_ep')}}" class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
-                <img src="{{ url('images\nuovo_evento.png') }}" alt="Nuovo evento">
+            <a href="{{ route('inserimentoNuovoEvento')}}" >
+                <img src="{{ asset('images\nuovo_evento.png') }}" alt="Nuovo evento" class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
             </a>
             <p class=" mt-1 text-center text-2xl text-black">Nuovo evento</p>
         </div>
