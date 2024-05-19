@@ -29,21 +29,23 @@ Route::get('/faq', function () {
 ->name('faq');
 
 Route::get('/home_admin', function () {
-    return view('home_admin');
+    return view('homeAdmin');
 })
-->name('home_admin');
+->name('homeAdmin');
 
 
 Route::get('/home_admin/lista_paz', function () {
-    return view('lista_paz');
+    return view('listaPaz');
 })
-->name('lista_paz');
+->name('listaPaz');
 
 
 Route::get('/home_admin/analisi_dati', function () {
-    return view('analisi_dati');
+    return view('analisiDati');
 })
-->name('analisi_dati');
+->name('analisiDati');
+
+
 
 
 
