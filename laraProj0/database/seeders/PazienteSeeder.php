@@ -17,7 +17,7 @@ class PazienteSeeder extends Seeder
         $faker = Faker::create('it_IT');
         $pazs = DB::table('user')->where('usertype', 'P')->get();
         $num = count($pazs);
-        $usernames = $pazs->select('username');
+        $usernames = $pazs->pluck('username');
         $provs = [
             'AG', 'AL', 'AN', 'AO', 'AR', 'AP', 'AT', 'AV', 'BA', 'BT', 'BL', 'BN', 'BG', 'BI', 'BO', 'BZ', 'BS',
             'BR', 'CA', 'CL', 'CB', 'CI', 'CE', 'CT', 'CZ', 'CH', 'CO', 'CS', 'CR', 'KR', 'CN', 'EN', 'FM', 'FE',
@@ -50,26 +50,51 @@ class PazienteSeeder extends Seeder
             "Via Carducci",
             "Piazza Duomo"
         ];
-        $faker = Faker::create('it_IT');
         $clins = DB::table('user')->where('usertype', 'C')->get();
-        $usernames = $clins->select('username');
+        $usernames = $clins->pluck('username');
+        $numstel = [
+            '340 1234567',
+            '347 2345678',
+            '333 3456789',
+            '348 4567890',
+            '339 5678901',
+            '320 6789012',
+            '366 7890123',
+            '389 8901234',
+            '380 9012345',
+            '335 0123456',
+            '346 1234567',
+            '328 2345678',
+            '327 3456789',
+            '338 4567890',
+            '349 5678901',
+            '380 6789012',
+            '333 7890123',
+            '366 8901234',
+            '342 9012345',
+            '388 0123456',
+        ];
+        
         
 
         foreach(range(1, $num) as $index){
-            DB::table('user')->insert([
-                'username' => $faker->randomElement($usernames),
-                'nome' => $faker->firstName,
-                'cognome' => $faker->lastName,
-                'data_nasc' => $faker->dateTimeBetween('-100 years', '-30 years')->format('d-m-Y'),
-                'genere' => $faker->randomElement(['M', 'F', 'A']),
-                'via' => $faker->randomElement($addrs),
-                'civico' => $faker->numberBetween(1, 150),
-                'citta' => $faker->city,
-                'prov' => $faker->randomElement($provs),
-                'telefono' => $faker->phoneNumber,
-                'email' => $faker->freeEmail,
-                'clinico' => $faker->randomElement($usernames),               
-            ]);
+
+            try{
+                DB::table('paziente')->insert([
+                    'username' => $faker->randomElement($usernames),
+                    'nome' => $faker->firstName,
+                    'cognome' => $faker->lastName,
+                    'data_nasc' => $faker->dateTimeBetween('-100 years', '-30 years')->format('Y-m-d'),
+                    'genere' => $faker->randomElement(['M', 'F', 'A']),
+                    'via' => $faker->randomElement($addrs),
+                    'civico' => $faker->numberBetween(1, 150),
+                    'citta' => $faker->city,
+                    'prov' => $faker->randomElement($provs),
+                    'telefono' => $faker->randomElement($numstel),
+                    'email' => $faker->freeEmail,
+                    'clinico' => $faker->randomElement($usernames),               
+                ]);
+            } catch(\Exception $e) { continue;}
         }
     }
 }

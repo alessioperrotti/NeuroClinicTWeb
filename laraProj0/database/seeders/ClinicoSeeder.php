@@ -17,18 +17,21 @@ class ClinicoSeeder extends Seeder
         $faker = Faker::create('it_IT');
         $clins = DB::table('user')->where('usertype', 'C')->get();
         $num = count($clins);
-        $usernames = $clins->select('username');
+        $usernames = $clins->pluck('username');
 
         foreach(range(1, $num) as $index){
-            DB::table('user')->insert([
-                'username' => $faker->randomElement($usernames),
-                'nome' => $faker->firstName,
-                'cognome' => $faker->lastName,
-                'data_nasc' => $faker->dateTimeBetween('-70 years', '-18 years')->format('d-m-Y'),
-                'ruolo' => $faker->randomElement(['Medico', 'Fisioterapista']),
-                'specializ' => $faker->randomElement(['Neurologo', 'Ortopedico', 'Podologo', 
-                    'Radiologo', 'Terapista del dolore', 'Fisiatra', 'Terapista della mano']),
-            ]);
+
+            try{
+                DB::table('clinico')->insert([
+                    'username' => $faker->randomElement($usernames),
+                    'nome' => $faker->firstName,
+                    'cognome' => $faker->lastName,
+                    'data_nasc' => $faker->dateTimeBetween('-70 years', '-18 years')->format('Y-m-d'),
+                    'ruolo' => $faker->randomElement(['Medico', 'Fisioterapista']),
+                    'specializ' => $faker->randomElement(['Neurologo', 'Ortopedico', 'Podologo', 
+                        'Radiologo', 'Terapista del dolore', 'Fisiatra', 'Terapista della mano']),
+                ]);
+            } catch(\Exception) { continue;}
         }
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('terapia', function (Blueprint $table) {
             $table->id('ID');
             $table->date('data');
-            $table->string('paziente', 20)->references('username')->on('paziente');
+            $table->string('paziente', 20)->references('username')->on('paziente')->unique();
         });
     }
 

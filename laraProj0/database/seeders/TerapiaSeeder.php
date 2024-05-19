@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
 
-class UserSeeder extends Seeder
+class TerapiaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +15,15 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create('it_IT');
-
-        foreach(range(1,25) as $index){
+        $pazs = DB::table('user')->where('usertype', 'P')->pluck('username');
+        $num = count($pazs);
+        
+        foreach(range(1, $num) as $item){
 
             try{
-                DB::table('user')->insert([
-                    'username' => substr($faker->unique()->userName, 0, 20),
-                    'password' => substr($faker->city, 0, 20),  // ovviamente è solo per testing
-                    'usertype' => $faker->randomElement(['C', 'P']),
+                DB::table('terapia')->insert([
+                    'data' => $faker->dateTimeThisYear(),
+                    'paziente' => $faker->unique()->randomElement($pazs),
                 ]);
             } catch(\Exception $e) { continue;}
         }

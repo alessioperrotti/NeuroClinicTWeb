@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('citta', 30);
             $table->string('prov', 2);
             $table->string('telefono', 13);
-            $table->string('email', 30);
+            $table->string('email', 40);
             $table->string('clinico', 20)->references('username')->on('clinico');
         });
     }

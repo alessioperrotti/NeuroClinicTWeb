@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('diagnosi', function (Blueprint $table) {
             $table->string('paziente', 20)->references('username')->on('paziente');
-            $table->string('disturbo', 20)->references('nome', 30)->on('distmotorio');
+            $table->string('disturbo', 30)->references('nome', 30)->on('distmotorio');
             $table->date('data');
         });
     }
