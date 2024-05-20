@@ -51,3 +51,9 @@ Route::get('/home_admin/farmaci_attivita', function () {
 })
 ->name('Gestione farmaci e attività');
 
+
+Route::get('/home_admin/aggiorna_faq', function () {
+    return view('gestione_faq');
+})
+->name('Gestione Faq');
+

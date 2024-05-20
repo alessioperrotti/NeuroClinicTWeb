@@ -11,27 +11,27 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700">Nome</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
+                    <input name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
                 </div>
                 <div>
                     <label class="block text-gray-700">Cognome</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
+                    <input name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
                 </div>
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
-                    <input type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
+                    <input name="dataDiNascita" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
                 </div>
                 <div>
                     <label class="block text-gray-700">Ruolo</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Ruolo">
+                    <input name="ruolo" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Ruolo">
                 </div>
                 <div>
                     <label class="block text-gray-700">Specializzazione</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Specializzazione">
+                    <input name="specializzazione" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Specializzazione">
                 </div>
                 <div>
                     <label class="block text-gray-700">Username</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
+                    <input name="username" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
