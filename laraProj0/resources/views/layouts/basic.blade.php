@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- vite('resources/css/app.css') -->
     <title>NeuroClinic | @yield('title') </title>
-    <script src="https://cdn.tailwindcss.com"></script> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src=@yield('scriptjs')> 
 </head>
 <body class="bg-cyan-50">
     <header>
