@@ -32,7 +32,7 @@
 
             <div class='flex justify-between px-5 gap-x-4 py-3'>
                 <h2 class='w-1/3 font-semibold'>Numero di eventi totali registrati</h2>
-                <h2 >10</h2>
+                <h2>10</h2>
             </div>
             <hr>
         </div>
@@ -43,8 +43,15 @@
             <input class="w-full" type="text" id="cognomeClinico" placeholder="Cerca per cognome" class=" bg-cyan-50 my-6 appearance-none w-full py-2 px-3
                  border-0 border-b-2 border-gray-300 focus:border-black
                   text-gray-700 leading-tight  focus:outline-none">
-            <div>
+            <div class="bg-white">
 
+                <table class = "table-fixed w-max">
+                    <tr class="w-max flex justify-between"> 
+                        <th scope="col">Paziente</th>
+                        <th scope="col">Numero cambi terapia</th>
+                        
+                    </tr>
+                </table>
 
 
             </div>

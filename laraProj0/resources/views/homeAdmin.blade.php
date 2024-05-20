@@ -22,7 +22,7 @@
     </div>
     <div class="m-8 ">
         <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
-            <a href=>
+            <a href="{{route('analisiDati')}}">
                 <img src="images/grafico.svg" class="size-60" alt="Clinici">
             </a>
         </div>
