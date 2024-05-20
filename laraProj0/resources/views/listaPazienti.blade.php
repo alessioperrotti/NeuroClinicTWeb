@@ -21,22 +21,13 @@
             <span class="font-bold">{{ $paziente->nome }}</span>
             <div class="flex mr-2 gap-x-4">
                 <a href="{{ route('cartellaClin2')}}">
-                    <img src="{{ url('images/cartella_clinica.png') }}" alt="Modifica" class="h-10 inline-block">
+                    <img src="{{ asset('images/cartella_clinica.png') }}" alt="Modifica" class="h-10 inline-block">
                 </a>
             </div>
         </div>
 
     @endforeach
     @endisset()
-    <!-- da aggiungere clinici -->
-
-
-    <div class="flex justify-center  mt-10">
-        <!-- Bottone per aggiungere un nuovo clinico -->
-        <button id="btnAggiungiClinico" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">
-            Aggiungi clinico
-        </button>
-    </div>
     
 </div>
 

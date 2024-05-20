@@ -11,44 +11,44 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700">Nome</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
+                    <input name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
                 </div>
                 <div>
                     <label class="block text-gray-700">Cognome</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
+                    <input name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
                 </div>
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
-                    <input type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
+                    <input name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
                 </div>
                 <div>
                     <label class="block text-gray-700">Genere</label>
-                    <select class="block mt-1 w-full p-2 border border-gray-300 rounded-md">
-                        <option class="text-gray-700">Uomo</option>
-                        <option class="text-gray-700">Donna</option>
-                        <option class="text-gray-700">Altro</option>
+                    <select name="genere" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                        <option value="M" class="text-gray-700">Uomo</option>
+                        <option value="F" class="text-gray-700">Donna</option>
+                        <option value="A" class="text-gray-700">Altro</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-gray-700">Indirizzo</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                    <input name="indirizzo" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
                 </div>
                 <div>
                     <label class="block text-gray-700">Telefono</label>
-                    <input type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
+                    <input name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
                 </div>
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
-                    <input type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
+                    <input name="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
                 </div>
                 <div>
                     <label class="block text-gray-700">Username</label>
-                    <input type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
+                    <input name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
-                <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md">
-                <input type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md">
+                <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">
+                <input type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500">
             </div>
         </form>
     </div>

@@ -68,3 +68,8 @@ Route::get('/home_clin/lista_paz/cart_clinica',function () {
     return view('cartellaClin2');
 })
 ->name('cartellaClin2'); // rotta per sviluppo
+
+Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
+    return view('modificaTerapia');
+})
+->name('modificaTerapia'); // rotta per sviluppo

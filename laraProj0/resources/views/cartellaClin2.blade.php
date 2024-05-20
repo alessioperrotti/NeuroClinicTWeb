@@ -33,7 +33,7 @@
             @endisset
         </ul>
     </div>
-    <a href="">
+    <a href="{{ route('modificaTerapia')}}">
         <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
             Modifica Terapia
         </button>
@@ -46,10 +46,10 @@
         <p class="h-min text-lg font-semibold">Filtra per disturbo: </p>
 
         <!-- help needed -->
-        <select multiple class="inline bg-white rounded-md h-min px-2 py-1 border border-cyan-600" size=1>
+        <select name="filtroDisturbo" multiple class="inline bg-white rounded-md h-min px-2 py-1 border border-cyan-600" size=1>
             @isset($disturbi)
                 @foreach($disturbi as $disturbo)
-                <option>{{ $disturbo->nome}}</option>
+                <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
                 @endforeach
             @endisset
         </select>
@@ -58,11 +58,11 @@
         <p class="text-lg font-semibold">Filtra per intensità:</p>
         <div class="flex space-x-1 items-center">
             <p>min</p>
-            <input type="text" class="bg-white inline h-4 rounded-md p-2 w-10 border border-cyan-600 text-center">
+            <input name="filtroMin" type="text" class="bg-white inline h-4 rounded-md p-2 w-10 border border-cyan-600 text-center">
         </div>
         <div class="flex space-x-1 items-center">
             <p>max</p>
-            <input type="text" class="bg-white inline h-4 rounded-md p-2 w-10 border border-cyan-600 text-center">
+            <input name="filtroMax" type="text" class="bg-white inline h-4 rounded-md p-2 w-10 border border-cyan-600 text-center">
         </div>
     </div>
 </div>
@@ -80,7 +80,7 @@
             <span class="font-bold">{{ $episodio->nome }}</span>
             <div class="flex mr-2 gap-x-4">
                 <a href="{{ route('cartellaClin2')}}">
-                    <img src="{{ url('images/cartella_clinica.png') }}" alt="Modifica" class="h-10 inline-block">
+                    <img src="{{ asset('images/cartella_clinica.png') }}" alt="Modifica" class="h-10 inline-block">
                 </a>
             </div>
         </div>
