@@ -16,12 +16,12 @@
         <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8">
             <div>
                 <a href="{{ route('home') }}"> 
-                    <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
+                    <img src="{{ asset('images/logo_bianco.svg') }}" class="h-16" alt="Logo">
                 </a>    
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="">CARTELLA CLINICA</a>
+                    <a href="{{ route('cartellaClinicaPaziente')}}">CARTELLA CLINICA</a>
                     <a href="{{ route('inserimentoNuovoEvento')}}">NUOVO EVENTO</a>
                     <a href="{{ route('home') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
                 </nav>
@@ -29,7 +29,7 @@
         </div>
     </header>
    
-    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, @yield('nomeCognPaz')</h1>
+    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, @yield('paziente')</h1>
     <br>
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
@@ -97,7 +97,7 @@
     <hr class="h-1 my-10 bg-cyan-600 m-28">
     <div class="mx-96">
         <div class="max-w-52 float-left   mb-10 ">
-            <a >
+            <a href="{{ route('cartellaClinicaPaziente') }}">
                 <img src="{{ asset('images\cartella_clinica.png') }}" alt="Cartella clinica" class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
             </a>
             <p class="mt-1 text-center text-2xl text-black">Cartella clinica</p>

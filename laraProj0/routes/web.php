@@ -47,3 +47,8 @@ Route::get('/home_paz/aggiorna_dati', function() {
     return view('aggiornaDatiPaziente');
 })
 ->name('aggiornaDatiPaziente');
+
+Route::get('/home_paz/cartella', function() {
+    return view('cartellaClinicaPaziente');
+})
+->name('cartellaClinicaPaziente');
