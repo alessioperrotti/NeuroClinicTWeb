@@ -45,13 +45,13 @@
                   text-gray-700 leading-tight  focus:outline-none">
             <div class="bg-white">
 
-                <table class = "table-fixed w-max">
+                <!-- <table class = "table-fixed w-max">
                     <tr class="w-max flex justify-between"> 
                         <th scope="col">Paziente</th>
                         <th scope="col">Numero cambi terapia</th>
                         
                     </tr>
-                </table>
+                </table>  da rivedere-->
 
 
             </div>
