@@ -56,7 +56,7 @@
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Indirizzo</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('indPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('indirPaz')</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
@@ -65,13 +65,13 @@
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
-            <p class="text-black font-bold text-base">Indirizzo e-mail</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('mailPaz')</p>
+            <p class="text-black font-bold text-base">Indirizzo E-mail</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('emailPaz')</p>
         </div>
         <br>
         <br>
         <div class=" flex justify-center items-center"> 
-            <a class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">
+            <a href="{{ route('aggiornaDatiPaziente') }}" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">
                 Aggiorna i tuoi dati
             </a>
         </div>

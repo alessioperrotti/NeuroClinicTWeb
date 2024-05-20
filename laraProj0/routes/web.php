@@ -42,3 +42,8 @@ Route::get('/home_paz/nuovo_ep', function() {
     return view('inserimentoNuovoEvento');
 })
 ->name('inserimentoNuovoEvento');
+
+Route::get('/home_paz/aggiorna_dati', function() {
+    return view('aggiornaDatiPaziente');
+})
+->name('aggiornaDatiPaziente');
