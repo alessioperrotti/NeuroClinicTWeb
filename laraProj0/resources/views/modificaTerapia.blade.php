@@ -7,16 +7,16 @@
 <div class="flex justify-center space-x-20">
     <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] px-6 justify-center">
         <h3 class="my-4 font-bold text-xl text-center">Farmaci</h3>
-        <?php $farmaci = ["Farmaco1", "Farmaco2", "Farmaco3"] ?>
         @isset($farmaci)
         <div class="flex-col mb-4">
             <ul style="list-style-type: disc" class="ml-6">
             @foreach($farmaci as $farmaco)
             <li class="mb-2">
             <div class="space-x-4">
-                <label class="text-base text-gray-800">{{ $farmaco}}</label>
-                <input id="freqCheckId1" type="checkbox" name="farmaco" value="{{ $farmaco}}">
+                <label class="text-base text-gray-800">{{ $farmaco->nome}}</label>
+                <input id="freqCheckId1" type="checkbox" name="farmaco" value="{{ $farmaco->nome}}">
             </div>
+            <!-- div che deve comparire con JavaScript -->
             <div id="freqDivId1" class="flex-row space-x-1 hidden">
                 <select name="nvolteF" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
                     <option value="1">1</option>
@@ -33,15 +33,14 @@
     </div>
     <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] px-6 justify-center">
         <h3 class="my-4 font-bold text-xl text-center">Attività Riabilitative</h3>
-        <?php $farmaci = ["Farmaco1", "Farmaco2", "Farmaco3"] ?>
-        @isset($farmaci)
+        @isset($attivita)
         <div class="flex-col mb-4">
             <ul style="list-style-type: disc" class="ml-6">
-            @foreach($farmaci as $farmaco)
+            @foreach($attivita as $att)
             <li class="mb-2">
                 <div class="space-x-4">
-                <label class="text-base text-gray-800">{{ $farmaco}}</label>
-                <input type="checkbox" name="farmaco" value="{{ $farmaco}}">
+                <label class="text-base text-gray-800">{{ $att->nome}}</label>
+                <input type="checkbox" name="farmaco" value="{{ $att->nome}}">
             </div>
             </li>
             @endforeach
