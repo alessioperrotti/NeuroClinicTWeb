@@ -46,7 +46,7 @@
                     <input name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
                 </div>
             </div>
-            <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
+            <div class="flex justify-center mt-4 gap-y-4 gap-x-24">
                 <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">
                 <input type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500">
             </div>

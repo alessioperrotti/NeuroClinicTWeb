@@ -46,7 +46,7 @@
         <p class="h-min text-lg font-semibold">Filtra per disturbo: </p>
 
         <!-- help needed -->
-        <select name="filtroDisturbo" multiple class="inline bg-white rounded-md h-min px-2 py-1 border border-cyan-600" size=1>
+        <select name="filtroDisturbo" multiple class="inline bg-white rounded-md h-min w-min p-1 border border-cyan-600" size=1>
             @isset($disturbi)
                 @foreach($disturbi as $disturbo)
                 <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
@@ -58,11 +58,33 @@
         <p class="text-lg font-semibold">Filtra per intensità:</p>
         <div class="flex space-x-1 items-center">
             <p>min</p>
-            <input name="filtroMin" type="text" class="bg-white inline h-4 rounded-md p-2 w-10 border border-cyan-600 text-center">
+            <select name="filtroMin" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
         </div>
         <div class="flex space-x-1 items-center">
             <p>max</p>
-            <input name="filtroMax" type="text" class="bg-white inline h-4 rounded-md p-2 w-10 border border-cyan-600 text-center">
+            <select name="filtroMax" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
         </div>
     </div>
 </div>
