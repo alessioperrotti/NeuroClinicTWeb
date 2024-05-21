@@ -27,6 +27,7 @@
         </div>
     </header>
    
+    @isset($clinico)
     <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, @yield('utente')</h1>
     <br>
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
@@ -34,27 +35,27 @@
         <br>
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Nome</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('nomeClin')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$clinico->nome}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Cognome</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('cognClin')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$clinico->cognome}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Data di nascita</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('dataClin')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$clinico->dataNasc}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Ruolo</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('ruoloClin')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$clinico->ruolo}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Specializzazione</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('specClin')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$clinico->specializ}}</p>
         </div>
         <br>
         <br>
@@ -70,7 +71,7 @@
         <br>
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Username</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('userClin')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$clinico->username}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
@@ -82,12 +83,15 @@
             <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 ">Cambia password</button>
         </div>
     </div>
+    @endisset
+
+
     <hr class="h-1 my-10 bg-cyan-600 m-28">
     <div class=" flex justify-center space-x-20">
         <div class="max-w-[200px] float-left   mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
                 <a href="{{ route('listaPazienti')}}">
-                    <img src="{{ url('images/cartella_clinica.png')}}" alt="Cartella clinica">
+                    <img src="{{ asset('images/cartella_clinica.png')}}" alt="Cartella clinica">
                 </a>
             </button>
             <p class="text-center text-2xl text-black">Cartelle cliniche</p>
