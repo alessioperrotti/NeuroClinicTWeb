@@ -29,7 +29,23 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
+
+        $role = auth()->user()->role;
+
+        switch($role) {
+
+            case 'A':
+                return redirect()->route('homeAdmin');
+                break;
+            case 'P':
+                return redirect()->route('homePaziente');
+                break;
+            case 'C':
+                return redirect()->route('homeClinico');
+                break;
+            default: return redirect('/'); 
+        }
     }
 
     /**

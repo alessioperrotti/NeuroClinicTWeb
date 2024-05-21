@@ -29,44 +29,44 @@
         </div>
     </header>
    
-    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, @yield('paziente')</h1>
+    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, {{AUTH::user()->nome . " " . AUTH::user()->cognome}}</h1>
     <br>
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
         <br>
         <div class="flex">
             <p class="text-black font-bold text-base">Nome</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('nomePaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->nome}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Cognome</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('cognPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->cognome}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Data di nascita</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('dataPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->dataNasc}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Genere</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('genPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->genere}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Indirizzo</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('indirPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->via . " " . AUTH::user()->civico . " " . AUTH::user()->citta . " " . AUTH::user()->prov}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Telefono</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('telPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->telefono}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Indirizzo E-mail</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('emailPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->email}}</p>
         </div>
         <br>
         <br>
@@ -82,12 +82,12 @@
         <br>
         <div class="flex">
             <p class="text-black font-bold text-base">Username</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('userPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->username}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Password</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">@yield('pwdPaz')</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2"> * * * * * * * * * *</p>
         </div>
         <br>
         <div class=" flex justify-center items-center">
@@ -109,4 +109,5 @@
             <p class=" mt-1 text-center text-2xl text-black">Nuovo evento</p>
         </div>
     </div>
+
 </body>

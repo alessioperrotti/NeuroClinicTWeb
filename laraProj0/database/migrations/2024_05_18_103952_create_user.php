@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('username', 20);
             $table->string('password');
             $table->string('usertype', 1);   //A per admin, P per paziente e C per clinico
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
