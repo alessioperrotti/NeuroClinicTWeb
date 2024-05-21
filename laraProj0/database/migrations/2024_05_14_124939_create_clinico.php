@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username', 20)->references('username')->on('user');
             $table->string('nome', 30);
             $table->string('cognome', 30);
-            $table->date('data_nasc');
+            $table->date('dataNasc');
             $table->string('ruolo', 20);
             $table->string('specializ', 30);
         });
