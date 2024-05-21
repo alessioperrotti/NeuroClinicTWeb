@@ -1,6 +1,6 @@
 @extends('layouts.basic')
 
-@section('title', 'Inserimento nuovo clinico')
+@section('title', 'Elimina Paziente')
 
 @section('content')
 

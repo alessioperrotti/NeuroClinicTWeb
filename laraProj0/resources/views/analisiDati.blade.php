@@ -63,4 +63,9 @@
 
 
 
-        @endsection
+@endsection
+
+@section('title')
+Analisi Dati
+@endsection
+

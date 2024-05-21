@@ -61,3 +61,7 @@
 
 <div></div>
 @endsection
+
+@section('title')
+Home Admin
+@endsection
