@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi dei dati</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        .data-analysis, .search-section {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            width: 48%;
+        }
+        .data-analysis h2, .search-section h2 {
+            margin-top: 0;
+        }
+        .data-analysis .field, .search-section .field {
+            margin-bottom: 10px;
+        }
+        .data-analysis .field input, .search-section .field input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        .data-analysis .field select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        .search-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .search-section table, .search-section th, .search-section td {
+            border: 1px solid #ccc;
+        }
+        .search-section th, .search-section td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="data-analysis">
+            <h2>Analisi dei dati</h2>
+            <div class="field">
+                <label for="media-pazienti">Media pazienti per clinico</label>
+                <input type="text" id="media-pazienti" name="media-pazienti" disabled>
+            </div>
+            <div class="field">
+                <label for="media-disturbi">Media disturbi motori registrati per paziente</label>
+                <input type="text" id="media-disturbi" name="media-disturbi" disabled>
+            </div>
+            <div class="field">
+                <label for="disturbo-motorio">Disturbo motorio:</label>
+                <input type="text" id="disturbo-motorio" name="disturbo-motorio" disabled>
+            </div>
+            <div class="field">
+                <label for="numero-eventi">Numero di eventi totali registrati</label>
+                <input type="text" id="numero-eventi" name="numero-eventi" disabled>
+            </div>
+        </div>
+        <div class="search-section">
+            <h2>Cerca per cognome</h2>
+            <div class="field">
+                <input type="text" id="cerca-cognome" name="cerca-cognome" placeholder="Cerca per cognome">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Paziente</th>
+                        <th>Numero cambi terapia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Righe di dati dei pazienti andranno qui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
