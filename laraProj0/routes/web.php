@@ -52,3 +52,4 @@ Route::get('/home_paz/cartella', function() {
     return view('cartellaClinicaPaziente');
 })
 ->name('cartellaClinicaPaziente');
+

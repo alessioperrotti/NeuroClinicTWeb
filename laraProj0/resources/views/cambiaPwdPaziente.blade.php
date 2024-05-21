@@ -6,9 +6,9 @@
 <div class="flex flex-col items-center justify-center gap-y-2">
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Modifica password</h1>
     <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12">
-        <form class="mb-10">
+        <form class="mb-10">    
             <label class="block text-gray-700 font-semibold text-xl">Vecchia Password</label>
-            <input name="vecchiaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2"></inpunt>
+            <input name="vecchiaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 hover:"></inpunt>
             <label class="block text-gray-700 font-semibold text-xl">Nuova Password</label>
             <input name="nuovaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2"></inpunt>
             <label class="block text-gray-700 font-semibold text-xl">Conferma Nuova Password</label>

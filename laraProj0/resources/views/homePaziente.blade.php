@@ -21,8 +21,8 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="{{ route('cartellaClinicaPaziente')}}">CARTELLA CLINICA</a>
-                    <a href="{{ route('inserimentoNuovoEvento')}}">NUOVO EVENTO</a>
+                    <a href="{{ route('cartellaClinicaPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLA CLINICA</a>
+                    <a href="{{ route('inserimentoNuovoEvento')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">NUOVO EVENTO</a>
                     <a href="{{ route('home') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
                 </nav>
             </div>
