@@ -30,7 +30,8 @@ Route::get('/faq', function () {
 ->name('faq');
 
 Route::get('/home_paz',[PazController::class, 'index'])
-->name('homePaziente')->middleware('can:isPaziente');
+->name('homePaziente')->middleware('can:isPaziente'); 
+
 
 Route::get('/home_paz/cambia_pwd', function () {
     return view('cambiaPwdPaziente');
