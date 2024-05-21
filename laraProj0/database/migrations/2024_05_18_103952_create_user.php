@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->string('username', 20);
-            $table->string('password', 20);
+            $table->string('password');
             $table->string('usertype', 1);   //A per admin, P per paziente e C per clinico
         });
     }
