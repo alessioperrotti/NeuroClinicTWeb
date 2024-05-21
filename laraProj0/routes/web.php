@@ -132,3 +132,5 @@ Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
     return view('modificaTerapia');
 })
 ->name('modificaTerapia'); // rotta per sviluppo
+
+require __DIR__.'/auth.php';
