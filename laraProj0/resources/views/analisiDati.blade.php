@@ -37,7 +37,7 @@
             <div class="bg-white overflow-y-auto flex-grow table-container ">
                 <table class="min-w-full bg-white">
                     <thead >
-                        <tr class="sticky">
+                        <tr class="sticky top-0 bg-white">
                             <th class="px-4 py-2 font-semibold uppercase tracking-wider">Paziente</th>
                             <th class="px-4 py-2 font-semibold uppercase tracking-wider">Numero cambi terapia</th>
                         </tr>
