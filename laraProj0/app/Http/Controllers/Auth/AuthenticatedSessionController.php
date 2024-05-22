@@ -29,9 +29,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+
         // return redirect()->intended(RouteServiceProvider::HOME);
 
         $role = auth()->user()->usertype;
+
 
         switch($role) {
 
@@ -39,7 +42,8 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('homeAdmin');
                 break;
             case 'P':
-                return redirect()->route('homePaziente');
+                $paziente = auth()->user()->paziente;
+                return redirect()->route('homePaziente', $paziente);
                 break;
             case 'C':
                 return redirect()->route('homeClinico');

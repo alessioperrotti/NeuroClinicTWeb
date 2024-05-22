@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Resources\Paziente;
 
 class User extends Authenticatable
 {
@@ -48,5 +50,10 @@ class User extends Authenticatable
 
     public function hasRole($r): bool {
         return ($this->usertype == $r);
+    }
+
+    public function paziente()
+    {
+        return $this->hasOne(Paziente::class, 'username', 'username');
     }
 }

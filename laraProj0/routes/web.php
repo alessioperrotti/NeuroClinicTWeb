@@ -19,18 +19,19 @@ Route::get('/', function () {
 })
 ->name('home');
 
+/*
 Route::get('/login', function () {
     return view('login');
 })
-->name('login');
+->name('login'); */
 
 Route::get('/faq', function () {
     return view('faq');
 })
 ->name('faq');
 
-Route::get('/home_paz',[PazController::class, 'index'])
-->name('homePaziente')->middleware('can:isPaziente'); 
+Route::get('/home_paz/{paziente}',[PazController::class, 'index'])
+->name('homePaziente'); 
 
 
 Route::get('/home_paz/cambia_pwd', function () {

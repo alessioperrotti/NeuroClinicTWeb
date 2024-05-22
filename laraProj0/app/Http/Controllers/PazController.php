@@ -7,7 +7,7 @@ use Illuminate\View\View;
 
 class PazController extends Controller
 {
-    public function index(): View {
-        return view('homePaziente');
+    public function index($paziente): View {
+        return view('homePaziente')->with('paziente', $paziente);
     }
 }
