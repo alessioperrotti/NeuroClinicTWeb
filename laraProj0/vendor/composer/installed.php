@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8303f7d3111fd9cce9619bf0155feb17938d9e19',
+        'reference' => '7905673306064dfcf0278d0180dd7c74f3c6ae23',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -391,7 +391,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8303f7d3111fd9cce9619bf0155feb17938d9e19',
+            'reference' => '7905673306064dfcf0278d0180dd7c74f3c6ae23',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -988,6 +988,15 @@
             'install_path' => __DIR__ . '/../spatie/ignition',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-html' => array(
+            'pretty_version' => '3.9.0',
+            'version' => '3.9.0.0',
+            'reference' => '35802bd9b276ce08e1d9d15584b17fdef965063b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-html',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'spatie/laravel-ignition' => array(
             'pretty_version' => '2.4.1',

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Resources\Paziente;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -49,7 +50,7 @@ class User extends Authenticatable
     ];
 
     public function hasRole($r): bool {
-        return ($this->usertype == $r);
+        return ($this->usertype === $r);
     }
 
     public function paziente()
