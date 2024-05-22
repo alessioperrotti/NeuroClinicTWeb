@@ -31,7 +31,7 @@ Route::get('/faq', function () {
 ->name('faq');
 
 Route::get('/home_paz/{paziente}',[PazController::class, 'index'])
-->name('homePaziente'); 
+->name('homePaziente')->middleware(['auth', 'can:isPaziente']); 
 
 
 Route::get('/home_paz/cambia_pwd', function () {

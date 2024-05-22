@@ -43,7 +43,7 @@ class AuthenticatedSessionController extends Controller
                 break;
             case 'P':
                 $paziente = auth()->user()->paziente;
-                return redirect()->route('homePaziente', $paziente);
+                return redirect()->route('homePaziente', );
                 break;
             case 'C':
                 return redirect()->route('homeClinico');

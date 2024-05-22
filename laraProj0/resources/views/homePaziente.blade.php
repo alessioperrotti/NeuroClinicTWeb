@@ -29,7 +29,7 @@
         </div>
     </header>
    
-    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, {{$paziente . " " . $paziente}}</h1>
+    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, {{Auth::user() . " " . Auth::user()}}</h1>
     <br>
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
