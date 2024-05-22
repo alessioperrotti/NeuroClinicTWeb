@@ -29,44 +29,44 @@
         </div>
     </header>
    
-    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, {{AUTH::user()->nome . " " . AUTH::user()->cognome}}</h1>
+    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, {{Auth::user()->nome . " " . Auth::user()->cognome}}</h1>
     <br>
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
         <br>
         <div class="flex">
             <p class="text-black font-bold text-base">Nome</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->nome}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->nome}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Cognome</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->cognome}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->cognome}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Data di nascita</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->dataNasc}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->dataNasc}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Genere</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->genere}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->genere}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Indirizzo</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->via . " " . AUTH::user()->civico . " " . AUTH::user()->citta . " " . AUTH::user()->prov}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->via . " " . Auth::user()->civico . " " . Auth::user()->citta . " " . Auth::user()->prov}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Telefono</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->telefono}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->telefono}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base">Indirizzo E-mail</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->email}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->email}}</p>
         </div>
         <br>
         <br>
@@ -82,7 +82,7 @@
         <br>
         <div class="flex">
             <p class="text-black font-bold text-base">Username</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{AUTH::user()->username}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{Auth::user()->username}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
