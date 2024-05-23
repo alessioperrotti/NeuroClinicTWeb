@@ -38,20 +38,11 @@ class AuthenticatedSessionController extends Controller
 
         $role = auth()->user()->usertype;
 
-        if(Gate::allows('isClinico')) {
-            // Utente è un paziente
-            Log::info('Approvando il Gate isClinico per l\'utente:', ['user' => $user]);
-            return redirect()->route('homeClinico');
-        }
-
-
         switch($role) {
-
             case 'A':
                 return redirect()->route('homeAdmin');
                 break;
             case 'P':
-                $paziente = auth()->user()->paziente;
                 return redirect()->route('homePaziente');
                 break;
             case 'C':
