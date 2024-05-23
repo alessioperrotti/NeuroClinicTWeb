@@ -30,12 +30,30 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-gray-700">Indirizzo</label>
-                    <input name="indirizzo" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                    <label class="block text-gray-700">Via</label>
+                    <input name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Civico</label>
+                    <input name="indirizzo" type="number" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Città</label>
+                    <input name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Provincia</label>
+                    <select name="provincia" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                        @isset($province)
+                        @foreach($province as $provincia)
+                            <option value={{$provincia}} class="text-gray-700">{{$provincia}}</option>
+                        @endforeach
+                        @endisset
+                    </select>
                 </div>
                 <div>
                     <label class="block text-gray-700">Telefono</label>
-                    <input name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
+                    <input name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                 </div>
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
@@ -44,7 +62,11 @@
                 <div>
                     <label class="block text-gray-700">Username</label>
                     <input name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
-                </div>
+                </div>   
+            </div>
+            <div>
+                <label class="block text-gray-700">Username</label>
+                <input name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
             </div>
             <div class="flex justify-center mt-4 gap-y-4 gap-x-24">
                 <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">
