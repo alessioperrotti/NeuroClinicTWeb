@@ -64,10 +64,10 @@ Route::get('/home_admin', function () {
 })
 ->name('homeAdmin')->middleware('can:isAdmin');
 
-Route::get('/home_admin/lista_paz', function () {
-    return view('listaPaz');
-})
-->name('listaPaz');
+#Route::get('/home_admin/lista_paz', function () {
+#    return view('listaPaz');
+#})
+#->name('listaPaz');
 
 Route::get('/home_admin/analisi_dati', function () {
     return view('analisiDati');
@@ -117,6 +117,11 @@ Route::get('/home_clin/lista_paz',function () {
     return view('listaPazienti');
 })
 ->name('listaPazienti');
+
+#ROTTA LISTA PAZIENTI DEVO DEFINIRE IL CONTROLLER
+Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
+    ->name('listaPaz')->middleware('can:isAdmin'); 
+
 
 /*
 Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {

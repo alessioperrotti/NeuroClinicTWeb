@@ -14,18 +14,23 @@
      text-gray-700 leading-tight  focus:outline-none">
 
     <div id="listaPazienti" class="mb-4">
+        <!-- PER ORA NON FUNZIONA IL BUTTON ELIMINA -->
+        @isset($pazienti)
+            @foreach ($pazienti as $paziente)
+                <div class="flex justify-between items-center bg-white p-2 rounded-lg mb-2">
+                    <span class="font-bold">{{$paziente->nome . " " . $paziente->cognome}}</span>
+                    <div class="flex mr-2 gap-x-4">
+                        <button id="btnElimina">
+                            <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                        </button>
+                    </div>
+                </div>
+            @endforeach
 
+        
+        @endisset
 
-        <div class="flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-            <span class="font-bold">Mario Rossi</span>
-            <div class="flex mr-2 gap-x-4">
-
-                <button id="btnElimina">
-                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
-                </button>
-            </div>
-        </div>
-        <!-- da aggiungere pazienti -->
+    
     </div>
 
 

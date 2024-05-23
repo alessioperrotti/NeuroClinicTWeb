@@ -7,6 +7,8 @@
     <!-- vite('resources/css/app.css') -->
     <title>NeuroClinic | @yield('title') </title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body class="bg-cyan-50">
     <header>
@@ -16,6 +18,11 @@
             </a>
         </div>
     </header>
+    <div class="text-gray-600">
+        <button onclick="window.history.back()" class="btn btn-secondary p-2">
+            <i class="fas fa-arrow-left "></i> Indietro
+        </button>
+    </div>
     <div name="content">
         @yield('content')
     </div>
