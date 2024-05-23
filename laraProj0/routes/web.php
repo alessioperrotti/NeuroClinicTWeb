@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PazController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
