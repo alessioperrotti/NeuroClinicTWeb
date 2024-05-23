@@ -1,6 +1,9 @@
 <?php
 
+
+
 use App\Http\Controllers\PazController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,10 +62,10 @@ Route::get('/home_paz/cartella' , function () {
 })
 ->name('cartellaClinicaPaziente');
 
-Route::get('/home_admin', function () {
-    return view('homeAdmin');
-})
-->name('homeAdmin')->middleware('can:isAdmin');
+
+Route::get('/home_admin', [AdminController::class, 'index'])
+->name('homeAdmin'); 
+
 
 Route::get('/home_admin/lista_paz', function () {
     return view('listaPaz');
