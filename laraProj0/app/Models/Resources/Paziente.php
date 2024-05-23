@@ -9,7 +9,8 @@ class Paziente extends Model
 {
     protected $table = 'paziente';
     protected $primaryKey = 'username';
-    protected $guarded = ['username'];
+    protected $keyType = 'string';
+    // protected $guarded = ['username'];
     public $timestamps = false;
     
     public function user()

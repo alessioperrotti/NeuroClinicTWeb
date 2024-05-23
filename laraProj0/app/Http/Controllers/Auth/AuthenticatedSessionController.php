@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Gate;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -35,6 +38,12 @@ class AuthenticatedSessionController extends Controller
 
         $role = auth()->user()->usertype;
 
+        if(Gate::allows('isPaziente')) {
+            // Utente è un paziente
+            Log::info('Approvando il Gate isPaziente per l\'utente:', ['user' => $user]);
+            return redirect()->route('homePaziente');
+        }
+
 
         switch($role) {
 
@@ -43,7 +52,7 @@ class AuthenticatedSessionController extends Controller
                 break;
             case 'P':
                 $paziente = auth()->user()->paziente;
-                return redirect()->route('homePaziente', );
+                return redirect()->route('homePaziente');
                 break;
             case 'C':
                 return redirect()->route('homeClinico');

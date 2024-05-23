@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Log;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,9 +22,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Log::info('AppServiceProvider boot method called');
+
         $this->registerPolicies();
 
         Gate::define('isPaziente', function ($user) {
+            Log::info('Definendo il Gate isPaziente per l\'utente:', ['user' => $user]);
             return $user->hasRole('P');
         });
     }
