@@ -47,7 +47,7 @@ Route::get('/home_paz/nuovo_ep' , function () {
 Route::get('/home_clin/nuovo_paz',function () {
     return view('nuovoPaziente');
 })
-->name('nuovoPaziente');
+->name('nuovoPaziente')->middleware('can:isClinico');
 
 Route::get('/home_paz/aggiorna_dati' , function () {
     return view('aggiornaDatiPaziente');
@@ -62,7 +62,7 @@ Route::get('/home_paz/cartella' , function () {
 Route::get('/home_admin', function () {
     return view('homeAdmin');
 })
-->name('homeAdmin');
+->name('homeAdmin')->middleware('can:isAdmin');
 
 Route::get('/home_admin/lista_paz', function () {
     return view('listaPaz');
