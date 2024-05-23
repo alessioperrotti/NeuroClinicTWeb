@@ -10,8 +10,11 @@ class Paziente extends Model
     protected $table = 'paziente';
     protected $primaryKey = 'username';
     protected $keyType = 'string';
-    protected $guarded = ['username'];
+    //protected $guarded = ['username'];
     public $timestamps = false;
+    protected $fillable = ['username', 'nome', 'cognome', 'dataNasc', 'genere', 'via',
+     'civico', 'citta', 'prov', 'telefono', 'email', 'clinico'];
+
     
     public function user()
     {

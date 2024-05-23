@@ -29,10 +29,11 @@ class NewPazienteRequest extends FormRequest
             'via' => 'required|max:30',
             'civico' => 'required|numeric',
             'citta' => 'required|max:30',
-            'provincia' => 'required|max:2',
+            'prov' => 'required|max:2',
             'telefono' => 'required|min:10|max:13',
-            'email' => 'required|max:40',
-            'clinico' => 'required'
+            'email' => 'required|email|max:40|unique:paziente,email',
+            'username' => 'required|max:20|unique:user,username',
+            'clinico' => 'required',
         ];
     }
 }

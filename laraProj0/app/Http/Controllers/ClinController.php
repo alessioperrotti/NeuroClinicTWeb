@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
 use App\Models\Resources\Paziente;
 use App\Models\GestoreClinici;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class ClinController extends Controller
 {
@@ -42,10 +44,19 @@ class ClinController extends Controller
 
     public function storePaziente(NewPazienteRequest $request) : RedirectResponse {
 
-        
+        Log::info('Entro nello store paziente');
+
+        $validatedData = $request->validated();
+        $user = new User([
+            'username' => $validatedData['username'],
+            'password' => Hash::make('stdpassword'),
+            'usertype' => 'P'
+        ]);
+        $user->save();
         $paziente = New Paziente;
-        $paziente->fill($request->validated());
+        $paziente->fill($validatedData);
         $paziente->save();
+        
 
         return redirect()->action([ClinController::class, 'index']);
     }
