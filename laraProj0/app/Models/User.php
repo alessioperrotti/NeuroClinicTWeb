@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Resources\Paziente;
+use App\Models\Resources\Clinico;
 use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function paziente()
     {
         return $this->hasOne(Paziente::class, 'username', 'username');
+    }
+
+    public function clinico()
+    {
+        return $this->hasOne(Clinico::class, 'username', 'username');
     }
 }

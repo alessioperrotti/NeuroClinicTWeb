@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PazController;
+use App\Http\Controllers\ClinController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -103,10 +104,8 @@ Route::get('/home_admin/aggiorna_faq', function () {
 })
 ->name('gestioneFaq');
 
-Route::get('/home_clin',function () {
-    return view('homeClinico');
-})
-->name('homeClinico');
+Route::get('/home_clin', [ClinController::class, 'index'])
+->name('homeClinico')->middleware('can:isClinico');
 
 Route::get('/home_clin/aggiorna_clin',function () {
     return view('aggiornaClinico');
