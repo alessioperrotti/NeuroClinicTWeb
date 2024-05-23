@@ -30,10 +30,10 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="#who">CHI SIAMO</a>
-                    <a href="{{ route('faq') }}">FAQ</a>
-                    <a href="#contact">CONTATTACI</a>
-                    <a href="{{ route('login') }}">AREA RISERVATA</a>
+                    <a href="#who" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CHI SIAMO</a>
+                    <a href="{{ route('faq') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">FAQ</a>
+                    <a href="#contact" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CONTATTACI</a>
+                    <a href="{{ route('login') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
                 </nav>
             </div>
         </div>
