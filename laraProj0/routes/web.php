@@ -83,10 +83,11 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 ->name('nuovoClinico');
 
 
-Route::get('/home_admin/disturbi', function () {
-    return view('gestioneDisturbi');
-})
-->name('gestioneDisturbi');
+
+
+Route::get('/home_admin/disturbi', [AdminController::class, 'mostraDisturbi'])
+    ->name('gestioneDisturbi');
+    
 
 
 Route::get('/home_admin/clinici', function () {
