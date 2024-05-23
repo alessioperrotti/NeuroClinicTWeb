@@ -24,8 +24,15 @@ class NewPazienteRequest extends FormRequest
         return [
             'nome' => 'required|max:30',
             'cognome' => 'required|max:30',
+            'dataNasc' => 'required',
             'genere' => 'required|min:0|max:1',
-            'telefono' => 'required|min'
+            'via' => 'required|max:30',
+            'civico' => 'required|numeric',
+            'citta' => 'required|max:30',
+            'provincia' => 'required|max:2',
+            'telefono' => 'required|min:10|max:13',
+            'email' => 'required|max:40',
+            'clinico' => 'required'
         ];
     }
 }

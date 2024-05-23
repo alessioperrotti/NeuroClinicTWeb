@@ -6,8 +6,8 @@
 <div class="flex flex-col items-center justify-center gap-y-2">
     <h1 class="text-5xl font-bold  mt-5 mb-8 gap-y-5">Inserimento nuovo paziente</h1>
 
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
-        <form>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl mb-12">
+        <form method="POST" action="{{ route('nuovoPaziente')}}">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700">Nome</label>
@@ -29,31 +29,35 @@
                         <option value="A" class="text-gray-700">Altro</option>
                     </select>
                 </div>
-                <div>
-                    <label class="block text-gray-700">Via</label>
-                    <input name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                <div class="flex">
+                    <div class="basis-2/3">
+                        <label class="block text-gray-700">Via</label>
+                        <input name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                    </div>
+                    <div class="basis-1/3 pl-2">
+                        <label class="block text-gray-700">Civico</label>
+                        <input name="indirizzo" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Civico">
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-gray-700">Civico</label>
-                    <input name="indirizzo" type="number" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
-                </div>
-                <div>
-                    <label class="block text-gray-700">Città</label>
-                    <input name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
-                </div>
-                <div>
-                    <label class="block text-gray-700">Provincia</label>
-                    <select name="provincia" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                        @isset($province)
-                        @foreach($province as $provincia)
-                            <option value={{$provincia}} class="text-gray-700">{{$provincia}}</option>
-                        @endforeach
-                        @endisset
-                    </select>
+                <div class="flex">
+                    <div class="basis-2/3">
+                        <label class="block text-gray-700">Città</label>
+                        <input name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Indirizzo">
+                    </div>
+                    <div class="basis-1/3 pl-2">
+                        <label class="block text-gray-700">Provincia</label>
+                        <select name="provincia" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                            @isset($province)
+                            @foreach($province as $provincia)
+                                <option value={{$provincia}} class="text-gray-700">{{$provincia}}</option>
+                            @endforeach
+                            @endisset
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-gray-700">Telefono</label>
-                    <input name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <input name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
                 </div>
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
@@ -62,11 +66,17 @@
                 <div>
                     <label class="block text-gray-700">Username</label>
                     <input name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Clinico Associato</label>
+                    <select name="provincia" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    @isset($clinici)
+                        @foreach($clinici as $clinico)
+                        <option value={{$clinico->username}}>{{$clinico->nome . " " . $clinico->cognome}}</option>
+                        @endforeach
+                    @endisset
+                    </select>
                 </div>   
-            </div>
-            <div>
-                <label class="block text-gray-700">Username</label>
-                <input name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
             </div>
             <div class="flex justify-center mt-4 gap-y-4 gap-x-24">
                 <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">

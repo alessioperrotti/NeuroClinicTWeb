@@ -48,6 +48,9 @@ Route::get('/home_paz/nuovo_ep' , function () {
 Route::get('/home_clin/nuovo_paz', [ClinController::class, 'addPaziente'])
 ->name('nuovoPaziente')->middleware('can:isClinico');
 
+Route::post('/home_clin/nuovo_paz', [ClinController::class, 'storePaziente'])
+->name('nuovoPaziente')->middleware('can:isClinico');
+
 Route::get('/home_paz/aggiorna_dati' , function () {
     return view('aggiornaDatiPaziente');
 })
