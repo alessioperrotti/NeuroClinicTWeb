@@ -79,8 +79,9 @@ class DatabaseSeeder extends Seeder
                 'ruolo' => 'Fisioterapista',
                 'specializ' => 'Riabilitazione Respiratoria'
             ],
-            
+
         ]);
+
 
         DB::table('paziente')->insert([
             [
@@ -170,5 +171,23 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        DB::table('distmotorio')->insert([
+            [
+                'nome' => 'Paralisi cerebrale',
+                'categoria' => 'movimento e postura'
+            ],
+            [
+                'nome' => 'Mioclono',
+                'categoria' => 'ipercinetici'
+            ],
+            [
+                'nome' => 'Atassia',
+                'categoria' => 'coordinazione motoria'
+            ],
+            [
+                'nome' => 'Parkinsonismo',
+                'categoria' => 'ipocinetici'
+            ]
+        ]);
     }
 }
