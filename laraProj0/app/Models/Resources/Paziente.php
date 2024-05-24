@@ -2,6 +2,7 @@
 
 namespace App\Models\Resources;
 use App\Models\User;
+use App\Models\Resources\Episodio;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,5 +20,10 @@ class Paziente extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'username', 'username');
+    }
+
+    public function episodi()
+    {
+        return $this->hasMany(Episodio::class, 'paziente', 'username');
     }
 }

@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attivita extends Model
 {
-    use HasFactory;
+    protected $table = 'attivita';
+    public $timestamps = false;
 }

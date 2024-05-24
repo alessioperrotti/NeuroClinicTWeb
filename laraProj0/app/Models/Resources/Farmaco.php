@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Farmaco extends Model
 {
-    use HasFactory;
+    protected $table = 'farmaco';
+    public $timestamps = false;
 }
