@@ -20,8 +20,7 @@ class AdminController extends Controller
         $pazienti=$this->pazienteModel->getPazienti();
         #return view('listaPaz')->with('pazienti',$pazienti);
         return response()
-        ->view('listaPaz', ['pazienti' => $pazienti])
-        ->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        ->view('listaPaz', ['pazienti' => $pazienti]);
         
     } 
 
@@ -29,6 +28,6 @@ class AdminController extends Controller
     {
         $this->pazienteModel->eliminaPaz($username);
         $pazienti = $this->pazienteModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
-        return view('listaPaz', ['pazienti' => $pazienti]);   
+        return redirect()->route('listaPaz');   
     }
 }

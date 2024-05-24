@@ -34,12 +34,23 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.delete-form').forEach(form => {
-            form.addEventListener('submit', function (event) {
-                if (!confirm('Sei sicuro di voler eliminare questo paziente?')) {
-                    event.preventDefault();
-                }
-            });
+        // Sovrascrive il pulsante "Indietro"
+        //Prendo l'elemento con Id=back_button, a questo elemento sovrascrivo  
+        //l'attributo onclick in modo che quando viene cliccato eseguo la funzione
+        //che imposta window.location.href sulla route {{ route('homeAdmin') }} (window.location.href è una proprietà in JavaScript che rappresenta l'URL della pagina corrente)
+        var backButton = document.getElementById('back_button');
+        backButton.onclick = function() {
+            window.location.href = "{{ route('homeAdmin') }}";
+        };
+
+        // Conferma per l'eliminazione del paziente:
+        //prendo l'elemento form con classe delete-form e gli aggiungo un gestore degli eventi 
+        //quando la form viene inviata eseguo la funzione, se l'utente fa clic su "Annulla", la funzione confirm restituirà false, 
+        //(!false=true ed entro nell'if), l'evento di submit viene quindi prevenuto e il paziente non viene eliminato
+        document.querySelector('.delete-form').addEventListener('submit', function(event) {
+            if (!confirm('Sei sicuro di voler eliminare questo paziente?')) {
+                event.preventDefault();
+            }
         });
     });
 </script>
