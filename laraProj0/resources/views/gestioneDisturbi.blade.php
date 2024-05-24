@@ -35,10 +35,10 @@
         <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">Aggiungi Disturbo</button>
     </div>
 
-    <!-- Contenitore per il form di inserimento nuovo disturbo, inizialmente nascosto -->
-    <div id="formNuovoDisturbo" class="mt-4 " style="display: none;">
+    <!-- Contenitore per il form di inserimento nuovo disturbo, inizialmente nascosto solo se non ci sono stati errori nella form-->
+    <div id="formNuovoDisturbo" class="mt-4" style="display: {{ $errors->any() ? 'block' : 'none' }} ;"> 
         <form action="{{ route('gestioneDisturbi.store') }}" method="post">
-            
+            @csrf
             <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
             <div class="bg-white p-4 rounded">
                 <div class=" mb-6 flex justify-between">
@@ -58,7 +58,7 @@
                         <input name="categoria" type="text" id="categoria" placeholder="Categoria" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         @if ($errors->first('categoria'))
                         <ul class="errors">
-                            @foreach ($errors->get('nome') as $message)
+                            @foreach ($errors->get('categoria') as $message)
                             <li class="text-red">{{ $message }}</li>
                             @endforeach
                         </ul>
@@ -66,8 +66,8 @@
                     </div>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="reset" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="reset" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button type="submit" id="" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -84,6 +84,7 @@
 
         document.getElementById('btnAnnulla').addEventListener('click', function() {
             // Nasconde la form e resetta i campi
+            
             document.getElementById('formNuovoDisturbo').style.display = 'none';
             document.getElementById('nomeDisturbo').value = '';
             document.getElementById('categoriaDisturbo').value = '';

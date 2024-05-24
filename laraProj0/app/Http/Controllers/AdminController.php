@@ -40,6 +40,7 @@ class AdminController extends Controller
         $disturbi=$this->disturbiModel->getDisturbi();
         return view('gestioneDisturbi')->with('disturbi',$disturbi);
     }
+   
 
     public function storeDisturbo(NewDisturboRequest $request): RedirectResponse {
     
@@ -60,7 +61,7 @@ class AdminController extends Controller
         $disturbo->fill($validatedData);
         $disturbo->save();
 
-        return redirect()->action([AdminController::class, 'index']);
+        return redirect()->action([AdminController::class, 'viewDisturbi']);
 
     }
 
