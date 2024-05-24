@@ -18,7 +18,7 @@
                 <br>
                 <input name="password" id="password" type="password" class="border rounded-md h-[60px] w-[336px] p-4 text-xl">
             </div>
-            <input type="submit" class="bg-cyan-600 rounded-xl mt-3 w-[200px] h-[60px] text-white font-semibold hover:bg-cyan-500" value="Login">   
+            <input type="submit" class="bg-cyan-600 rounded-xl mt-3 w-[200px] h-[60px] text-white font-semibold hover:bg-cyan-500 cursor-pointer" value="Login">   
         </form>
     </div>
     <img src="{{ url('images/star3d.png')}}" class="h-[700px] z-0" alt="Sfondo Login">
