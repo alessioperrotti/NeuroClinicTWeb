@@ -67,4 +67,10 @@ class ClinController extends Controller
         $pazienti = $this->gestPazModel->getPazienti();
         return view('listaPazienti')->with('pazienti', $pazienti);
     }
+
+    public function showCartClinica($userPaz) : View {
+        $paziente = Paziente::find($userPaz);
+        // gestire reperimento farmaci, attività ed episodi
+        return view('cartellaClin2')->with('paziente', $paziente);
+    }
 }

@@ -116,16 +116,8 @@ Route::get('/home_clin/aggiorna_clin',function () {
 Route::get('/home_clin/lista_paz', [ClinController::class, 'viewPazienti'])
 ->name('listaPazienti')->middleware('can:isClinico');
 
-/*
-Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
-    return view('cartellaClin2');
-})
-->name('cartellaClin2'); */
-
-Route::get('/home_clin/lista_paz/cart_clinica',function () {
-    return view('cartellaClin2');
-})
-->name('cartellaClin2'); // rotta per sviluppo
+Route::get('/home_clin/lista_paz/cart_clinica/{userPaz}', [ClinController::class, 'showCartClinica'])
+->name('cartellaClin2')->middleware('can:isClinico'); 
 
 Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
     return view('modificaTerapia');
