@@ -9,16 +9,19 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
 use App\Models\Resources\Paziente;
 use App\Models\GestoreClinici;
+use App\Models\GestorePazienti;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class ClinController extends Controller
 {
     protected $gestClinModel;
+    protected $gestPazModel;
 
     public function __construct()
     {
         $this->gestClinModel = new GestoreClinici;
+        $this->gestPazModel = new GestorePazienti;
     }
 
     public function index(): View {
@@ -44,8 +47,6 @@ class ClinController extends Controller
 
     public function storePaziente(NewPazienteRequest $request) : RedirectResponse {
 
-        Log::info('Entro nello store paziente');
-
         $validatedData = $request->validated();
         $user = new User([
             'username' => $validatedData['username'],
@@ -59,5 +60,11 @@ class ClinController extends Controller
         
 
         return redirect()->action([ClinController::class, 'index']);
+    }
+
+    public function viewPazienti(): View {
+        
+        $pazienti = $this->gestPazModel->getPazienti();
+        return view('listaPazienti')->with('pazienti', $pazienti);
     }
 }

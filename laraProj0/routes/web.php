@@ -113,10 +113,8 @@ Route::get('/home_clin/aggiorna_clin',function () {
 })
 ->name('aggiornaClinico');
 
-Route::get('/home_clin/lista_paz',function () {
-    return view('listaPazienti');
-})
-->name('listaPazienti');
+Route::get('/home_clin/lista_paz', [ClinController::class, 'viewPazienti'])
+->name('listaPazienti')->middleware('can:isClinico');
 
 /*
 Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
