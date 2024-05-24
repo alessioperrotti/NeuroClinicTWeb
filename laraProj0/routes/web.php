@@ -85,10 +85,12 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 
 
 
-Route::get('/home_admin/disturbi', [AdminController::class, 'mostraDisturbi'])
+Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
     ->name('gestioneDisturbi');
     
 
+Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
+->name('gestioneDisturbi.store');
 
 Route::get('/home_admin/clinici', function () {
     return view('gestioneClinici');

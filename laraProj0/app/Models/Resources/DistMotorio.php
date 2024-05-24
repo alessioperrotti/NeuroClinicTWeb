@@ -11,4 +11,8 @@ class DistMotorio extends Model
    protected $keyType = 'string';
    public $timestamps = false;
 
+   protected $fillable = ['nome', 'categoria'];
+
+  
+
 }
