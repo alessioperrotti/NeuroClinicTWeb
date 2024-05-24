@@ -23,7 +23,12 @@
                 <nav class="space-x-4 text-white text-sm">
                     <a href="{{ route('cartellaClinicaPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLA CLINICA</a>
                     <a href="{{ route('inserimentoNuovoEvento')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">NUOVO EVENTO</a>
-                    <a href="{{ route('home') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
+                    @auth
+                        <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
+                    @endauth
                 </nav>
             </div>
         </div>

@@ -16,7 +16,12 @@
             <div class="mb-8"> 
                 <label for="password" class="text-xl font-semibold">Password</label>
                 <br>
-                <input name="password" id="password" type="password" class="border rounded-md h-[60px] w-[336px] p-4 text-xl">
+                <div class="relative">
+                    <input name="password" id="password" type="password" class="border rounded-md h-[60px] w-[336px] p-4 text-xl">
+                    <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('password')">
+                        <img id="eyeId1" src="{{asset('images/eye-solid.png')}}" alt="ciao" class="w-5">
+                    </button>
+                </div>
             </div>
             <input type="submit" class="bg-cyan-600 rounded-xl mt-3 w-[200px] h-[60px] text-white font-semibold hover:bg-cyan-500" value="Login">   
         </form>

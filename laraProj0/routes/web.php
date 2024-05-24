@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PazController;
+use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,7 @@ Route::get('/home_paz', [PazController::class, 'index'])
 Route::get('/home_paz/cambia_pwd', function () {
     return view('cambiaPwdPaziente');
 })
-->name('cambiaPwdPaziente');
+->middleware('auth')->name('cambiaPwdPaziente');
 
 Route::get('/home_paz/nuovo_ep' , function () {
     return view('inserimentoNuovoEvento');
@@ -133,5 +134,8 @@ Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
     return view('modificaTerapia');
 })
 ->name('modificaTerapia'); // rotta per sviluppo
+
+Route::put('/cambia_pwd', [PasswordController::class, 'update'])
+->middleware('auth')->name('password.update');
 
 require __DIR__.'/auth.php';

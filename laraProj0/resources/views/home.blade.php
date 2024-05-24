@@ -33,7 +33,12 @@
                     <a href="#who">CHI SIAMO</a>
                     <a href="{{ route('faq') }}">FAQ</a>
                     <a href="#contact">CONTATTACI</a>
-                    <a href="{{ route('login') }}">AREA RISERVATA</a>
+                    @guest
+                        <a href="{{ route('login') }}">AREA RISERVATA</a>
+                    @endguest
+                    @can('isPaziente')
+                        <a href="{{ route('homePaziente') }}">AREA RISERVATA</a>
+                    @endcan
                 </nav>
             </div>
         </div>
