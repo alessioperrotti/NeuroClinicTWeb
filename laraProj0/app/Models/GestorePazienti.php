@@ -17,4 +17,6 @@ class GestorePazienti extends Model
         return $pazienti;
     }
 
+    
+
 }

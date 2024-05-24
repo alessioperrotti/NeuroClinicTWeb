@@ -119,10 +119,13 @@ Route::get('/home_clin/lista_paz',function () {
 })
 ->name('listaPazienti');
 
-#ROTTA LISTA PAZIENTI DEVO DEFINIRE IL CONTROLLER
+
 Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
     ->name('listaPaz')->middleware('can:isAdmin'); 
 
+
+Route::delete('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
+    ->name('eliminaPaziente')->middleware('can:isAdmin');
 
 /*
 Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
