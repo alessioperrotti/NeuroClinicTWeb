@@ -18,15 +18,17 @@ class AdminController extends Controller
     public function mostraPazienti()
     {
         $pazienti=$this->pazienteModel->getPazienti();
-        return view('listaPaz')->with('pazienti',$pazienti);
-    }
+        #return view('listaPaz')->with('pazienti',$pazienti);
+        return response()
+        ->view('listaPaz', ['pazienti' => $pazienti])
+        ->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        
+    } 
 
     public function eliminaPaziente($username)
     {
-        $paziente = Paziente::findOrFail($username);
-        $paziente->delete();
-        $pazienti=$this->pazienteModel->getPazienti();
-
-        return view('listaPaz', ['pazienti', $pazienti]);
+        $this->pazienteModel->eliminaPaz($username);
+        $pazienti = $this->pazienteModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
+        return view('listaPaz', ['pazienti' => $pazienti]);   
     }
 }
