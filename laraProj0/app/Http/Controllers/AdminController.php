@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewDisturboRequest;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
 use App\Models\Resources\DistMotorio;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
 
     protected $disturbiModel;
+    protected $pazienti;
 
     public function __construct()
     {
         
-        #$this->middleware('can:isAdmin');
+        $this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi();
+      
           
     }
 
@@ -47,24 +48,32 @@ class AdminController extends Controller
 
         Log::info('metodo storeDisturbo attivato');
         $validatedData = $request->validated();
-/*
-        $user = new User([
-            'username' => $validatedData['username'],
-            'password' => Hash::make('stdpassword'),
-            'usertype' => 'A'
-        ]);
-        $user->save();
-        devo capire a cosa serve nell'aggiunta del paziente. credo qui non serva???
-        
-        */
-        $disturbo = new DistMotorio;
+
+        $disturbo = new DistMotorio();
         $disturbo->fill($validatedData);
         $disturbo->save();
 
-        return redirect()->action([AdminController::class, 'viewDisturbi']);
 
+        
+
+ 
+
+        //return redirect()->action([AdminController::class, 'index']);
+        return redirect()->route('gestioneDisturbi');
+       
+        
     }
 
-    
-    
+    public function deleteDisturbo($nome)
+    {
+        $this->disturbiModel->deleteDisturbo($nome);
+        $this->disturbiModel->getDisturbi();
+        return redirect()->route('gestioneDisturbi');
+
+        
+    }
+
+
+
+
 }

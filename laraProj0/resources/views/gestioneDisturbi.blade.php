@@ -8,19 +8,28 @@
 </div>
 <div id="app" class=" text-lg container mx-auto p-4 w-full max-w-4xl">
 
-    @csrf
+
     <form id="listaDisturbi" class="mb-4">
+        @csrf
         @isset($disturbi)
         @foreach($disturbi as $disturbo)
         <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
             <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
             <div class="flex mr-2 gap-x-4">
+
+
                 <button id="btnModifica">
                     <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                 </button>
-                <button id="btnElimina">
-                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
-                </button>
+
+                <form action="{{ route('gestioneDisturbi.delete', $disturbo->nome) }}" method="POST" class="inline-block">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" id="btnElimina">
+                        <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                    </button>
+                </form>
+
             </div>
         </div>
         @endforeach

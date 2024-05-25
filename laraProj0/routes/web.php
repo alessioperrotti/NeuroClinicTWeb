@@ -75,10 +75,10 @@ Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
 Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
 ->name('gestioneDisturbi.store');
 
-Route::get('/home_admin/lista_paz', function () {
-    return view('listaPaz');
-})
-->name('listaPaz');
+Route::delete('/home_admin/disturbi/{nome}', [AdminController::class, 'deleteDisturbo'])
+    ->name('gestioneDisturbi.delete');
+
+
 
 Route::get('/home_admin/analisi_dati', function () {
     return view('analisiDati');
@@ -91,7 +91,7 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 ->name('nuovoClinico');
 
 
-
+    
 
 
 Route::get('/home_admin/clinici', function () {
