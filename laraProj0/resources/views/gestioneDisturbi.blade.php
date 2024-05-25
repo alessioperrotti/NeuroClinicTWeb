@@ -30,7 +30,7 @@
 
 
     <!-- Contenitore per il form di inserimento nuovo disturbo, inizialmente nascosto solo se non ci sono stati errori nella form-->
-    <div id="formNuovoDisturbo" class="mt-4" style="display: {{ $errors->any() ? 'block' : 'none' }} ;"> 
+    <div id="formNuovoDisturbo" class="mt-4" style='display: {{ $errors->any() ? "block" : "none" }} ;'> 
         <form action="{{ route('gestioneDisturbi.store') }}" method="post">
             @csrf
             <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
