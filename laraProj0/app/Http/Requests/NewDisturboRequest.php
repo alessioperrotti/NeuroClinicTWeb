@@ -32,6 +32,4 @@ class NewDisturboRequest extends FormRequest
             'categoria' => 'required|max:30',
         ];
     }
-
-    
 }
