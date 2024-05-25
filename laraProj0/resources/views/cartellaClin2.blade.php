@@ -26,6 +26,10 @@
                     <p class="text-gray-500">{{ $farmaco->descr}}</p>
                 @endforeach
             @endisset
+
+            @if($farmaci == null)
+                <li><p class="font-semibold">Non ci sono farmaci prescritti.</p>
+            @endif
             
             @isset($attivita)
                 @foreach($attivita as $att)
@@ -33,6 +37,10 @@
                     <p class="text-gray-500">{{ $att->descr}}</p>
                 @endforeach
             @endisset
+
+            @if($attivita == null)
+                <li><p class="font-semibold">Non ci sono attvità pianificate.</p>
+            @endif
         </ul>
     </div>
     <a href="{{ route('modificaTerapia')}}">
@@ -54,6 +62,10 @@
                 <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
                 @endforeach
             @endisset
+
+            @if($disturbi == null)
+                <li><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
+            @endif
         </select>
     </div>
     <div name="filtro2" class="space-x-2 flex items-center">
@@ -111,6 +123,10 @@
 
     @endforeach
     @endisset
-    <!-- da aggiungere clinici -->
+
+    @if($episodi == null)
+        <li><p class="font-semibold">Non ci sono episodi segnalati.</p>
+    @endif
+
 </div>
 @endsection

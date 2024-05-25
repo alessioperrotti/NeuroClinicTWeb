@@ -9,4 +9,9 @@ class Attivita extends Model
 {
     protected $table = 'attivita';
     public $timestamps = false;
+
+    public function terapie()
+    {
+        return $this->hasMany(Terapia::class, 'terapia', 'id');
+    }
 }

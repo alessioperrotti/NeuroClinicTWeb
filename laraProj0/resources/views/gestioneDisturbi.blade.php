@@ -7,33 +7,27 @@
     <h1 class="text-5xl font-bold ml-5 mt-5 mb-8 gap-y-5">Gestione disturbi motori</h1>
 </div>
 <div id="app" class=" text-lg container mx-auto p-4 w-full max-w-4xl">
-
-    @csrf
     <form id="listaDisturbi" class="mb-4">
-        @isset($disturbi)
-        @foreach($disturbi as $disturbo)
+
         <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-            <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
+            <span class="nomeDisturbo font-bold">Epilessia Mioclonica</span>
             <div class="flex mr-2 gap-x-4">
                 <button id="btnModifica">
                     <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                 </button>
                 <button id="btnElimina">
-                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">    
                 </button>
             </div>
         </div>
-        @endforeach
-        @endisset
+        <!-- da aggiungere disturbi -->
     </form>
 
-
-
-
     <div class="flex justify-center  mt-10">
-        <!-- Bottone per aggiungere un nuovo disturbo -->
-        <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">Aggiungi Disturbo</button>
+    <!-- Bottone per aggiungere un nuovo disturbo -->
+    <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">Aggiungi Disturbo</button>
     </div>
+
 
     <!-- Contenitore per il form di inserimento nuovo disturbo, inizialmente nascosto solo se non ci sono stati errori nella form-->
     <div id="formNuovoDisturbo" class="mt-4" style="display: {{ $errors->any() ? 'block' : 'none' }} ;"> 
@@ -68,14 +62,21 @@
                 <div class="flex justify-center gap-x-14">
                     <button type="reset" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
                     <button type="submit" id="" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+
+   
                 </div>
             </div>
-        </form>
+            <div class="flex justify-center gap-x-14">
+                <button id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
+                <button id="btnConfermaInserimento" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+            </div>
+        </div>
     </div>
 </div>
 
 
 <script>
+
     document.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('btnAggiungiDisturbo').addEventListener('click', function() {
             // Mostra la form di inserimento nuovo disturbo
@@ -91,6 +92,17 @@
         });
 
         // Da aggiungere gestore di eventi per Modifica ed Elimina
+
+   
+
+    document.getElementById('btnAnnulla').addEventListener('click', function() {
+        // Nasconde la form e resetta i campi
+        document.getElementById('formNuovoDisturbo').style.display = 'none';
+        document.getElementById('nomeDisturbo').value = '';
+        document.getElementById('categoriaDisturbo').value = '';
     });
+
+    // Da aggiungere gestore di eventi per Modifica ed Elimina
+});
 </script>
 @endsection

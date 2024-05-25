@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('terapia', function (Blueprint $table) {
-            $table->id('ID');
+            $table->id('id');
             $table->date('data');
             $table->string('paziente', 20)->references('username')->on('paziente')->unique();
         });

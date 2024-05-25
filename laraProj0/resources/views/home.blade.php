@@ -33,9 +33,6 @@
                     <a href="#who">CHI SIAMO</a>
                     <a href="{{ route('faq') }}">FAQ</a>
                     <a href="#contact">CONTATTACI</a>
-                    <php>
-                        $
-                    </php>
                     <a href="{{ route('login') }}">AREA RISERVATA</a>
                 </nav>
             </div>
