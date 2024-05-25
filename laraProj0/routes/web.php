@@ -5,7 +5,7 @@
 use App\Http\Controllers\PazController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -82,8 +82,6 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
     return view('nuovoClinico');
 })
 ->name('nuovoClinico');
-
-
 
 
 Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
