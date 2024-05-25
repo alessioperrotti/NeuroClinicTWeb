@@ -15,6 +15,7 @@ use App\Models\GestoreTerapie;
 use App\Models\Resources\Terapia;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class ClinController extends Controller
 {
@@ -55,23 +56,31 @@ class ClinController extends Controller
     public function storePaziente(NewPazienteRequest $request) : RedirectResponse {
 
         $validatedData = $request->validated();
-        $user = new User([
-            'username' => $validatedData['username'],
-            'password' => Hash::make('stdpassword'),
-            'usertype' => 'P'
-        ]);
-        $user->save();
-        $paziente = New Paziente;
-        $paziente->fill($validatedData);
-        $paziente->save();
-        
 
+        DB::beginTransaction();
+        try {
+            $user = new User([
+                'username' => $validatedData['username'],
+                'password' => Hash::make('stdpassword'),
+                'usertype' => 'P'
+            ]);
+            $user->save();
+            $paziente = New Paziente;
+            $paziente->fill($validatedData);
+            $paziente->save();
+            DB::commit();
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+        }
+        
         return redirect()->action([ClinController::class, 'index']);
     }
 
     public function viewPazienti(): View {
-        
-        $pazienti = $this->gestPazModel->getPazienti();
+
+        $userClin = Auth::user()->clinico->username;
+        $pazienti = $this->gestPazModel->getPazientiByClin($userClin);
         return view('listaPazienti')->with('pazienti', $pazienti);
     }
 
