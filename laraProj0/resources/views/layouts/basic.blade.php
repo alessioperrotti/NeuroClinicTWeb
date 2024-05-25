@@ -7,9 +7,10 @@
     <!-- vite('resources/css/app.css') -->
     <title>NeuroClinic | @yield('title') </title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
 </head>
 <body class="bg-cyan-50">
+    <script src="{{ asset('js/public.js') }}"></script>
     <header>
         <div class="bg-cyan-600 h-[100px] flex items-center justify-center">
             <a href="{{ route('home') }}">

@@ -15,7 +15,7 @@ class PasswordController extends Controller
         $this->middleware('auth');
     }
 
-    public function update(Request $request)
+    public function update_pwd(Request $request)
     {
         //validazione dei dati della form
         $request->validate([
