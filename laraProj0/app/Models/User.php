@@ -59,4 +59,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(Paziente::class, 'username', 'username');
     }
+    
 }

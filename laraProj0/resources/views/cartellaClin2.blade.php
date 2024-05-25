@@ -3,7 +3,9 @@
 @section('title', 'Cartella Paziente')
 
 @section('content')
-<h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Cartella clinica di @yield('paziente')</h1>
+@isset($paziente)
+<h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Cartella clinica di {{ $paziente->nome . " " . $paziente->cognome }}</h1>
+@endisset
 <div class="flex flex-col items-center">
     <div name="container_terapia" class="bg-white mx-16 mb-6 rounded-xl shadow-md h-auto p-8">
         <h3 class="text-2xl font-semibold">Disturbi diagnosticati</h3>
@@ -24,6 +26,10 @@
                     <p class="text-gray-500">{{ $farmaco->descr}}</p>
                 @endforeach
             @endisset
+
+            @if($farmaci == null)
+                <li><p class="font-semibold">Non ci sono farmaci prescritti.</p>
+            @endif
             
             @isset($attivita)
                 @foreach($attivita as $att)
@@ -31,6 +37,10 @@
                     <p class="text-gray-500">{{ $att->descr}}</p>
                 @endforeach
             @endisset
+
+            @if($attivita == null)
+                <li><p class="font-semibold">Non ci sono attvità pianificate.</p>
+            @endif
         </ul>
     </div>
     <a href="{{ route('modificaTerapia')}}">
@@ -94,7 +104,7 @@
     border-0 border-b-2 border-gray-300 focus:border-black
     text-gray-700 leading-tight  focus:outline-none" >
 
-    @isset($pisodi)
+    @isset($episodi)
     @foreach ($episodi as $episodio)
     <!-- ho messo padding a 4 invece che a 2 (eventualmente cambiare anche su admin) -->
         
@@ -111,5 +121,4 @@
     @endisset
     <!-- da aggiungere clinici -->
 </div>
-
 @endsection

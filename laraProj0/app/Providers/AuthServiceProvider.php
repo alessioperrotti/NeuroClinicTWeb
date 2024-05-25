@@ -27,8 +27,19 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('isPaziente', function ($user) {
-            Log::info('Definendo il Gate isPaziente per l\'utente:', ['user' => $user]);
             return $user->hasRole('P');
+        });
+
+        Gate::define('isClinico', function ($user) {
+            return $user->hasRole('C');
+        });
+
+        Gate::define('isAdmin', function ($user) {
+
+            Log::info("gate isAdmin");
+
+
+            return $user->hasRole('A');
         });
     }
 }

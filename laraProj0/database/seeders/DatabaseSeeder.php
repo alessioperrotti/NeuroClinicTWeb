@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ['username' => 'scottlang', 'password' => Hash::make('password22'), 'usertype' => 'C'],
         ]);
 
+
         DB::table('clinico')->insert([
             [
                 'username' => 'tonystark',
@@ -81,6 +82,7 @@ class DatabaseSeeder extends Seeder
             ],
             
         ]);
+
 
         DB::table('paziente')->insert([
             [
@@ -170,5 +172,356 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        DB::table('distmotorio')->insert([
+            [
+                'nome' => 'Paralisi cerebrale',
+                'categoria' => 'movimento e postura'
+            ],
+            [
+                'nome' => 'Mioclono',
+                'categoria' => 'ipercinetici'
+            ],
+            [
+                'nome' => 'Atassia',
+                'categoria' => 'coordinazione motoria'
+            ],
+            [
+                'nome' => 'Parkinsonismo',
+                'categoria' => 'ipocinetici'
+            ]
+        ]);
+
+
+        DB::table('farmaco')->insert([
+            [
+                'nome' => 'Levodopa 100mg',
+                'descr' => 'Trattamento principale per il Parkinson, riduce i sintomi motori aumentando i livelli di dopamina nel cervello.'
+            ],
+            [
+                'nome' => 'Carbidopa 25mg',
+                'descr' => "Utilizzato in combinazione con Levodopa, previene la sua degradazione prematura, aumentando l'efficacia terapeutica."
+            ],
+            [
+                'nome' => 'Baclofen 10mg',
+                'descr' => "Rilassante muscolare usato per alleviare spasmi muscolari, crampi e rigidità associati a disturbi neurologici."
+            ],
+            [
+                'nome' => 'Gabapentin 300mg',
+                'descr' => "Anticonvulsivante e analgesico per il trattamento di neuropatie, dolore neuropatico e alcune forme di epilessia."
+            ],
+            [
+                'nome' => 'Dantrolene 25mg',
+                'descr' => "Utilizzato per il trattamento della spasticità muscolare, agisce direttamente sul muscolo scheletrico per ridurre la contrazione."
+            ],
+            [
+                'nome' => 'Diazepam 5mg',
+                'descr' => "Benzodiazepina che allevia ansia, spasmi muscolari e convulsioni, oltre a essere usata come sedativo."
+            ],
+            [
+                'nome' => 'Tolcapone 100mg',
+                'descr' => "Inibitore della COMT che prolunga l'effetto della Levodopa nel trattamento del Parkinson, migliorando la gestione dei sintomi."
+            ],
+            [
+                'nome' => 'Ropinirole 0.25mg',
+                'descr' => "Agonista della dopamina usato per trattare i sintomi del Parkinson e la sindrome delle gambe senza riposo."
+            ],
+            [
+                'nome' => 'Pramipexole 0.125mg',
+                'descr' => "Agonista della dopamina efficace nel trattamento del Parkinson e della sindrome delle gambe senza riposo, migliorando il controllo motorio."
+            ],
+            [
+                'nome' => 'Tizanidine 2mg',
+                'descr' => "Rilassante muscolare che tratta spasmi muscolari causati da sclerosi multipla, lesioni spinali e altre condizioni."
+            ]
+        ]);
+
+
+        DB::table('attivita')->insert([
+            [
+                'nome' => 'Fisioterapia',
+                'descr' => 'Trattamento riabilitativo che utilizza esercizi fisici per migliorare la mobilità e ridurre il dolore nei pazienti con disturbi motori.'
+            ],
+            [
+                'nome' => 'Terapia Occupazionale',
+                'descr' => 'Attività che aiuta i pazienti a migliorare le abilità motorie necessarie per le attività quotidiane e l\'indipendenza.'
+            ],
+            [
+                'nome' => 'Idroterapia',
+                'descr' => 'Terapia che utilizza l\'acqua per facilitare i movimenti, ridurre la spasticità e migliorare la forza muscolare.'
+            ],
+            [
+                'nome' => 'Terapia con Onde d\'Urto',
+                'descr' => 'Utilizza onde acustiche per stimolare la rigenerazione dei tessuti e ridurre il dolore nei disturbi muscoloscheletrici.'
+            ],
+            [
+                'nome' => 'Esercizi di Equilibrio',
+                'descr' => 'Programmi specifici di esercizi per migliorare l\'equilibrio e ridurre il rischio di cadute nei pazienti con disturbi motori.'
+            ],
+            [
+                'nome' => 'Terapia Manuale',
+                'descr' => 'Interventi pratici eseguiti da fisioterapisti per mobilizzare articolazioni e tessuti molli, migliorando la funzione motoria.'
+            ],
+            [
+                'nome' => 'Riabilitazione Robotica',
+                'descr' => 'Utilizzo di dispositivi robotici per supportare e migliorare il recupero dei movimenti nei pazienti con deficit motori.'
+            ],
+            [
+                'nome' => 'Elettrostimolazione',
+                'descr' => 'Applicazione di correnti elettriche per stimolare i muscoli, migliorare la forza e ridurre la spasticità.'
+            ],
+            [
+                'nome' => 'Terapia Cognitivo-Motoria',
+                'descr' => 'Combina esercizi cognitivi e fisici per migliorare la coordinazione motoria e le funzioni cognitive nei pazienti.'
+            ],
+            [
+                'nome' => 'Yoga Terapeutico',
+                'descr' => 'Utilizzo di posture, respirazione e meditazione per migliorare la flessibilità, la forza e il benessere generale nei pazienti con disturbi motori.'
+            ]
+        ]);
+
+        
+        DB::table('episodio')->insert([
+            [
+                'data' => '2023-01-15',
+                'ora' => '08:30:00',
+                'durata' => 30,
+                'intensita' => 5,
+                'paziente' => 'pazipazi',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-02-20',
+                'ora' => '14:00:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'dianaprince',
+                'disturbo' => 'Mioclono'
+            ],
+            [
+                'data' => '2023-03-12',
+                'ora' => '10:15:00',
+                'durata' => 20,
+                'intensita' => 4,
+                'paziente' => 'peterparker',
+                'disturbo' => 'Atassia'
+            ],
+            [
+                'data' => '2023-04-05',
+                'ora' => '09:45:00',
+                'durata' => 60,
+                'intensita' => 8,
+                'paziente' => 'maryjane',
+                'disturbo' => 'Parkinsonismo'
+            ],
+            [
+                'data' => '2023-05-22',
+                'ora' => '11:30:00',
+                'durata' => 35,
+                'intensita' => 6,
+                'paziente' => 'clarkkent',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-06-14',
+                'ora' => '15:00:00',
+                'durata' => 40,
+                'intensita' => 5,
+                'paziente' => 'brucewayne',
+                'disturbo' => 'Mioclono'
+            ],
+            [
+                'data' => '2023-07-09',
+                'ora' => '08:00:00',
+                'durata' => 50,
+                'intensita' => 7,
+                'paziente' => 'pazipazi',
+                'disturbo' => 'Atassia'
+            ],
+            [
+                'data' => '2023-08-21',
+                'ora' => '12:45:00',
+                'durata' => 30,
+                'intensita' => 4,
+                'paziente' => 'dianaprince',
+                'disturbo' => 'Parkinsonismo'
+            ],
+            [
+                'data' => '2023-09-10',
+                'ora' => '09:30:00',
+                'durata' => 25,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-10-03',
+                'ora' => '14:15:00',
+                'durata' => 55,
+                'intensita' => 8,
+                'paziente' => 'maryjane',
+                'disturbo' => 'Mioclono'
+            ],
+            [
+                'data' => '2023-11-19',
+                'ora' => '10:45:00',
+                'durata' => 60,
+                'intensita' => 7,
+                'paziente' => 'clarkkent',
+                'disturbo' => 'Atassia'
+            ],
+            [
+                'data' => '2023-12-01',
+                'ora' => '08:15:00',
+                'durata' => 40,
+                'intensita' => 5,
+                'paziente' => 'brucewayne',
+                'disturbo' => 'Parkinsonismo'
+            ],
+            [
+                'data' => '2023-01-25',
+                'ora' => '11:00:00',
+                'durata' => 30,
+                'intensita' => 4,
+                'paziente' => 'pazipazi',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-02-15',
+                'ora' => '13:00:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'dianaprince',
+                'disturbo' => 'Mioclono'
+            ],
+            [
+                'data' => '2023-03-22',
+                'ora' => '10:30:00',
+                'durata' => 20,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 'Atassia'
+            ],
+            [
+                'data' => '2023-04-12',
+                'ora' => '09:15:00',
+                'durata' => 60,
+                'intensita' => 9,
+                'paziente' => 'maryjane',
+                'disturbo' => 'Parkinsonismo'
+            ],
+            [
+                'data' => '2023-05-28',
+                'ora' => '11:45:00',
+                'durata' => 35,
+                'intensita' => 8,
+                'paziente' => 'clarkkent',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-06-18',
+                'ora' => '15:15:00',
+                'durata' => 50,
+                'intensita' => 6,
+                'paziente' => 'brucewayne',
+                'disturbo' => 'Mioclono'
+            ],
+            [
+                'data' => '2023-07-19',
+                'ora' => '08:30:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'pazipazi',
+                'disturbo' => 'Atassia'
+            ],
+            [
+                'data' => '2023-08-30',
+                'ora' => '12:30:00',
+                'durata' => 30,
+                'intensita' => 5,
+                'paziente' => 'dianaprince',
+                'disturbo' => 'Parkinsonismo'
+            ],
+            [
+                'data' => '2023-09-22',
+                'ora' => '09:00:00',
+                'durata' => 25,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-10-15',
+                'ora' => '14:45:00',
+                'durata' => 55,
+                'intensita' => 8,
+                'paziente' => 'maryjane',
+                'disturbo' => 'Mioclono'
+            ],
+            [
+                'data' => '2023-11-29',
+                'ora' => '10:00:00',
+                'durata' => 60,
+                'intensita' => 9,
+                'paziente' => 'clarkkent',
+                'disturbo' => 'Atassia'
+            ],
+            [
+                'data' => '2023-12-12',
+                'ora' => '08:45:00',
+                'durata' => 40,
+                'intensita' => 5,
+                'paziente' => 'brucewayne',
+                'disturbo' => 'Parkinsonismo'
+            ],
+            [
+                'data' => '2023-01-30',
+                'ora' => '11:15:00',
+                'durata' => 30,
+                'intensita' => 4,
+                'paziente' => 'pazipazi',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-02-25',
+                'ora' => '13:15:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'dianaprince',
+                'disturbo' => 'Mioclono'
+            ],
+            [
+                'data' => '2023-03-29',
+                'ora' => '10:45:00',
+                'durata' => 20,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 'Atassia'
+            ],
+            [
+                'data' => '2023-04-20',
+                'ora' => '09:30:00',
+                'durata' => 60,
+                'intensita' => 9,
+                'paziente' => 'maryjane',
+                'disturbo' => 'Parkinsonismo'
+            ],
+            [
+                'data' => '2023-05-30',
+                'ora' => '11:30:00',
+                'durata' => 35,
+                'intensita' => 8,
+                'paziente' => 'clarkkent',
+                'disturbo' => 'Paralisi cerebrale'
+            ],
+            [
+                'data' => '2023-06-25',
+                'ora' => '15:30:00',
+                'durata' => 50,
+                'intensita' => 6,
+                'paziente' => 'brucewayne',
+                'disturbo' => 'Mioclono'
+            ]
+        ]);
+        
     }
 }
