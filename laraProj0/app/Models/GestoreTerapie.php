@@ -11,11 +11,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GestoreTerapie extends Model
 {
-    use HasFactory;
     protected $farmModel;
     protected $attModel;
 
-    protected function __construct(){
+    public function __construct(){
 
         $this->farmModel = new Farmaco;
         $this->attModel = new Attivita;

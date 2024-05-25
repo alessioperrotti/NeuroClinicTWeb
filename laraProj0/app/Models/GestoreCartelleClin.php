@@ -24,13 +24,11 @@ class GestoreCartelleClin extends Model
 
         $paziente = Paziente::with('diagnosi.disturbo')->findOrFail($userPaz);
         $disturbi = $paziente->diagnosi->pluck('disturbo')->unique();
-        return $disturbi;
+        return new Collection($disturbi);
     }
 
     public function getTerapiaAttivaByPaz($userPaz): Terapia {
 
-        $paziente = Paziente::find($userPaz);
-        $terapiaAtt = $paziente->terapie->orderBy('data', 'desc')->first(); // estraggo la terapia con data più recente
-        return $terapiaAtt;
+        return Terapia::where('paziente', $userPaz)->orderBy('data', 'desc')->first();
     }
 }

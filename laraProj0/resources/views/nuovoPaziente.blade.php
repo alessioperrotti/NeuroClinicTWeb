@@ -144,8 +144,8 @@
                 <!-- <input type="password" class="hidden" value="password">  --> 
             </div>
             <div class="flex justify-center mt-4 gap-y-4 gap-x-24">
-                <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">
-                <input type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500">
+                <input type="reset" value="Annulla Inserimento" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">
+                <input type="submit" value="Conferma Inserimento" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500">
             </div>
         </form>
     </div>
