@@ -67,6 +67,13 @@ Route::get('/home_paz/cartella' , function () {
 Route::get('/home_admin', [AdminController::class, 'index'])
 ->name('homeAdmin'); 
 
+Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
+    ->name('gestioneDisturbi');
+    
+
+Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
+->name('gestioneDisturbi.store');
+
 
 #Route::get('/home_admin/lista_paz', function () {
 #    return view('listaPaz');
