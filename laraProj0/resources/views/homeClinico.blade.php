@@ -19,16 +19,16 @@
             </a>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="{{ route('listaPazienti')}}">CARTELLE CLINICHE</a>
-                    <a href="{{ route('nuovoPaziente')}}">REGISTRA PAZIENTE</a>
-                    <a href="">LOGOUT</a>
+                    <a href="{{ route('listaPazienti')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLE CLINICHE</a>
+                    <a href="{{ route('nuovoPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">REGISTRA PAZIENTE</a>
+                    <a href="" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
                 </nav>
             </div>
         </div>
     </header>
    
     @isset($clinico)
-    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, @yield('utente')</h1>
+    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, {{$clinico->nome . " " . $clinico->cognome}}</h1>
     <br>
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
