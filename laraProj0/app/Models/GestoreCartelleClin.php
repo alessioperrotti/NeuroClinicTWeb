@@ -8,6 +8,7 @@ use App\Models\Resources\Paziente;
 use App\Models\Resources\Episodio;
 use App\Models\Resources\Diagnosi;
 use Illuminate\Database\Eloquent\Collection;
+use App\Models\Resources\Terapia;
 
 class GestoreCartelleClin extends Model
 {
@@ -24,5 +25,12 @@ class GestoreCartelleClin extends Model
         $paziente = Paziente::with('diagnosi.disturbo')->findOrFail($userPaz);
         $disturbi = $paziente->diagnosi->pluck('disturbo')->unique();
         return $disturbi;
+    }
+
+    public function getTerapiaAttivaByPaz($userPaz): Terapia {
+
+        $paziente = Paziente::find($userPaz);
+        $terapiaAtt = $paziente->terapie->orderBy('data', 'desc')->first(); // estraggo la terapia con data più recente
+        return $terapiaAtt;
     }
 }

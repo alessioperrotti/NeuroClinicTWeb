@@ -26,6 +26,10 @@
                     <p class="text-gray-500">{{ $farmaco->descr}}</p>
                 @endforeach
             @endisset
+
+            @if($farmaci == null)
+                <li><p class="font-semibold">Non ci sono farmaci prescritti.</p>
+            @endif
             
             @isset($attivita)
                 @foreach($attivita as $att)
@@ -33,6 +37,10 @@
                     <p class="text-gray-500">{{ $att->descr}}</p>
                 @endforeach
             @endisset
+
+            @if($attivita == null)
+                <li><p class="font-semibold">Non ci sono attvità pianificate.</p>
+            @endif
         </ul>
     </div>
     <a href="{{ route('modificaTerapia')}}">

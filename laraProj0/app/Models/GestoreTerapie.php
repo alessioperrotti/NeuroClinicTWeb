@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Resources\Attivita;
 use App\Models\Resources\Farmaco;
+use App\Models\Resources\Terapia;
 use Illuminate\Database\Eloquent\Collection;
 
 class GestoreTerapie extends Model
@@ -29,5 +30,19 @@ class GestoreTerapie extends Model
         $attivita = Attivita::all();
         return $attivita;
     }
+
+    public function getFarmaciByTer ($terId) : Collection {
+
+        $terapia = Terapia::with('prescrizioni.farmaco')->findOrFail($terId);
+        $farmaci = $terapia->prescrizioni->pluck('farmaco')->unique();
+        return $farmaci;
+    }
+
+    public function getAttivitaByTer ($terId) : Collection {
+
+        $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
+        $attivita = $terapia->pianificazioni->pluck('attivita')->unique();
+        return $attivita;
+    }    
     
 }

@@ -11,6 +11,8 @@ use App\Models\Resources\Paziente;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
+use App\Models\GestoreTerapie;
+use App\Models\Resources\Terapia;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,12 +21,14 @@ class ClinController extends Controller
     protected $gestClinModel;
     protected $gestPazModel;
     protected $gestCartModel;
+    protected $gestTerModel;
 
     public function __construct()
     {
         $this->gestClinModel = new GestoreClinici;
         $this->gestPazModel = new GestorePazienti;
         $this->gestCartModel = new GestoreCartelleClin;
+        $this->gestTerModel = new GestoreTerapie;
     }
 
     public function index(): View {
@@ -72,14 +76,20 @@ class ClinController extends Controller
     }
 
     public function showCartClinica($userPaz) : View {
-        
+
         $paziente = Paziente::find($userPaz);
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz);
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
+        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terId = $terapia->pluck('id');
+        $farmaci = $this->gestTerModel->getFarmaciByTer($terId);
+        $attivita = $this->gestTerModel->getAttivitaByTer($terId);
 
         return view('cartellaClin2')
                 ->with('paziente', $paziente)
                 ->with('episodi', $episodi)
-                ->with('disturbi', $disturbi);
+                ->with('disturbi', $disturbi)
+                ->with('farmaci', $farmaci)
+                ->with('attivita', $attivita);
     }
 }
