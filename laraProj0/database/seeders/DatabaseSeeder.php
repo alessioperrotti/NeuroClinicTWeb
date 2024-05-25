@@ -188,7 +188,17 @@ class DatabaseSeeder extends Seeder
             [
                 'nome' => 'Parkinsonismo',
                 'categoria' => 'ipocinetici'
-            ]
+            ],
+            ['nome' => 'Distrofia muscolare', 'categoria' => 'distrofie muscolari'],
+            ['nome' => 'Corea', 'categoria' => 'movimenti involontari'],
+            ['nome' => 'Sindromi piramidali', 'categoria' => 'lesioni piramidali'],
+            ['nome' => 'Distonia', 'categoria' => 'distonie'],
+            ['nome' => 'Sindrome di Tourette', 'categoria' => 'tourette'],
+            ['nome' => 'Sindrome delle gambe senza riposo', 'categoria' => 'sensoriale'],
+            ['nome' => 'Tremore essenziale', 'categoria' => 'tremori'],
+            ['nome' => 'Sindrome di Guillain-Barré', 'categoria' => 'lesioni nervose'],
+            ['nome' => 'Neuropatia periferica', 'categoria' => 'neuropatie'],
+            ['nome' => 'Sclerosi laterale amiotrofica', 'categoria' => 'lesioni del motoneurone']
         ]);
 
 
@@ -653,6 +663,35 @@ class DatabaseSeeder extends Seeder
             ['freq' => '4 volte a settimana', 'terapia' => 18, 'attivita' => 8],
             ['freq' => '5 volte a settimana', 'terapia' => 19, 'attivita' => 9],
             ['freq' => '6 volte a settimana', 'terapia' => 20, 'attivita' => 10],
+        ]);
+        
+        
+        DB::table('diagnosi')->insert([
+            ['paziente' => 'pazipazi', 'disturbo' => 'Parkinsonismo', 'data' => '2023-01-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 'Distonia', 'data' => '2023-02-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 'Atassia', 'data' => '2023-03-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 'Mioclono', 'data' => '2023-04-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2023-05-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 'Parkinsonismo', 'data' => '2023-06-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 'Distonia', 'data' => '2023-07-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 'Atassia', 'data' => '2023-08-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 'Mioclono', 'data' => '2023-09-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2023-10-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 'Parkinsonismo', 'data' => '2023-11-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 'Distonia', 'data' => '2023-12-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 'Atassia', 'data' => '2024-01-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 'Mioclono', 'data' => '2024-02-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2024-03-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 'Parkinsonismo', 'data' => '2024-04-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 'Distonia', 'data' => '2024-05-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 'Atassia', 'data' => '2024-06-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 'Mioclono', 'data' => '2024-07-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2024-08-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 'Parkinsonismo', 'data' => '2024-09-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 'Distonia', 'data' => '2024-10-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 'Atassia', 'data' => '2024-11-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 'Mioclono', 'data' => '2024-12-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2025-01-01'],
         ]);
         
     }

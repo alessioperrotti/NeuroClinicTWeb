@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Resources\Paziente;
 use App\Models\Resources\Episodio;
 use App\Models\Resources\Diagnosi;
+use App\Models\Resources\DistMotorio;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Resources\Terapia;
 
@@ -23,8 +24,14 @@ class GestoreCartelleClin extends Model
     public function getDisturbiByPaz($userPaz): Collection {
 
         $paziente = Paziente::with('diagnosi.disturbo')->findOrFail($userPaz);
-        $disturbi = $paziente->diagnosi->pluck('disturbo')->unique();
-        return new Collection($disturbi);
+        $disturbi = new Collection;
+        $diagnosi = $paziente->diagnosi;
+        //dd($diagnosi);
+        foreach($diagnosi as $diagn) {
+            $dist = DistMotorio::find($diagn->disturbo);
+            $disturbi->add($dist);
+        }
+        return $disturbi;
     }
 
     public function getTerapiaAttivaByPaz($userPaz): Terapia {

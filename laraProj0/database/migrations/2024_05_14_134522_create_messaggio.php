@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('messaggio', function (Blueprint $table) {
-            $table->id('ID');
+            $table->id('id');
             $table->timestamps();
             $table->string('paziente', 20)->references('username')->on('paziente');
             $table->string('clinico', 20)->references('username')->on('clinico');

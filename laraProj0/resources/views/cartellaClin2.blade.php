@@ -13,9 +13,12 @@
         <ul style="list-style-type: disc" class="ml-6">
             @isset($disturbi)
                 @foreach($disturbi as $disturbo)
-                <li>{{ $disturbo->nome}}
+                <li class="mb-4">{{ $disturbo->nome}}
                 @endforeach
             @endisset
+            @if($disturbi == null)
+                <li ><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
+            @endif
         </ul>
         <h3 class="text-2xl font-semibold mt-6">Terapia attiva</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
@@ -33,7 +36,7 @@
             
             @isset($attivita)
                 @foreach($attivita as $att)
-                <li><p class="font-semibold">{{ $att->nome}}</p>
+                <li class="mb-4"><p class="font-semibold">{{ $att->nome}}</p>
                     <p class="text-gray-500">{{ $att->descr}}</p>
                 @endforeach
             @endisset
@@ -55,8 +58,7 @@
     <div name="filtro1" class="space-x-2 flex items-center">
         <p class="h-min text-lg font-semibold">Filtra per disturbo: </p>
 
-        <!-- help needed -->
-        <select name="filtroDisturbo" multiple class="inline bg-white rounded-md h-min w-min p-1 border border-cyan-600" size=1>
+        <select name="filtroDisturbo" class="inline bg-white rounded-md h-min w-min p-1 border border-cyan-600" size=1>
             @isset($disturbi)
                 @foreach($disturbi as $disturbo)
                 <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
