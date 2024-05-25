@@ -10,6 +10,7 @@ use App\Http\Requests\NewPazienteRequest;
 use App\Models\Resources\Paziente;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
+use App\Models\GestoreCartelleClin;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,11 +18,13 @@ class ClinController extends Controller
 {
     protected $gestClinModel;
     protected $gestPazModel;
+    protected $gestCartModel;
 
     public function __construct()
     {
         $this->gestClinModel = new GestoreClinici;
         $this->gestPazModel = new GestorePazienti;
+        $this->gestCartModel = new GestoreCartelleClin;
     }
 
     public function index(): View {
@@ -71,6 +74,7 @@ class ClinController extends Controller
     public function showCartClinica($userPaz) : View {
         $paziente = Paziente::find($userPaz);
         // gestire reperimento farmaci, attività ed episodi
-        return view('cartellaClin2')->with('paziente', $paziente);
+        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz);
+        return view('cartellaClin2')->with('paziente', $paziente)->with('episodi', $episodi);
     }
 }

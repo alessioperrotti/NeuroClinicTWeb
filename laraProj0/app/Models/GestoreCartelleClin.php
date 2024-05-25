@@ -8,7 +8,7 @@ use App\Models\Resources\Paziente;
 use App\Models\Resources\Episodio;
 use Illuminate\Database\Eloquent\Collection;
 
-class GestoreEpisodi extends Model
+class GestoreCartelleClin extends Model
 {
     use HasFactory;
 
@@ -16,5 +16,10 @@ class GestoreEpisodi extends Model
         
         $paziente = Paziente::find($userPaz);
         return $paziente->episodi;
+    }
+
+    public function getDisturbiByPaz($userPaz): Collection {
+
+        $paziente = Paziente::find($userPaz);
     }
 }

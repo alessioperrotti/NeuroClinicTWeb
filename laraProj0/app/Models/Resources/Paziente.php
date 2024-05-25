@@ -3,6 +3,7 @@
 namespace App\Models\Resources;
 use App\Models\User;
 use App\Models\Resources\Episodio;
+use App\Models\Resources\DistMotorio;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,10 @@ class Paziente extends Model
     public function episodi()
     {
         return $this->hasMany(Episodio::class, 'paziente', 'username');
+    }
+
+    public function disturbi()
+    {
+        
     }
 }
