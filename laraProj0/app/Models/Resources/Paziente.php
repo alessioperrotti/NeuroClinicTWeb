@@ -4,6 +4,8 @@ namespace App\Models\Resources;
 use App\Models\User;
 use App\Models\Resources\Episodio;
 use App\Models\Resources\DistMotorio;
+use App\Models\Resources\Diagnosi;
+use App\Models\Resources\Terapia;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,8 +30,13 @@ class Paziente extends Model
         return $this->hasMany(Episodio::class, 'paziente', 'username');
     }
 
-    public function disturbi()
+    public function diagnosi()
     {
-        
+        return $this->hasMany(Diagnosi::class, 'paziente', 'username');
+    }
+
+    public function terapie()  // fa riferimento a tutte le terapie dello storico
+    {
+        return $this->hasMany(Terapia::class, 'paziente', 'username');
     }
 }
