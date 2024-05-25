@@ -62,6 +62,10 @@
                 <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
                 @endforeach
             @endisset
+
+            @if($disturbi == null)
+                <li><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
+            @endif
         </select>
     </div>
     <div name="filtro2" class="space-x-2 flex items-center">
@@ -119,6 +123,10 @@
 
     @endforeach
     @endisset
-    <!-- da aggiungere clinici -->
+
+    @if($episodi == null)
+        <li><p class="font-semibold">Non ci sono episodi segnalati.</p>
+    @endif
+
 </div>
 @endsection
