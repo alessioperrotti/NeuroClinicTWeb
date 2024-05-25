@@ -90,7 +90,7 @@ class ClinController extends Controller
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz);
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
-        $terId = $terapia->pluck('id');
+        $terId = $terapia->id;
         $farmaci = $this->gestTerModel->getFarmaciByTer($terId);
         $attivita = $this->gestTerModel->getAttivitaByTer($terId);
 

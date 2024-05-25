@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'MI',
                 'telefono' => '3201234567',
                 'email' => 'martina.ricci@example.com',
-                'clinico' => 'tonystark'
+                'clinico' => 'clinclin'
             ],
             [
                 'username' => 'dianaprince',
@@ -139,7 +139,7 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'NY',
                 'telefono' => '3454567890',
                 'email' => 'mary.jane@example.com',
-                'clinico' => 'wandamaximoff'
+                'clinico' => 'clinclin'
             ],
             [
                 'username' => 'clarkkent',
@@ -521,6 +521,138 @@ class DatabaseSeeder extends Seeder
                 'paziente' => 'brucewayne',
                 'disturbo' => 'Mioclono'
             ]
+        ]);
+
+
+        DB::table('terapia')->insert([
+            [
+                'data' => '2023-01-01',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-01-15',
+                'paziente' => 'dianaprince'
+            ],
+            [
+                'data' => '2023-02-01',
+                'paziente' => 'peterparker'
+            ],
+            [
+                'data' => '2023-02-15',
+                'paziente' => 'maryjane'
+            ],
+            [
+                'data' => '2023-03-01',
+                'paziente' => 'clarkkent'
+            ],
+            [
+                'data' => '2023-03-15',
+                'paziente' => 'brucewayne'
+            ],
+            [
+                'data' => '2023-04-01',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-04-15',
+                'paziente' => 'dianaprince'
+            ],
+            [
+                'data' => '2023-05-01',
+                'paziente' => 'peterparker'
+            ],
+            [
+                'data' => '2023-05-15',
+                'paziente' => 'maryjane'
+            ],
+            [
+                'data' => '2023-06-01',
+                'paziente' => 'clarkkent'
+            ],
+            [
+                'data' => '2023-06-15',
+                'paziente' => 'brucewayne'
+            ],
+            [
+                'data' => '2023-07-01',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-07-15',
+                'paziente' => 'dianaprince'
+            ],
+            [
+                'data' => '2023-08-01',
+                'paziente' => 'peterparker'
+            ],
+            [
+                'data' => '2023-08-15',
+                'paziente' => 'maryjane'
+            ],
+            [
+                'data' => '2023-09-01',
+                'paziente' => 'clarkkent'
+            ],
+            [
+                'data' => '2023-09-15',
+                'paziente' => 'brucewayne'
+            ],
+            [
+                'data' => '2023-10-01',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-10-15',
+                'paziente' => 'dianaprince'
+            ]
+        ]);
+
+
+        DB::table('prescrizione')->insert([
+            ['freq' => '1 volta al giorno', 'terapia' => 1, 'farmaco' => 1],
+            ['freq' => '2 volte al giorno', 'terapia' => 2, 'farmaco' => 2],
+            ['freq' => '1 volta al giorno', 'terapia' => 3, 'farmaco' => 3],
+            ['freq' => '3 volte al giorno', 'terapia' => 4, 'farmaco' => 4],
+            ['freq' => '1 volta al giorno', 'terapia' => 5, 'farmaco' => 5],
+            ['freq' => '2 volte al giorno', 'terapia' => 6, 'farmaco' => 6],
+            ['freq' => '1 volta al giorno', 'terapia' => 7, 'farmaco' => 7],
+            ['freq' => '3 volte al giorno', 'terapia' => 8, 'farmaco' => 8],
+            ['freq' => '1 volta al giorno', 'terapia' => 9, 'farmaco' => 9],
+            ['freq' => '2 volte al giorno', 'terapia' => 10, 'farmaco' => 10],
+            ['freq' => '1 volta al giorno', 'terapia' => 11, 'farmaco' => 1],
+            ['freq' => '3 volte al giorno', 'terapia' => 12, 'farmaco' => 2],
+            ['freq' => '1 volta al giorno', 'terapia' => 13, 'farmaco' => 3],
+            ['freq' => '2 volte al giorno', 'terapia' => 14, 'farmaco' => 4],
+            ['freq' => '1 volta al giorno', 'terapia' => 15, 'farmaco' => 5],
+            ['freq' => '3 volte al giorno', 'terapia' => 16, 'farmaco' => 6],
+            ['freq' => '1 volta al giorno', 'terapia' => 17, 'farmaco' => 7],
+            ['freq' => '2 volte al giorno', 'terapia' => 18, 'farmaco' => 8],
+            ['freq' => '1 volta al giorno', 'terapia' => 19, 'farmaco' => 9],
+            ['freq' => '3 volte al giorno', 'terapia' => 20, 'farmaco' => 10],
+        ]);
+
+
+        DB::table('pianificazione')->insert([
+            ['freq' => '2 volte a settimana', 'terapia' => 1, 'attivita' => 1],
+            ['freq' => '3 volte a settimana', 'terapia' => 2, 'attivita' => 2],
+            ['freq' => '1 volta a settimana', 'terapia' => 3, 'attivita' => 3],
+            ['freq' => '4 volte a settimana', 'terapia' => 4, 'attivita' => 4],
+            ['freq' => '5 volte a settimana', 'terapia' => 5, 'attivita' => 5],
+            ['freq' => '6 volte a settimana', 'terapia' => 6, 'attivita' => 6],
+            ['freq' => '7 volte a settimana', 'terapia' => 7, 'attivita' => 7],
+            ['freq' => '2 volte a settimana', 'terapia' => 8, 'attivita' => 8],
+            ['freq' => '3 volte a settimana', 'terapia' => 9, 'attivita' => 9],
+            ['freq' => '1 volta a settimana', 'terapia' => 10, 'attivita' => 10],
+            ['freq' => '4 volte a settimana', 'terapia' => 11, 'attivita' => 1],
+            ['freq' => '5 volte a settimana', 'terapia' => 12, 'attivita' => 2],
+            ['freq' => '6 volte a settimana', 'terapia' => 13, 'attivita' => 3],
+            ['freq' => '7 volte a settimana', 'terapia' => 14, 'attivita' => 4],
+            ['freq' => '2 volte a settimana', 'terapia' => 15, 'attivita' => 5],
+            ['freq' => '3 volte a settimana', 'terapia' => 16, 'attivita' => 6],
+            ['freq' => '1 volta a settimana', 'terapia' => 17, 'attivita' => 7],
+            ['freq' => '4 volte a settimana', 'terapia' => 18, 'attivita' => 8],
+            ['freq' => '5 volte a settimana', 'terapia' => 19, 'attivita' => 9],
+            ['freq' => '6 volte a settimana', 'terapia' => 20, 'attivita' => 10],
         ]);
         
     }

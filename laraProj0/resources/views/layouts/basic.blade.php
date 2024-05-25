@@ -16,6 +16,11 @@
             </a>
         </div>
     </header>
+    <div class="text-gray-600">
+        <button id="back_button" onclick="window.history.back()" class="btn btn-secondary p-2">
+            <i class="fas fa-arrow-left "></i> Indietro
+        </button>
+    </div>
     <div name="content">
         @yield('content')
     </div>

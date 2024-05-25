@@ -22,7 +22,7 @@
         <ul style="list-style-type: disc" class="ml-6">
             @isset($farmaci)
                 @foreach($farmaci as $farmaco)   
-                <li><p class="font-semibold">{{ $farmaco->nome}}</p>
+                <li class="mb-4"><p class="font-semibold">{{ $farmaco->nome ." (". $farmaco->freq . ")"}}</p>
                     <p class="text-gray-500">{{ $farmaco->descr}}</p>
                 @endforeach
             @endisset
@@ -110,17 +110,10 @@
 
     @isset($episodi)
     @foreach ($episodi as $episodio)
-    <!-- ho messo padding a 4 invece che a 2 (eventualmente cambiare anche su admin) -->
-        
         <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2">
-            <span class="font-bold">{{ $episodio->nome }}</span>
-            <div class="flex mr-2 gap-x-4">
-                <a href="{{ route('cartellaClin2')}}">
-                    <img src="{{ asset('images/cartella_clinica.png') }}" alt="Modifica" class="h-10 inline-block">
-                </a>
-            </div>
+            <p class="font-bold">{{ $episodio->disturbo }}</p>
+            <p class="text-gray-500">del {{$episodio->data}} alle {{$episodio->ora}}</p>
         </div>
-
     @endforeach
     @endisset
 

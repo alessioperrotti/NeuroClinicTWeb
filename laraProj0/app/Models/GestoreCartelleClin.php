@@ -29,6 +29,8 @@ class GestoreCartelleClin extends Model
 
     public function getTerapiaAttivaByPaz($userPaz): Terapia {
 
-        return Terapia::where('paziente', $userPaz)->orderBy('data', 'desc')->first();
+        $terapia = Terapia::where('paziente', $userPaz)->orderBy('data', 'desc')->first();
+        return $terapia;
+        
     }
 }
