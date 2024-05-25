@@ -16,5 +16,4 @@ class PazController extends Controller
         $paziente = $user->paziente;
         return view('homePaziente')->with('paziente', $paziente);
     }
-
 }
