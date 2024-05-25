@@ -13,7 +13,7 @@
 </head>
 
 <body class="bg-cyan-50">
-    <header class="fixed top-0 left-0 right-0 z-20">
+    <header class="">
         <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8">
             <a href="{{ route('home')}}">
                 <img src="{{ asset('images/logo_bianco.svg')}}" class="h-16" alt="Logo">
@@ -30,15 +30,15 @@
     <div class="flex justify-center">
         <div class="m-8 ">
             <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square size-60 ">
-                <a href="">
+                <a href="{{route('gestioneFaq')}}">
                     <img src="{{ asset('images/question.svg')}}" class="size-60" alt="Clinici">
                 </a>
             </div>
-            <h2 class="p-2 text-3xl">Gestione clinici</h2>
+            <h2 class="p-2 text-3xl">Gestione Faq</h2>
         </div>
         <div class="m-8 ">
             <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
-                <a href="">
+                <a href="{{route('gestioneFarmaciAttivita')}}">
                     <img src="{{ asset('images/medicina.svg')}}" class="size-60" alt="Clinici">
                 </a>
             </div>
@@ -58,7 +58,7 @@
     <div class="flex justify-center">
         <div class="m-8 text-3xl">
             <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
-                <a href=>
+                <a href="{{route('gestioneDisturbi')}}">
                     <img src="{{ asset('images/icona_stamp.svg')}}" class="size-60" alt="Clinici">
                 </a>
             </div>
@@ -74,7 +74,7 @@
         </div>
         <div class="m-8">
             <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square h-auto w-auto">
-                <a href=>
+                <a href="{{route('gestioneClinici')}}">
                     <img src="{{ asset('images/dottore.svg')}}" class="size-60" alt="Clinici">
                 </a>
             </div>

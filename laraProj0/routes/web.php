@@ -1,7 +1,9 @@
 <?php
 
+
+
 use App\Http\Controllers\PazController;
-use App\Http\Controllers\ClinController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,11 +47,10 @@ Route::get('/home_paz/nuovo_ep' , function () {
 })
 ->name('inserimentoNuovoEvento');
 
-Route::get('/home_clin/nuovo_paz', [ClinController::class, 'addPaziente'])
+Route::get('/home_clin/nuovo_paz',function () {
+    return view('nuovoPaziente');
+})
 ->name('nuovoPaziente')->middleware('can:isClinico');
-
-Route::post('/home_clin/nuovo_paz', [ClinController::class, 'storePaziente'])
-->name('nuovoPaziente.store')->middleware('can:isClinico');
 
 Route::get('/home_paz/aggiorna_dati' , function () {
     return view('aggiornaDatiPaziente');
@@ -61,10 +62,10 @@ Route::get('/home_paz/cartella' , function () {
 })
 ->name('cartellaClinicaPaziente');
 
-Route::get('/home_admin', function () {
-    return view('homeAdmin');
-})
-->name('homeAdmin')->middleware('can:isAdmin');
+
+Route::get('/home_admin', [AdminController::class, 'index'])
+->name('homeAdmin'); 
+
 
 Route::get('/home_admin/lista_paz', function () {
     return view('listaPaz');
@@ -82,11 +83,14 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 ->name('nuovoClinico');
 
 
-Route::get('/home_admin/disturbi', function () {
-    return view('gestioneDisturbi');
-})
-->name('gestioneDisturbi');
 
+
+Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
+    ->name('gestioneDisturbi');
+    
+
+Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
+->name('gestioneDisturbi.store');
 
 Route::get('/home_admin/clinici', function () {
     return view('gestioneClinici');
@@ -105,19 +109,31 @@ Route::get('/home_admin/aggiorna_faq', function () {
 })
 ->name('gestioneFaq');
 
-Route::get('/home_clin', [ClinController::class, 'index'])
-->name('homeClinico')->middleware('can:isClinico');
+Route::get('/home_clin',function () {
+    return view('homeClinico');
+})
+->name('homeClinico');
 
 Route::get('/home_clin/aggiorna_clin',function () {
     return view('aggiornaClinico');
 })
 ->name('aggiornaClinico');
 
-Route::get('/home_clin/lista_paz', [ClinController::class, 'viewPazienti'])
-->name('listaPazienti')->middleware('can:isClinico');
+Route::get('/home_clin/lista_paz',function () {
+    return view('listaPazienti');
+})
+->name('listaPazienti');
 
-Route::get('/home_clin/lista_paz/cart_clinica/{userPaz}', [ClinController::class, 'showCartClinica'])
-->name('cartellaClin2')->middleware('can:isClinico'); 
+/*
+Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
+    return view('cartellaClin2');
+})
+->name('cartellaClin2'); */
+
+Route::get('/home_clin/lista_paz/cart_clinica',function () {
+    return view('cartellaClin2');
+})
+->name('cartellaClin2'); // rotta per sviluppo
 
 Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
     return view('modificaTerapia');
