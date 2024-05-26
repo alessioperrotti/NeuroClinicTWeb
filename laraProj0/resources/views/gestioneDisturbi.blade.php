@@ -69,7 +69,7 @@
             </div>
         </form>
     </div>
-
+    
     <div id="formModificaDisturbo" class="mt-4" style="display: none;">
         <form id="modificaDisturboForm" action="" method="post">
             @csrf
@@ -109,17 +109,17 @@
             });
 
             $(document).on('click', '.btnModifica', function() {
-                var id = $(this).data('id');
+                id = $(this).data('id');
                 const nome = $(this).data('nome');
                 const categoria = $(this).data('categoria');
-             
                 
-	            var url = "{{ route('gestioneDisturbi.update',':id') }}";
-                
-	            url = url.replace(':id', id);
-                console.log(url);
-                
+                var url = '{{ route("gestioneDisturbi.update", ":id") }}';
+                url = url.replace(':id', id);
                 $('#formModificaDisturbo').attr('action', url);
+                
+                
+
+	           
 
                 $('#formModificaDisturbo').show();
                
