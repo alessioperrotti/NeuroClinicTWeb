@@ -115,8 +115,10 @@ Route::get('/home_admin/farmaci_attivita', function () {
 Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])
     ->name('gestioneFaq');
 
-Route::delete('/faq/{id}', [AdminController::class, 'eliminaFaq']
-    )->name('faq.elimina');
+Route::delete('/faq/{id}', [AdminController::class, 'eliminaFaq'])->name('faq.elimina');
+
+Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
+    ->name('gestioneFaq.store')->middleware('can:isAdmin');
    
 Route::get('/home_clin',function () {
     return view('homeClinico');
