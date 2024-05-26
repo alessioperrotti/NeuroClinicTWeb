@@ -30,26 +30,32 @@ class GestoreTerapie extends Model
         return $attivita;
     }
 
-    public function getFarmaciByTer ($terId) : Collection {
+    public function getFarmaciByTer ($terId) : array {
 
         $terapia = Terapia::with('prescrizioni.farmaco')->findOrFail($terId);
-        $farmaci = new Collection();
+        $farmaci = [];
         $prescrizioni = $terapia->prescrizioni;
         foreach($prescrizioni as $presc){
             $farm = Farmaco::findOrFail($presc->farmaco);
-            $farmaci->add($farm);
+            $farmaci[] = [
+                'farmaco' => $farm,
+                'freq' => $presc->freq
+            ];
         }
         return $farmaci; 
     }
 
-    public function getAttivitaByTer ($terId) : Collection {
+    public function getAttivitaByTer ($terId) : array {
 
         $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
-        $attivita = new Collection();
+        $attivita = [];
         $pianificazioni = $terapia->pianificazioni;
         foreach($pianificazioni as $pian){
             $att = Attivita::findOrFail($pian->attivita);
-            $attivita->add($att);
+            $attivita[] = [
+                'attivita' => $att,
+                'freq' => $pian->freq
+            ];
         }
         return $attivita;
     }    

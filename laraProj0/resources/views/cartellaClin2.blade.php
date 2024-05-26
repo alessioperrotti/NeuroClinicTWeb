@@ -25,8 +25,8 @@
         <ul style="list-style-type: disc" class="ml-6">
             @isset($farmaci)
                 @foreach($farmaci as $farmaco)   
-                <li class="mb-4"><p class="font-semibold">{{ $farmaco->nome ." (". $farmaco->freq . ")"}}</p>
-                    <p class="text-gray-500">{{ $farmaco->descr}}</p>
+                <li class="mb-4"><p class="font-semibold">{{ $farmaco['farmaco']->nome ." (". $farmaco['freq'] . ")"}}</p>
+                    <p class="text-gray-500">{{ $farmaco['farmaco']->descr}}</p>
                 @endforeach
             @endisset
 
@@ -36,8 +36,8 @@
             
             @isset($attivita)
                 @foreach($attivita as $att)
-                <li class="mb-4"><p class="font-semibold">{{ $att->nome}}</p>
-                    <p class="text-gray-500">{{ $att->descr}}</p>
+                <li class="mb-4"><p class="font-semibold">{{ $att['attivita']->nome ." (". $att['freq'] . ")"}}</p>
+                    <p class="text-gray-500">{{ $att['attivita']->descr}}</p>
                 @endforeach
             @endisset
 
@@ -58,7 +58,7 @@
     <div name="filtro1" class="space-x-2 flex items-center">
         <p class="h-min text-lg font-semibold">Filtra per disturbo: </p>
 
-        <select name="filtroDisturbo" class="inline bg-white rounded-md h-min w-min p-1 border border-cyan-600" size=1>
+        <select name="filtroDisturbo[]" multiple class="inline bg-white rounded-md h-min w-min p-1 border border-cyan-600" size=2>
             @isset($disturbi)
                 @foreach($disturbi as $disturbo)
                 <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
