@@ -7,6 +7,7 @@ use App\Models\GestorePazienti;
 use App\Models\Resources\Paziente;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
+use App\Models\GestoreFaq;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminController extends Controller
         #$this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi();
         $this->pazienteModel= new GestorePazienti;
+        $this->faqModel= new GestoreFaq;
           
     }
 
@@ -30,6 +32,16 @@ class AdminController extends Controller
         return view('homeAdmin'); 
     }
 
+    public function viewGestioneFaq()
+    {
+        $faqs=$this->faqModel->getFaqs();
+        return view('gestioneFaq')->with('faqs',$faqs); 
+    }
+    public function eliminaFaq($id)
+    {
+        $this->faqModel->eliminaFaq($id);
+        return redirect()->route('gestioneFaq');
+    }
 
     public function viewDisturbi()
     {

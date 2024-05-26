@@ -110,11 +110,14 @@ Route::get('/home_admin/farmaci_attivita', function () {
 ->name('gestioneFarmaciAttivita');
 
 
-Route::get('/home_admin/aggiorna_faq', function () {
-    return view('gestioneFaq');
-})
-->name('gestioneFaq');
 
+
+Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])
+    ->name('gestioneFaq');
+
+Route::delete('/faq/{id}', [AdminController::class, 'eliminaFaq']
+    )->name('faq.elimina');
+   
 Route::get('/home_clin',function () {
     return view('homeClinico');
 })

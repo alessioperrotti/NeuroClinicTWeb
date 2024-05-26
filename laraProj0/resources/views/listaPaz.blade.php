@@ -52,18 +52,19 @@
                 event.preventDefault();
             }
         });
-
-        // Filtro per cognome jQuery
-        $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
-                                                    //l'evento input si verifica quando il contenuto dell'elemento input cambia.
-            var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
-            $('.paziente').each(function() {        //per ogni elemento con classe "paziente" esguo questa funzione
-                var fullName = $(this).find('span').text().toLowerCase(); //estraggo il nome completo che so essere nell'elemento span
-                                                                         // all'interno dell'elemento con classe paziente (l'elemento della lista in questo caso)
-                var cognome = fullName.split(' ').slice(-1)[0]; // Prende l'ultimo elemento come cognome così anche se il paziente ha 2 nomi trova comunque il cognome
-                $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il paziente in base al filtro
-            });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
-        });                                                 // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
+        $(document).ready(function() {
+            // Filtro per cognome jQuery
+            $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
+                                                        //l'evento input si verifica quando il contenuto dell'elemento input cambia.
+                var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
+                $('.paziente').each(function() {        //per ogni elemento con classe "paziente" esguo questa funzione
+                    var fullName = $(this).find('span').text().toLowerCase(); //estraggo il nome completo che so essere nell'elemento span
+                                                                            // all'interno dell'elemento con classe paziente (l'elemento della lista in questo caso)
+                    var cognome = fullName.split(' ').pop(); // Prende l'ultimo elemento come cognome così anche se il paziente ha 2 nomi trova comunque il cognome
+                    $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il paziente in base al filtro
+                });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
+            }); 
+        });                                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
     });                                                     // preso all'inizio
 </script>
 
