@@ -76,7 +76,7 @@
         <br>
         <br>
         <div class=" flex justify-center items-center"> 
-            <a href="{{ route('aggiornaDatiPaziente') }}" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">
+            <a href="{{ route('aggiornaDatiPaziente', $paziente->username) }}" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">
                 Aggiorna i tuoi dati
             </a>
         </div>

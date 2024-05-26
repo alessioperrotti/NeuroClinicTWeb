@@ -50,10 +50,11 @@ Route::get('/home_clin/nuovo_paz',function () {
 })
 ->name('nuovoPaziente');
 
-Route::get('/home_paz/aggiorna_dati' , function () {
-    return view('aggiornaDatiPaziente');
-})
+Route::get('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'edit'])
 ->name('aggiornaDatiPaziente');
+
+Route::put('/home_paz/aggiornn_dati/{username}' , [PazController::class, 'update'])
+->name('paziente.update');
 
 Route::get('/home_paz/cartella' , function () {
     return view('cartellaClinicaPaziente');
@@ -135,7 +136,7 @@ Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
 })
 ->name('modificaTerapia'); // rotta per sviluppo
 
-Route::put('/cambia_pwd', [PasswordController::class, 'update'])
+Route::put('/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->middleware('auth')->name('password.update');
 
 require __DIR__.'/auth.php';

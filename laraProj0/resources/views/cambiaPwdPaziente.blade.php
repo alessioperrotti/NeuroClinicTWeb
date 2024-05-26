@@ -20,7 +20,7 @@
                 <div class="relative">
                     <input id="vecchiaPwd" name="vecchiaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " required>
                     <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('vecchiaPwd', 'eyeId1')">
-                        <img id="eyeId1" src="{{asset('images/eye-solid.png')}}" alt="ciao" class="w-5">
+                        <img id="eyeId1" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                     </button>
                 </div>
 
@@ -34,7 +34,7 @@
             <div class="relative">
                 <input id="nuovaPwd" name="nuovaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " required>
                 <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('nuovaPwd', 'eyeId2')">
-                    <img id="eyeId2" src="{{asset('images/eye-solid.png')}}" alt="ciao" class="w-5">
+                    <img id="eyeId2" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                 </button>
             </div>
 
@@ -48,7 +48,7 @@
             <div class="relative">
                 <input id="confermaPwd" name="confermaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " required>
                 <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('confermaPwd', 'eyeId3')">
-                    <img id="eyeId3" src="{{asset('images/eye-solid.png')}}" alt="ciao" class="w-5">
+                    <img id="eyeId3" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                 </button>
             </div>
 

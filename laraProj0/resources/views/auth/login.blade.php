@@ -19,7 +19,7 @@
                 <div class="relative">
                     <input name="password" id="password" type="password" class="border rounded-md h-[60px] w-[336px] p-4 text-xl">
                     <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('password', 'eyeId1')">
-                        <img id="eyeId1" src="{{asset('images/eye-solid.png')}}" alt="ciao" class="w-5">
+                        <img id="eyeId1" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                     </button>
                 </div>
             </div>
