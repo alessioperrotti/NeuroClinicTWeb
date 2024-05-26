@@ -64,9 +64,9 @@ class AdminController extends Controller
         
     }
 
-    public function deleteDisturbo($nome)
+    public function deleteDisturbo($id)
     {
-        $this->disturbiModel->deleteDisturbo($nome);
+        $this->disturbiModel->deleteDisturbo($id);
         $this->disturbiModel->getDisturbi();
         return redirect()->route('gestioneDisturbi');
 

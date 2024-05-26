@@ -17,9 +17,9 @@ class GestoreDisturbi extends Model
         return $disturbi;
     }
 
-    public function deleteDisturbo($nome)
+    public function deleteDisturbo($id)
     {
-        $disturbo = DistMotorio::findOrFail($nome);
+        $disturbo = DistMotorio::findOrFail($id);
         $disturbo->delete();
     }
 

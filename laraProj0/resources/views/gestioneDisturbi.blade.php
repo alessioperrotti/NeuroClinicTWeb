@@ -17,7 +17,7 @@
                     <button type="button" class="btnModifica" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
                         <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
-                    <form action="{{ route('gestioneDisturbi.delete', $disturbo->nome) }}" method="POST" class="inline-block">
+                    <form action="{{ route('gestioneDisturbi.delete', $disturbo->id) }}" method="POST" class="inline-block">
                         @csrf
                         @method('DELETE')
                         <button type="submit" id="btnElimina">
