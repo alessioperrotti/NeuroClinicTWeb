@@ -36,24 +36,24 @@
     </div>
         
         <!-- Contenitore per il form di inserimento nuova FAQ , inizialmente nascosto -->
-        <div id="formNuovaFaq" class="mt-4 " style="display: none;">
-            <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
+        <form id="formNuovaFaq" action="{{ route('gestioneFaq.store')}}" method="POST" style="display: none;">
+            @csrf
+            <hr class="h-0.5 my-8 bg-cyan-600 border-0">
             <div class="bg-white p-4 rounded-lg">
-                <div class=" mb-6 mx-3 " >
-                    
-                        <label for="domanda" class="block text-gray-700 text-sm font-bold mb-2">Domanda</label>
-                        <input type="text" id="domanda" placeholder="Domanda" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    
-                        <label for="risposta" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                        <textarea id="risposta" placeholder="Risposta" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        </textarea>
+                <div class="mb-6 mx-3">
+                    <label for="domanda" class="block text-gray-700 text-sm font-bold mb-2">Domanda</label>
+                    <input type="text" id="domanda" name="domanda" placeholder="Domanda" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-6 mx-3">
+                    <label for="risposta" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                    <textarea id="risposta" name="risposta" placeholder="Risposta" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button id="btnAnnullaInserimento" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button id="btnConfermaInserimento" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
