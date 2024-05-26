@@ -78,11 +78,15 @@ Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
 Route::delete('/home_admin/disturbi/{id}', [AdminController::class, 'deleteDisturbo'])
     ->name('gestioneDisturbi.delete');
 
+Route::put('/home_admin/disturbi/{id}', [AdminController::class, 'updateDisturbo'])
+    ->name('gestioneDisturbi.update');
+
+    
 
 Route::get('/home_admin/lista_paz', function () {
     return view('listaPaz');
 })
-->name('listaPaz');
+    ->name('listaPaz');
 
 Route::get('/home_admin/analisi_dati', function () {
     return view('analisiDati');

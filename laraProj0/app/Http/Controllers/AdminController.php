@@ -73,6 +73,32 @@ class AdminController extends Controller
         
     }
 
+    // public function updateDisturbo(NewDisturboRequest $request,$id):RedirectResponse
+    // {
+    //     $validatedData = $request->validated();
+    //     $disturbo = DistMotorio::find($id);
+    //     $disturbo->fill($validatedData);
+    //     $disturbo->save();
+    //     return redirect()->route('gestioneDisturbi.view');
+    // }
+    
+    public function updateDisturbo(Request $request, $id): RedirectResponse
+    {
+        $validated = $request->validate([
+            'nome' => 'required|max:30',
+            'categoria' => 'required|max:30',
+        ]);
+
+        $disturbo = DistMotorio::findOrFail($id);
+        $disturbo->nome = $validated['nome'];
+        $disturbo->categoria = $validated['categoria'];
+        $disturbo->save();
+
+        return redirect()->route('gestioneDisturbi.index')->with('success', 'Disturbo aggiornato con successo.');
+    }
+
+    
+
 
 
 

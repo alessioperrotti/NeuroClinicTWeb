@@ -8,6 +8,7 @@
     <title>NeuroClinic | @yield('title') </title>
     <script src="https://cdn.tailwindcss.com" ></script> 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  
 
 </head>
 <body class="bg-cyan-50">
