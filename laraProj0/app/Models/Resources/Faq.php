@@ -12,7 +12,9 @@ class Faq extends Model
     protected $table = 'faq';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
-    protected $fillable = ['domanda', 'risposta', 'id'];
+    protected $fillable = ['domanda', 'risposta'];
+    
+    public $timestamps = false; // Disabilita i timestamp automatici
 
 
 }

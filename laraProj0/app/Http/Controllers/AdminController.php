@@ -11,6 +11,8 @@ use App\Models\GestoreDisturbi;
 use App\Models\GestoreFaq;
 use App\Http\Requests\NewFaqRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -45,22 +47,24 @@ class AdminController extends Controller
         $this->faqModel->eliminaFaq($id);
         return redirect()->route('gestioneFaq');
     }
-    public function storeFaq(NewFaqRequest $request) : RedirectResponse {
-
+    public function storeFaq(NewFaqRequest $request) : RedirectResponse 
+    {
         $validatedData = $request->validated();
 
         DB::beginTransaction();
         try {
-            $faq = New Faq;
+            $faq = new Faq();
             $faq->fill($validatedData);
             $faq->save();
             DB::commit();
         } 
         catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Errore durante il salvataggio della FAQ: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della FAQ.');
         }
         
-        return redirect()->action([AdminController::class, 'viewGestioneFaq']);
+        return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiunta con successo.');
     }
 
     public function viewDisturbi()
