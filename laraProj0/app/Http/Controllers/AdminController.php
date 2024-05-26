@@ -9,6 +9,8 @@ use App\Models\Resources\Faq;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
 use App\Models\GestoreFaq;
+use App\Http\Requests\NewFaqRequest;
+use Illuminate\Http\RedirectResponse;
 
 class AdminController extends Controller
 {
@@ -43,22 +45,22 @@ class AdminController extends Controller
         $this->faqModel->eliminaFaq($id);
         return redirect()->route('gestioneFaq');
     }
-    public function storeFaq(NewPazienteRequest $request) : RedirectResponse {
+    public function storeFaq(NewFaqRequest $request) : RedirectResponse {
 
         $validatedData = $request->validated();
 
         DB::beginTransaction();
         try {
             $faq = New Faq;
-            $paziente->fill($validatedData);
-            $paziente->save();
+            $faq->fill($validatedData);
+            $faq->save();
             DB::commit();
         } 
         catch (\Exception $e) {
             DB::rollBack();
         }
         
-        return redirect()->action([ClinController::class, 'viewGestioneFaq']);
+        return redirect()->action([AdminController::class, 'viewGestioneFaq']);
     }
 
     public function viewDisturbi()
