@@ -18,7 +18,7 @@
             <li class="mb-2">
             <div class="space-x-4">
                 <label class="text-base text-gray-800">{{ $farmaco->nome}}</label>
-                <input id="{{$farmaco->nome}}" type="checkbox" name="farmaco" value="{{ $farmaco->nome}}">
+                <input id="{{$farmaco->nome}}" type="checkbox" name="farmaco" value="{{$farmaco->nome}}">
             </div>
             <!-- div che deve comparire con JavaScript -->
             <div id="freqDivId1" class="flex-row space-x-1 hidden">
