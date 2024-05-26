@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\GestorePazienti;
 use App\Models\Resources\Paziente;
+use App\Models\Resources\Faq;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
 use App\Models\GestoreFaq;
@@ -48,13 +49,7 @@ class AdminController extends Controller
 
         DB::beginTransaction();
         try {
-            $faq = new Faq([
-                'username' => $validatedData['username'],
-                'password' => Hash::make('stdpassword'),
-                'usertype' => 'P'
-            ]);
-            $user->save();
-            $paziente = New Paziente;
+            $faq = New Faq;
             $paziente->fill($validatedData);
             $paziente->save();
             DB::commit();
