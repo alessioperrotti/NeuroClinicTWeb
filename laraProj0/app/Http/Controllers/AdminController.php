@@ -42,6 +42,29 @@ class AdminController extends Controller
         $this->faqModel->eliminaFaq($id);
         return redirect()->route('gestioneFaq');
     }
+    public function storeFaq(NewPazienteRequest $request) : RedirectResponse {
+
+        $validatedData = $request->validated();
+
+        DB::beginTransaction();
+        try {
+            $faq = new Faq([
+                'username' => $validatedData['username'],
+                'password' => Hash::make('stdpassword'),
+                'usertype' => 'P'
+            ]);
+            $user->save();
+            $paziente = New Paziente;
+            $paziente->fill($validatedData);
+            $paziente->save();
+            DB::commit();
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+        }
+        
+        return redirect()->action([ClinController::class, 'viewGestioneFaq']);
+    }
 
     public function viewDisturbi()
     {
