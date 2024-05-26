@@ -82,11 +82,11 @@ class AdminController extends Controller
     //     return redirect()->route('gestioneDisturbi.view');
     // }
     
-    public function updateDisturbo(Request $request, $id): RedirectResponse
+    public function updateDisturbo(Request $request, $id)
     {
         $validated = $request->validate([
-            'nome' => 'required|max:30',
-            'categoria' => 'required|max:30',
+            'nomeMod' => 'required|max:30',
+            'categoriaMod' => 'required|max:30',
         ]);
 
         $disturbo = DistMotorio::findOrFail($id);
