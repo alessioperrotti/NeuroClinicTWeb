@@ -119,9 +119,7 @@ Route::get('/home_clin/lista_paz', [ClinController::class, 'viewPazienti'])
 Route::get('/home_clin/lista_paz/cart_clinica/{userPaz}', [ClinController::class, 'showCartClinica'])
 ->name('cartellaClin2')->middleware('can:isClinico'); 
 
-Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
-    return view('modificaTerapia');
-})
-->name('modificaTerapia'); // rotta per sviluppo
+Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia/{userPaz}', [ClinController::class, 'showModTerapia'])
+->name('modificaTerapia')->middleware('can:isClinico'); 
 
 require __DIR__.'/auth.php';

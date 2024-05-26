@@ -46,7 +46,7 @@
             @endif
         </ul>
     </div>
-    <a href="{{ route('modificaTerapia')}}">
+    <a href="{{ route('modificaTerapia', ['userPaz' => $paziente->username])}}">
         <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
             Modifica Terapia
         </button>
@@ -104,11 +104,7 @@
         </div>
     </div>
 </div>
-<div class=" text-lg container mx-auto p-4 w-full max-w-4xl">
-    <input type="text" name="nomeDisturbo" placeholder="Cerca per nome del disturbo" 
-    class=" bg-cyan-50 my-6 appearance-none w-full py-2 px-3
-    border-0 border-b-2 border-gray-300 focus:border-black
-    text-gray-700 leading-tight  focus:outline-none" >
+<div class=" text-lg container mx-auto p-4 w-full max-w-4xl mt-6">
 
     @isset($episodi)
     @foreach ($episodi as $episodio)

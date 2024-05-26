@@ -3,8 +3,12 @@
 @section('title', 'Modifica Terapia')
 
 @section('content')
-<h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Modifica terapia di @yield('paziente')</h1>
+@isset($paziente)
+<h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Modifica terapia di {{$paziente->nome . " " . $paziente->cognome}}</h1>
+@endisset
+<form>
 <div class="flex justify-center space-x-20">
+    @csrf
     <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] px-6 justify-center">
         <h3 class="my-4 font-bold text-xl text-center">Farmaci</h3>
         @isset($farmaci)
@@ -14,7 +18,7 @@
             <li class="mb-2">
             <div class="space-x-4">
                 <label class="text-base text-gray-800">{{ $farmaco->nome}}</label>
-                <input id="freqCheckId1" type="checkbox" name="farmaco" value="{{ $farmaco->nome}}">
+                <input id="{{$farmaco->nome}}" type="checkbox" name="farmaco" value="{{ $farmaco->nome}}">
             </div>
             <!-- div che deve comparire con JavaScript -->
             <div id="freqDivId1" class="flex-row space-x-1 hidden">
@@ -53,4 +57,17 @@
     <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 w-[180px]">
     <input type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 w-[180px]">
 </div>
+</form>
+<script>
+    $(document).ready(function() {
+        // Array di farmaci selezionati passato dal controller
+        var farmTer = @json($farmTer);
+        
+        // Seleziona i checkbox corrispondenti
+        farmTer.forEach(function(farmaco) {
+            $('input[type="checkbox"][value="' + farmaco.nome + '"]').prop('checked', true);
+        });
+    });
+</script>
+
 @endsection

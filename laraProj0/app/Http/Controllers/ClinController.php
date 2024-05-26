@@ -101,4 +101,21 @@ class ClinController extends Controller
                 ->with('farmaci', $farmaci)
                 ->with('attivita', $attivita);
     }
+
+    public function showModTerapia($userPaz) : View {
+
+        $paziente = Paziente::find($userPaz);
+        $farmaci = $this->gestTerModel->getFarmaci();
+        $attivita = $this->gestTerModel->getAttivita();
+        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terId = $terapia->id;
+        $farmTer = $this->gestTerModel->getFarmaciByTer($terId);
+        $attTer = $this->gestTerModel->getAttivitaByTer($terId);
+        return view('modificaTerapia')
+                ->with('paziente', $paziente)
+                ->with('farmaci', $farmaci)
+                ->with('attivita', $attivita)
+                ->with('farmTer', $farmTer)
+                ->with('attTer', $attTer);
+    }
 }
