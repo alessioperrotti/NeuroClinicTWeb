@@ -58,6 +58,30 @@ class GestoreTerapie extends Model
             ];
         }
         return $attivita;
-    }    
+    }
+    
+    public function getNomiFarmaciByTer ($terId) : array {
+
+        $terapia = Terapia::with('prescrizioni.farmaco')->findOrFail($terId);
+        $farmaci = [];
+        $prescrizioni = $terapia->prescrizioni;
+        foreach($prescrizioni as $presc){
+            $farm = Farmaco::findOrFail($presc->farmaco);
+            $farmaci[] = $farm->nome;
+        }
+        return $farmaci; 
+    }
+
+    public function getNomiAttivitaByTer ($terId) : array {
+
+        $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
+        $attivita = [];
+        $pianificazioni = $terapia->pianificazioni;
+        foreach($pianificazioni as $pian){
+            $att = Attivita::findOrFail($pian->attivita);
+            $attivita[] = $att->nome;
+        }
+        return $attivita;
+    }
     
 }

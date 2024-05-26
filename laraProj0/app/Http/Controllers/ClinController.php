@@ -109,8 +109,8 @@ class ClinController extends Controller
         $attivita = $this->gestTerModel->getAttivita();
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
-        $farmTer = $this->gestTerModel->getFarmaciByTer($terId);
-        $attTer = $this->gestTerModel->getAttivitaByTer($terId);
+        $farmTer = $this->gestTerModel->getNomiFarmaciByTer($terId);
+        $attTer = $this->gestTerModel->getNomiAttivitaByTer($terId);
         return view('modificaTerapia')
                 ->with('paziente', $paziente)
                 ->with('farmaci', $farmaci)

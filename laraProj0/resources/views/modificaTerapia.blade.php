@@ -7,9 +7,9 @@
 <h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Modifica terapia di {{$paziente->nome . " " . $paziente->cognome}}</h1>
 @endisset
 <form>
-<div class="flex justify-center space-x-20">
+<div class="flex justify-center">
     @csrf
-    <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] px-6 justify-center">
+    <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] mr-6 px-6 justify-center">
         <h3 class="my-4 font-bold text-xl text-center">Farmaci</h3>
         @isset($farmaci)
         <div class="flex-col mb-4">
@@ -35,7 +35,7 @@
         </div>
         @endisset
     </div>
-    <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] px-6 justify-center">
+    <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] ml-6 px-6 justify-center">
         <h3 class="my-4 font-bold text-xl text-center">Attività Riabilitative</h3>
         @isset($attivita)
         <div class="flex-col mb-4">
@@ -65,8 +65,14 @@
         
         // Seleziona i checkbox corrispondenti
         farmTer.forEach(function(farmaco) {
-            $('input[type="checkbox"][value="' + farmaco.nome + '"]').prop('checked', true);
+            $('input[type="checkbox"][value="' + farmaco + '"]').prop('checked', true);
         });
+
+        var attTer = @json($attTer);
+
+        attTer.forEach(function(attivita) {
+            $('input[type="checkbox"][value="' + attivita + '"]').prop('checked', true);
+        })
     });
 </script>
 
