@@ -18,10 +18,10 @@
             <li class="mb-2">
             <div class="space-x-4">
                 <label class="text-base text-gray-800">{{ $farmaco->nome}}</label>
-                <input type="checkbox" name="farmaco" value="{{ $farmaco->nome}}">
+                <input id={{'f'.$farmaco->id}} type="checkbox" name="farmaco" value="{{ $farmaco->nome}}">
             </div>
             <!-- div che deve comparire con JavaScript -->
-            <div id="{{$farmaco->id}}" class="flex-row space-x-1 hidden my-2">
+            <div id="{{'divf'.$farmaco->id}}" class="flex-row space-x-1 hidden my-2">
                 <select name="nvolteF" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
                     <option value="1 volta">1 volta</option>
                     <option value="2 volte">2 volte</option>
@@ -50,9 +50,9 @@
             <li class="mb-2">
                 <div class="space-x-4">
                 <label class="text-base text-gray-800">{{ $att->nome}}</label>
-                <input type="checkbox" name="attivita" value="{{ $att->nome}}">
+                <input id={{'a'.$att->id}} type="checkbox" name="attivita" value="{{ $att->nome}}">
             </div>
-            <div id="{{$att->id}}" class="flex-row space-x-1 hidden my-2">
+            <div id="{{'diva'.$att->id}}" class="flex-row space-x-1 hidden my-2">
                 <select name="nvolteA" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
                     <option value="1 volta">1 volta</option>
                     <option value="2 volte">2 volte</option>
@@ -86,20 +86,21 @@
         // Seleziona i checkbox corrispondenti
         farmTer.forEach(function(farmaco) {
             $('input[type="checkbox"][value="' + farmaco.nome + '"]').prop('checked', true);
-            $('#' + farmaco.id).removeClass('hidden');
+            $('#' + 'divf' + farmaco.id).removeClass('hidden');
         });
 
         var attTer = @json($attTer);
 
         attTer.forEach(function(attivita) {
             $('input[type="checkbox"][value="' + attivita.nome + '"]').prop('checked', true);
-            $('#' + attivita.id).removeClass('hidden');
+            $('#' + 'diva' + attivita.id).removeClass('hidden');
         })
 
         // handler per il change della checkbox
         $('input[type="checkbox"][name="farmaco"]').change(function() {
             var checkbox = $(this);
-            var divId = checkbox.val();  // l'id del div è il valore della checkbox
+            var divId = 'div' + checkbox.prop('id');  /* creo una connessione semantica tra il div e la
+                                                checkbox posta sopra di esso (questo per ogni coppia input/div) */
             if (checkbox.is(':checked')) {
                 $('#' + divId).removeClass('hidden');
             } else {
@@ -110,7 +111,7 @@
         
         $('input[type="checkbox"][name="attivita"]').change(function() {
             var checkbox = $(this);
-            var divId = checkbox.val();  
+            var divId = 'div' + checkbox.prop('id');  
             if (checkbox.is(':checked')) {
                 $('#' + divId).removeClass('hidden');
             } else {
