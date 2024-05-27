@@ -34,7 +34,7 @@
     <div class="flex justify-center mt-10">
         <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4">Aggiungi Disturbo</button>
     </div>
-    <div id="formNuovoDisturbo" class="mt-4" style="display: {{ $errors->any() ? 'block' : 'none' }};">
+    <div id="formNuovoDisturbo" class="mt-4" style="display: hidden">
         <form action="{{ route('gestioneDisturbi.store') }}" method="post">
             @csrf
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
@@ -65,7 +65,7 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="reset" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="submit" id="btnAggiungi" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -135,7 +135,7 @@
         });
 
 
-        //per la validazione con ajax
+        //per la validazione della modifica con ajax
         $(function() {
             var actionUrl = "{{ route('gestioneDisturbi.update') }}";
             var formId = 'formModificaDisturbo'; //a questa assegnamo l'id della form
@@ -149,6 +149,22 @@
                 doFormValidation(actionUrl, formId); //valida l'intera form
             });
         });
+
+         //per la validazione dell'inserimento con ajax
+         $(function() {
+            var actionUrl = "{{ route('gestioneDisturbi.store') }}";
+            var formId = 'formNuovoDisturbo'; //a questa assegnamo l'id della form
+            $(":input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+                //quando mi sposto su un altro elemento di input, estraggo l'id
+                var formElementId = $(this).attr('id');
+                doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+            });
+            $("#btnAggiungi").on('submit', function(event) { //sarebbe l id della form. 
+                event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+                doFormValidation(actionUrl, formId); //valida l'intera form
+            });
+        });
+
     </script>
 </div>
 @endsection
