@@ -7,61 +7,69 @@ use App\Http\Requests\UpdateDisturboRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
+use App\Models\GestoreFarmaci;
+use App\Models\GestoreTerapie;
 use App\Models\Resources\DistMotorio;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
 
     protected $disturbiModel;
+    protected $farmaciModel;
+    protected $terapieModel;
     protected $pazienti;
-    protected $disturboDaModi=0;
+
 
     public function __construct()
     {
-        
+
         $this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi();
-      
-          
+        $this->farmaciModel = new GestoreFarmaci();
+        $this->terapieModel = new GestoreTerapie();
     }
 
     public function index()
     {
         $user = Auth::user();
         $admin = $user->paziente;
-        return view('homeAdmin'); 
+        return view('homeAdmin');
     }
 
 
     public function viewDisturbi()
     {
         Log::info('metodo viewDisturbo attivato');
-        $disturbi=$this->disturbiModel->getDisturbi();
-        return view('gestioneDisturbi')->with('disturbi',$disturbi)->with('disturboDaModificare',$this->disturboDaModi);
+        $disturbi = $this->disturbiModel->getDisturbi();
+        return view('gestioneDisturbi')->with('disturbi', $disturbi)->with('disturboDaModificare', $this->disturboDaModi);
     }
-   
 
-    public function storeDisturbo(NewDisturboRequest $request): RedirectResponse {
-    
+
+    public function storeDisturbo(NewDisturboRequest $request): RedirectResponse
+    {
+
 
         Log::info('metodo storeDisturbo attivato');
         $validatedData = $request->validated();
 
-        $disturbo = new DistMotorio();
-        $disturbo->fill($validatedData);
-        $disturbo->save();
+
+        DB::beginTransaction();
+        try {
+            $disturbo = new DistMotorio();
+            $disturbo->fill($validatedData);
+            $disturbo->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Errore durante il salvataggio del disturbo: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del disturbo.');
+        }
 
 
-        
-
- 
-
-        //return redirect()->action([AdminController::class, 'index']);
         return redirect()->route('gestioneDisturbi');
-       
-        
     }
 
     public function deleteDisturbo(Request $request)
@@ -70,29 +78,46 @@ class AdminController extends Controller
             'idDel' => 'required',
         ]);
 
-        $id = $validated['idDel'];
-        $this->disturbiModel->deleteDisturbo($id);
-        $this->disturbiModel->getDisturbi();
-        return redirect()->route('gestioneDisturbi');        
+        DB::beginTransaction();
+        try {
+            $id = $validated['idDel'];
+            $this->disturbiModel->deleteDisturbo($id);
+            $this->disturbiModel->getDisturbi();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Errore durante l\'eliminazione del disturbo: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del disturbo.');
+        }
+        
+        return redirect()->route('gestioneDisturbi');
     }
 
-   
+
     public function updateDisturbo(UpdateDisturboRequest $request)
     {
         $validated = $request->validated();
+       
+        DB::beginTransaction();
+        try {
+            $id = $validated['idMod'];
+            $disturbo = DistMotorio::findOrFail($id);
+            $disturbo->nome = $validated['nomeMod'];
+            $disturbo->categoria = $validated['categoriaMod'];
+            $disturbo->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Errore durante l\'aggiornamento del disturbo: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del disturbo.');
+        }
 
-        $id = $validated['idMod'];
-        $disturbo = DistMotorio::findOrFail($id);
-        $disturbo->nome = $validated['nomeMod'];
-        $disturbo->categoria = $validated['categoriaMod'];
-        $disturbo->save();
 
         return redirect()->route('gestioneDisturbi');
     }
 
-    
-    
 
-
-
+    public function viewTerapie()
+    {
+    }
 }

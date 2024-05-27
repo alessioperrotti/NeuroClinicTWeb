@@ -15,4 +15,6 @@ class Farmaco extends Model
     {
         return $this->hasMany(Terapia::class, 'terapia', 'id');
     }
+
+    
 }
