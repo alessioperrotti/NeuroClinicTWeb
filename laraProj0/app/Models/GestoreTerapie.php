@@ -30,7 +30,7 @@ class GestoreTerapie extends Model
         return $attivita;
     }
 
-    public function getFarmaciByTer ($terId) : array {
+    public function getFarmaciFreqByTer ($terId) : array {  // restituisce farmaci con frequenza
 
         $terapia = Terapia::with('prescrizioni.farmaco')->findOrFail($terId);
         $farmaci = [];
@@ -45,7 +45,7 @@ class GestoreTerapie extends Model
         return $farmaci; 
     }
 
-    public function getAttivitaByTer ($terId) : array {
+    public function getAttivitaFreqByTer ($terId) : array {  // restituisce attività con frequenza
 
         $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
         $attivita = [];
@@ -60,26 +60,26 @@ class GestoreTerapie extends Model
         return $attivita;
     }
     
-    public function getNomiFarmaciByTer ($terId) : array {
+    public function getFarmaciByTer ($terId) : array {
 
         $terapia = Terapia::with('prescrizioni.farmaco')->findOrFail($terId);
         $farmaci = [];
         $prescrizioni = $terapia->prescrizioni;
         foreach($prescrizioni as $presc){
             $farm = Farmaco::findOrFail($presc->farmaco);
-            $farmaci[] = $farm->nome;
+            $farmaci[] = $farm;
         }
         return $farmaci; 
     }
 
-    public function getNomiAttivitaByTer ($terId) : array {
+    public function getAttivitaByTer ($terId) : array {
 
         $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
         $attivita = [];
         $pianificazioni = $terapia->pianificazioni;
         foreach($pianificazioni as $pian){
             $att = Attivita::findOrFail($pian->attivita);
-            $attivita[] = $att->nome;
+            $attivita[] = $att;
         }
         return $attivita;
     }

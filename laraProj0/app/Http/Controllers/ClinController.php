@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
+use App\Http\Requests\NewTerapiaRequest;
 use App\Models\Resources\Paziente;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
@@ -91,8 +92,8 @@ class ClinController extends Controller
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
-        $farmaci = $this->gestTerModel->getFarmaciByTer($terId);
-        $attivita = $this->gestTerModel->getAttivitaByTer($terId);
+        $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
+        $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
 
         return view('cartellaClin2')
                 ->with('paziente', $paziente)
@@ -109,13 +110,21 @@ class ClinController extends Controller
         $attivita = $this->gestTerModel->getAttivita();
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
-        $farmTer = $this->gestTerModel->getNomiFarmaciByTer($terId);
-        $attTer = $this->gestTerModel->getNomiAttivitaByTer($terId);
+        $farmTer = $this->gestTerModel->getFarmaciByTer($terId);
+        $attTer = $this->gestTerModel->getAttivitaByTer($terId);
         return view('modificaTerapia')
                 ->with('paziente', $paziente)
                 ->with('farmaci', $farmaci)
                 ->with('attivita', $attivita)
                 ->with('farmTer', $farmTer)
                 ->with('attTer', $attTer);
+    }
+
+    public function storeTerapia(NewTerapiaRequest $request) : RedirectResponse {
+
+        $validatedData = $request->validated();
+
+        return redirect()->action([ClinController::class, 'index']);
+
     }
 }
