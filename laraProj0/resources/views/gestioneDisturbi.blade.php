@@ -9,32 +9,38 @@
 
 <div id="app" class="text-lg container mx-auto p-4 w-full max-w-4xl">
 
+    <input type="text" id="cercaDisturbo" placeholder="Cerca disturbo" class="bg-cyan-50 my-6 appearance-none w-full py-2 px-3
+    border-0 border-b-2 border-gray-300 focus:border-black text-gray-700 leading-tight focus:outline-none">
 
-    @isset($disturbi)
-    @foreach($disturbi as $disturbo)
-    <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-        <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
-        <div class="flex mr-2 gap-x-4">
-            <button type="button" class="btnModifica" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
-                <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
-            </button>
-            <form action="{{ route('gestioneDisturbi.delete') }}" method="POST" class="inline-block">
-                @csrf
-                <input type="hidden" name="idDel" value="{{$disturbo->id}}">
-                <button type="submit" id="btnElimina">
-                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+
+    <div class="max-h-96 overflow-y-auto">
+        @isset($disturbi)
+        @foreach($disturbi as $disturbo)
+        <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
+            <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
+            <div class="flex mr-2 gap-x-4">
+                <button type="button" class="btnModifica" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
+                    <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                 </button>
-            </form>
+                <form action="{{ route('gestioneDisturbi.delete') }}" method="POST" class="inline-block">
+                    @csrf
+                    <input type="hidden" name="idDel" value="{{$disturbo->id}}">
+                    <button type="submit" id="btnElimina">
+                        <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                    </button>
+                </form>
+            </div>
         </div>
+        @endforeach
+        @endisset
+
     </div>
-    @endforeach
-    @endisset
 
 
     <div class="flex justify-center mt-10">
         <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4">Aggiungi Disturbo</button>
     </div>
-    <div id="formNuovoDisturbo" class="mt-4" style="display: hidden">
+    <div id="formNuovoDisturbo" class="mt-4" style="display:none">
         <form action="{{ route('gestioneDisturbi.store') }}" method="post">
             @csrf
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
@@ -97,7 +103,7 @@
         </form>
     </div>
 
-    <script src="{{ asset('js/functions.js') }}" ></script>  
+    <script src="{{ asset('js/functions.js') }}"></script>
     <script>
         $(document).ready(function() {
             //codice per l'aggiunta del disturbo
@@ -130,7 +136,18 @@
 
 
 
-
+            // Funzione che implementa il cerca disturbo
+            $("#cercaDisturbo").on('input', function() {
+                var ricerca = $("#cercaDisturbo").val().toLowerCase(); // Prende la parola inserita nel campo di ricerca
+                $(".disturbo").each(function() {
+                    var nome = $(this).find(".nomeDisturbo").text().toLowerCase(); // Trova il testo del nome del disturbo
+                    if (nome.indexOf(ricerca) != -1) {
+                        $(this).show(); // Mostra l'elemento se corrisponde alla ricerca
+                    } else {
+                        $(this).hide(); // Nasconde l'elemento se non corrisponde alla ricerca
+                    }
+                });
+            });
 
         });
 
@@ -150,8 +167,8 @@
             });
         });
 
-         //per la validazione dell'inserimento con ajax
-         $(function() {
+        //per la validazione dell'inserimento con ajax
+        $(function() {
             var actionUrl = "{{ route('gestioneDisturbi.store') }}";
             var formId = 'formNuovoDisturbo'; //a questa assegnamo l'id della form
             $(":input").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -164,7 +181,6 @@
                 doFormValidation(actionUrl, formId); //valida l'intera form
             });
         });
-
     </script>
 </div>
 @endsection
