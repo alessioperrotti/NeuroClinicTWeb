@@ -18,8 +18,12 @@
                             <span class="text-xl">+</span>
                         </div>
                         <div class="accordion-content mt-2 hidden">
-                            <p id="answer-2">{{$faq->risposta}}</p>
-                            <button class="bg-blue-500 text-white py-1 px-3 rounded mt-2" >Modifica</button>
+                            <form action="{{ route('faq.update', $faq->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <textarea name="risposta" class="w-full border-2" rows="4">{{$faq->risposta}}</textarea>
+                                <button type="submit" class="bg-blue-500 text-white py-1 px-3 rounded mt-2">Salva nuova risposta</button>
+                            </form>
                             <form action="{{ route('faq.elimina', $faq->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Sei sicuro di voler eliminare questa FAQ?');">
                                 @csrf
                                 @method('DELETE')

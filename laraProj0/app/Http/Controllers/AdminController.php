@@ -66,6 +66,27 @@ class AdminController extends Controller
         
         return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiunta con successo.');
     }
+    public function updateFaq(Request $request, $id): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'risposta' => 'required|string'
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $faq = Faq::findOrFail($id);
+            $faq->risposta = $validatedData['risposta'];
+            $faq->save();
+            DB::commit();
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Errore durante l\'aggiornamento della FAQ: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento della FAQ.');
+        }
+        
+        return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiornata con successo.');
+    }
 
     public function viewDisturbi()
     {
