@@ -30,6 +30,7 @@
     @endforeach
     @endisset
 
+
     <div class="flex justify-center mt-10">
         <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4">Aggiungi Disturbo</button>
     </div>
@@ -90,13 +91,13 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="reset" id="btnAnnullaMod" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifica</button>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifica Disturbo</button>
+                    <button type="submit" id="btnEffettuaMod" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifica Disturbo</button>
                 </div>
             </div>
         </form>
     </div>
 
-
+    <script src="{{ asset('js/functions.js') }}" ></script>  
     <script>
         $(document).ready(function() {
             //codice per l'aggiunta del disturbo
@@ -128,6 +129,25 @@
             });
 
 
+
+
+
+        });
+
+
+        //per la validazione con ajax
+        $(function() {
+            var actionUrl = "{{ route('gestioneDisturbi.update') }}";
+            var formId = 'formModificaDisturbo'; //a questa assegnamo l'id della form
+            $(":input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+                //quando mi sposto su un altro elemento di input, estraggo l'id
+                var formElementId = $(this).attr('id');
+                doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+            });
+            $("#btnEffettuaMod").on('submit', function(event) { //sarebbe l id della form. 
+                event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+                doFormValidation(actionUrl, formId); //valida l'intera form
+            });
         });
     </script>
 </div>

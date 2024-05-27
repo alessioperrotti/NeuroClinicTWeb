@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewDisturboRequest;
-
+use App\Http\Requests\UpdateDisturboRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
@@ -66,7 +66,7 @@ class AdminController extends Controller
 
     public function deleteDisturbo(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validated([
             'idDel' => 'required',
         ]);
 
@@ -77,13 +77,9 @@ class AdminController extends Controller
     }
 
    
-    public function updateDisturbo(Request $request)
+    public function updateDisturbo(UpdateDisturboRequest $request)
     {
-        $validated = $request->validate([
-            'idMod' => 'required',
-            'nomeMod' => 'required|max:30',
-            'categoriaMod' => 'required|max:30',
-        ]);
+        $validated = $request->validated();
 
         $id = $validated['idMod'];
         $disturbo = DistMotorio::findOrFail($id);
