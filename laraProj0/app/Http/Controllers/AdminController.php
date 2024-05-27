@@ -9,6 +9,8 @@ use App\Models\Resources\Faq;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
 use App\Models\GestoreFaq;
+use App\Models\GestoreClinici;
+use App\Models\Resources\Clinico;
 use App\Http\Requests\NewFaqRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +19,17 @@ use Illuminate\Support\Facades\Log;
 class AdminController extends Controller
 {
     protected $adminModel;
-    protected $pazienteModel;
+    protected $pazientiModel;
     protected $disturbiModel;
+    protected $cliniciModel;
 
     public function __construct()
     {
         
         #$this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi();
-        $this->pazienteModel= new GestorePazienti;
+        $this->pazientiModel= new GestorePazienti;
+        $this->cliniciModel= new GestoreClinici;
         $this->faqModel= new GestoreFaq;
           
     }
@@ -36,7 +40,7 @@ class AdminController extends Controller
         $admin = $user->paziente;
         return view('homeAdmin'); 
     }
-
+    #SEZIONA FAQ
     public function viewGestioneFaq()
     {
         $faqs=$this->faqModel->getFaqs();
@@ -88,6 +92,13 @@ class AdminController extends Controller
         return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiornata con successo.');
     }
 
+    #SEZIONE CLINICI
+    public function viewGestioneClinici()
+    {
+        $clinici=$this->cliniciModel->getClinici();
+        return view('gestioneClinici')->with('clinici',$clinici); 
+    }
+
     public function viewDisturbi()
     {
         Log::info('metodo viewDisturbo attivato');
@@ -122,7 +133,7 @@ class AdminController extends Controller
 
     public function mostraPazienti()
     {
-        $pazienti=$this->pazienteModel->getPazienti();
+        $pazienti=$this->pazientiModel->getPazienti();
         #return view('listaPaz')->with('pazienti',$pazienti);
         return response()
         ->view('listaPaz', ['pazienti' => $pazienti]);
@@ -131,8 +142,8 @@ class AdminController extends Controller
 
     public function eliminaPaziente($username)
     {
-        $this->pazienteModel->eliminaPaz($username);
-        $pazienti = $this->pazienteModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
+        $this->pazientiModel->eliminaPaz($username);
+        $pazienti = $this->pazientiModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
         return redirect()->route('listaPaz');   
     }
 }

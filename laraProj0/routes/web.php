@@ -85,10 +85,14 @@ Route::get('/home_admin/analisi_dati', function () {
 })
 ->name('analisiDati');
 
+
 Route::get('/home_admin/clinici/nuovo_clin', function () {
     return view('nuovoClinico');
 })
 ->name('nuovoClinico');
+
+Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
+    ->name('gestioneClinici');
 
 
 Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
@@ -98,10 +102,6 @@ Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
 Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
 ->name('gestioneDisturbi.store');
 
-Route::get('/home_admin/clinici', function () {
-    return view('gestioneClinici');
-})
-->name('gestioneClinici');
 
 
 Route::get('/home_admin/farmaci_attivita', function () {

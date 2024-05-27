@@ -9,7 +9,7 @@
 </div>
 <div id="app" class="text-lg container mx-auto p-4 w-full max-w-4xl">
     
-    <input type="text" id="cognomeClinico" placeholder="Cerca per cognome" class="bg-cyan-50 my-6 appearance-none w-full py-2 px-3
+    <input type="text" id="cognomePaziente" placeholder="Cerca per cognome" class="bg-cyan-50 my-6 appearance-none w-full py-2 px-3
     border-0 border-b-2 border-gray-300 focus:border-black text-gray-700 leading-tight focus:outline-none">
 
     <ul id="listaPazienti" class="mb-4 list-none">
@@ -54,7 +54,7 @@
         });
         $(document).ready(function() {
             // Filtro per cognome jQuery
-            $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
+            $('#cognomePaziente').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomePaziente
                                                         //l'evento input si verifica quando il contenuto dell'elemento input cambia.
                 var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
                 $('.paziente').each(function() {        //per ogni elemento con classe "paziente" esguo questa funzione
