@@ -81,6 +81,8 @@ Route::delete('/home_admin/disturbi/{id}', [AdminController::class, 'deleteDistu
 Route::put('/home_admin/disturbi/{id}', [AdminController::class, 'updateDisturbo'])
     ->name('gestioneDisturbi.update');
 
+Route::post('/update-variable', [AdminController::class, 'updateDisturboDaMod'])
+->name('updateDisturboDaMod'); //rotta per aggiorna variabile php con idDisturboDaModificare
     
 
 Route::get('/home_admin/lista_paz', function () {

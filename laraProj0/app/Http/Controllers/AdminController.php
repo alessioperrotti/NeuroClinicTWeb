@@ -16,6 +16,7 @@ class AdminController extends Controller
 
     protected $disturbiModel;
     protected $pazienti;
+    protected $disturboDaModi=0;
 
     public function __construct()
     {
@@ -37,9 +38,8 @@ class AdminController extends Controller
     public function viewDisturbi()
     {
         Log::info('metodo viewDisturbo attivato');
-
         $disturbi=$this->disturbiModel->getDisturbi();
-        return view('gestioneDisturbi')->with('disturbi',$disturbi);
+        return view('gestioneDisturbi')->with('disturbi',$disturbi)->with('disturboDaModificare',$this->disturboDaModi);
     }
    
 
@@ -90,15 +90,30 @@ class AdminController extends Controller
         ]);
 
         $disturbo = DistMotorio::findOrFail($id);
-        $disturbo->nome = $validated['nome'];
-        $disturbo->categoria = $validated['categoria'];
+        $disturbo->nome = $validated['nomeMod'];
+        $disturbo->categoria = $validated['categoriaMod'];
         $disturbo->save();
 
-        return redirect()->route('gestioneDisturbi.index')->with('success', 'Disturbo aggiornato con successo.');
+        return redirect()->route('gestioneDisturbi');
     }
 
-    
+    public function updateDisturboDaMod(Request $request)
+    {
+        // Ricevi il nuovo valore della variabile tramite AJAX
+        $newVariable = $request->input('variable');
+        Log::info($newVariable);
+        
+        // aggiorna la variabile Php
+        $this->disturboDaModi = $newVariable;
+        Log::info($this->disturboDaModi);
+        
 
+
+        // In questo esempio, semplicemente ritorna una risposta con il nuovo valore
+        return response()->json(['disturboDaMod' => $newVariable]);
+    }
+    
+    
 
 
 

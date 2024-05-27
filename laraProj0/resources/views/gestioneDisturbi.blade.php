@@ -71,7 +71,7 @@
     </div>
     
     <div id="formModificaDisturbo" class="mt-4" style="display: none;">
-        <form id="modificaDisturboForm" action="" method="post">
+        <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update', $disturboDaModificare)}}" method="post">
             @csrf
             @method('PUT')
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
@@ -98,6 +98,17 @@
     <!-- Il codice JavaScript deve essere incluso alla fine del body -->
     <script>
         $(document).ready(function() {
+
+
+             // Imposta il token CSRF per la richiesta AJAX
+             $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+
+
             $('#btnAggiungiDisturbo').on('click', function() {
                 $('#formNuovoDisturbo').show();
             });
@@ -109,17 +120,39 @@
             });
 
             $(document).on('click', '.btnModifica', function() {
-                id = $(this).data('id');
+                const id = $(this).data('id');
                 const nome = $(this).data('nome');
                 const categoria = $(this).data('categoria');
+              
+              //  $('#formModificaDisturbo').attr('action', url);
+              
+                console.log(id);
                 
-                var url = '{{ route("gestioneDisturbi.update", ":id") }}';
-                url = url.replace(':id', id);
-                $('#formModificaDisturbo').attr('action', url);
-                
+	            // Definisci il nuovo valore della variabile
+                var idDisturbo = id;
+
+               
+
                 
 
-	           
+                // Invia la variabile al server tramite AJAX
+                $.ajax({
+                    url: "{{ url('/update-variable') }}",
+                    type: 'POST',
+                    data: { variable: idDisturbo },
+                    success: function(response) {
+                        // Aggiorna il contenuto del DOM con la nuova variabile
+                        
+                        
+                        // Stampa il nuovo valore sulla console
+                        console.log("La nuova variabile è: " + response.disturboDaMod);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Errore: " + xhr.responseText);
+                    }
+                });
+
+
 
                 $('#formModificaDisturbo').show();
                

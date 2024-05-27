@@ -24,5 +24,7 @@ class GestoreDisturbi extends Model
     }
 
     
+
+    
 }
 
