@@ -75,7 +75,7 @@ Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
 Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
     ->name('gestioneDisturbi.store');
 
-Route::delete('/home_admin/disturbi/{id}', [AdminController::class, 'deleteDisturbo'])
+Route::post('/home_admin/disturbi/delete', [AdminController::class, 'deleteDisturbo'])
     ->name('gestioneDisturbi.delete');
 
 Route::post('/home_admin/disturbi/update', [AdminController::class, 'updateDisturbo'])

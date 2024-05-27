@@ -8,28 +8,28 @@
 </div>
 
 <div id="app" class="text-lg container mx-auto p-4 w-full max-w-4xl">
-    <form id="listaDisturbi" class="mb-4">
-        @csrf
-        @isset($disturbi)
-        @foreach($disturbi as $disturbo)
-        <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-            <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
-            <div class="flex mr-2 gap-x-4">
-                <button type="button" class="btnModifica" data-rotta="{{route('gestioneDisturbi.update', $disturbo->id)}}" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
-                    <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+
+
+    @isset($disturbi)
+    @foreach($disturbi as $disturbo)
+    <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
+        <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
+        <div class="flex mr-2 gap-x-4">
+            <button type="button" class="btnModifica" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
+                <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+            </button>
+            <form action="{{ route('gestioneDisturbi.delete') }}" method="POST" class="inline-block">
+                @csrf
+                <input type="hidden" name="idDel" value="{{$disturbo->id}}">
+                <button type="submit" id="btnElimina">
+                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                 </button>
-                <form action="{{ route('gestioneDisturbi.delete', $disturbo->id) }}" method="POST" class="inline-block">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" id="btnElimina">
-                        <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
-                    </button>
-                </form>
-            </div>
+            </form>
         </div>
-        @endforeach
-        @endisset
-    </form>
+    </div>
+    @endforeach
+    @endisset
+
     <div class="flex justify-center mt-10">
         <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4">Aggiungi Disturbo</button>
     </div>
@@ -127,14 +127,8 @@
 
             });
 
-           
+
         });
-
-
-
-
-
-      
     </script>
 </div>
 @endsection

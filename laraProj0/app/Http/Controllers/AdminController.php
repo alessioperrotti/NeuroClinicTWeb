@@ -64,24 +64,19 @@ class AdminController extends Controller
         
     }
 
-    public function deleteDisturbo($id)
+    public function deleteDisturbo(Request $request)
     {
+        $validated = $request->validate([
+            'idDel' => 'required',
+        ]);
+
+        $id = $validated['idDel'];
         $this->disturbiModel->deleteDisturbo($id);
         $this->disturbiModel->getDisturbi();
-        return redirect()->route('gestioneDisturbi');
-
-        
+        return redirect()->route('gestioneDisturbi');        
     }
 
-    // public function updateDisturbo(NewDisturboRequest $request,$id):RedirectResponse
-    // {
-    //     $validatedData = $request->validated();
-    //     $disturbo = DistMotorio::find($id);
-    //     $disturbo->fill($validatedData);
-    //     $disturbo->save();
-    //     return redirect()->route('gestioneDisturbi.view');
-    // }
-    
+   
     public function updateDisturbo(Request $request)
     {
         $validated = $request->validate([
@@ -99,21 +94,6 @@ class AdminController extends Controller
         return redirect()->route('gestioneDisturbi');
     }
 
-    public function updateDisturboDaMod(Request $request)
-    {
-        // Ricevi il nuovo valore della variabile tramite AJAX
-        $newVariable = $request->input('variable');
-        Log::info($newVariable);
-        
-        // aggiorna la variabile Php
-        $this->disturboDaModi = $newVariable;
-        Log::info($this->disturboDaModi);
-        
-
-
-        // In questo esempio, semplicemente ritorna una risposta con il nuovo valore
-        return response()->json(['disturboDaMod' => $newVariable]);
-    }
     
     
 
