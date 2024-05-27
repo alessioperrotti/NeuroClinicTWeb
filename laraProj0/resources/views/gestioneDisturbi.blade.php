@@ -15,7 +15,7 @@
         <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
             <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
             <div class="flex mr-2 gap-x-4">
-                <button type="button" class="btnModifica" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
+                <button type="button" class="btnModifica" data-rotta="{{route('gestioneDisturbi.update', $disturbo->id)}}" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
                     <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                 </button>
                 <form action="{{ route('gestioneDisturbi.delete', $disturbo->id) }}" method="POST" class="inline-block">
@@ -71,13 +71,14 @@
     </div>
     
     <div id="formModificaDisturbo" class="mt-4" style="display: none;">
-        <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update', $disturboDaModificare)}}" method="post">
+        <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update')}}" method="post">
             @csrf
-            @method('PUT')
+           
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
             <h1>Modifica disturbo selezionato</h1>
             <div class="bg-white p-4 rounded">
                 <div class="mb-6 flex justify-between">
+                    <input type="hidden" id="idMod" name="idMod" value="">
                     <div>
                         <label for="nomeMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
                         <input type="text" id="nomeMod" name="nomeMod" placeholder="Nome" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
@@ -123,9 +124,16 @@
                 const id = $(this).data('id');
                 const nome = $(this).data('nome');
                 const categoria = $(this).data('categoria');
+                var rotta =  $(this).data('rotta');
+
+                var baseUrl = "{{ url('/') }}";
+                // Costruisci l'URL dell'azione del form dinamicamente
+                const actionUrl = `${baseUrl}/home_admin/disturbi/${id}`;
+                console.log(actionUrl);
+                
+              console.log(rotta);
               
-              //  $('#formModificaDisturbo').attr('action', url);
-              
+
                 console.log(id);
                 
 	            // Definisci il nuovo valore della variabile
@@ -141,8 +149,7 @@
                     type: 'POST',
                     data: { variable: idDisturbo },
                     success: function(response) {
-                        // Aggiorna il contenuto del DOM con la nuova variabile
-                        
+                     
                         
                         // Stampa il nuovo valore sulla console
                         console.log("La nuova variabile è: " + response.disturboDaMod);
@@ -158,6 +165,7 @@
                
                 $('#nomeMod').val(nome);
                 $('#categoriaMod').val(categoria);
+                $('#idMod').val(id);
 
             });
 
