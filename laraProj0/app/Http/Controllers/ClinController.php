@@ -13,10 +13,13 @@ use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
+use App\Models\Resources\Prescrizione;
+use App\Models\Resources\Pianificazione;
 use App\Models\Resources\Terapia;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ClinController extends Controller
 {
@@ -120,9 +123,35 @@ class ClinController extends Controller
                 ->with('attTer', $attTer);
     }
 
-    public function storeTerapia(NewTerapiaRequest $request) : RedirectResponse {
+    public function storeTerapia(NewTerapiaRequest $request, $userPaz) : RedirectResponse {
 
         $validatedData = $request->validated();
+        $data = Carbon::now()->toDateString();
+        $terapia = new Terapia([
+            'data' => $data,
+            'paziente' => $userPaz
+        ]);
+
+        $terapia->save();
+
+        foreach($validatedData['farmaco'] as $item){
+            $prescrizione = new Prescrizione([
+                'terapia' => $terapia->id,
+                'farmaco' => $item->id,
+                //gestire freq
+            ]);
+        }
+        
+        foreach($validatedData['attivita'] as $item){
+            $pianificazione = new Pianificazione([
+                'terapia' => $terapia->id,
+                'attivita' => $item->id,
+                //gestire freq
+            ]);
+        }
+        
+        
+
 
         return redirect()->action([ClinController::class, 'index']);
 

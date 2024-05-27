@@ -12,6 +12,8 @@ class Pianificazione extends Model
     protected $table = 'pianificazione';
     public $timestamps = false;
 
+    protected $fillable = ['freq', 'terapia', 'attivita'];
+
     public function attivita()
     {
         return $this->belongsTo(Attivita::class, 'attivita', 'id');

@@ -120,6 +120,9 @@ Route::get('/home_clin/lista_paz/cart_clinica/{userPaz}', [ClinController::class
 ->name('cartellaClin2')->middleware('can:isClinico'); 
 
 Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia/{userPaz}', [ClinController::class, 'showModTerapia'])
-->name('modificaTerapia')->middleware('can:isClinico'); 
+->name('modificaTerapia')->middleware('can:isClinico');
+
+Route::post('/home_clin/lista_paz/cart_clinica/mod_terapia/{userPaz}', [ClinController::class, 'storeTerapia'])
+->name('modificaTerapia.store')->middleware('can:isClinico'); 
 
 require __DIR__.'/auth.php';

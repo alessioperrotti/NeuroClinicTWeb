@@ -6,7 +6,7 @@
 @isset($paziente)
 <h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Modifica terapia di {{$paziente->nome . " " . $paziente->cognome}}</h1>
 @endisset
-<form>
+<form method="POST" action="{{ route(modificaTerapia.store, ['userPaz' => $paziente->username])}}">
 <div class="flex justify-center">
     @csrf
     <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] mr-6 px-6 justify-center">

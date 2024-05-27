@@ -12,6 +12,8 @@ class Prescrizione extends Model
     protected $table = 'prescrizione';
     public $timestamps = false;
 
+    protected $fillable = ['freq', 'terapia', 'farmaco'];
+
     public function farmaco()
     {
         return $this->belongsTo(Farmaco::class, 'farmaco', 'id');
