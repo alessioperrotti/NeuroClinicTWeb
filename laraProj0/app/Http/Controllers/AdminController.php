@@ -44,7 +44,7 @@ class AdminController extends Controller
     {
         Log::info('metodo viewDisturbo attivato');
         $disturbi = $this->disturbiModel->getDisturbi();
-        return view('gestioneDisturbi')->with('disturbi', $disturbi)->with('disturboDaModificare', $this->disturboDaModi);
+        return view('gestioneDisturbi')->with('disturbi', $disturbi);
     }
 
 
