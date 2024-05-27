@@ -69,11 +69,11 @@
             </div>
         </form>
     </div>
-    
+
     <div id="formModificaDisturbo" class="mt-4" style="display: none;">
         <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update')}}" method="post">
             @csrf
-           
+
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
             <h1>Modifica disturbo selezionato</h1>
             <div class="bg-white p-4 rounded">
@@ -96,20 +96,10 @@
         </form>
     </div>
 
-    <!-- Il codice JavaScript deve essere incluso alla fine del body -->
+
     <script>
         $(document).ready(function() {
-
-
-             // Imposta il token CSRF per la richiesta AJAX
-             $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-
-
+            //codice per l'aggiunta del disturbo
             $('#btnAggiungiDisturbo').on('click', function() {
                 $('#formNuovoDisturbo').show();
             });
@@ -120,95 +110,31 @@
                 $('#categoria').val('');
             });
 
+            //codice per la modifica del disturbo
             $(document).on('click', '.btnModifica', function() {
+                //estrae i valori del tasto btnModifica
                 const id = $(this).data('id');
                 const nome = $(this).data('nome');
                 const categoria = $(this).data('categoria');
-                var rotta =  $(this).data('rotta');
 
-                var baseUrl = "{{ url('/') }}";
-                // Costruisci l'URL dell'azione del form dinamicamente
-                const actionUrl = `${baseUrl}/home_admin/disturbi/${id}`;
-                console.log(actionUrl);
-                
-              console.log(rotta);
-              
-
-                console.log(id);
-                
-	            // Definisci il nuovo valore della variabile
-                var idDisturbo = id;
-
-               
-
-                
-
-                // Invia la variabile al server tramite AJAX
-                $.ajax({
-                    url: "{{ url('/update-variable') }}",
-                    type: 'POST',
-                    data: { variable: idDisturbo },
-                    success: function(response) {
-                     
-                        
-                        // Stampa il nuovo valore sulla console
-                        console.log("La nuova variabile è: " + response.disturboDaMod);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Errore: " + xhr.responseText);
-                    }
-                });
-
-
-
-                $('#formModificaDisturbo').show();
-               
+                //riempe i campi del form
                 $('#nomeMod').val(nome);
                 $('#categoriaMod').val(categoria);
                 $('#idMod').val(id);
 
+                //mostra il form
+                $('#formModificaDisturbo').show();
+
             });
 
-            $('#btnAnnullaMod').on('click', function() {
-                $('#formModificaDisturbo').hide();
-                $('#idMod').val('');
-                $('#nomeMod').val('');
-                $('#categoriaMod').val('');
-            });
+           
         });
 
-        $('#btnAggiungiDisturbo').on('click', function() {
-            console.log("Aggiungi Disturbo button clicked");
-            $('#formNuovoDisturbo').show();
-        });
 
-        $('#btnAnnulla').on('click', function() {
-            console.log("Annulla button clicked");
-            $('#formNuovoDisturbo').hide();
-            $('#nome').val('');
-            $('#categoria').val('');
-        });
 
-        $(document).on('click', '.btnModifica', function() {
-            console.log("Modifica button clicked");
-            const nome = $(this).data('nome');
-            const categoria = $(this).data('categoria');
-            $disturboSelezionato = $(this).data('id');
-            console.log("Modifica Disturbo:", nome, categoria);
 
-            $('#formModificaDisturbo').show();
-            $('#nomeMod').val(nome);
-            $('#categoriaMod').val(categoria);
 
-        });
-
-        $('#btnAnnullaMod').on('click', function() {
-            console.log("Annulla Modifica button clicked");
-            $('#formModificaDisturbo').hide();
-            $('#nomeMod').val('');
-            $('#categoriaMod').val('');
-            $('#btnConfermaMod').data('idDist').val(id);
-        });
+      
     </script>
 </div>
 @endsection
