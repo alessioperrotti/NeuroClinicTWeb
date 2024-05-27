@@ -93,7 +93,8 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 
 Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
     ->name('gestioneClinici');
-
+Route::delete('/clinico/{id}', [AdminController::class, 'eliminaClinico'])
+    ->name('clinico.elimina');
 
 Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
     ->name('gestioneDisturbi');

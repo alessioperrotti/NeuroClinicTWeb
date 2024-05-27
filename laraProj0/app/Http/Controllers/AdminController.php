@@ -98,7 +98,25 @@ class AdminController extends Controller
         $clinici=$this->cliniciModel->getClinici();
         return view('gestioneClinici')->with('clinici',$clinici); 
     }
+    // Elimina un clinico
+    public function eliminaClinico($id): RedirectResponse
+    {
+        DB::beginTransaction();
+        try {
+            $clinico = Clinico::findOrFail($id);
+            $clinico->delete();
 
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Errore durante l\'eliminazione del clinico: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
+        }
+
+        return redirect()->back()->with('success', 'Clinico eliminato con successo.');
+    }
+
+    #SEZIONE DISTURBI
     public function viewDisturbi()
     {
         Log::info('metodo viewDisturbo attivato');
