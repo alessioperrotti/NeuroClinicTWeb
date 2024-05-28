@@ -49,7 +49,7 @@ class GestoreTerapie extends Model
 
         $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
         $attivita = [];
-        $pianificazioni = $terapia->pianificazioni;
+        $pianificazioni = $terapia->pianificazioni();
         foreach($pianificazioni as $pian){
             $att = Attivita::findOrFail($pian->attivita);
             $attivita[] = [

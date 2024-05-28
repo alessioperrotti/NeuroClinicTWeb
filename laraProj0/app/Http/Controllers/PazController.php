@@ -55,7 +55,7 @@ class PazController extends Controller
         $request->validate([
             'nome' => 'required|string|max:30|alpha',
             'cognome' => 'required|string|max:30|alpha',
-            'dataNasc' => 'required|date|before:today|date_format:Y-m-d',
+            'dataNasc' => 'required|date|before:today|date_format:Y-m-d'    ,
             'genere' => 'required|string|max:1',
             'via' => 'required|string|max:30',
             'civico' => 'required|string|max:5',
