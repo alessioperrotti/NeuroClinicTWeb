@@ -56,10 +56,8 @@ Route::get('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'edit']
 Route::put('/home_paz/aggiornn_dati/{username}' , [PazController::class, 'update'])
 ->name('paziente.update');
 
-Route::get('/home_paz/cartella' , function () {
-    return view('cartellaClinicaPaziente');
-})
-->name('cartellaClinicaPaziente');
+Route::get('/home_paz/cartella/{userPaz}' , [PazController::class, 'showCartClinica']) 
+->name('cartellaClinicaPaziente')->middleware('can:isPaziente');
 
 Route::get('/home_admin', function () {
     return view('homeAdmin');

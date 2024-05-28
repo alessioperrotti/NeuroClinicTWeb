@@ -9,10 +9,36 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Resources\Paziente;
 use App\Models\User;
+use App\Models\GestoreCartelleClin;
+use App\Models\GestoreTerapie;
+use App\Models\GestoreDistubi;
+use App\Models\GestorePazienti;
+use App\Models\GestoreClinici;
+/*use App\Models\Resources\Attivita;
+use App\Models\Resources\Clinico;
+use App\Models\Resources\Diagnosi;
+use App\Models\Resources\DistMotorio;
+use App\Models\Resources\Episodio;
+use App\Models\Resources\Farmaco;
+use App\Models\Resources\Terapia;*/
+
 
 
 class PazController extends Controller
 {
+    protected $gestClinModel;
+    protected $gestPazModel;
+    protected $gestCartModel;
+    protected $gestTerModel;
+
+    public function __construct()
+    {
+        $this->gestClinModel = new GestoreClinici;
+        $this->gestPazModel = new GestorePazienti;
+        $this->gestCartModel = new GestoreCartelleClin;
+        $this->gestTerModel = new GestoreTerapie;
+    }
+    
     public function index(): View {
         $user = Auth::user();
         $paziente = $user->paziente;
@@ -45,4 +71,23 @@ class PazController extends Controller
         
         return redirect()->route('homePaziente', ['username' => $paziente->username ])->with('success', 'Dati paziente aggiornati con successo.');
     }
+
+    public function showCartClinica($userPaz) : View {
+
+        $paziente = Paziente::find($userPaz);
+        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz);
+        $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
+        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terId = $terapia->pluck('id');   //recupero l'id della terapia attiva
+        $farmaci = $this->gestTerModel->getFarmaciByTer($terId);
+        $attivita = $this->gestTerModel->getAttivitaByTer($terId);
+
+        return view('cartellaClinicaPaziente')
+                ->with('paziente', $paziente)
+                ->with('episodi', $episodi)
+                ->with('disturbi', $disturbi)
+                ->with('farmaci', $farmaci)
+                ->with('attivita', $attivita);
+    }
+
 }

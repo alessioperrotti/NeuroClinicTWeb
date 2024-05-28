@@ -29,6 +29,10 @@ class PasswordController extends Controller
             return back()->withErrors(['vecchiaPwd' => 'La password attuale non è corretta']);
         }
 
+        if($request->vecchiaPwd == $request->nuovaPwd) {
+            return back()->withErrors(['nuovaPwd' => 'La nuova password non può essere uguale a quella attuale']);
+        }
+
         if($request->nuovaPwd != $request->confermaPwd) {
             return back()->withErrors(['confermaPwd' => 'La password non coincide ']);
         }

@@ -2,7 +2,7 @@
 @section('title', 'Cartella Paziente')
 
 @section('content')
-<h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Cartella clinica di @yield('paziente')</h1>
+<h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Cartella clinica di {{$paziente->nome . " " . $paziente->cognome}}</h1>
 <div class="flex flex-col items-center">
     <div name="container_terapia" class="bg-white mx-16 mb-6 rounded-xl shadow-md h-auto p-8">
         <h3 class="text-2xl font-semibold">Disturbi diagnosticati</h3>

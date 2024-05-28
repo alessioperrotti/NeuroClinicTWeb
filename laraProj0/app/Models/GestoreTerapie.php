@@ -15,7 +15,7 @@ class GestoreTerapie extends Model
     protected $farmModel;
     protected $attModel;
 
-    protected function __construct(){
+    public function __construct(){
 
         $this->farmModel = new Farmaco;
         $this->attModel = new Attivita;
