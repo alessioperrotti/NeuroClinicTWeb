@@ -30,8 +30,8 @@
                     <option value="5 volte">5 volte</option>
                     <option value="6 volte">6 volte</option>
                 </select>
-                <select name={{"periodoF".$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
-                    <?php dd("periodoF".$farmaco->id); ?>
+                <select name={{'periodoF'.$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                
                     <option value="al giorno">al giorno</option>
                     <option value="a settimana">a settimana</option>
                 </select>
