@@ -116,8 +116,8 @@ class ClinController extends Controller
         $attivita = $this->gestTerModel->getAttivita();
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
-        $farmTer = $this->gestTerModel->getFarmaciByTer($terId);
-        $attTer = $this->gestTerModel->getAttivitaByTer($terId);
+        $farmTer = $this->gestTerModel->getFarmaciFreqByTer($terId);
+        $attTer = $this->gestTerModel->getAttivitaFreqByTer($terId);
         return view('modificaTerapia')
                 ->with('paziente', $paziente)
                 ->with('farmaci', $farmaci)
@@ -126,49 +126,63 @@ class ClinController extends Controller
                 ->with('attTer', $attTer);
     }
 
-    public function storeTerapia(NewTerapiaRequest $request, $userPaz) : RedirectResponse {
+    public function storeTerapia($userPaz) : RedirectResponse {
 
-        $validatedData = $request->validated();
-        $data = Carbon::now()->toDateString();
-        $terapia = new Terapia([
-            'data' => $data,
-            'paziente' => $userPaz
-        ]);
+        $validatedData = $_POST;
+        $data = Carbon::now()->toDateString(); //prende la data corrente
 
-        $terapia->save();
-
-        foreach($validatedData['farmaco'] as $item){
-
-            $farmaco = Farmaco::where('nome', $item)->first();
-            $campoVolte = 'nvolteF'.$farmaco->id;
-            $campoPeriodo = 'periodoF'.$farmaco->id;
-            $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
-
-            $prescrizione = new Prescrizione([
-
-                'terapia' => $terapia->id,
-                'farmaco' => $farmaco->id,
-                'freq' => $freq
+        DB::beginTransaction();
+        try{
+            $terapia = new Terapia([
+                'data' => $data,
+                'paziente' => $userPaz
             ]);
+
+            $terapia->save();
+            Log::info('Terapia creata');
+            Log::info($validatedData);
+
+            foreach($validatedData['farmaco'] as $item){
+
+                $farmaco = Farmaco::where('nome', $item)->first();
+                $campoVolte = 'nvolteF'.$farmaco->id;
+                $campoPeriodo = 'periodoF'.$farmaco->id;
+                $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+
+                $prescrizione = new Prescrizione([
+
+                    'terapia' => $terapia->id,
+                    'farmaco' => $farmaco->id,
+                    'freq' => $freq
+                ]);
+                $prescrizione->save();
+            }
+            
+            Log::info('Farmaci salvati');
+            foreach($validatedData['attivita'] as $item){
+
+                $attivita = Attivita::where('nome', $item)->first();
+                $campoVolte = 'nvolteA'.$attivita->id;
+                $campoPeriodo = 'periodoA'.$attivita->id;
+                $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+
+                $pianificazione = new Pianificazione([
+
+                    'terapia' => $terapia->id,
+                    'attivita' => $attivita->id,
+                    'freq' => $freq
+                ]);
+                $pianificazione->save();
+            }
+            Log::info('Terapia salvata');
+            DB::commit();
+        }
+            catch(\Exception $e) {
+                DB::rollBack();
         }
         
-        foreach($validatedData['attivita'] as $item){
-
-            $attivita = Attivita::where('nome', $item)->first();
-            $campoVolte = 'nvolteA'.$attivita->id;
-            $campoPeriodo = 'periodoA'.$attivita->id;
-            $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
-
-            $pianificazione = new Pianificazione([
-
-                'terapia' => $terapia->id,
-                'attivita' => $item->id,
-                'freq' => $freq
-            ]);
-        }
         
-        
-        return redirect()->back();
+        return redirect()->action([ClinController::class, 'showCartClinica'], ['userPaz' => $userPaz]);
 
     }
 }

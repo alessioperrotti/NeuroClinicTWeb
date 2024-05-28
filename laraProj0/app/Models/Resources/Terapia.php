@@ -12,7 +12,7 @@ class Terapia extends Model
     protected $table = 'terapia';
     public $timestamps = false;
 
-    protected $fillable = ['paziente', 'data'];
+    protected $fillable = ['data', 'paziente'];
 
     public function prescrizioni()
     {
