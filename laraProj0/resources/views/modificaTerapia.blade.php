@@ -6,7 +6,7 @@
 @isset($paziente)
 <h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Modifica terapia di {{$paziente->nome . " " . $paziente->cognome}}</h1>
 @endisset
-<form method="POST" action="{{ route(modificaTerapia.store, ['userPaz' => $paziente->username])}}">
+<form method="POST" action="{{ route('modificaTerapia.store', ['userPaz' => $paziente->username])}}">
 <div class="flex justify-center">
     @csrf
     <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] mr-6 px-6 justify-center">
@@ -22,7 +22,7 @@
             </div>
             <!-- div che deve comparire con JavaScript -->
             <div id="{{'divf'.$farmaco->id}}" class="flex-row space-x-1 hidden my-2">
-                <select name="nvolteF" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                <select name={{"nvolteF".$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
                     <option value="1 volta">1 volta</option>
                     <option value="2 volte">2 volte</option>
                     <option value="3 volte">3 volte</option>
@@ -30,7 +30,8 @@
                     <option value="5 volte">5 volte</option>
                     <option value="6 volte">6 volte</option>
                 </select>
-                <select name="periodoF" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                <select name={{"periodoF".$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                    <?php dd("periodoF".$farmaco->id); ?>
                     <option value="al giorno">al giorno</option>
                     <option value="a settimana">a settimana</option>
                 </select>
@@ -78,7 +79,7 @@
     <input type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 w-[180px]">
 </div>
 </form>
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         // Array di farmaci selezionati passato dal controller
         var farmTer = @json($farmTer);
