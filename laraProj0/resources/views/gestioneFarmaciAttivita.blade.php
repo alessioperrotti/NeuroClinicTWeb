@@ -25,13 +25,13 @@
                     <button class="btnModificaFarmaco" data-id="{{$farmaco->id}}" data-nome="{{$farmaco->nome}}" data-descr="{{$farmaco->descr}}">
                         <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
-                    <form action="">
-                        <input type="hidden" name="idDel" value="{{$farmaco->id}}">
-                        <button type="submit" class="btnEliminaFarmaco">
 
-                            <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
-                        </button>
-                    </form>
+                    <input type="hidden" name="idDel" value="{{$farmaco->id}}">
+                    <button type="submit" class="btnEliminaFarmaco">
+
+                        <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                    </button>
+
                 </div>
             </div>
             @endforeach
@@ -82,11 +82,10 @@
                 <div class=" mb-6 mx-3 ">
 
                     <label for="nomeFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                    <input type="text" id="nomeFarmaco" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-
+                    <input type="text" id="nomeFarmaco" name="nome" placeholder="Nome" class="shadow  appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <h1 class="text-sm mb-7 text-gray-600"> Il nome del farmaco deve essere seguito dalla grammatura</h1>
                     <label for="descrizioneFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrizioneFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    </textarea>
+                    <textarea id="descrizioneFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
@@ -193,9 +192,10 @@
 
         $("#btnAnnullaModFarmaco").on("click", function() {
             //nasconde la modifica del farmaco
-            $("#formModificaFarmaco").hide()
-            //fa ricomparire il tasto per aggiungere
-            $("#btnAggiungiFarmaco").show();
+            $('#formNuovoFarmaco').hide();
+            $('#nomeFarmaco').val('');
+            $('#descrizioneFarmaco').val('');
+            $('#btnAggiungiFarmaco').show();
         })
 
 
