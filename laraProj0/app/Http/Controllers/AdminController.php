@@ -106,7 +106,7 @@ class AdminController extends Controller
     public function storeFarmaco(NewFarmacoRequest $request)
     {
         $validatedData = $request->validated();
-
+        Log::info('metodo storeFarmaco attivato');
 
         $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
 

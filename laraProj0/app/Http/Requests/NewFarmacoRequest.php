@@ -11,7 +11,7 @@ class NewFarmacoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class NewFarmacoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome'=> ['required', 'string', 'max:30'],
+            'descr'=> ['required', 'string', 'max:255'],
         ];
     }
+
+    
 }

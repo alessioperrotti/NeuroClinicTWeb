@@ -66,32 +66,37 @@
     </div>
 
 
-    <div class="flex justify-center  mt-10">
+    <div class="flex justify-center mt-10 mb-4">
         <!-- Bottone per aggiungere un nuovo Farmaco -->
-        <button id="btnAggiungiFarmaco" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">Aggiungi Farmaco</button>
+        <button id="btnAggiungiFarmaco" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg ">Aggiungi Farmaco</button>
     </div>
 
     <!-- Contenitore per il form di inserimento nuovo Farmaco, inizialmente nascosto -->
     <div id="formNuovoFarmaco" class="mt-4 " style="display: none;">
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
         <h1>Aggiungi Farmaco</h1>
+        <form action="{{route('gestioneFarmaci.store')}}" method="post">
+            @csrf
 
-        <div class="bg-white p-4 rounded-lg mt-3">
-            <div class=" mb-6 mx-3 ">
+            <div class="bg-white p-4 rounded-lg mt-3">
+                <div class=" mb-6 mx-3 ">
 
-                <label for="nomeFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                <input type="text" id="nomeFarmaco" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <label for="nomeFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                    <input type="text" id="nomeFarmaco" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
-                <label for="descrizioneFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                <textarea id="descrizioneFarmaco" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <label for="descrizioneFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                    <textarea id="descrizioneFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </textarea>
+                </div>
+                <div class="flex justify-center gap-x-14">
+                    <button id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button id="btnConfermaInserimentoFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                </div>
             </div>
-            <div class="flex justify-center gap-x-14">
-                <button id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                <button id="btnConfermaInserimentoFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
-            </div>
-        </div>
+        </form>
     </div>
+
+
 
 
 </div>
@@ -179,10 +184,10 @@
             //mostra il form
             $('#formModificaFarmaco').show();
 
+
+            $("#btnAnnullaFarmaco").click()
             //nasconde il tasto per aggiungere
             $("#btnAggiungiFarmaco").hide();
-
-
 
         });
 

@@ -103,7 +103,6 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 
 
 
-
 Route::get('/home_admin/clinici', function () {
     return view('gestioneClinici');
 })
@@ -112,6 +111,17 @@ Route::get('/home_admin/clinici', function () {
 
 Route::get('/home_admin/farmaci_attivita', [AdminController::class, "viewFarmaci"])
     ->name('gestioneFarmaciAttivita');
+
+Route::post('/home_admin/farmaci_attivita/farmaco', [AdminController::class, 'storeFarmaco'])
+    ->name('gestioneFarmaci.store');
+
+Route::post('/home_admin/farmaci_attivita/farmaco/delete', [AdminController::class, 'deleteFarmaco'])
+    ->name('gestioneFarmaci.delete');
+
+Route::post('/home_admin/farmaci_attivita/farmaco/update', [AdminController::class, 'updateFarmaco'])
+    ->name('gestioneFarmaci.update');
+
+
 
 
 Route::get('/home_admin/aggiorna_faq', function () {
