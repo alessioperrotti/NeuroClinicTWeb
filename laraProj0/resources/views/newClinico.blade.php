@@ -7,7 +7,8 @@
     <h1 class="text-5xl font-bold  mt-5 mb-8 gap-y-5">Inserimento nuovo clinico</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
-        <form>
+        <form action="{{ route('nuovoClinico.store') }}" method="POST">
+            @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700">Nome</label>
@@ -19,7 +20,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
-                    <input name="dataDiNascita" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
+                    <input name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
                 </div>
                 <div>
                     <label class="block text-gray-700">Ruolo</label>
@@ -27,7 +28,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Specializzazione</label>
-                    <input name="specializzazione" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Specializzazione">
+                    <input name="specializ" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Specializzazione">
                 </div>
                 <div>
                     <label class="block text-gray-700">Username</label>
@@ -35,8 +36,10 @@
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
-                <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded-md">Annulla Modifiche</button>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Conferma Modifiche</button>
+                <a href="{{ route('gestioneClinici') }}">
+                    <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded-md">Annulla Inserimento</button>
+                </a>
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Conferma Inserimento</button>
             </div>
         </form>
     </div>

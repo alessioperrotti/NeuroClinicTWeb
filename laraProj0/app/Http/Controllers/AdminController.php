@@ -12,6 +12,7 @@ use App\Models\GestoreFaq;
 use App\Models\GestoreClinici;
 use App\Models\Resources\Clinico;
 use App\Http\Requests\NewFaqRequest;
+use App\Http\Requests\NewClinicoRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -48,7 +49,7 @@ class AdminController extends Controller
     }
     public function eliminaFaq($id)
     {
-        $this->faqModel->eliminaFaq($id);
+        $this->faqModel->deleteFaq($id);
         return redirect()->route('gestioneFaq');
     }
     public function storeFaq(NewFaqRequest $request) : RedirectResponse 
@@ -77,28 +78,43 @@ class AdminController extends Controller
         $clinici=$this->cliniciModel->getClinici();
         return view('gestioneClinici')->with('clinici',$clinici); 
     }
+    //AGGIUNGI CLINICO
+    public function viewNuovoClinico()
+    {
+        return view('newClinico');
+    }
     // Elimina un clinico
     public function eliminaClinico($id): RedirectResponse
     {
-        DB::beginTransaction();
-        try {
-            $clinico = Clinico::findOrFail($id);
-            $clinico->delete();
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Errore durante l\'eliminazione del clinico: ' . $e->getMessage());
+        if(!$this->cliniciModel->deleteClinico($id))        
+            return redirect()->back()->with('success', 'Clinico eliminato con successo.');
+        else
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
-        }
-
-        return redirect()->back()->with('success', 'Clinico eliminato con successo.');
+        
     }
-    public function viewNuovoClinico()
+    public function storeClinico(NewClinicoRequest $request): RedirectResponse
     {
-        if (Auth::user()->usertype == 'A') {
-            return view('newClinico');
-        }
+        log::info('metodo storeClinico del controller attivato');
+        $validatedData = $request->validated();
+        if($this->cliniciModel->storeClinico($validatedData))
+            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+        else
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del clinico.');
+    }
+    public function viewAggiornaClinico($userClin)
+    {
+        $clinico = $this->cliniciModel->getClinico($userClin);
+        return view('editClinico')->with('clinico', $clinico);
+    }
+    public function updateClinico(NewClinicoRequest $request ,$userClin)
+    {
+        log::info('metodo updateClinico del controller attivato');
+        $validatedData = $request->validated();
+        log::info("dati validati");
+        if($this->cliniciModel->updateClinico($validatedData, $userClin))
+            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+        else
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
     }
     #SEZIONE DISTURBI
     public function viewDisturbi()

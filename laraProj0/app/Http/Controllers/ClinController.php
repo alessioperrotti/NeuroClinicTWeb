@@ -55,17 +55,9 @@ class ClinController extends Controller
     public function storePaziente(NewPazienteRequest $request) : RedirectResponse {
 
         $validatedData = $request->validated();
-        $user = new User([
-            'username' => $validatedData['username'],
-            'password' => Hash::make('stdpassword'),
-            'usertype' => 'P'
-        ]);
-        $user->save();
-        $paziente = New Paziente;
-        $paziente->fill($validatedData);
-        $paziente->save();
+        $this->gestClinModel->storePaziente($validatedData);
         
-
+        
         return redirect()->action([ClinController::class, 'index']);
     }
 

@@ -18,7 +18,7 @@ class GestoreFaq extends Model
         $faqs=Faq::all();
         return $faqs;
     }
-    public function eliminaFaq($id): bool
+    public function deleteFaq($id): bool
     {
         $faq = Faq::findOrFail($id);
         $faq->delete();
@@ -36,6 +36,22 @@ class GestoreFaq extends Model
         catch (\Exception $e) {
             DB::rollBack();
             Log::error('Errore durante il salvataggio della FAQ: ' . $e->getMessage());
+            return false;
+        }
+        return true;
+    }
+    public function updateFaq($validatedData, $id): bool
+    {
+        DB::beginTransaction();
+        try {
+            $faq = Faq::findOrFail($id);
+            $faq->risposta = $validatedData['risposta'];
+            $faq->save();
+            DB::commit();
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Errore durante l\'aggiornamento della FAQ: ' . $e->getMessage());
             return false;
         }
         return true;

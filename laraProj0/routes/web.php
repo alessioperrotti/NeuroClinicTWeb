@@ -88,11 +88,20 @@ Route::get('/home_admin/analisi_dati', function () {
 
 #home_admin/clinici
 Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
-    ->name('gestioneClinici');
+    ->name('gestioneClinici')->middleware('can:isAdmin');
 Route::delete('/clinico/{id}', [AdminController::class, 'eliminaClinico'])
-    ->name('clinico.elimina');
+    ->name('clinico.elimina')->middleware('can:isAdmin');
 Route::get('/home_admin/clinici/nuovo_clin', [AdminController::class, 'viewNuovoClinico'])
-    ->name('nuovoClinico');
+    ->name('nuovoClinico')->middleware('can:isAdmin');
+Route::put('/nuovoClinico', [AdminController::class, 'storeClinico'])
+    ->name('nuovoClinico.store')->middleware('can:isAdmin');
+
+Route::get('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'viewAggiornaClinico'])
+    ->name('aggiornaClinicoAdmin')->middleware('can:isAdmin');
+
+Route::post('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'updateClinico'])
+    ->name('aggiornaClinicoAdmin.edit')->middleware('can:isAdmin');
+
 
 Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
     ->name('gestioneDisturbi');

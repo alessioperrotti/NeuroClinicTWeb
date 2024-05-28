@@ -14,6 +14,8 @@ class Clinico extends Model
     protected $guarded = ['username'];
     public $timestamps = false;
 
+    protected $fillable = ['nome', 'cognome', 'ruolo', 'username', 'dataNasc', 'specializ'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'username', 'username');

@@ -18,9 +18,11 @@
                 <li class="clinico flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                     <span class=" font-bold">{{ $clinico->nome . " " . $clinico->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
-                        <button id="btnModifica">
-                            <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
-                        </button>
+                        <form action="{{ route('aggiornaClinicoAdmin', $clinico->username) }}" method="GET">
+                            <button id="btnModifica">
+                                <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+                            </button>
+                        </form>
                         <form action="{{ route('clinico.elimina', $clinico->username) }}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo clinico?');"> 
                             @csrf
                             @method('DELETE')
