@@ -26,7 +26,6 @@ class GestoreCartelleClin extends Model
         $paziente = Paziente::with('diagnosi.disturbo')->findOrFail($userPaz);
         $disturbi = new Collection;
         $diagnosi = $paziente->diagnosi;
-        //dd($diagnosi);
         foreach($diagnosi as $diagn) {
             $dist = DistMotorio::find($diagn->disturbo);
             $disturbi->add($dist);

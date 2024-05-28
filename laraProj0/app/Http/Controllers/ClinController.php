@@ -13,6 +13,8 @@ use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
+use App\Models\Resources\Farmaco;
+use App\Models\Resources\Attivita;
 use App\Models\Resources\Prescrizione;
 use App\Models\Resources\Pianificazione;
 use App\Models\Resources\Terapia;
@@ -61,6 +63,7 @@ class ClinController extends Controller
 
         $validatedData = $request->validated();
 
+        // spostare logica nel model
         DB::beginTransaction();
         try {
             $user = new User([
@@ -135,25 +138,37 @@ class ClinController extends Controller
         $terapia->save();
 
         foreach($validatedData['farmaco'] as $item){
+
+            $farmaco = Farmaco::where('nome', $item)->first();
+            $campoVolte = 'nvolteF'.$farmaco->id;
+            $campoPeriodo = 'periodoF'.$farmaco->id;
+            $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+
             $prescrizione = new Prescrizione([
+
                 'terapia' => $terapia->id,
-                'farmaco' => $item->id,
-                //gestire freq
+                'farmaco' => $farmaco->id,
+                'freq' => $freq
             ]);
         }
         
         foreach($validatedData['attivita'] as $item){
+
+            $attivita = Attivita::where('nome', $item)->first();
+            $campoVolte = 'nvolteA'.$attivita->id;
+            $campoPeriodo = 'periodoA'.$attivita->id;
+            $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+
             $pianificazione = new Pianificazione([
+
                 'terapia' => $terapia->id,
                 'attivita' => $item->id,
-                //gestire freq
+                'freq' => $freq
             ]);
         }
         
         
-
-
-        return redirect()->action([ClinController::class, 'index']);
+        return redirect()->back();
 
     }
 }
