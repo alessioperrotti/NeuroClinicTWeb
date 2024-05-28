@@ -54,42 +54,21 @@ class AdminController extends Controller
     public function storeFaq(NewFaqRequest $request) : RedirectResponse 
     {
         $validatedData = $request->validated();
-
-        DB::beginTransaction();
-        try {
-            $faq = new Faq();
-            $faq->fill($validatedData);
-            $faq->save();
-            DB::commit();
-        } 
-        catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Errore durante il salvataggio della FAQ: ' . $e->getMessage());
+        if($this->faqModel->storeFaq($validatedData)) 
+            return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiunta con successo.');
+        else
             return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della FAQ.');
-        }
-        
-        return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiunta con successo.');
     }
     public function updateFaq(Request $request, $id): RedirectResponse
     {
         $validatedData = $request->validate([
             'risposta' => 'required|string'
         ]);
-
-        DB::beginTransaction();
-        try {
-            $faq = Faq::findOrFail($id);
-            $faq->risposta = $validatedData['risposta'];
-            $faq->save();
-            DB::commit();
-        } 
-        catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Errore durante l\'aggiornamento della FAQ: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento della FAQ.');
-        }
         
-        return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiornata con successo.');
+        if(!$this->faqModel->updateFaq($validatedData, $id))
+            return redirect()->action([AdminController::class, 'viewGestioneFaq']);
+        else
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento della FAQ.');
     }
 
     #SEZIONE CLINICI
@@ -115,7 +94,12 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Clinico eliminato con successo.');
     }
-
+    public function viewNuovoClinico()
+    {
+        if (Auth::user()->usertype == 'A') {
+            return view('newClinico');
+        }
+    }
     #SEZIONE DISTURBI
     public function viewDisturbi()
     {

@@ -16,7 +16,7 @@
         @isset($clinici)
             @foreach ($clinici as $clinico)
                 <li class="clinico flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-                    <span class="font-bold">{{ $clinico->nome . " " . $clinico->cognome }}</span>
+                    <span class=" font-bold">{{ $clinico->nome . " " . $clinico->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
                         <button id="btnModifica">
                             <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
@@ -37,7 +37,7 @@
     <div class="flex justify-center  mt-10">
         <!-- Bottone per aggiungere un nuovo clinico -->
         <button id="btnAggiungiClinico" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">
-            Aggiungi clinico
+            <a href="{{ route('nuovoClinico') }}" class="btn" id="btnAggiungiClinico">Aggiungi Clinico</a>
         </button>
     </div>
     
@@ -53,6 +53,19 @@
         backButton.onclick = function() {
             window.location.href = "{{ route('homeAdmin') }}";
         };
+        $(document).ready(function() {
+            // Filtro per cognome jQuery
+            $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
+                                                        //l'evento input si verifica quando il contenuto dell'elemento input cambia.
+                var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
+                $('.clinico').each(function() {        //per ogni elemento con classe "clinico" esguo questa funzione
+                    var fullName = $(this).find('span').text().toLowerCase(); //estraggo il nome completo che so essere nell'elemento span
+                                                                            // all'interno dell'elemento con classe clinico (l'elemento della lista in questo caso)
+                    var cognome = fullName.split(' ').pop(); // Prende l'ultimo elemento come cognome così anche se il clinico ha 2 nomi trova comunque il cognome
+                    $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il clinico in base al filtro
+                });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
+            });                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
+        });    
     });                                                 
 </script>
 

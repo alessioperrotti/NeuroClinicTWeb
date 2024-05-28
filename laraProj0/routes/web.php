@@ -86,22 +86,20 @@ Route::get('/home_admin/analisi_dati', function () {
 ->name('analisiDati');
 
 
-Route::get('/home_admin/clinici/nuovo_clin', function () {
-    return view('nuovoClinico');
-})
-->name('nuovoClinico');
-
+#home_admin/clinici
 Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
     ->name('gestioneClinici');
 Route::delete('/clinico/{id}', [AdminController::class, 'eliminaClinico'])
     ->name('clinico.elimina');
+Route::get('/home_admin/clinici/nuovo_clin', [AdminController::class, 'viewNuovoClinico'])
+    ->name('nuovoClinico');
 
 Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
     ->name('gestioneDisturbi');
     
 
 Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
-->name('gestioneDisturbi.store');
+    ->name('gestioneDisturbi.store');
 
 
 
