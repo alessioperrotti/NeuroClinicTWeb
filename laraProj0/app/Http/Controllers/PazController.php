@@ -36,7 +36,7 @@ class PazController extends Controller
             'citta' => 'required|string|max:30',
             'prov' => 'required|string|max:2',
             'telefono' => 'required|string|max:13',
-            'email' => 'required|string|email|max:40|unique:paziente,email,',
+            'email' => 'required|string|email|max:40|unique:paziente,email',
         ]);
 
         $paziente = Paziente::findOrFail($username);

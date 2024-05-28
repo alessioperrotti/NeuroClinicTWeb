@@ -20,32 +20,37 @@
                 <div>
                     <label class="block text-gray-700 font-semibold">Nome</label>
                     <input id="nome" name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->nome}}" >
-                        
-                        @error('nome')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    @if ($errors->first('nome'))
+                    <ul class="errors">
+                        @foreach ($errors->get('nome') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Cognome</label>
                     <input id="cognome" name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->cognome}}" >
-                    @error('cognome')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    @if ($errors->first('cognome'))
+                    <ul class="errors">
+                        @foreach ($errors->get('cognome') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
                     <input id="dataNasc" name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->dataNasc}}" >
-                    @error('dataNasc')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    @if ($errors->first('dataNasc'))
+                    <ul class="errors">
+                        @foreach ($errors->get('dataNasc') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
 
                 <div>
@@ -58,34 +63,39 @@
                 </div>
 
                 <div>
-                
                     <label class="block text-gray-700">Via</label>
                     <input id="via" name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->via}}" >
-                    @error('via')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    @if ($errors->first('via'))
+                    <ul class="errors">
+                        @foreach ($errors->get('via') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Civico</label>
                     <input id="civico" name="civico" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->civico}}" >
-                    @error('civico')
-                        <span class="invalid-feedback " role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    @if ($errors->first('civico'))
+                    <ul class="errors">
+                        @foreach ($errors->get('civico') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Città</label>
                     <input id="citta" name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->citta}}" >
-                    @error('citta')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    @if ($errors->first('citta'))
+                    <ul class="errors">
+                        @foreach ($errors->get('citta') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
 
                 <div>
@@ -207,21 +217,25 @@
                 <div>
                     <label class="block text-gray-700">Telefono</label>
                     <input id="telefono" name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->telefono}}">
-                    @error('telefono')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    @if ($errors->first('telefono'))
+                    <ul class="errors">
+                        @foreach ($errors->get('telefono') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
 
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
                     <input id="email" name="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->email}}">
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    @if ($errors->first('email'))
+                    <ul class="errors">
+                        @foreach ($errors->get('email') as $message)
+                        <li class="text-red">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
             </div>
             <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">
