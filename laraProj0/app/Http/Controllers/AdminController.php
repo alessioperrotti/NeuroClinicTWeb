@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewDisturboRequest;
+use App\Http\Requests\NewFarmacoRequest;
 use App\Http\Requests\UpdateDisturboRequest;
+use App\Http\Requests\UpdateFarmacoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
@@ -38,14 +40,13 @@ class AdminController extends Controller
         return view('homeAdmin');
     }
 
-
+    //DISTURBI
     public function viewDisturbi()
     {
         Log::info('metodo viewDisturbo attivato');
         $disturbi = $this->disturbiModel->getDisturbi();
         return view('gestioneDisturbi')->with('disturbi', $disturbi);
     }
-
 
     public function storeDisturbo(NewDisturboRequest $request): RedirectResponse
     {
@@ -78,8 +79,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del disturbo.');
         }
     }
-
-
+    
     public function updateDisturbo(UpdateDisturboRequest $request)
     {
         $validated = $request->validated();
@@ -92,6 +92,64 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del disturbo.');
         }
     }
+    
+
+    //FARMACI
+
+    
+    public function viewFarmaci()
+    {
+        $farmaci = $this->farmaciModel->getFarmaci();
+        return view('gestioneFarmaciAttivita')->with('farmaci', $farmaci);
+
+    }
+    public function storeFarmaco(NewFarmacoRequest $request)
+    {
+        $validatedData = $request->validated();
+
+
+        $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
+
+        if ($riuscito) {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del farmaco.');
+        } else {
+            return redirect()->route('gestioneFarmaciAttivita');
+        }
+
+    }    
+
+    public function deleteFarmaco(Request $request)
+    {
+        $validated = $request->validate([
+            'idDel' => 'required',
+        ]);
+
+        $riuscito = $this->farmaciModel->deleteFarmaco($validated);
+
+        if ($riuscito) {
+            return redirect()->route('gestioneFarmaciAttivita');
+        } else {
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del farmaco.');
+        }
+    }
+
+    public function updateFarmaco(UpdateFarmacoRequest $request)
+    {
+        $validated = $request->validated();
+
+        $riuscito = $this->farmaciModel->updateFarmaco($validated);
+
+        if ($riuscito) {    
+            return redirect()->route('gestioneFarmaciAttivita');
+        } else {
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del farmaco.');
+        }
+    }
+    
+
+
+    
+
 
 
   

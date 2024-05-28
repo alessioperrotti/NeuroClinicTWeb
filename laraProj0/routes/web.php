@@ -110,9 +110,7 @@ Route::get('/home_admin/clinici', function () {
     ->name('gestioneClinici');
 
 
-Route::get('/home_admin/farmaci_attivita', function () {
-    return view('gestioneFarmaciAttivita');
-})
+Route::get('/home_admin/farmaci_attivita', [AdminController::class, "viewFarmaci"])
     ->name('gestioneFarmaciAttivita');
 
 
