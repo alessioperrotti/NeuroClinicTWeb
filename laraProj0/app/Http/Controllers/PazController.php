@@ -26,17 +26,18 @@ class PazController extends Controller
 
     public function update(Request $request, $username)
     {
-        /*$request->validate([
-            'nome' => 'required|string|max:30',
-            'cognome' => 'required|string|max:30',
-            'dataNasc' => 'required|date',
+        $request->validate([
+            'nome' => 'required|string|max:30|alpha',
+            'cognome' => 'required|string|max:30|alpha',
+            'dataNasc' => 'required|date|before:today|date_format:Y-m-d',
             'genere' => 'required|string|max:1',
             'via' => 'required|string|max:30',
+            'civico' => 'required|string|max:5',
+            'citta' => 'required|string|max:30',
+            'prov' => 'required|string|max:2',
             'telefono' => 'required|string|max:13',
-            'email' => 'required|string|max:40|email',
-            'username' => 'required|string|max:20',
-            
-        ]);*/
+            'email' => 'required|string|email|max:40|unique:paziente,email,',
+        ]);
 
         $paziente = Paziente::findOrFail($username);
 

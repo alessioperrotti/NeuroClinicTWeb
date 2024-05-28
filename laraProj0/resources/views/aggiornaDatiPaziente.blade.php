@@ -19,39 +19,78 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700 font-semibold">Nome</label>
-                    <input id="nome" name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->nome}}" required>
+                    <input id="nome" name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->nome}}" >
+                        
+                        @error('nome')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                 </div>
+
                 <div>
                     <label class="block text-gray-700">Cognome</label>
-                    <input id="cognome" name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->cognome}}" required>
+                    <input id="cognome" name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->cognome}}" >
+                    @error('cognome')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
-                    <input id="dataNasc" name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->dataNasc}}" required>
+                    <input id="dataNasc" name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->dataNasc}}" >
+                    @error('dataNasc')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div>
                     <label class="block text-gray-700">Genere</label>
-                    <select id="genere" name="genere" size="1" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                    <select id="genere" name="genere" size="1" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" >
                         <option value="M"  {{ $paziente->genere == 'M' ? 'selected' : '' }}>Maschio</option>
                         <option value="F"  {{ $paziente->genere == 'F' ? 'selected' : '' }}>Femmina</option>
                         <option value="A"  {{ $paziente->genere == 'A' ? 'selected' : '' }}>Altro</option>
                     </select>
                 </div>
+
                 <div>
+                
                     <label class="block text-gray-700">Via</label>
-                    <input id="via" name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->via}}" required>
+                    <input id="via" name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->via}}" >
+                    @error('via')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div>
                     <label class="block text-gray-700">Civico</label>
-                    <input id="civico" name="civico" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->civico}}" required>
+                    <input id="civico" name="civico" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->civico}}" >
+                    @error('civico')
+                        <span class="invalid-feedback " role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div>
                     <label class="block text-gray-700">Città</label>
-                    <input id="citta" name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->citta}}" required>
+                    <input id="citta" name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->citta}}" >
+                    @error('citta')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div>
                     <label class="block text-gray-700">Provincia</label>
-                    <select id="prov" name="prov" size="1" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                    <select id="prov" name="prov" size="1" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" >
                         <option value="AG"  {{ $paziente->prov == 'AG' ? 'selected' : '' }}>Agrigento</option>
                         <option value="AL"  {{ $paziente->prov == 'AL' ? 'selected' : '' }}>Alessandria</option>
                         <option value="AN"  {{ $paziente->prov == 'AN' ? 'selected' : '' }}>Ancona</option>
@@ -164,13 +203,25 @@
                         <option value="VT"  {{ $paziente->prov == 'VT' ? 'selected' : '' }}>Viterbo</option>
                     </select>
                 </div>
+
                 <div>
                     <label class="block text-gray-700">Telefono</label>
-                    <input id="telefono" name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->telefono}}" required>
+                    <input id="telefono" name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->telefono}}">
+                    @error('telefono')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
-                    <input id="email" name="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->email}}" required>
+                    <input id="email" name="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->email}}">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">

@@ -18,7 +18,7 @@
             
                 <label for="vecchiaPwd" class="block text-gray-700 font-semibold text-xl">Vecchia Password</label>
                 <div class="relative">
-                    <input id="vecchiaPwd" name="vecchiaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " required>
+                    <input id="vecchiaPwd" name="vecchiaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 ">
                     <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('vecchiaPwd', 'eyeId1')">
                         <img id="eyeId1" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                     </button>
