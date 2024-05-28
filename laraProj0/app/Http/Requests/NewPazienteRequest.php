@@ -22,12 +22,12 @@ class NewPazienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:30',
-            'cognome' => 'required|max:30',
-            'dataNasc' => 'required',
+            'nome' => 'required|max:30|alpha',
+            'cognome' => 'required|max:30|alpha',
+            'dataNasc' => 'required|date|before:today',
             'genere' => 'required|min:0|max:1',
             'via' => 'required|max:30',
-            'civico' => 'required|numeric',
+            'civico' => 'required|string|max:5',
             'citta' => 'required|max:30',
             'prov' => 'required|max:2',
             'telefono' => 'required|min:10|max:13',

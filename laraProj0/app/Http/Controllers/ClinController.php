@@ -7,14 +7,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
+use App\Http\Requests\NewTerapiaRequest;
 use App\Models\Resources\Paziente;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
+use App\Models\Resources\Farmaco;
+use App\Models\Resources\Attivita;
+use App\Models\Resources\Prescrizione;
+use App\Models\Resources\Pianificazione;
 use App\Models\Resources\Terapia;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ClinController extends Controller
 {
@@ -55,23 +62,32 @@ class ClinController extends Controller
     public function storePaziente(NewPazienteRequest $request) : RedirectResponse {
 
         $validatedData = $request->validated();
-        $user = new User([
-            'username' => $validatedData['username'],
-            'password' => Hash::make('stdpassword'),
-            'usertype' => 'P'
-        ]);
-        $user->save();
-        $paziente = New Paziente;
-        $paziente->fill($validatedData);
-        $paziente->save();
-        
 
+        // spostare logica nel model
+        DB::beginTransaction();
+        try {
+            $user = new User([
+                'username' => $validatedData['username'],
+                'password' => Hash::make('stdpassword'),
+                'usertype' => 'P'
+            ]);
+            $user->save();
+            $paziente = New Paziente;
+            $paziente->fill($validatedData);
+            $paziente->save();
+            DB::commit();
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+        }
+        
         return redirect()->action([ClinController::class, 'index']);
     }
 
     public function viewPazienti(): View {
-        
-        $pazienti = $this->gestPazModel->getPazienti();
+
+        $userClin = Auth::user()->clinico->username;
+        $pazienti = $this->gestPazModel->getPazientiByClin($userClin);
         return view('listaPazienti')->with('pazienti', $pazienti);
     }
 
@@ -81,9 +97,9 @@ class ClinController extends Controller
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz);
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
-        $terId = $terapia->pluck('id');
-        $farmaci = $this->gestTerModel->getFarmaciByTer($terId);
-        $attivita = $this->gestTerModel->getAttivitaByTer($terId);
+        $terId = $terapia->id;
+        $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
+        $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
 
         return view('cartellaClin2')
                 ->with('paziente', $paziente)
@@ -91,5 +107,68 @@ class ClinController extends Controller
                 ->with('disturbi', $disturbi)
                 ->with('farmaci', $farmaci)
                 ->with('attivita', $attivita);
+    }
+
+    public function showModTerapia($userPaz) : View {
+
+        $paziente = Paziente::find($userPaz);
+        $farmaci = $this->gestTerModel->getFarmaci();
+        $attivita = $this->gestTerModel->getAttivita();
+        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terId = $terapia->id;
+        $farmTer = $this->gestTerModel->getFarmaciByTer($terId);
+        $attTer = $this->gestTerModel->getAttivitaByTer($terId);
+        return view('modificaTerapia')
+                ->with('paziente', $paziente)
+                ->with('farmaci', $farmaci)
+                ->with('attivita', $attivita)
+                ->with('farmTer', $farmTer)
+                ->with('attTer', $attTer);
+    }
+
+    public function storeTerapia(NewTerapiaRequest $request, $userPaz) : RedirectResponse {
+
+        $validatedData = $request->validated();
+        $data = Carbon::now()->toDateString();
+        $terapia = new Terapia([
+            'data' => $data,
+            'paziente' => $userPaz
+        ]);
+
+        $terapia->save();
+
+        foreach($validatedData['farmaco'] as $item){
+
+            $farmaco = Farmaco::where('nome', $item)->first();
+            $campoVolte = 'nvolteF'.$farmaco->id;
+            $campoPeriodo = 'periodoF'.$farmaco->id;
+            $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+
+            $prescrizione = new Prescrizione([
+
+                'terapia' => $terapia->id,
+                'farmaco' => $farmaco->id,
+                'freq' => $freq
+            ]);
+        }
+        
+        foreach($validatedData['attivita'] as $item){
+
+            $attivita = Attivita::where('nome', $item)->first();
+            $campoVolte = 'nvolteA'.$attivita->id;
+            $campoPeriodo = 'periodoA'.$attivita->id;
+            $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+
+            $pianificazione = new Pianificazione([
+
+                'terapia' => $terapia->id,
+                'attivita' => $item->id,
+                'freq' => $freq
+            ]);
+        }
+        
+        
+        return redirect()->back();
+
     }
 }

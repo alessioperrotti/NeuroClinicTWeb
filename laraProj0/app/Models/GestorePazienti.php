@@ -17,4 +17,17 @@ class GestorePazienti extends Model
         return $pazienti;
     }
 
+    public function getPazientiByClin($userClin): Collection
+    {
+        $pazienti = Paziente::where('clinico', $userClin)->get();
+        return $pazienti;
+    }
+
+    public  function eliminaPaz($username) : bool
+    {
+        $paziente = Paziente::findOrFail($username);
+        $paziente->delete();
+        return true;
+    }   
+
 }

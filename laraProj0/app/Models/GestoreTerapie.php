@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GestoreTerapie extends Model
 {
-    use HasFactory;
     protected $farmModel;
     protected $attModel;
 
@@ -31,18 +30,58 @@ class GestoreTerapie extends Model
         return $attivita;
     }
 
-    public function getFarmaciByTer ($terId) : Collection {
+    public function getFarmaciFreqByTer ($terId) : array {  // restituisce farmaci con frequenza
 
         $terapia = Terapia::with('prescrizioni.farmaco')->findOrFail($terId);
-        $farmaci = $terapia->prescrizioni->pluck('farmaco')->unique();
-        return $farmaci;
+        $farmaci = [];
+        $prescrizioni = $terapia->prescrizioni;
+        foreach($prescrizioni as $presc){
+            $farm = Farmaco::findOrFail($presc->farmaco);
+            $farmaci[] = [
+                'farmaco' => $farm,
+                'freq' => $presc->freq
+            ];
+        }
+        return $farmaci; 
     }
 
-    public function getAttivitaByTer ($terId) : Collection {
+    public function getAttivitaFreqByTer ($terId) : array {  // restituisce attività con frequenza
 
         $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
-        $attivita = $terapia->pianificazioni->pluck('attivita')->unique();
+        $attivita = [];
+        $pianificazioni = $terapia->pianificazioni;
+        foreach($pianificazioni as $pian){
+            $att = Attivita::findOrFail($pian->attivita);
+            $attivita[] = [
+                'attivita' => $att,
+                'freq' => $pian->freq
+            ];
+        }
         return $attivita;
-    }    
+    }
+    
+    public function getFarmaciByTer ($terId) : array {
+
+        $terapia = Terapia::with('prescrizioni.farmaco')->findOrFail($terId);
+        $farmaci = [];
+        $prescrizioni = $terapia->prescrizioni;
+        foreach($prescrizioni as $presc){
+            $farm = Farmaco::findOrFail($presc->farmaco);
+            $farmaci[] = $farm;
+        }
+        return $farmaci; 
+    }
+
+    public function getAttivitaByTer ($terId) : array {
+
+        $terapia = Terapia::with('pianificazioni.attivita')->findOrFail($terId);
+        $attivita = [];
+        $pianificazioni = $terapia->pianificazioni;
+        foreach($pianificazioni as $pian){
+            $att = Attivita::findOrFail($pian->attivita);
+            $attivita[] = $att;
+        }
+        return $attivita;
+    }
     
 }

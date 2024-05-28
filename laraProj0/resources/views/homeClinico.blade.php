@@ -100,7 +100,7 @@
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
                 <a href="{{ route('nuovoPaziente')}}">
                     <!-- cambiare immagine -->
-                    <img src="{{ url('images/nuovo_evento.png')}}" alt="Nuovo evento">
+                    <img src="{{ asset('images/nuovo_evento.png')}}" alt="Nuovo evento">
                 </a>
             </button>
             <p class="text-center text-2xl text-black">Registra Paziente</p>

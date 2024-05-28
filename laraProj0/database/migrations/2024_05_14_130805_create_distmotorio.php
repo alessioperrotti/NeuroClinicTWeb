@@ -13,6 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('distmotorio', function (Blueprint $table) {
+            $table->id('id');
             $table->string('nome', 40);
             $table->string('categoria', 30);
         });

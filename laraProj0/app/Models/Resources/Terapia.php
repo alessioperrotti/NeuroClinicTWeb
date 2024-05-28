@@ -12,6 +12,8 @@ class Terapia extends Model
     protected $table = 'terapia';
     public $timestamps = false;
 
+    protected $fillable = ['paziente', 'data'];
+
     public function prescrizioni()
     {
         return $this->hasMany(Prescrizione::class, 'terapia', 'id');

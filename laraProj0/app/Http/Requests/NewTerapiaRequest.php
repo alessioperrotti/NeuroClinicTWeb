@@ -3,18 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
 
-
-class NewDisturboRequest extends FormRequest
+class NewTerapiaRequest extends FormRequest
 {
-    
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,12 +21,8 @@ class NewDisturboRequest extends FormRequest
      */
     public function rules(): array
     {
-
-        Log::info('richiesta nuovo disturbo');
-
         return [
-            'nome' => 'required|max:30',
-            'categoria' => 'required|max:30',
+            //
         ];
     }
 }
