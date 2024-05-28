@@ -9,7 +9,7 @@
 <form method="POST" action="{{ route('modificaTerapia.store', [$paziente->username])}}">
 <div class="flex justify-center">
     @csrf
-    <div class="bg-white rounded-xl shadow-md h-auto min-w-[400px] mr-6 px-6 justify-center">
+    <div class="bg-white rounded-xl shadow-md h-auto mr-6 px-6 justify-center"> <!-- sistemare minwidth -->
         <h3 class="my-4 font-bold text-xl text-center">Farmaci</h3>
         @isset($farmaci)
         <div class="flex-col mb-4">

@@ -536,87 +536,87 @@ class DatabaseSeeder extends Seeder
 
         DB::table('terapia')->insert([
             [
-                'data' => '2023-01-01',
+                'data' => '2023-01-01 09:00:00',
                 'paziente' => 'pazipazi'
             ],
             [
-                'data' => '2023-01-15',
+                'data' => '2023-01-15 11:30:00',
                 'paziente' => 'dianaprince'
             ],
             [
-                'data' => '2023-02-01',
+                'data' => '2023-02-01 14:00:00',
                 'paziente' => 'peterparker'
             ],
             [
-                'data' => '2023-02-15',
+                'data' => '2023-02-15 08:45:00',
                 'paziente' => 'maryjane'
             ],
             [
-                'data' => '2023-03-01',
+                'data' => '2023-03-01 16:30:00',
                 'paziente' => 'clarkkent'
             ],
             [
-                'data' => '2023-03-15',
+                'data' => '2023-03-15 10:15:00',
                 'paziente' => 'brucewayne'
             ],
             [
-                'data' => '2023-04-01',
+                'data' => '2023-04-01 12:00:00',
                 'paziente' => 'pazipazi'
             ],
             [
-                'data' => '2023-04-15',
+                'data' => '2023-04-15 13:45:00',
                 'paziente' => 'dianaprince'
             ],
             [
-                'data' => '2023-05-01',
+                'data' => '2023-05-01 09:30:00',
                 'paziente' => 'peterparker'
             ],
             [
-                'data' => '2023-05-15',
+                'data' => '2023-05-15 15:00:00',
                 'paziente' => 'maryjane'
             ],
             [
-                'data' => '2023-06-01',
+                'data' => '2023-06-01 11:00:00',
                 'paziente' => 'clarkkent'
             ],
             [
-                'data' => '2023-06-15',
+                'data' => '2023-06-15 14:30:00',
                 'paziente' => 'brucewayne'
             ],
             [
-                'data' => '2023-07-01',
+                'data' => '2023-07-01 08:00:00',
                 'paziente' => 'pazipazi'
             ],
             [
-                'data' => '2023-07-15',
+                'data' => '2023-07-15 17:45:00',
                 'paziente' => 'dianaprince'
             ],
             [
-                'data' => '2023-08-01',
+                'data' => '2023-08-01 10:30:00',
                 'paziente' => 'peterparker'
             ],
             [
-                'data' => '2023-08-15',
+                'data' => '2023-08-15 13:00:00',
                 'paziente' => 'maryjane'
             ],
             [
-                'data' => '2023-09-01',
+                'data' => '2023-09-01 09:45:00',
                 'paziente' => 'clarkkent'
             ],
             [
-                'data' => '2023-09-15',
+                'data' => '2023-09-15 16:00:00',
                 'paziente' => 'brucewayne'
             ],
             [
-                'data' => '2023-10-01',
+                'data' => '2023-10-01 07:30:00',
                 'paziente' => 'pazipazi'
             ],
             [
-                'data' => '2023-10-15',
+                'data' => '2023-10-15 15:30:00',
                 'paziente' => 'dianaprince'
             ]
         ]);
-
+        
 
         DB::table('prescrizione')->insert([
             ['freq' => '1 volta al giorno', 'terapia' => 1, 'farmaco' => 1],

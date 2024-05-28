@@ -129,7 +129,7 @@ class ClinController extends Controller
     public function storeTerapia($userPaz) : RedirectResponse {
 
         $validatedData = $_POST;
-        $data = Carbon::now()->toDateString(); //prende la data corrente
+        $data = Carbon::now()->toDateTimeString(); //prende la data corrente
 
         DB::beginTransaction();
         try{
@@ -142,39 +142,42 @@ class ClinController extends Controller
             Log::info('Terapia creata');
             Log::info($validatedData);
 
-            foreach($validatedData['farmaco'] as $item){
+            if(isset($validatedData['farmaco'])){
+                foreach($validatedData['farmaco'] as $item){
 
-                $farmaco = Farmaco::where('nome', $item)->first();
-                $campoVolte = 'nvolteF'.$farmaco->id;
-                $campoPeriodo = 'periodoF'.$farmaco->id;
-                $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+                    $farmaco = Farmaco::where('nome', $item)->first();
+                    $campoVolte = 'nvolteF'.$farmaco->id;
+                    $campoPeriodo = 'periodoF'.$farmaco->id;
+                    $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
 
-                $prescrizione = new Prescrizione([
+                    $prescrizione = new Prescrizione([
 
-                    'terapia' => $terapia->id,
-                    'farmaco' => $farmaco->id,
-                    'freq' => $freq
-                ]);
-                $prescrizione->save();
+                        'terapia' => $terapia->id,
+                        'farmaco' => $farmaco->id,
+                        'freq' => $freq
+                    ]);
+                    $prescrizione->save();
+                }
             }
             
-            Log::info('Farmaci salvati');
-            foreach($validatedData['attivita'] as $item){
+            if(isset($validatedData['attivita'])){
+                foreach($validatedData['attivita'] as $item){
 
-                $attivita = Attivita::where('nome', $item)->first();
-                $campoVolte = 'nvolteA'.$attivita->id;
-                $campoPeriodo = 'periodoA'.$attivita->id;
-                $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
+                    $attivita = Attivita::where('nome', $item)->first();
+                    $campoVolte = 'nvolteA'.$attivita->id;
+                    $campoPeriodo = 'periodoA'.$attivita->id;
+                    $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
 
-                $pianificazione = new Pianificazione([
+                    $pianificazione = new Pianificazione([
 
-                    'terapia' => $terapia->id,
-                    'attivita' => $attivita->id,
-                    'freq' => $freq
-                ]);
-                $pianificazione->save();
+                        'terapia' => $terapia->id,
+                        'attivita' => $attivita->id,
+                        'freq' => $freq
+                    ]);
+                    $pianificazione->save();
+                }
             }
-            Log::info('Terapia salvata');
+            
             DB::commit();
         }
             catch(\Exception $e) {
