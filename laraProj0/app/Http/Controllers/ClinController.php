@@ -11,6 +11,7 @@ use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
+use App\Models\GestoreDisturbi;
 
 
 class ClinController extends Controller
@@ -19,6 +20,7 @@ class ClinController extends Controller
     protected $gestPazModel;
     protected $gestCartModel;
     protected $gestTerModel;
+    protected $gestDistModel;
 
     public function __construct()
     {
@@ -26,6 +28,7 @@ class ClinController extends Controller
         $this->gestPazModel = new GestorePazienti;
         $this->gestCartModel = new GestoreCartelleClin;
         $this->gestTerModel = new GestoreTerapie;
+        $this->gestDistModel = new GestoreDisturbi;
     }
 
     public function index(): View {
@@ -72,7 +75,7 @@ class ClinController extends Controller
     public function showCartClinica($userPaz) : View {
 
         $paziente = Paziente::find($userPaz);
-        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz);
+        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('data');
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
@@ -116,4 +119,14 @@ class ClinController extends Controller
         }
         
     }
+
+    public function showModDiagnosi($userPaz) : View {
+
+        $paziente = Paziente::find($userPaz);
+        $distDiagnosi = $this->gestCartModel->getDisturbiByPaz($userPaz);
+        $disturbi = $this->gestDistModel->getDisturbi();
+        return view('modificaDiagnosi')
+                ->with('paziente', $paziente)
+                ->with('distDiagnosi', $distDiagnosi)
+                ->with('disturbi', $disturbi);}
 }

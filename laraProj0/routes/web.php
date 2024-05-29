@@ -45,11 +45,7 @@ Route::get('/home_paz/nuovo_ep' , function () {
 })
 ->name('inserimentoNuovoEvento');
 
-Route::get('/home_clin/nuovo_paz', [ClinController::class, 'addPaziente'])
-->name('nuovoPaziente')->middleware('can:isClinico');
 
-Route::post('/home_clin/nuovo_paz', [ClinController::class, 'storePaziente'])
-->name('nuovoPaziente.store')->middleware('can:isClinico');
 
 Route::get('/home_paz/aggiorna_dati' , function () {
     return view('aggiornaDatiPaziente');
@@ -105,13 +101,19 @@ Route::get('/home_admin/aggiorna_faq', function () {
 })
 ->name('gestioneFaq');
 
-Route::get('/home_clin', [ClinController::class, 'index'])
-->name('homeClinico')->middleware('can:isClinico');
+
 
 Route::get('/home_clin/aggiorna_clin',function () {
     return view('aggiornaClinico');
 })
 ->name('aggiornaClinico');
+
+
+
+// rotte nuove per clinico
+
+Route::get('/home_clin', [ClinController::class, 'index'])
+->name('homeClinico')->middleware('can:isClinico');
 
 Route::get('/home_clin/lista_paz', [ClinController::class, 'viewPazienti'])
 ->name('listaPazienti')->middleware('can:isClinico');
@@ -124,5 +126,14 @@ Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia/{userPaz}', [ClinContr
 
 Route::post('/home_clin/lista_paz/cart_clinica/mod_terapia/{userPaz}', [ClinController::class, 'storeTerapia'])
 ->name('modificaTerapia.store')->middleware('can:isClinico');
+
+Route::get('/home_clin/nuovo_paz', [ClinController::class, 'addPaziente'])
+->name('nuovoPaziente')->middleware('can:isClinico');
+
+Route::post('/home_clin/nuovo_paz', [ClinController::class, 'storePaziente'])
+->name('nuovoPaziente.store')->middleware('can:isClinico');
+
+Route::get('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinController::class, 'showModDiagnosi'])
+->name('modificaDiagnosi')->middleware('can:isClinico');
 
 require __DIR__.'/auth.php';

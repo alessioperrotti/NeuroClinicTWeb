@@ -46,11 +46,18 @@
             @endif
         </ul>
     </div>
-    <a href="{{ route('modificaTerapia', ['userPaz' => $paziente->username])}}">
-        <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
-            Modifica Terapia
-        </button>
-    </a>
+    <div class="flex-row justify-center space-x-16">
+        <a href="{{ route('modificaDiagnosi', ['userPaz' => $paziente->username])}}">
+            <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
+                Modifica Diagnosi
+            </button>
+        </a>
+        <a href="{{ route('modificaTerapia', ['userPaz' => $paziente->username])}}">
+            <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
+                Modifica Terapia
+            </button>
+        </a>
+    </div>
 </div>
 <hr class="h-1 my-10 bg-cyan-600 m-28">
 <h2 class="text-3xl font-bold ml-5 mt-5 mb-8">Episodi registrati</h2>
@@ -120,4 +127,12 @@
     @endif
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var backButton = document.getElementById('back_button');
+        backButton.onclick = function() {
+            window.location.href = "{{ route('listaPazienti') }}";
+        };
+    })
+</script>
 @endsection
