@@ -11,5 +11,7 @@ class DistMotorio extends Model
 
    protected $fillable = ['nome', 'categoria'];
 
+   // manca relazione con diagnosi -> in merge prendere questo model da backend-clinico
+
 
 }
