@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Resources\Clinico;
+use App\Models\Resources\Paziente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
@@ -74,5 +75,16 @@ class GestoreClinici extends Model
             return false;
         }
         return true;
+    }
+    public function mediaPazientiPerClinico(){
+        $numeroClinici = Clinico::count();
+        $numeroPazienti = Paziente::count();
+    
+        if ($numeroClinici == 0) {
+            return 0;
+        }
+    
+        $media = $numeroPazienti / $numeroClinici;
+        return $media;
     }
 }

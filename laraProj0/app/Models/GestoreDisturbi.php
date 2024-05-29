@@ -16,7 +16,10 @@ class GestoreDisturbi extends Model
         $disturbi = DistMotorio::all();
         return $disturbi;
     }
-
+    public function getDisturbo($id):DistMotorio {
+        $disturbo = DistMotorio::findOrFail($id);
+        return $disturbo;
+    }
     
 }
 

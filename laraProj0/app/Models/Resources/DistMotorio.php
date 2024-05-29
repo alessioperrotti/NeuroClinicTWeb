@@ -17,6 +17,9 @@ class DistMotorio extends Model
    {
       return $this->hasMany(Diagnosi::class, 'disturbo', 'nome');
    }
-  
+   public function episodi()
+   {
+      return $this->hasMany(Episodio::class, 'disturbo', 'id');
+   }
 
 }

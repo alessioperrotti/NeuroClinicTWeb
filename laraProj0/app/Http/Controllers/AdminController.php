@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
 use App\Models\GestoreFaq;
 use App\Models\GestoreClinici;
+use App\Models\Resources\Episodio;
 use App\Models\Resources\Clinico;
 use App\Http\Requests\NewFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
+use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -26,7 +28,8 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        
+
+        Log::info('AdminController inizializzato');
         #$this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi();
         $this->pazientiModel= new GestorePazienti;
@@ -106,8 +109,9 @@ class AdminController extends Controller
         $clinico = $this->cliniciModel->getClinico($userClin);
         return view('editClinico')->with('clinico', $clinico);
     }
-    public function updateClinico(NewClinicoRequest $request ,$userClin)
+    public function updateClinico(UpdateClinicoRequest  $request ,$userClin)
     {
+        
         log::info('metodo updateClinico del controller attivato');
         $validatedData = $request->validated();
         log::info("dati validati");
@@ -164,4 +168,23 @@ class AdminController extends Controller
         $pazienti = $this->pazientiModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
         return redirect()->route('listaPaz');   
     }
+
+    #ANALISI DEI DATI
+    public function viewAnalisiDati()
+    {
+        $mediaPazientiPerClinico = $this->cliniciModel->mediaPazientiPerClinico();
+        $mediaDisturbiPerPaziente = $this->pazientiModel->mediaDisturbiMotoriPerPaziente();
+        $disturbiMotori = $this->disturbiModel->getDisturbi();
+        return view('analisiDati')
+            ->with('mediaPazientiPerClinico',$mediaPazientiPerClinico)
+            ->with('mediaDisturbiPerPaziente',$mediaDisturbiPerPaziente)
+            ->with('disturbiMotori',$disturbiMotori)
+            ;
+    }
+    public function getEpisodiDisturbo($id)
+    {
+        $numeroEpisodi = Episodio::where('disturbo', $id)->count();
+        return response()->json(['numeroEpisodi' => $numeroEpisodi]);
+    }
+
 }

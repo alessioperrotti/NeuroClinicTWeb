@@ -10,24 +10,25 @@
         <div class='bg-white text-lg w-1/2 px-5 border rounded border-gray-300 max-h-80 overflow-y-auto'>
             <div class='flex justify-between px-5 gap-x-4 py-3'>
                 <h2 class='w-1/3 font-semibold'>Media pazienti per clinico</h2>
-                <h2>10</h2>
+                <h2>{{$mediaPazientiPerClinico}}</h2>
             </div>
             <hr>
             <div class='flex justify-between px-5 gap-x-4 py-3'>
                 <h2 class='w-1/3 font-semibold'>Media disturbi motori registrati per paziente</h2>
-                <h2>10</h2>
+                <h2>{{$mediaDisturbiPerPaziente}}</h2>
             </div>
             <hr>
             <div class='flex justify-between px-5 gap-x-4 py-3'>
                 <h2 class='w-1/3 font-semibold'>Disturbo motorio</h2>
-                <select class="w-1/4">
-                    <option>Prova1</option>
-                    <option>Prova2</option>
+                <select id="disturboSelect" class="w-1/4">
+                    @foreach($disturbiMotori as $disturbo)
+                        <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class='flex justify-between px-5 gap-x-4 py-3'>
                 <h2 class='w-1/3 font-semibold'>Numero di eventi totali registrati</h2>
-                <h2>10</h2>
+                <h2 id="numEpisodi"></h2>
             </div>
             <hr>
         </div>
@@ -82,6 +83,17 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('disturboSelect').addEventListener('change', function() {
+        var disturboId = this.value;
+        fetch("{{ route('episodi.disturbo', ':id') }}".replace(':id', disturboId))
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('numEpisodi').textContent = data.numeroEpisodi;
+            })
+            .catch(error => console.error('Errore:', error));
+    });
+</script>
 @endsection
 
 @section('title')

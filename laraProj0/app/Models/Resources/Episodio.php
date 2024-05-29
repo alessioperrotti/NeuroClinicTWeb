@@ -15,4 +15,8 @@ class Episodio extends Model
     {
         $paziente = $this->belongsTo(Paziente::class, 'paziente', 'username');
     }
+    public function disturbo()
+    {
+        return $this->belongsTo(DistMotorio::class, 'disturbo', 'id');
+    }
 }
