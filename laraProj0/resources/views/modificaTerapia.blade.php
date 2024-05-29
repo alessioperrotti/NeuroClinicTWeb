@@ -9,7 +9,7 @@
 <form method="POST" action="{{ route('modificaTerapia.store', [$paziente->username])}}">
 <div class="flex justify-center">
     @csrf
-    <div class="bg-white rounded-xl shadow-md h-auto mr-6 px-6 justify-center"> <!-- sistemare minwidth -->
+    <div class="bg-white rounded-xl shadow-md h-auto mr-6 px-6 min-w-[400px] justify-center"> <!-- sistemare minwidth -->
         <h3 class="my-4 font-bold text-xl text-center">Farmaci</h3>
         @isset($farmaci)
         <div class="flex-col mb-4">
@@ -75,7 +75,7 @@
     </div>
 </div>
 <div class="flex flex-row justify-center my-8 space-x-16">
-    <input type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 w-[180px] cursor-pointer">
+    <input type="button" value="Annulla Modifiche" onclick="location.reload();" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 w-[180px] cursor-pointer">
     <input type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 w-[180px] cursor-pointer">
 </div>
 </form>

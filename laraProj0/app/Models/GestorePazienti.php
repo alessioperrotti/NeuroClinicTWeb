@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Resources\Paziente;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class GestorePazienti extends Model
 {
@@ -28,6 +30,28 @@ class GestorePazienti extends Model
         $paziente = Paziente::findOrFail($username);
         $paziente->delete();
         return true;
-    }   
+    }
+    
+    public function storePaziente($validatedData) : bool {
+
+        DB::beginTransaction();
+        try {
+            $user = new User([
+                'username' => $validatedData['username'],
+                'password' => Hash::make('stdpassword'),
+                'usertype' => 'P'
+            ]);
+            $user->save();
+            $paziente = New Paziente;
+            $paziente->fill($validatedData);
+            $paziente->save();
+            DB::commit();
+            return true;
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
 
 }

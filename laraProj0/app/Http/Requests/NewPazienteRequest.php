@@ -24,7 +24,7 @@ class NewPazienteRequest extends FormRequest
         return [
             'nome' => 'required|max:30|alpha',
             'cognome' => 'required|max:30|alpha',
-            'dataNasc' => 'required|date|before:today',
+            'dataNasc' => 'required|date|before:today|after:1900-01-01',
             'genere' => 'required|min:0|max:1',
             'via' => 'required|max:30',
             'civico' => 'required|string|max:5',

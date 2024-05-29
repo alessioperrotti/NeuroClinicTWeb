@@ -1,27 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
-use App\Http\Requests\NewTerapiaRequest;
 use App\Models\Resources\Paziente;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
-use App\Models\Resources\Farmaco;
-use App\Models\Resources\Attivita;
-use App\Models\Resources\Prescrizione;
-use App\Models\Resources\Pianificazione;
-use App\Models\Resources\Terapia;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+
 
 class ClinController extends Controller
 {
@@ -41,7 +31,6 @@ class ClinController extends Controller
     public function index(): View {
         $user = Auth::user();
         $clinico = $user->clinico;
-        Log::info('Accedo a controller clinico');
         return view('homeClinico')->with('clinico', $clinico);
     }
 
@@ -63,25 +52,14 @@ class ClinController extends Controller
 
         $validatedData = $request->validated();
 
-        // spostare logica nel model
-        DB::beginTransaction();
-        try {
-            $user = new User([
-                'username' => $validatedData['username'],
-                'password' => Hash::make('stdpassword'),
-                'usertype' => 'P'
-            ]);
-            $user->save();
-            $paziente = New Paziente;
-            $paziente->fill($validatedData);
-            $paziente->save();
-            DB::commit();
-        } 
-        catch (\Exception $e) {
-            DB::rollBack();
+        if ($this->gestPazModel->storePaziente($validatedData)) {
+
+            return redirect()->action([ClinController::class, 'index']);
+        }
+        else {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del paziente.');
         }
         
-        return redirect()->action([ClinController::class, 'index']);
     }
 
     public function viewPazienti(): View {
@@ -129,63 +107,13 @@ class ClinController extends Controller
     public function storeTerapia($userPaz) : RedirectResponse {
 
         $validatedData = $_POST;
-        $data = Carbon::now()->toDateTimeString(); //prende la data corrente
 
-        DB::beginTransaction();
-        try{
-            $terapia = new Terapia([
-                'data' => $data,
-                'paziente' => $userPaz
-            ]);
-
-            $terapia->save();
-            Log::info('Terapia creata');
-            Log::info($validatedData);
-
-            if(isset($validatedData['farmaco'])){
-                foreach($validatedData['farmaco'] as $item){
-
-                    $farmaco = Farmaco::where('nome', $item)->first();
-                    $campoVolte = 'nvolteF'.$farmaco->id;
-                    $campoPeriodo = 'periodoF'.$farmaco->id;
-                    $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
-
-                    $prescrizione = new Prescrizione([
-
-                        'terapia' => $terapia->id,
-                        'farmaco' => $farmaco->id,
-                        'freq' => $freq
-                    ]);
-                    $prescrizione->save();
-                }
-            }
-            
-            if(isset($validatedData['attivita'])){
-                foreach($validatedData['attivita'] as $item){
-
-                    $attivita = Attivita::where('nome', $item)->first();
-                    $campoVolte = 'nvolteA'.$attivita->id;
-                    $campoPeriodo = 'periodoA'.$attivita->id;
-                    $freq = $validatedData[$campoVolte] . " " . $validatedData[$campoPeriodo];
-
-                    $pianificazione = new Pianificazione([
-
-                        'terapia' => $terapia->id,
-                        'attivita' => $attivita->id,
-                        'freq' => $freq
-                    ]);
-                    $pianificazione->save();
-                }
-            }
-            
-            DB::commit();
+        if ($this->gestTerModel->storeTerapia($userPaz, $validatedData)) {
+            return redirect()->action([ClinController::class, 'showCartClinica'], ['userPaz' => $userPaz]);
         }
-            catch(\Exception $e) {
-                DB::rollBack();
+        else {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della terapia.');
         }
         
-        
-        return redirect()->action([ClinController::class, 'showCartClinica'], ['userPaz' => $userPaz]);
-
     }
 }

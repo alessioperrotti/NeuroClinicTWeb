@@ -110,7 +110,7 @@
     @foreach ($episodi as $episodio)
         <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2">
             <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
-            <p class="text-gray-500">del {{$episodio->data}} alle {{$episodio->ora}}</p>
+            <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
         </div>
     @endforeach
     @endisset
