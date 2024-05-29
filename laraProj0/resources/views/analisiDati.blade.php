@@ -20,7 +20,8 @@
             <hr>
             <div class='flex justify-between px-5 gap-x-4 py-3'>
                 <h2 class='w-1/3 font-semibold'>Disturbo motorio</h2>
-                <select id="disturboSelect" class="w-1/4">
+                <select id="disturboSelect">
+                    <option value="" disabled selected>Seleziona un disturbo</option>
                     @foreach($disturbiMotori as $disturbo)
                         <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option>
                     @endforeach
@@ -34,7 +35,9 @@
         </div>
 
         <div class="w-1/2 border border-gray-300 rounded flex flex-col max-h-80">
-            <input class="w-full p-2 border-b border-gray-300 rounded-t" type="text" id="cognomeClinico" placeholder="Cerca per cognome">
+            <input class="w-full p-2 border-b border-gray-300 rounded-t focus:outline-none focus:border-b-2 focus:border-blue-500" 
+            type="text" id="cognomePaziente" placeholder="Cerca per cognome">
+            
             <div class="bg-white overflow-y-auto flex-grow table-container ">
                 <table class="min-w-full bg-white">
                     <thead >
@@ -44,39 +47,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-t border-gray-200">
-                            <td class="px-4 py-2">Mario Rossi</td>
-                            <td class="px-4 py-2">2</td>
-                        </tr>
-                        <tr class="border-t border-gray-200 bg-gray-50">
-                            <td class="px-4 py-2">Luca Bianchi</td>
-                            <td class="px-4 py-2">3</td>
-                        </tr>
-                        <tr class="border-t border-gray-200">
-                            <td class="px-4 py-2">Giulia Verdi</td>
-                            <td class="px-4 py-2">1</td>
-                        </tr>
-                        <tr class="border-t border-gray-200 bg-gray-50">
-                            <td class="px-4 py-2">Anna Neri</td>
-                            <td class="px-4 py-2">4</td>
-                        </tr>
-                        <tr class="border-t border-gray-200">
-                            <td class="px-4 py-2">Marco Gialli</td>
-                            <td class="px-4 py-2">2</td>
-                        </tr>
-                        <!-- Aggiungi più righe di esempio -->
-                        <tr class="border-t border-gray-200 bg-gray-50">
-                            <td class="px-4 py-2">Federico Blu</td>
-                            <td class="px-4 py-2">5</td>
-                        </tr>
-                        <tr class="border-t border-gray-200">
-                            <td class="px-4 py-2">Elena Viola</td>
-                            <td class="px-4 py-2">3</td>
-                        </tr>
-                        <tr class="border-t border-gray-200 bg-gray-50">
-                            <td class="px-4 py-2">Sara Rosa</td>
-                            <td class="px-4 py-2">1</td>
-                        </tr>
+                        @foreach($pazienti as $paziente)
+                            <tr class="paziente">
+                                <td class="px-4 py-2"> {{ $paziente->nome }} {{ $paziente->cognome }}</td>
+                                <td class="px-40 py-2">{{ $paziente->numeroCambiTerapia }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -84,16 +60,30 @@
     </div>
 </div>
 <script>
-    document.getElementById('disturboSelect').addEventListener('change', function() {
-        var disturboId = this.value;
-        fetch("{{ route('episodi.disturbo', ':id') }}".replace(':id', disturboId))
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('numEpisodi').textContent = data.numeroEpisodi;
-            })
-            .catch(error => console.error('Errore:', error));
+    $(document).ready(function() {
+        // Filtro per cognome
+        document.getElementById('cognomePaziente').addEventListener('input', function() {
+            var filter = this.value.toLowerCase();
+            document.querySelectorAll('.paziente').forEach(function(row) {
+                var fullName = row.querySelector('td:first-child').textContent.toLowerCase();
+                var cognome = fullName.split(' ').pop();
+                row.style.display = cognome.startsWith(filter) ? '' : 'none';
+            });
+        });
+
+        // Gestore di eventi per la selezione del disturbo
+        document.getElementById('disturboSelect').addEventListener('change', function() {
+            var disturboId = this.value;
+            fetch("{{ route('episodi.disturbo', ':id') }}".replace(':id', disturboId))
+                .then(response => response.json()) // Se il fetch è andato a buon fine, trasformo la risposta in formato JSON
+                .then(data => {                    // Data è una funzione di callback che prende i dati JSON ottenuti dalla risposta della richiesta.
+                    document.getElementById('numEpisodi').textContent = data.numeroEpisodi;
+                })
+                .catch(error => console.error('Errore:', error));
+        });
     });
 </script>
+
 @endsection
 
 @section('title')

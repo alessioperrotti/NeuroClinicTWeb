@@ -82,7 +82,7 @@ Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
 
 Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
     ->name('analisiDati')->middleware('can:isAdmin');
-#ROTTA ANALISI DEI DATI
+#ROTTA ANALISI DEI DATI NUMERO EPISODI PER DISTURBO
 Route::get('/episodi-disturbo/{id}', [AdminController::class, 'getEpisodiDisturbo'])
     ->name('episodi.disturbo');
 

@@ -11,6 +11,7 @@ use App\Models\GestoreDisturbi;
 use App\Models\GestoreFaq;
 use App\Models\GestoreClinici;
 use App\Models\Resources\Episodio;
+use App\Models\Resources\Terapia;
 use App\Models\Resources\Clinico;
 use App\Http\Requests\NewFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
@@ -172,6 +173,10 @@ class AdminController extends Controller
     #ANALISI DEI DATI
     public function viewAnalisiDati()
     {
+        $pazienti = $this->pazientiModel->getPazienti();
+        foreach ($pazienti as $paziente) {
+            $paziente->numeroCambiTerapia = $this->getNumeroCambiTerapia($paziente->username);
+        }
         $mediaPazientiPerClinico = $this->cliniciModel->mediaPazientiPerClinico();
         $mediaDisturbiPerPaziente = $this->pazientiModel->mediaDisturbiMotoriPerPaziente();
         $disturbiMotori = $this->disturbiModel->getDisturbi();
@@ -179,12 +184,16 @@ class AdminController extends Controller
             ->with('mediaPazientiPerClinico',$mediaPazientiPerClinico)
             ->with('mediaDisturbiPerPaziente',$mediaDisturbiPerPaziente)
             ->with('disturbiMotori',$disturbiMotori)
-            ;
+            ->with('pazienti', $pazienti);
     }
     public function getEpisodiDisturbo($id)
     {
         $numeroEpisodi = Episodio::where('disturbo', $id)->count();
         return response()->json(['numeroEpisodi' => $numeroEpisodi]);
     }
-
+    public function getNumeroCambiTerapia($username) {
+        $numeroTerapie = Terapia::where('paziente', $username)->count();
+        $numeroCambiTerapia = $numeroTerapie - 1;
+        return $numeroCambiTerapia;
+    }
 }

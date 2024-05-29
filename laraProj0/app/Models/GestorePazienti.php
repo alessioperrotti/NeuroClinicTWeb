@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Resources\Paziente;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Resources\Episodio;
+use App\Models\Resources\Terapia;
 
 class GestorePazienti extends Model
 {
@@ -43,6 +44,11 @@ class GestorePazienti extends Model
         $media = $numeroDisturbiTotali / $numeroPazienti;
     
         return $media;
+    }
+    public function getNumeroCambiTerapia($username) {
+        $numeroTerapie = Terapia::where('paziente', $username)->count();
+        $numeroCambiTerapia = $numeroTerapie - 1;
+        return $numeroCambiTerapia;
     }
 
 }
