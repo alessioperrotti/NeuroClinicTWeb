@@ -297,7 +297,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 30,
                 'intensita' => 5,
                 'paziente' => 'pazipazi',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-02-20',
@@ -305,7 +305,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 45,
                 'intensita' => 7,
                 'paziente' => 'dianaprince',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ],
             [
                 'data' => '2023-03-12',
@@ -313,7 +313,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 20,
                 'intensita' => 4,
                 'paziente' => 'peterparker',
-                'disturbo' => 'Atassia'
+                'disturbo' => 3
             ],
             [
                 'data' => '2023-04-05',
@@ -321,7 +321,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 60,
                 'intensita' => 8,
                 'paziente' => 'maryjane',
-                'disturbo' => 'Parkinsonismo'
+                'disturbo' => 4
             ],
             [
                 'data' => '2023-05-22',
@@ -329,7 +329,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 35,
                 'intensita' => 6,
                 'paziente' => 'clarkkent',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-06-14',
@@ -337,7 +337,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 40,
                 'intensita' => 5,
                 'paziente' => 'brucewayne',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ],
             [
                 'data' => '2023-07-09',
@@ -345,7 +345,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 50,
                 'intensita' => 7,
                 'paziente' => 'pazipazi',
-                'disturbo' => 'Atassia'
+                'disturbo' => 3
             ],
             [
                 'data' => '2023-08-21',
@@ -353,7 +353,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 30,
                 'intensita' => 4,
                 'paziente' => 'dianaprince',
-                'disturbo' => 'Parkinsonismo'
+                'disturbo' => 4
             ],
             [
                 'data' => '2023-09-10',
@@ -361,7 +361,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 25,
                 'intensita' => 6,
                 'paziente' => 'peterparker',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-10-03',
@@ -369,7 +369,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 55,
                 'intensita' => 8,
                 'paziente' => 'maryjane',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ],
             [
                 'data' => '2023-11-19',
@@ -377,7 +377,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 60,
                 'intensita' => 7,
                 'paziente' => 'clarkkent',
-                'disturbo' => 'Atassia'
+                'disturbo' => 3
             ],
             [
                 'data' => '2023-12-01',
@@ -385,7 +385,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 40,
                 'intensita' => 5,
                 'paziente' => 'brucewayne',
-                'disturbo' => 'Parkinsonismo'
+                'disturbo' => 4
             ],
             [
                 'data' => '2023-01-25',
@@ -393,7 +393,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 30,
                 'intensita' => 4,
                 'paziente' => 'pazipazi',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-02-15',
@@ -401,7 +401,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 45,
                 'intensita' => 7,
                 'paziente' => 'dianaprince',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ],
             [
                 'data' => '2023-03-22',
@@ -409,7 +409,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 20,
                 'intensita' => 6,
                 'paziente' => 'peterparker',
-                'disturbo' => 'Atassia'
+                'disturbo' => 3
             ],
             [
                 'data' => '2023-04-12',
@@ -417,7 +417,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 60,
                 'intensita' => 9,
                 'paziente' => 'maryjane',
-                'disturbo' => 'Parkinsonismo'
+                'disturbo' => 4
             ],
             [
                 'data' => '2023-05-28',
@@ -425,7 +425,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 35,
                 'intensita' => 8,
                 'paziente' => 'clarkkent',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-06-18',
@@ -433,7 +433,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 50,
                 'intensita' => 6,
                 'paziente' => 'brucewayne',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ],
             [
                 'data' => '2023-07-19',
@@ -441,7 +441,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 45,
                 'intensita' => 7,
                 'paziente' => 'pazipazi',
-                'disturbo' => 'Atassia'
+                'disturbo' => 3
             ],
             [
                 'data' => '2023-08-30',
@@ -449,7 +449,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 30,
                 'intensita' => 5,
                 'paziente' => 'dianaprince',
-                'disturbo' => 'Parkinsonismo'
+                'disturbo' => 4
             ],
             [
                 'data' => '2023-09-22',
@@ -457,7 +457,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 25,
                 'intensita' => 6,
                 'paziente' => 'peterparker',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-10-15',
@@ -465,7 +465,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 55,
                 'intensita' => 8,
                 'paziente' => 'maryjane',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ],
             [
                 'data' => '2023-11-29',
@@ -473,7 +473,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 60,
                 'intensita' => 9,
                 'paziente' => 'clarkkent',
-                'disturbo' => 'Atassia'
+                'disturbo' => 3
             ],
             [
                 'data' => '2023-12-12',
@@ -481,7 +481,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 40,
                 'intensita' => 5,
                 'paziente' => 'brucewayne',
-                'disturbo' => 'Parkinsonismo'
+                'disturbo' => 4
             ],
             [
                 'data' => '2023-01-30',
@@ -489,7 +489,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 30,
                 'intensita' => 4,
                 'paziente' => 'pazipazi',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-02-25',
@@ -497,7 +497,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 45,
                 'intensita' => 7,
                 'paziente' => 'dianaprince',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ],
             [
                 'data' => '2023-03-29',
@@ -505,7 +505,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 20,
                 'intensita' => 6,
                 'paziente' => 'peterparker',
-                'disturbo' => 'Atassia'
+                'disturbo' => 3
             ],
             [
                 'data' => '2023-04-20',
@@ -513,7 +513,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 60,
                 'intensita' => 9,
                 'paziente' => 'maryjane',
-                'disturbo' => 'Parkinsonismo'
+                'disturbo' => 4
             ],
             [
                 'data' => '2023-05-30',
@@ -521,7 +521,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 35,
                 'intensita' => 8,
                 'paziente' => 'clarkkent',
-                'disturbo' => 'Paralisi cerebrale'
+                'disturbo' => 1
             ],
             [
                 'data' => '2023-06-25',
@@ -529,7 +529,7 @@ class DatabaseSeeder extends Seeder
                 'durata' => 50,
                 'intensita' => 6,
                 'paziente' => 'brucewayne',
-                'disturbo' => 'Mioclono'
+                'disturbo' => 2
             ]
         ]);
 
@@ -667,31 +667,31 @@ class DatabaseSeeder extends Seeder
         
         
         DB::table('diagnosi')->insert([
-            ['paziente' => 'pazipazi', 'disturbo' => 'Parkinsonismo', 'data' => '2023-01-01'],
-            ['paziente' => 'dianaprince', 'disturbo' => 'Distonia', 'data' => '2023-02-01'],
-            ['paziente' => 'peterparker', 'disturbo' => 'Atassia', 'data' => '2023-03-01'],
-            ['paziente' => 'maryjane', 'disturbo' => 'Mioclono', 'data' => '2023-04-01'],
-            ['paziente' => 'clarkkent', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2023-05-01'],
-            ['paziente' => 'brucewayne', 'disturbo' => 'Parkinsonismo', 'data' => '2023-06-01'],
-            ['paziente' => 'pazipazi', 'disturbo' => 'Distonia', 'data' => '2023-07-01'],
-            ['paziente' => 'dianaprince', 'disturbo' => 'Atassia', 'data' => '2023-08-01'],
-            ['paziente' => 'peterparker', 'disturbo' => 'Mioclono', 'data' => '2023-09-01'],
-            ['paziente' => 'maryjane', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2023-10-01'],
-            ['paziente' => 'clarkkent', 'disturbo' => 'Parkinsonismo', 'data' => '2023-11-01'],
-            ['paziente' => 'brucewayne', 'disturbo' => 'Distonia', 'data' => '2023-12-01'],
-            ['paziente' => 'pazipazi', 'disturbo' => 'Atassia', 'data' => '2024-01-01'],
-            ['paziente' => 'dianaprince', 'disturbo' => 'Mioclono', 'data' => '2024-02-01'],
-            ['paziente' => 'peterparker', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2024-03-01'],
-            ['paziente' => 'maryjane', 'disturbo' => 'Parkinsonismo', 'data' => '2024-04-01'],
-            ['paziente' => 'clarkkent', 'disturbo' => 'Distonia', 'data' => '2024-05-01'],
-            ['paziente' => 'brucewayne', 'disturbo' => 'Atassia', 'data' => '2024-06-01'],
-            ['paziente' => 'pazipazi', 'disturbo' => 'Mioclono', 'data' => '2024-07-01'],
-            ['paziente' => 'dianaprince', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2024-08-01'],
-            ['paziente' => 'peterparker', 'disturbo' => 'Parkinsonismo', 'data' => '2024-09-01'],
-            ['paziente' => 'maryjane', 'disturbo' => 'Distonia', 'data' => '2024-10-01'],
-            ['paziente' => 'clarkkent', 'disturbo' => 'Atassia', 'data' => '2024-11-01'],
-            ['paziente' => 'brucewayne', 'disturbo' => 'Mioclono', 'data' => '2024-12-01'],
-            ['paziente' => 'pazipazi', 'disturbo' => 'Sclerosi laterale amiotrofica', 'data' => '2025-01-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 4, 'data' => '2023-01-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 8, 'data' => '2023-02-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 3, 'data' => '2023-03-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 2, 'data' => '2023-04-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 14, 'data' => '2023-05-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 4, 'data' => '2023-06-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 8, 'data' => '2023-07-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 3, 'data' => '2023-08-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 2, 'data' => '2023-09-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 14, 'data' => '2023-10-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 4, 'data' => '2023-11-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 8, 'data' => '2023-12-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 3, 'data' => '2024-01-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 2, 'data' => '2024-02-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 14, 'data' => '2024-03-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 4, 'data' => '2024-04-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 8, 'data' => '2024-05-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 3, 'data' => '2024-06-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 2, 'data' => '2024-07-01'],
+            ['paziente' => 'dianaprince', 'disturbo' => 14, 'data' => '2024-08-01'],
+            ['paziente' => 'peterparker', 'disturbo' => 4, 'data' => '2024-09-01'],
+            ['paziente' => 'maryjane', 'disturbo' => 8, 'data' => '2024-10-01'],
+            ['paziente' => 'clarkkent', 'disturbo' => 3, 'data' => '2024-11-01'],
+            ['paziente' => 'brucewayne', 'disturbo' => 2, 'data' => '2024-12-01'],
+            ['paziente' => 'pazipazi', 'disturbo' => 14, 'data' => '2025-01-01'],
         ]);
         
     }

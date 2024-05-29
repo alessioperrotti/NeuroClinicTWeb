@@ -17,8 +17,14 @@ class GestoreCartelleClin extends Model
 
     public function getEpisodiByPaz($userPaz): Collection {
         
-        $paziente = Paziente::find($userPaz);
-        return $paziente->episodi;
+        $paziente = Paziente::with('episodi')->find($userPaz);
+        $episodi = new Collection;
+        foreach($paziente->episodi as $episodio) {
+            $dist = DistMotorio::find($episodio->disturbo);
+            $episodio->disturbo = $dist;
+            $episodi->add($episodio);
+        }
+        return $episodi;
     }
 
     public function getDisturbiByPaz($userPaz): Collection {

@@ -19,6 +19,6 @@ class Diagnosi extends Model
 
     public function disturbo()
     {
-        return $this->belongsTo(DistMotorio::class, 'disturbo', 'nome');
+        return $this->belongsTo(DistMotorio::class, 'disturbo', 'id');
     }
 }
