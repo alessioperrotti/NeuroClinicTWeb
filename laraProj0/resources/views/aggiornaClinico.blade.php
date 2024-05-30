@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
-                <input type="reset" class="bg-gray-500 text-white py-2 px-4 rounded-md">Annulla Modifiche</button>
-                <input type="submit" class="bg-cyan-600 text-white py-2 px-4 rounded-md">Conferma Modifiche</button>
+                <input type="reset" class="bg-gray-500 text-white py-2 px-4 rounded-md min-w-[100px]">
+                <input type="submit" class="bg-cyan-600 text-white py-2 px-4 rounded-md min-w-[100px]">
             </div>
         </form>
     </div>
