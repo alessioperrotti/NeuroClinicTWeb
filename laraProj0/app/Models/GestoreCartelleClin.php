@@ -10,6 +10,7 @@ use App\Models\Resources\Diagnosi;
 use App\Models\Resources\DistMotorio;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Resources\Terapia;
+use Illuminate\Support\Facades\Log;
 
 class GestoreCartelleClin extends Model
 {
@@ -30,8 +31,10 @@ class GestoreCartelleClin extends Model
     public function getDisturbiByPaz($userPaz): Collection {
 
         $paziente = Paziente::with('diagnosi.disturbo')->findOrFail($userPaz);
+        $latestDiagnosiDate = $paziente->diagnosi->max('data');
+        $diagnosi = $paziente->diagnosi->where('data', $latestDiagnosiDate);
+        Log::info($diagnosi);
         $disturbi = new Collection;
-        $diagnosi = $paziente->diagnosi;
         foreach($diagnosi as $diagn) {
             $dist = DistMotorio::find($diagn->disturbo);
             $disturbi->add($dist);

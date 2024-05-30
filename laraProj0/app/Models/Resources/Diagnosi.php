@@ -11,6 +11,7 @@ class Diagnosi extends Model
 {
     protected $table = 'diagnosi';
     public $timestamps = false;
+    protected $fillable = ['paziente', 'disturbo', 'data'];
 
     public function paziente()
     {

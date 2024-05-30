@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Resources\Prescrizione;
 use App\Models\Resources\Pianificazione;
+use App\Models\Resources\Diagnosi;
+use Illuminate\Support\Facades\Log;
 
 class GestoreTerapie extends Model
 {
@@ -122,5 +124,30 @@ class GestoreTerapie extends Model
         }
     }
 
+    public function storeDiagnosi ($userPaz, $validatedData) {
+            
+            $data = Carbon::now()->toDateTimeString(); //prende la data corrente
+    
+            DB::beginTransaction();
+            try{
+                foreach($validatedData['disturbo'] as $item){
+                    $diagnosi = new Diagnosi([
+                        'data' => $data,
+                        'paziente' => $userPaz,
+                        'disturbo' => $item
+                    ]);
+                    $diagnosi->save();
+                }
+                
+                Log::info('Tutto apposto');
+                DB::commit();
+                return true;
+            }
+                catch(\Exception $e) {
+                    Log::info('Errore'.$e->getMessage());
+                    DB::rollBack();
+                    return false;
+            }
+    }
     
 }

@@ -86,7 +86,6 @@
         
         // Seleziona i checkbox corrispondenti
         farmTer.forEach(function(farmaco) {
-            console.log(farmaco);
             $('input[type="checkbox"][value="' + farmaco.farmaco.nome + '"]').prop('checked', true);
             $('#' + 'divf' + farmaco.farmaco.id).removeClass('hidden');
             $('#' + 'divf' + farmaco.farmaco.id + ' select ').prop('disabled', false);
@@ -98,7 +97,6 @@
         });
 
         var attTer = @json($attTer);
-        console.log(attTer);
 
         attTer.forEach(function(attivita) {
             $('input[type="checkbox"][value="' + attivita.attivita.nome + '"]').prop('checked', true);
@@ -107,7 +105,6 @@
             var words = attivita.freq.split(" ");
             var nvolte = words[0] + " " + words[1];
             var periodo = words[2] + " " + words[3];
-            console.log(nvolte);
             $('select[name="nvolteA' + attivita.attivita.id + '"]').val(nvolte);
             $('select[name="periodoA' + attivita.attivita.id + '"]').val(periodo);
         })

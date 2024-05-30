@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('paziente', 20)->references('username')->on('paziente');
             $table->integer('disturbo')->references('id')->on('distmotorio');
-            $table->date('data');
+            $table->datetime('data');
         });
     }
 

@@ -128,5 +128,19 @@ class ClinController extends Controller
         return view('modificaDiagnosi')
                 ->with('paziente', $paziente)
                 ->with('distDiagnosi', $distDiagnosi)
-                ->with('disturbi', $disturbi);}
+                ->with('disturbi', $disturbi);
+    }
+
+    public function storeDiagnosi($userPaz) : RedirectResponse {
+
+        $validatedData = $_POST;
+        Log::info($validatedData);
+
+        if ($this->gestTerModel->storeDiagnosi($userPaz, $validatedData)) {
+            return redirect()->action([ClinController::class, 'showCartClinica'], ['userPaz' => $userPaz]);
+        }
+        else {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della diagnosi.');
+        }
+    }
 }

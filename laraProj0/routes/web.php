@@ -136,4 +136,7 @@ Route::post('/home_clin/nuovo_paz', [ClinController::class, 'storePaziente'])
 Route::get('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinController::class, 'showModDiagnosi'])
 ->name('modificaDiagnosi')->middleware('can:isClinico');
 
+Route::post('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinController::class, 'storeDiagnosi'])
+->name('modificaDiagnosi.store')->middleware('can:isClinico');
+
 require __DIR__.'/auth.php';
