@@ -34,7 +34,7 @@ Route::get('/faq', function () {
 Route::get('/home_paz', [PazController::class, 'index'])
 ->name('homePaziente')->middleware('can:isPaziente'); 
 
-
+// fare un metodo di controller per questa vista
 Route::get('/home_paz/cambia_pwd', function () {
     return view('cambiaPwdPaziente');
 })
