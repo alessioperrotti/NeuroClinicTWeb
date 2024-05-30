@@ -148,6 +148,11 @@ class ClinController extends Controller
             
             $clinico = Auth::user()->clinico;
             Log::info($clinico);
-            return view('aggiornaClinico')->with('clinico', $clinico);
+            return view('editClinico')
+                ->with('clinico', $clinico);
+    }
+
+    public function editClinico($userClin){
+        
     }
 }

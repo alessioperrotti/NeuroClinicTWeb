@@ -139,4 +139,7 @@ Route::post('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinCont
 Route::get('/home_clin/aggiorna_clin', [ClinController::class, 'showModClinico'])
 ->name('aggiornaClinico')->middleware('can:isClinico');
 
+Route::post('/home_clin/aggiorna_clin', [ClinController::class, 'editClinico'])
+->name('aggiornaClinico.edit')->middleware('can:isClinico');
+
 require __DIR__.'/auth.php';
