@@ -103,10 +103,7 @@ Route::get('/home_admin/aggiorna_faq', function () {
 
 
 
-Route::get('/home_clin/aggiorna_clin',function () {
-    return view('aggiornaClinico');
-})
-->name('aggiornaClinico');
+
 
 
 
@@ -138,5 +135,8 @@ Route::get('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinContr
 
 Route::post('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinController::class, 'storeDiagnosi'])
 ->name('modificaDiagnosi.store')->middleware('can:isClinico');
+
+Route::get('/home_clin/aggiorna_clin', [ClinController::class, 'showModClinico'])
+->name('aggiornaClinico')->middleware('can:isClinico');
 
 require __DIR__.'/auth.php';

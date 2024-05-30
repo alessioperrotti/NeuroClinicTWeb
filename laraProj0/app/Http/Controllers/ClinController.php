@@ -143,4 +143,11 @@ class ClinController extends Controller
             return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della diagnosi.');
         }
     }
+
+    public function showModClinico () : View {
+            
+            $clinico = Auth::user()->clinico;
+            Log::info($clinico);
+            return view('aggiornaClinico')->with('clinico', $clinico);
+    }
 }
