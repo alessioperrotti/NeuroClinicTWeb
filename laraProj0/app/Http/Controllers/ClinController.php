@@ -12,6 +12,7 @@ use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
 use App\Models\GestoreDisturbi;
+use App\Http\Requests\UpdateClinicoRequest;
 
 
 class ClinController extends Controller
@@ -152,7 +153,14 @@ class ClinController extends Controller
                 ->with('clinico', $clinico);
     }
 
-    public function editClinico($userClin){
+    public function updateClinico(UpdateClinicoRequest  $request ,$userClin)
+    {
         
+        $validatedData = $request->validated();
+        
+        if($this->gestClinModel->updateClinico($validatedData, $userClin))
+            return redirect()->action([ClinController::class, 'index']);
+        else
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
     }
 }
