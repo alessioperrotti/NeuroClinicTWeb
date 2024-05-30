@@ -22,7 +22,7 @@
                 <button type="button" class="btnModifica" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
                     <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                 </button>
-                <form action="{{ route('gestioneDisturbi.delete') }}" method="POST" class="inline-block">
+                <form action="{{ route('gestioneDisturbi.delete') }}" method="POST" class="inline-block" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?')">
                     @csrf
                     <input type="hidden" name="idDel" value="{{$disturbo->id}}">
                     <button type="submit" id="btnElimina">
@@ -78,7 +78,7 @@
     </div>
 
     <div id="formModificaDisturbo" class="mt-4" style="display: none;">
-        <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update')}}" method="post">
+        <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update')}}" method="post" >
             @csrf
 
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">

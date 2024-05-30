@@ -26,11 +26,17 @@
                         <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
 
-                    <input type="hidden" name="idDel" value="{{$farmaco->id}}">
-                    <button class="btnEliminaFarmaco">
 
-                        <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
-                    </button>
+                    <form action="{{route('gestioneFarmaci.delete')}}" method="post"  onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
+                        @csrf
+                        
+                        <input type="hidden" name="idDel" value="{{$farmaco->id}}">
+                        <button type="submit" class="btnEliminaFarmaco">
+
+                            <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                        </button>
+                    </form>
+
 
                 </div>
             </div>
