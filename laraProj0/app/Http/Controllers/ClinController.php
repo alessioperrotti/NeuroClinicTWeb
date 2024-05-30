@@ -163,4 +163,9 @@ class ClinController extends Controller
         else
             return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
     }
+
+    public function showPassChange () : View {
+        
+        return view('cambiaPwdPaziente');
+    }
 }

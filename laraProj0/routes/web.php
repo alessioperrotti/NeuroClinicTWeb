@@ -142,4 +142,7 @@ Route::get('/home_clin/aggiorna_clin', [ClinController::class, 'showModClinico']
 Route::post('/home_clin/aggiorna_clin', [ClinController::class, 'updateClinico'])
 ->name('aggiornaClinico.edit')->middleware('can:isClinico');
 
+Route::get('/home_clin/cambia_pwd', [ClinController::class, 'showPassChange'])
+->name('cambiaPwdClinico')->middleware('auth');
+
 require __DIR__.'/auth.php';
