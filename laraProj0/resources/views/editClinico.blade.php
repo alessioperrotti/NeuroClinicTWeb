@@ -24,7 +24,10 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Ruolo</label>
-                    <input name="ruolo" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->ruolo}}>
+                    <select name="ruolo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                        <option value="Medico" @if($clinico->ruolo == 'Medico') selected @endif>Medico</option>
+                        <option value="Fisioterapista" @if($clinico->ruolo == 'Fisioterapista') selected @endif>Fisioterapista</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-gray-700">Specializzazione</label>
