@@ -33,7 +33,6 @@ class GestoreCartelleClin extends Model
         $paziente = Paziente::with('diagnosi.disturbo')->findOrFail($userPaz);
         $latestDiagnosiDate = $paziente->diagnosi->max('data');
         $diagnosi = $paziente->diagnosi->where('data', $latestDiagnosiDate);
-        Log::info($diagnosi);
         $disturbi = new Collection;
         foreach($diagnosi as $diagn) {
             $dist = DistMotorio::find($diagn->disturbo);

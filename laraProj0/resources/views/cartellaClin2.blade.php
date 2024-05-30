@@ -65,7 +65,7 @@
     <div name="filtro1" class="space-x-2 flex items-center">
         <p class="h-min text-lg font-semibold">Filtra per disturbo: </p>
 
-        <select name="filtroDisturbo[]" multiple class="inline bg-white rounded-md h-min w-min p-1 border border-cyan-600" size=2>
+        <select name="filtroDisturbo[]" multiple class="inline bg-white rounded-md h-min min-w-[100px] p-1 border border-cyan-600" size=2>
             @isset($disturbi)
                 @foreach($disturbi as $disturbo)
                 <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
@@ -115,8 +115,11 @@
 
     @isset($episodi)
     @foreach ($episodi as $episodio)
-        <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2">
-            <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
+        <div id={{$episodio->id}} class="flex justify-between items-center bg-white p-4 rounded-lg mb-2">
+            <div class="flex flex-row space-x-2">
+                <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
+                <p class="text-gray-500 font-semibold">{{"(Intensità:" . $episodio->intensita . ")"}}</p>
+            </div>
             <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
         </div>
     @endforeach
@@ -133,6 +136,11 @@
         backButton.onclick = function() {
             window.location.href = "{{ route('listaPazienti') }}";
         };
+
+        var disturbi = @json($disturbi);
+
+        // implementazione filtro disturbi
+
     })
 </script>
 @endsection

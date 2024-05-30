@@ -139,12 +139,10 @@ class GestoreTerapie extends Model
                     $diagnosi->save();
                 }
                 
-                Log::info('Tutto apposto');
                 DB::commit();
                 return true;
             }
                 catch(\Exception $e) {
-                    Log::info('Errore'.$e->getMessage());
                     DB::rollBack();
                     return false;
             }
