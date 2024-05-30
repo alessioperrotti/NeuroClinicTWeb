@@ -80,7 +80,9 @@
         </div>
         <br>
         <div class=" flex justify-center items-center">
-            <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 ">Cambia password</button>
+            <a href="{{ route('cambiaPwdClinico')}}">
+                <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">Cambia password</button>
+            </a>
         </div>
     </div>
     @endisset

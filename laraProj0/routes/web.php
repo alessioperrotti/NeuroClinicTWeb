@@ -3,6 +3,7 @@
 use App\Http\Controllers\PazController;
 use App\Http\Controllers\ClinController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -144,5 +145,8 @@ Route::post('/home_clin/aggiorna_clin', [ClinController::class, 'updateClinico']
 
 Route::get('/home_clin/cambia_pwd', [ClinController::class, 'showPassChange'])
 ->name('cambiaPwdClinico')->middleware('auth');
+
+Route::put('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
+->name('password.update')->middleware('auth');
 
 require __DIR__.'/auth.php';
