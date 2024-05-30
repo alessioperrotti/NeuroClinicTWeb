@@ -27,7 +27,7 @@
                     </button>
 
                     <input type="hidden" name="idDel" value="{{$farmaco->id}}">
-                    <button type="submit" class="btnEliminaFarmaco">
+                    <button class="btnEliminaFarmaco">
 
                         <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                     </button>
@@ -46,23 +46,28 @@
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
 
         <h1>Modifica farmaco selezionato</h1>
-        <div class="bg-white p-4 rounded-lg mt-3">
+        <form action="{{route('gestioneFarmaci.update')}}" method="post">
+            @csrf
+            <div class="bg-white p-4 rounded-lg mt-3">
 
-            <div class=" mb-6 mx-3 ">
+                <div class=" mb-6 mx-3 ">
 
 
-                <label for="nomeFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <label for="nomeFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                    <input type="hidden" id="idMod" name="idMod">
 
-                <label for="descrizioneFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                <textarea id="descrizioneFarmacoMod" name="descrizione" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="nomeFarmacoMod" name="nomeMod" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+                    <label for="descrizioneFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                    <textarea id="descrizioneFarmacoMod" name="descrMod" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </textarea>
+                </div>
+                <div class="flex justify-center gap-x-14">
+                    <button type="reset" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
+                    <button type="submit" id="btnConfermaModFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma Modifiche</button>
+                </div>
             </div>
-            <div class="flex justify-center gap-x-14">
-                <button id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
-                <button id="btnConfermaModFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma Modifiche</button>
-            </div>
-        </div>
+        </form>
     </div>
 
 
@@ -88,8 +93,8 @@
                     <textarea id="descrizioneFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button id="btnConfermaInserimentoFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button type="submit" id="btnConfermaInserimentoFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -184,7 +189,10 @@
             $('#formModificaFarmaco').show();
 
 
-            $("#btnAnnullaFarmaco").click()
+            $('#formNuovoFarmaco').hide();
+            $('#nomeFarmaco').val('');
+            $('#descrizioneFarmaco').val('');
+
             //nasconde il tasto per aggiungere
             $("#btnAggiungiFarmaco").hide();
 
@@ -192,7 +200,7 @@
 
         $("#btnAnnullaModFarmaco").on("click", function() {
             //nasconde la modifica del farmaco
-            $('#formNuovoFarmaco').hide();
+            $('#formModificaFarmaco').hide();
             $('#nomeFarmaco').val('');
             $('#descrizioneFarmaco').val('');
             $('#btnAggiungiFarmaco').show();

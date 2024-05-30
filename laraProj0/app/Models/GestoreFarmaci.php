@@ -54,14 +54,14 @@ class GestoreFarmaci extends Model
         }
     }
 
-    public function updateDisturbo($data){
+    public function updateFarmaco($data){
         
         DB::beginTransaction();
         try {
             $id = $data['idMod'];
             $farmaco = Farmaco::findOrFail($id);
             $farmaco->nome = $data['nomeMod'];
-            $farmaco->categoria = $data['categoriaMod'];
+            $farmaco->descr = $data['descrMod'];
             $farmaco->save();
             DB::commit();
             return true;

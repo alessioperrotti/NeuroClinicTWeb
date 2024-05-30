@@ -27,7 +27,7 @@ class UpdateDisturboRequest extends FormRequest
         return [
             'idMod' =>'required',
             'nomeMod' => 'required|max:30',
-            'categoriaMod' => 'required|max:30'
+            'categoriaMod' => 'required|max:255'
         ];
     }
 
