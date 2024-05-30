@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttivitaRequest;
 use App\Http\Requests\NewDisturboRequest;
 use App\Http\Requests\NewFarmacoRequest;
 use App\Http\Requests\UpdateDisturboRequest;
 use App\Http\Requests\UpdateFarmacoRequest;
+use App\Models\GestoreAttivita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GestoreDisturbi;
@@ -21,7 +23,7 @@ class AdminController extends Controller
 
     protected $disturbiModel;
     protected $farmaciModel;
-    protected $terapieModel;
+    protected $attivitaModel;
     protected $pazienti;
 
 
@@ -31,6 +33,7 @@ class AdminController extends Controller
         $this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi();
         $this->farmaciModel = new GestoreFarmaci();
+        $this->attivitaModel = new GestoreAttivita();
     }
 
     public function index()
@@ -94,20 +97,22 @@ class AdminController extends Controller
     }
     
 
-    //FARMACI
 
-    
-    public function viewFarmaci()
+    //VISTA FARMACI_ATTIVITA
+    //farmaci
+    public function viewFarmaciAttivita()
     {
         $farmaci = $this->farmaciModel->getFarmaci();
-        return view('gestioneFarmaciAttivita')->with('farmaci', $farmaci);
+        $attivita = $this->attivitaModel->getAttivita();
+        return view('gestioneFarmaciAttivita')->with('farmaci', $farmaci)->with('attivita',$attivita);
 
     }
+    
+
     public function storeFarmaco(NewFarmacoRequest $request)
     {
         $validatedData = $request->validated();
         Log::info('metodo storeFarmaco attivato');
-
         $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
 
         if ($riuscito) {
@@ -115,7 +120,6 @@ class AdminController extends Controller
         } else {
             return redirect()->route('gestioneFarmaciAttivita');
         }
-
     }    
 
     public function deleteFarmaco(Request $request)
@@ -145,6 +149,52 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del farmaco.');
         }
     }
+
+    //attivita
+    
+    public function storeAttivita(AttivitaRequest $request){
+        Log::info($request);
+        $validatedData = $request->validated();
+        Log::info('metodo storeAttivita attivato');
+
+        $riuscito = $this->attivitaModel->storeAttivita($validatedData);
+
+        if ($riuscito) {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio dell\'attività.');
+        } else {
+            return redirect()->route('gestioneFarmaciAttivita');
+        }
+    }
+
+    public function deleteAttivita(Request $request)
+    {
+        $validated = $request->validate([
+            'idDel' => 'required',
+        ]);
+
+        $riuscito = $this->attivitaModel->deleteAttivita($validated);
+
+        if ($riuscito) {
+            return redirect()->route('gestioneFarmaciAttivita');
+        } else {
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione dell\'attività.');
+        }
+    }
+
+    public function updateAttivita(AttivitaRequest $request)
+    {
+        Log::info($request);
+        $validated = $request->validated();
+
+        $riuscito = $this->attivitaModel->updateAttivita($validated);
+
+        if ($riuscito) {
+            return redirect()->route('gestioneFarmaciAttivita');
+        } else {
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione dell\'attività.');
+        }
+    }
+
     
 
 

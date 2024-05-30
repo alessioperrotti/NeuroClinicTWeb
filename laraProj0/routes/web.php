@@ -82,8 +82,8 @@ Route::post('/home_admin/disturbi/update', [AdminController::class, 'updateDistu
     ->name('gestioneDisturbi.update');
 
 Route::post('/update-variable', [AdminController::class, 'updateDisturboDaMod'])
-->name('updateDisturboDaMod'); //rotta per aggiorna variabile php con idDisturboDaModificare
-    
+    ->name('updateDisturboDaMod'); //rotta per aggiorna variabile php con idDisturboDaModificare
+
 
 Route::get('/home_admin/lista_paz', function () {
     return view('listaPaz');
@@ -109,9 +109,10 @@ Route::get('/home_admin/clinici', function () {
     ->name('gestioneClinici');
 
 
-Route::get('/home_admin/farmaci_attivita', [AdminController::class, "viewFarmaci"])
+//INIZIO VISTA FARMACI_ATTIVITA
+Route::get('/home_admin/farmaci_attivita', [AdminController::class, "viewFarmaciAttivita"])
     ->name('gestioneFarmaciAttivita');
-
+//rotte per gestione farmaci
 Route::post('/home_admin/farmaci_attivita/farmaco', [AdminController::class, 'storeFarmaco'])
     ->name('gestioneFarmaci.store');
 
@@ -120,6 +121,16 @@ Route::post('/home_admin/farmaci_attivita/farmaco/delete', [AdminController::cla
 
 Route::post('/home_admin/farmaci_attivita/farmaco/update', [AdminController::class, 'updateFarmaco'])
     ->name('gestioneFarmaci.update');
+//rotte per gestione attivita
+Route::post('/home_admin/farmaci_attivita/attivita', [AdminController::class, 'storeAttivita'])
+    ->name('gestioneAttivita.store');
+
+Route::post('/home_admin/farmaci_attivita/attivita/delete', [AdminController::class, 'deleteAttivita'])
+    ->name('gestioneAttivita.delete');
+
+Route::post('/home_admin/farmaci_attivita/attivita/update', [AdminController::class, 'updateAttivita'])
+    ->name('gestioneAttivita.update');
+//FINE VISTA FARMACI_ATTIVITA
 
 
 
