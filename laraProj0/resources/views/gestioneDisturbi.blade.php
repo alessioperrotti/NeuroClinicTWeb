@@ -44,6 +44,8 @@
         <form action="{{ route('gestioneDisturbi.store') }}" method="post">
             @csrf
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
+            <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Aggiungi Disturbo</h1>
+
             <div class="bg-white p-4 rounded">
                 <div class="mb-6 flex justify-between">
                     <div>
@@ -70,7 +72,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="reset" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button type="button" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
                     <button type="submit" id="btnAggiungi" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
@@ -78,11 +80,11 @@
     </div>
 
     <div id="formModificaDisturbo" class="mt-4" style="display: none;">
-        <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update')}}" method="post" >
+        <form id="modificaDisturboForm" action="{{route('gestioneDisturbi.update')}}" method="post">
             @csrf
 
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
-            <h1>Modifica disturbo selezionato</h1>
+            <h1 class='text-lg font-bold ml-5 mt-5 mb-8 '>Modifica disturbo selezionato</h1>
             <div class="bg-white p-4 rounded">
                 <div class="mb-6 flex justify-between">
                     <input type="hidden" id="idMod" name="id" value="">
@@ -96,7 +98,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="reset" id="btnAnnullaMod" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifica</button>
+                    <button type="button" id="btnAnnullaMod" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifica</button>
                     <button type="submit" id="btnEffettuaMod" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifica Disturbo</button>
                 </div>
             </div>
@@ -106,15 +108,28 @@
     <script src="{{ asset('js/functions.js') }}"></script>
     <script>
         $(document).ready(function() {
+
+
+            function resetForm(formId, fields) {
+                $(formId).hide();
+                fields.forEach(field => $(field).val(''));
+            }
+
+            function toggleForms(showFormId, hideFormId) {
+                $(showFormId).show();
+                $(hideFormId).hide();
+            }
+
             //codice per l'aggiunta del disturbo
             $('#btnAggiungiDisturbo').on('click', function() {
-                $('#formNuovoDisturbo').show();
+                toggleForms('#formNuovoDisturbo', '#btnAggiungiDisturbo');
+
             });
 
             $('#btnAnnulla').on('click', function() {
-                $('#formNuovoDisturbo').hide();
-                $('#nome').val('');
-                $('#categoria').val('');
+                
+                resetForm('#formNuovoDisturbo', ['#nome', '#categoria']);
+                $('#btnAggiungiDisturbo').show();
             });
 
             //codice per la modifica del disturbo
@@ -130,9 +145,25 @@
                 $('#idMod').val(id);
 
                 //mostra il form
-                $('#formModificaDisturbo').show();
+
+                toggleForms('#formModificaDisturbo', '#formNuovoDisturbo');
+                resetForm('#formNuovoDisturbo', ['#nome', '#categoria']);
+                $("#btnAggiungiDisturbo").hide();
 
             });
+
+            $("#btnAnnullaMod").on("click", function() {
+                resetForm('#formModificaDisturbo', ['#nomeMod', '#categoriaMod']);
+                $('#btnAggiungiDisturbo').show();
+            });
+
+          
+
+
+
+           
+
+
 
 
 

@@ -51,7 +51,7 @@
     <div id="formModificaFarmaco" class="mt-4 " style="display: none;">
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
 
-        <h1>Modifica farmaco selezionato</h1>
+        <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Modifica farmaco selezionato</h1>
         <form action="{{route('gestioneFarmaci.update')}}" method="post">
             @csrf
             <div class="bg-white p-4 rounded-lg mt-3">
@@ -85,7 +85,7 @@
     <!-- Contenitore per il form di inserimento nuovo Farmaco, inizialmente nascosto -->
     <div id="formNuovoFarmaco" class="mt-4 " style="display: none;">
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
-        <h1>Aggiungi Farmaco</h1>
+        <h1 class='text-lg font-bold ml-5 mt-5 mb-8 '>Aggiungi Farmaco</h1>
         <form action="{{route('gestioneFarmaci.store')}}" method="post">
             @csrf
 
@@ -171,7 +171,7 @@
     <div id="formModificaAttivita" class="mt-4 " style="display: none;">
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
 
-        <h1>Modifica attivita selezionata</h1>
+        <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Modifica attivita selezionata</h1>
         <form action="{{route('gestioneAttivita.update')}}" method="post">
             @csrf
             <div class="bg-white p-4 rounded-lg mt-3">
@@ -197,7 +197,7 @@
     <!-- Contenitore per il form di inserimento nuovo Attivita, inizialmente nascosto -->
     <div id="formNuovaAttivita" class="mt-4 " style="display: none;">
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
-        <h1>Aggiungi attivita</h1>
+        <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Aggiungi attivita</h1>
         <div class="bg-white p-4 rounded-lg mt-3">
             <form action="{{route('gestioneAttivita.store')}}" method="post">
                 @csrf
