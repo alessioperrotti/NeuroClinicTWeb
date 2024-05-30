@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewFarmacoRequest extends FormRequest
+class FarmacoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,9 @@ class NewFarmacoRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => ['integer'],
             'nome'=> ['required', 'string', 'max:30'],
             'descr'=> ['required', 'string', 'max:255'],
         ];
     }
-
-    
 }

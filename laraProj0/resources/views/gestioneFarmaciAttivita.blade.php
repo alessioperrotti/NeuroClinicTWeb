@@ -60,12 +60,12 @@
 
 
                     <label for="nomeFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                    <input type="hidden" id="idFarmacoMod" name="idMod">
+                    <input type="hidden" id="idFarmacoMod" name="id">
 
-                    <input type="text" id="nomeFarmacoMod" name="nomeMod" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <label for="descrFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrFarmacoMod" name="descrMod" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">

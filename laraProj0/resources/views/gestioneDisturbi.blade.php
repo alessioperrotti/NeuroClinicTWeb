@@ -85,14 +85,14 @@
             <h1>Modifica disturbo selezionato</h1>
             <div class="bg-white p-4 rounded">
                 <div class="mb-6 flex justify-between">
-                    <input type="hidden" id="idMod" name="idMod" value="">
+                    <input type="hidden" id="idMod" name="id" value="">
                     <div>
                         <label for="nomeMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                        <input type="text" id="nomeMod" name="nomeMod" placeholder="Nome" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="nomeMod" name="nome" placeholder="Nome" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div>
                         <label for="categoriaMod" class="block text-gray-700 text-sm font-bold mb-2">Categoria</label>
-                        <input type="text" id="categoriaMod" name="categoriaMod" placeholder="Categoria" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="categoriaMod" name="categoria" placeholder="Categoria" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                 </div>
                 <div class="flex justify-center gap-x-14">

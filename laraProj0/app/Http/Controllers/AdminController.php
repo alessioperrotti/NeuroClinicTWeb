@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AttivitaRequest;
+use App\Http\Requests\DisturboRequest;
+use App\Http\Requests\FarmacoRequest;
 use App\Http\Requests\NewDisturboRequest;
 use App\Http\Requests\NewFarmacoRequest;
 use App\Http\Requests\UpdateDisturboRequest;
@@ -51,7 +53,7 @@ class AdminController extends Controller
         return view('gestioneDisturbi')->with('disturbi', $disturbi);
     }
 
-    public function storeDisturbo(NewDisturboRequest $request): RedirectResponse
+    public function storeDisturbo(DisturboRequest $request): RedirectResponse
     {
 
 
@@ -83,7 +85,7 @@ class AdminController extends Controller
         }
     }
     
-    public function updateDisturbo(UpdateDisturboRequest $request)
+    public function updateDisturbo(DisturboRequest $request)
     {
         $validated = $request->validated();
 
@@ -109,7 +111,7 @@ class AdminController extends Controller
     }
     
 
-    public function storeFarmaco(NewFarmacoRequest $request)
+    public function storeFarmaco(FarmacoRequest $request)
     {
         $validatedData = $request->validated();
         Log::info('metodo storeFarmaco attivato');
@@ -137,7 +139,7 @@ class AdminController extends Controller
         }
     }
 
-    public function updateFarmaco(UpdateFarmacoRequest $request)
+    public function updateFarmaco(FarmacoRequest $request)
     {
         $validated = $request->validated();
 

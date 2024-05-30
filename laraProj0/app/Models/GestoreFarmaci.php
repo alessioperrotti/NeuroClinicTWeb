@@ -58,10 +58,10 @@ class GestoreFarmaci extends Model
         
         DB::beginTransaction();
         try {
-            $id = $data['idMod'];
+            $id = $data['id'];
             $farmaco = Farmaco::findOrFail($id);
-            $farmaco->nome = $data['nomeMod'];
-            $farmaco->descr = $data['descrMod'];
+            $farmaco->nome = $data['nome'];
+            $farmaco->descr = $data['descr'];
             $farmaco->save();
             DB::commit();
             return true;
