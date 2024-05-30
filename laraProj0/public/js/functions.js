@@ -27,7 +27,7 @@ function doElemValidation(id, actionUrl, formId) {
             data: formElems,
             dataType: "json",
             error: function (data) {  //funzione di callback, 
-                if (data.status === 422  ) { //codice per errori di validazione. è sempre una condizione di errore
+                if (data.status === 422) { //codice per errori di validazione. è sempre una condizione di errore
                     var errMsgs = JSON.parse(data.responseText); //definiamo il messaggio di errore.
                     $("#" + id).parent().find('.errors').html(' '); //risaliamo al parent e cerchiamo una classe .errors. poi cancelliamo gli errori vecchi
                     $("#" + id).after(getErrorHtml(errMsgs[id])); //con after passiamo l'errore dell'id che stiamo analizando
@@ -85,6 +85,7 @@ function doFormValidation(actionUrl, formId) {
         processData: false
     });
 }
+
 
 
 

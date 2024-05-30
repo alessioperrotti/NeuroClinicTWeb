@@ -10,7 +10,7 @@
     <div class="mb-4">
 
 
-        <input type="text" id="cercaDisturbo" placeholder="Cerca disturbo" class="bg-cyan-50 my-6 appearance-none w-full py-2 px-3
+        <input type="text" id="cercaFarmaco" placeholder="Cerca farmaco" class="bg-cyan-50 my-6 appearance-none w-full py-2 px-3
             border-0 border-b-2 border-gray-300 focus:border-black text-gray-700 leading-tight focus:outline-none">
 
         <div class="max-h-96 overflow-y-auto">
@@ -19,17 +19,17 @@
 
             @isset($farmaci)
             @foreach($farmaci as $farmaco)
-            <div class="flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-                <span class=" font-bold">{{$farmaco->nome}}</span>
+            <div class="farmaco flex justify-between items-center bg-white p-2 rounded-lg mb-2">
+                <span class="nomeFarmaco font-bold">{{$farmaco->nome}}</span>
                 <div class="flex mr-2 gap-x-4">
                     <button class="btnModificaFarmaco" data-id="{{$farmaco->id}}" data-nome="{{$farmaco->nome}}" data-descr="{{$farmaco->descr}}">
                         <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
 
 
-                    <form action="{{route('gestioneFarmaci.delete')}}" method="post"  onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
+                    <form action="{{route('gestioneFarmaci.delete')}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
                         @csrf
-                        
+
                         <input type="hidden" name="idDel" value="{{$farmaco->id}}">
                         <button type="submit" class="btnEliminaFarmaco">
 
@@ -216,18 +216,28 @@
 
 
 
-        // Funzione che implementa il cerca disturbo
-        $("#cercaDisturbo").on('input', function() {
-            var ricerca = $("#cercaDisturbo").val().toLowerCase(); // Prende la parola inserita nel campo di ricerca
-            $(".disturbo").each(function() {
-                var nome = $(this).find(".nomeDisturbo").text().toLowerCase(); // Trova il testo del nome del disturbo
-                if (nome.indexOf(ricerca) != -1) {
-                    $(this).show(); // Mostra l'elemento se corrisponde alla ricerca
-                } else {
-                    $(this).hide(); // Nasconde l'elemento se non corrisponde alla ricerca
-                }
+
+
+        function cercaElemento(inputId, elementClass, textClass) {
+            $(inputId).on('input', function() {
+                var ricerca = $(inputId).val().toLowerCase();
+                $(elementClass).each(function() {
+                    var nome = $(this).find(textClass).text().toLowerCase();
+                    if (nome.indexOf(ricerca) != -1) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
             });
-        });
+        }
+
+
+        cercaElemento("#cercaFarmaco", ".farmaco", ".nomeFarmaco");
+
+        
+
+
 
     });
 
