@@ -36,9 +36,9 @@
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
                 <a href="{{ route('gestioneClinici') }}">
-                    <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded-md">Annulla Modifica</button>
+                    <button type="button" class="bg-gray-500 hover:bg-gray-400 text-white py-2 px-4 rounded-md">Annulla Modifica</button>
                 </a>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Conferma Modifica</button>
+                <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white py-2 px-4 rounded-md">Conferma Modifica</button>
             </div>
         </form>
     </div>

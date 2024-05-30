@@ -148,15 +148,15 @@ class ClinController extends Controller
     public function showModClinico () : View {
             
             $clinico = Auth::user()->clinico;
-            Log::info($clinico);
             return view('aggiornaClinico')
                 ->with('clinico', $clinico);
     }
 
-    public function updateClinico(UpdateClinicoRequest  $request ,$userClin)
+    public function updateClinico(UpdateClinicoRequest  $request) : RedirectResponse
     {
         
         $validatedData = $request->validated();
+        $userClin = Auth::user()->clinico->username;
         
         if($this->gestClinModel->updateClinico($validatedData, $userClin))
             return redirect()->action([ClinController::class, 'index']);
