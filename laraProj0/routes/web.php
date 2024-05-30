@@ -80,27 +80,7 @@ Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
 #})
 #->name('listaPaz');
 
-Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
-    ->name('analisiDati')->middleware('can:isAdmin');
-#ROTTA ANALISI DEI DATI NUMERO EPISODI PER DISTURBO
-Route::get('/episodi-disturbo/{id}', [AdminController::class, 'getEpisodiDisturbo'])
-    ->name('episodi.disturbo');
 
-#home_admin/clinici
-Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
-    ->name('gestioneClinici')->middleware('can:isAdmin');
-Route::delete('/clinico/{id}', [AdminController::class, 'eliminaClinico'])
-    ->name('clinico.elimina')->middleware('can:isAdmin');
-Route::get('/home_admin/clinici/nuovo_clin', [AdminController::class, 'viewNuovoClinico'])
-    ->name('nuovoClinico')->middleware('can:isAdmin');
-Route::put('/nuovoClinico', [AdminController::class, 'storeClinico'])
-    ->name('nuovoClinico.store')->middleware('can:isAdmin');
-
-Route::get('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'viewAggiornaClinico'])
-    ->name('aggiornaClinicoAdmin')->middleware('can:isAdmin');
-
-Route::post('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'updateClinico'])
-    ->name('aggiornaClinicoAdmin.edit')->middleware('can:isAdmin');
 
 
 Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
@@ -122,10 +102,10 @@ Route::get('/home_admin/farmaci_attivita', function () {
 Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])
     ->name('gestioneFaq');
 
-Route::delete('/faq/{id}', [AdminController::class, 'eliminaFaq'])
+Route::post('/faq/{id}', [AdminController::class, 'eliminaFaq'])
     ->name('faq.elimina');
     
-Route::put('/faq/{id}', [AdminController::class, 'updateFaq'])
+Route::post('/faq/{id}', [AdminController::class, 'updateFaq'])
     ->name('faq.update');
 
 Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
@@ -151,16 +131,9 @@ Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
     ->name('listaPaz')->middleware('can:isAdmin'); 
 
 
-Route::delete('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
+Route::post('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
     ->name('eliminaPaziente')->middleware('can:isAdmin');
 
-
-
-/*
-Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
-    return view('cartellaClin2');
-})
-->name('cartellaClin2'); */
 
 Route::get('/home_clin/lista_paz/cart_clinica',function () {
     return view('cartellaClin2');
@@ -172,6 +145,35 @@ Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
 })
 ->name('modificaTerapia'); // rotta per sviluppo
 
+
+#--------------------------------------------------------------------#
+                    #ROTTA ANALISI DEI DATI
+Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
+    ->name('analisiDati')->middleware('can:isAdmin');
+#ROTTA ANALISI DEI DATI NUMERO EPISODI PER DISTURBO
+Route::get('/episodi-disturbo/{id}', [AdminController::class, 'getEpisodiDisturbo'])
+    ->name('episodi.disturbo');
+    #--------------------------------------------------------------------#
+                    #ROTTE X GESTIONE CLINICI
+Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
+    ->name('gestioneClinici')->middleware('can:isAdmin');
+
+Route::post('/clinico/{id}', [AdminController::class, 'eliminaClinico'])
+    ->name('clinico.elimina')->middleware('can:isAdmin');
+
+Route::get('/home_admin/clinici/nuovo_clin', [AdminController::class, 'viewNuovoClinico'])
+    ->name('nuovoClinico')->middleware('can:isAdmin');
+
+Route::post('/nuovoClinico', [AdminController::class, 'storeClinico'])
+    ->name('nuovoClinico.store')->middleware('can:isAdmin');
+
+Route::get('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'viewAggiornaClinico'])
+    ->name('aggiornaClinicoAdmin')->middleware('can:isAdmin');
+
+Route::post('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'updateClinico'])
+    ->name('aggiornaClinicoAdmin.edit')->middleware('can:isAdmin');
+#--------------------------------------------------------------------#
+                    #ROTTE GESTIONE FAQ
 
 
 require __DIR__.'/auth.php';

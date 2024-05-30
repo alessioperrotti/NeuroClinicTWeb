@@ -22,12 +22,10 @@
                                 <textarea name="risposta" class="w-full border-2" rows="4">{{$faq->risposta}}</textarea>
                                 <div class="flex gap-2 mt-2">
                                         @csrf
-                                        @method('PUT')
                                         <button type="submit" class="bg-blue-500 text-white py-1 px-3 rounded mt-2">Salva nuova risposta</button>
                             </form>
-                                <form action="{{ route('faq.elimina', $faq->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Sei sicuro di voler eliminare questa FAQ?');">
+                                <form action="{{ route('faq.elimina', $faq->id) }}" method="POST" class="delete-form inline-block" onsubmit="return confirm('Sei sicuro di voler eliminare questa FAQ?');">
                                     @csrf
-                                    @method('DELETE')
                                     <button type="submit" class="bg-red-500 text-white py-1 px-3 rounded mt-2">Elimina Faq</button>
                                 </form>
                                 </div>

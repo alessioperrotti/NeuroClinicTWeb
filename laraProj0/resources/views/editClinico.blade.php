@@ -24,7 +24,10 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Ruolo</label>
-                    <input name="ruolo" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->ruolo}}>
+                    <select name="ruolo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                        <option value="medico" {{ $clinico->ruolo == 'medico' ? 'selected' : '' }}>Medico</option>
+                        <option value="fisioterapia" {{ $clinico->ruolo == 'fisioterapia' ? 'selected' : '' }}>Fisioterapia</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-gray-700">Specializzazione</label>

@@ -25,7 +25,6 @@
                         </form>
                         <form action="{{ route('clinico.elimina', $clinico->username) }}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo clinico?');"> 
                             @csrf
-                            @method('DELETE')
                             <button type="submit">
                                 <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                             </button>

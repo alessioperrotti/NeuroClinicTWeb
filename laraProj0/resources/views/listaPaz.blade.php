@@ -20,7 +20,6 @@
                     <div class="flex mr-2 gap-x-4">
                         <form action="{{ route('eliminaPaziente', $paziente->username) }}" method="POST" class="delete-form">
                             @csrf
-                            @method('DELETE')
                             <button type="submit">
                                 <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                             </button>
