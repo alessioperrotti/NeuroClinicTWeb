@@ -16,7 +16,10 @@ use App\Models\GestoreDisturbi;
 use App\Models\GestoreFarmaci;
 use App\Models\GestoreTerapie;
 use App\Models\Resources\DistMotorio;
+use Illuminate\Database\Eloquent\Casts\Json;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Psy\Readline\Hoa\Console;
@@ -140,18 +143,20 @@ class AdminController extends Controller
         }
     }
 
-    public function updateFarmaco(FarmacoRequest $request)
+    public function updateFarmaco(FarmacoRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
         $riuscito = $this->farmaciModel->updateFarmaco($validated);
 
         if ($riuscito) {    
-            return redirect()->route('gestioneFarmaciAttivita');
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
         } else {
-            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del farmaco.');
+            return response()->json(['error' => 'Errore durante l\'eliminazione del farmaco.'], 422);
         }
     }
+
+    
 
     //attivita
     

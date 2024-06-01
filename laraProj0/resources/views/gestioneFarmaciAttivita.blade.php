@@ -64,11 +64,9 @@
 
 
                     <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <h1 class="errors">prova</h1>
                     <label for="descrFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
                     <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </textarea>
-                    <h1 class="errors"></h1>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
@@ -88,7 +86,7 @@
     <div id="formNuovoFarmaco" class="mt-4 " style="display: none;">
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
         <h1 class='text-lg font-bold ml-5 mt-5 mb-8 '>Aggiungi Farmaco</h1>
-        <form action="{{route('gestioneFarmaci.store')}}" method="post">
+        <form id="nuovoFarmacoForm" action="{{route('gestioneFarmaci.store')}}" method="post">
             @csrf
 
             <div class="bg-white p-4 rounded-lg mt-3">
@@ -377,13 +375,11 @@
                 error: function(data) { //funzione di callback, 
                     if (data.status === 422) { //codice per errori di validazione. è sempre una condizione di errore
                         var errMsgs = JSON.parse(data.responseText); //definiamo il messaggio di errore.
-                        console.log(errMsgs);
                         var inputName = $("#" + id).attr('name');
-                        $("#" + id).parent().find('.errors').html(' '); //risaliamo al parent e cerchiamo una classe .errors. poi cancelliamo gli errori vecchi
-                        //svuota l'elemento dopo l'elemento con id di classe errors
-                        $("#" + id).after(getErrorHtml(errMsgs[id])); //con after passiamo l'errore dell'id che stiamo analizando
-
-                        
+                        // $("#" + id).find('.errors').html(' '); //risaliamo al parent e cerchiamo una classe .errors. poi cancelliamo gli errori vecchi
+                        $("#" + id).next('.errors').html(' '); //non cancelliamo tutti gli errori perche poi non possiamo vedere gli errori di tutti gli elementi
+                        $("#" + id).after(getErrorHtml(errMsgs[inputName])); //con after passiamo l'errore dell'id che stiamo analizando
+                        console.log(errMsgs[inputName]);
                     }
                 },
                 contentType: false,
@@ -407,17 +403,23 @@
         } else {
             // elemento di input type != file
             inputVal = elem.val();
+
         }
+
         formElems = new FormData(); //creiamo un oggetto di tipo formdata che struttura tutte le info che si mandano al server al submit
-        formElems.append(id, inputVal); //aggiungiamo il valore di input 
+        var inputName = $("#" + id).attr('name'); //estraiamo il nome dell'elemento
+        formElems.append(inputName, inputVal); //aggiungiamo il valore di input 
         addFormToken(); //aggiungiamo il token
         sendAjaxReq(); //manda la richiesta ajax
 
     }
 
     function doFormValidation(actionUrl, formId) {
-
+        console.log("doFormValidationInizio");
         var form = new FormData(document.getElementById(formId));
+        for (var pair of form.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
         $.ajax({
             type: 'POST',
             url: actionUrl,
@@ -430,14 +432,21 @@
                         $("#" + id).parent().find('.errors').html(' ');
                         $("#" + id).after(getErrorHtml(errMsgs[id]));
                     });
+                    console.log("tutto male");
+                } else {
+                    console.log("Errore con status diverso da 422: ", data);
                 }
             },
             success: function(data) { //se non c'è una condizione di errore il server reindirizza al processo di errore
+                console.log("tutto bene");
                 window.location.replace(data.redirect);
             },
+
             contentType: false,
             processData: false
         });
+        console.log("doFormValidationFine");
+
     }
 
 
@@ -447,11 +456,45 @@
 
 
 
-    //per la validazione della modificaFarmaco con ajax
+    //per la validazione della modifica del Farmaco con ajax
     $(function() {
         var actionUrl = "{{ route('gestioneFarmaci.update') }}";
         var formId = 'modificaFarmacoForm'; //a questa assegnamo l'id della form
-        $("#modificaFarmacoForm :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            console.log(formElementId);
+            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(actionUrl, formId); //valida l'intera form
+        });
+    });
+
+    //per la validazione dell'inserimento del Farmaco con ajax
+    $(function() {
+        var actionUrl = "{{ route('gestioneFarmaci.store') }}";
+        var formId = 'nuovoFarmacoForm'; //a questa assegnamo l'id della form
+        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            console.log(formElementId);
+            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#btnConfermaInserimentoFarmaco").on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(actionUrl, formId); //valida l'intera form
+        });
+    });
+
+
+    //per la validazione della modifica della Attivita con ajax
+    $(function() {
+        var actionUrl = "{{ route('gestioneAttivita.update') }}";
+        var formId = 'nuovoFarmacoForm'; //a questa assegnamo l'id della form
+        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
@@ -465,20 +508,22 @@
 
 
 
-    // //per la validazione dell'inserimento con ajax
-    // $(function() {
-    //     var actionUrl = "{{ route('gestioneDisturbi.store') }}";
-    //     var formId = 'formNuovoDisturbo'; //a questa assegnamo l'id della form
-    //     $(":input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-    //         //quando mi sposto su un altro elemento di input, estraggo l'id
-    //         var formElementId = $(this).attr('id');
-    //         doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
-    //     });
-    //     $("#btnAggiungi").on('submit', function(event) { //sarebbe l id della form. 
-    //         event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-    //         doFormValidation(actionUrl, formId); //valida l'intera form
-    //     });
-    // });
+
+    //per la validazione del inserimento di una Attivita con ajax
+    $(function() {
+        var actionUrl = "{{ route('gestioneAttivita.store') }}";
+        var formId = 'nuovoFarmacoForm'; //a questa assegnamo l'id della form
+        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            console.log(formElementId);
+            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#btnConfermaModFarmaco").on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(actionUrl, formId); //valida l'intera form
+        });
+    });
 </script>
 
 
