@@ -52,7 +52,7 @@
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
 
         <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Modifica farmaco selezionato</h1>
-        <form action="{{route('gestioneFarmaci.update')}}" method="post">
+        <form id="modificaFarmacoForm" action="{{route('gestioneFarmaci.update')}}" method="post">
             @csrf
             <div class="bg-white p-4 rounded-lg mt-3">
 
@@ -62,11 +62,13 @@
                     <label for="nomeFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
                     <input type="hidden" id="idFarmacoMod" name="id">
 
-                    <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
+                    <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <h1 class="errors">prova</h1>
                     <label for="descrFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
                     <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </textarea>
+                    <h1 class="errors"></h1>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
@@ -201,7 +203,7 @@
         <div class="bg-white p-4 rounded-lg mt-3">
             <form action="{{route('gestioneAttivita.store')}}" method="post">
                 @csrf
-                <div class=" mb-6 mx-3 ">  
+                <div class=" mb-6 mx-3 ">
 
                     <label for="nomeAttivita" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
                     <input type="text" id="nomeAttivita" placeholder="Nome" name="nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
@@ -287,9 +289,9 @@
             $('#descrAttivitaMod').val(descrizione);
             $('#idAttivitaMod').val(id);
 
-            
 
-          
+
+
 
             toggleForms('#formModificaAttivita', '#formNuovaAttivita');
             resetForm('#formNuovaAttivita', ['#nomeAttivita', '#descrAttivita']);
@@ -343,20 +345,125 @@
     });
 
 
-    // //per la validazione della modifica con ajax
-    // $(function() {
-    //     var actionUrl = "{{ route('gestioneDisturbi.update') }}";
-    //     var formId = 'formModificaDisturbo'; //a questa assegnamo l'id della form
-    //     $(":input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-    //         //quando mi sposto su un altro elemento di input, estraggo l'id
-    //         var formElementId = $(this).attr('id');
-    //         doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
-    //     });
-    //     $("#btnEffettuaMod").on('submit', function(event) { //sarebbe l id della form. 
-    //         event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-    //         doFormValidation(actionUrl, formId); //valida l'intera form
-    //     });
-    // });
+    function getErrorHtml(elemErrors) {
+        if ((typeof(elemErrors) === 'undefined') || (elemErrors.length < 1)) //guarda se ci sono elementi da visualizzare 
+            return;
+        var out = '<ul class="errors">'; //genera la tag ul
+        for (var i = 0; i < elemErrors.length; i++) {
+            out += '<li>' + elemErrors[i] + '</li>'; //dentro di questa genera tanti tag li quanti gli errori
+        }
+        out += '</ul>';
+        return out;
+    }
+
+    function doElemValidation(id, actionUrl, formId) {
+        //dick prende in input l'id dell'elemento, url, lid della form
+        var formElems;
+
+        //mandiamo al server il token e l'elemento da validare.
+        //
+        function addFormToken() {
+            var tokenVal = $("#" + formId + " input[name=_token]").val();
+            formElems.append('_token', tokenVal);
+        }
+
+        function sendAjaxReq() {
+            console.log("richiesta ajax");
+            $.ajax({
+                type: 'POST',
+                url: actionUrl,
+                data: formElems,
+                dataType: "json",
+                error: function(data) { //funzione di callback, 
+                    if (data.status === 422) { //codice per errori di validazione. è sempre una condizione di errore
+                        var errMsgs = JSON.parse(data.responseText); //definiamo il messaggio di errore.
+                        console.log(errMsgs);
+                        var inputName = $("#" + id).attr('name');
+                        $("#" + id).parent().find('.errors').html(' '); //risaliamo al parent e cerchiamo una classe .errors. poi cancelliamo gli errori vecchi
+                        //svuota l'elemento dopo l'elemento con id di classe errors
+                        $("#" + id).after(getErrorHtml(errMsgs[id])); //con after passiamo l'errore dell'id che stiamo analizando
+
+                        
+                    }
+                },
+                contentType: false,
+                processData: false
+            });
+
+        }
+
+        var elem = $("#" + id);
+        if (elem.attr('type') === 'file') { //controlliamo se l'elemento è di tipo file o meno. 
+            //i file sono piu difficili da gestire. sono rappresentati come array
+            // elemento di input type=file valorizzato
+            if (elem.val() !== '') { //se l'utente non ha inserito il valore, ha solo perso il focus, allora inviamo solo il nome del file
+                inputVal = elem.get(0).files[0];
+            } else {
+                inputVal = new File([""], ""); //altrimenti, se l'utente ha specificato il file, creiamo un oggetto che lo rappresenta 
+            }
+
+            //in ogni caso inputVal è un valore di tipo file 
+
+        } else {
+            // elemento di input type != file
+            inputVal = elem.val();
+        }
+        formElems = new FormData(); //creiamo un oggetto di tipo formdata che struttura tutte le info che si mandano al server al submit
+        formElems.append(id, inputVal); //aggiungiamo il valore di input 
+        addFormToken(); //aggiungiamo il token
+        sendAjaxReq(); //manda la richiesta ajax
+
+    }
+
+    function doFormValidation(actionUrl, formId) {
+
+        var form = new FormData(document.getElementById(formId));
+        $.ajax({
+            type: 'POST',
+            url: actionUrl,
+            data: form,
+            dataType: "json",
+            error: function(data) {
+                if (data.status === 422) {
+                    var errMsgs = JSON.parse(data.responseText);
+                    $.each(errMsgs, function(id) {
+                        $("#" + id).parent().find('.errors').html(' ');
+                        $("#" + id).after(getErrorHtml(errMsgs[id]));
+                    });
+                }
+            },
+            success: function(data) { //se non c'è una condizione di errore il server reindirizza al processo di errore
+                window.location.replace(data.redirect);
+            },
+            contentType: false,
+            processData: false
+        });
+    }
+
+
+
+
+
+
+
+
+    //per la validazione della modificaFarmaco con ajax
+    $(function() {
+        var actionUrl = "{{ route('gestioneFarmaci.update') }}";
+        var formId = 'modificaFarmacoForm'; //a questa assegnamo l'id della form
+        $("#modificaFarmacoForm :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            console.log(formElementId);
+            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#btnConfermaModFarmaco").on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(actionUrl, formId); //valida l'intera form
+        });
+    });
+
+
 
     // //per la validazione dell'inserimento con ajax
     // $(function() {
