@@ -13,6 +13,7 @@ use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
 use App\Models\GestoreDisturbi;
 use App\Http\Requests\UpdateClinicoRequest;
+use Illuminate\Support\Facades\Hash;
 
 
 class ClinController extends Controller
@@ -35,7 +36,16 @@ class ClinController extends Controller
     public function index(): View {
         $user = Auth::user();
         $clinico = $user->clinico;
-        return view('homeClinico')->with('clinico', $clinico);
+        if ($user->password == Hash::make('stdpassword')) {  /* se la password è quella di 
+                                                                default si mostrerà un alert */
+            $changed = true;
+        } 
+        else {
+            $changed = false;
+        }
+        return view('homeClinico')
+            ->with('clinico', $clinico)
+            ->with('changed', $changed);
     }
 
     public function addPaziente(): View {
@@ -166,6 +176,6 @@ class ClinController extends Controller
 
     public function showPassChange () : View {
         
-        return view('cambiaPwdPaziente');
+        return view('cambiaPwdClinico');
     }
 }

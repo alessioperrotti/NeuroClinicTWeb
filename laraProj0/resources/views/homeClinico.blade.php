@@ -21,7 +21,12 @@
                 <nav class="space-x-4 text-white text-sm">
                     <a href="{{ route('listaPazienti')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLE CLINICHE</a>
                     <a href="{{ route('nuovoPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">REGISTRA PAZIENTE</a>
-                    <a href="" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
+                    @auth
+                        <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        @csrf
+                        </form>
+                    @endauth
                 </nav>
             </div>
         </div>
@@ -109,3 +114,16 @@
         </div>
     </div>
 </body>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        var changed = json_encode($changed);
+        if(changed){
+            alert("Non hai ancora modificato la password, ti consigliamo di farlo al più presto.");
+        }
+
+    });
+
+    
+</script>

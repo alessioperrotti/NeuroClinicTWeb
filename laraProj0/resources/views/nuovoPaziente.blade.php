@@ -12,7 +12,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700">Nome</label>
-                    <input name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
+                    <input name="nome" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
                     @if ($errors->first('nome'))
                     <ul class="errors">
                         @foreach ($errors->get('nome') as $message)
@@ -23,7 +23,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Cognome</label>
-                    <input name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
+                    <input name="cognome" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
                     @if ($errors->first('cognome'))
                     <ul class="errors">
                         @foreach ($errors->get('cognome') as $message)
@@ -54,7 +54,7 @@
                 <div class="flex">
                     <div class="basis-2/3">
                         <label class="block text-gray-700">Via</label>
-                        <input name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Via">
+                        <input name="via" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Via">
                         @if ($errors->first('via'))
                         <ul class="errors">
                             @foreach ($errors->get('via') as $message)
@@ -65,7 +65,7 @@
                     </div>
                     <div class="basis-1/3 pl-2">
                         <label class="block text-gray-700">Civico</label>
-                        <input name="civico" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Civico">
+                        <input name="civico" type="text" maxlength="5" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Civico">
                         @if ($errors->first('civico'))
                         <ul class="errors">
                             @foreach ($errors->get('civico') as $message)
@@ -78,7 +78,7 @@
                 <div class="flex">
                     <div class="basis-2/3">
                         <label class="block text-gray-700">Città</label>
-                        <input name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Città">
+                        <input name="citta" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Città">
                         @if ($errors->first('citta'))
                         <ul class="errors">
                             @foreach ($errors->get('citta') as $message)
@@ -100,7 +100,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Telefono</label>
-                    <input name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
+                    <input name="telefono" type="tel" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
                     @if ($errors->first('telefono'))
                     <ul class="errors">
                         @foreach ($errors->get('telefono') as $message)
@@ -111,7 +111,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
-                    <input name="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Email">
+                    <input name="email" type="email" maxlength="40" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Email">
                     @if ($errors->first('email'))
                     <ul class="errors">
                         @foreach ($errors->get('email') as $message)
@@ -141,7 +141,6 @@
                     @endisset
                     </select>
                 </div>
-                <!-- <input type="password" class="hidden" value="password">  --> 
             </div>
             <div class="flex justify-center mt-4 gap-y-4 gap-x-24">
                 <input type="reset" value="Annulla Inserimento" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">

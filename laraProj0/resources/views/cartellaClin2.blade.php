@@ -159,6 +159,7 @@
                 var disturbo = $(this).data('disturbo');
                 var intensita = $(this).data('intensita');
                 var distMatch = (!distSelezionati.length || distSelezionati.includes(disturbo));
+                // ho incluso il caso in cui non ci siano disturbi selezionati, in tal caso distMatch è true
                 
                 var intensitaMatch = intensita >= minimo && intensita <= massimo;
 
@@ -176,7 +177,7 @@
         minFiltro.change(filtraEpisodi);
         maxFiltro.change(filtraEpisodi);
 
-        filtraEpisodi();
+        filtraEpisodi(); // non dovrebbe servire, ma per sicurezza
 
 
     })
