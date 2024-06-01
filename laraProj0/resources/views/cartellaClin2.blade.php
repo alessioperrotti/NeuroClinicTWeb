@@ -82,6 +82,7 @@
         <div class="flex space-x-1 items-center">
             <p>min</p>
             <select name="filtroMin" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                <option value="0" selected>0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -97,6 +98,7 @@
         <div class="flex space-x-1 items-center">
             <p>max</p>
             <select name="filtroMax" class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -106,7 +108,7 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
                 <option value="9">9</option>
-                <option value="10">10</option>
+                <option value="10" selected>10</option>
             </select>
         </div>
     </div>
@@ -115,7 +117,7 @@
 
     @isset($episodi)
     @foreach ($episodi as $episodio)
-        <div id={{$episodio->id}} class="flex justify-between items-center bg-white p-4 rounded-lg mb-2">
+        <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2" data-disturbo="{{$episodio->disturbo->nome}}" data-intensita="{{$episodio->intensita}}">
             <div class="flex flex-row space-x-2">
                 <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
                 <p class="text-gray-500 font-semibold">{{"(Intensità:" . $episodio->intensita . ")"}}</p>
@@ -131,15 +133,51 @@
 
 </div>
 <script type="text/javascript">
+
     $(document).ready(function() {
         var backButton = document.getElementById('back_button');
         backButton.onclick = function() {
             window.location.href = "{{ route('listaPazienti') }}";
         };
 
-        var disturbi = @json($disturbi);
+        // -- Meccanismo di filtro --
+        var disturbiSelect = $('select[name="filtroDisturbo[]"]');
+        var minFiltro = $('select[name="filtroMin"]');
+        var maxFiltro = $('select[name="filtroMax"]');
+        console.log(disturbiSelect);
 
-        // implementazione filtro disturbi
+        function filtraEpisodi() {
+
+            // estraggo valori dai tre filtri
+            var distSelezionati = disturbiSelect.val();
+            console.log('Disturbi selezionati:', distSelezionati); 
+            var minimo = parseInt(minFiltro.val());  
+            var massimo = parseInt(maxFiltro.val());
+
+            $('div[data-disturbo]').each(function() { // su ogni div itero per vedere se deve essere mostrato o meno
+
+                var disturbo = $(this).data('disturbo');
+                var intensita = $(this).data('intensita');
+                var distMatch = (!distSelezionati.length || distSelezionati.includes(disturbo));
+                
+                var intensitaMatch = intensita >= minimo && intensita <= massimo;
+
+                if (distMatch && intensitaMatch) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            })
+            
+        }
+
+
+        disturbiSelect.change(filtraEpisodi);
+        minFiltro.change(filtraEpisodi);
+        maxFiltro.change(filtraEpisodi);
+
+        filtraEpisodi();
+
 
     })
 </script>

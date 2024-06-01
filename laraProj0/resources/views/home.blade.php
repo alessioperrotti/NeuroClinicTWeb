@@ -39,6 +39,9 @@
                     @can('isPaziente')
                         <a href="{{ route('homePaziente') }}">AREA RISERVATA</a>
                     @endcan
+                    @can('isClinico')
+                        <a href="{{ route('homeClinico') }}">AREA RISERVATA</a>
+                    @endcan
                 </nav>
             </div>
         </div>
