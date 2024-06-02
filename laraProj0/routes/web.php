@@ -102,12 +102,6 @@ Route::get('/home_admin/farmaci_attivita', function () {
 Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])
     ->name('gestioneFaq');
 
-Route::post('/faq/{id}', [AdminController::class, 'eliminaFaq'])
-    ->name('faq.elimina');
-    
-Route::post('/faq/{id}', [AdminController::class, 'updateFaq'])
-    ->name('faq.update');
-
 Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
     ->name('gestioneFaq.store')->middleware('can:isAdmin');
    
@@ -174,6 +168,10 @@ Route::post('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::
     ->name('aggiornaClinicoAdmin.edit')->middleware('can:isAdmin');
 #--------------------------------------------------------------------#
                     #ROTTE GESTIONE FAQ
-
+Route::post('/faq/{id}', [AdminController::class, 'eliminaFaq'])
+    ->name('faq.elimina');
+                    
+Route::post('/faq/update/{id}', [AdminController::class, 'updateFaq'])
+    ->name('faq.update');
 
 require __DIR__.'/auth.php';
