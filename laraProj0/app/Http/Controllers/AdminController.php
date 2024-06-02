@@ -56,14 +56,28 @@ class AdminController extends Controller
         $this->faqModel->deleteFaq($id);
         return redirect()->route('gestioneFaq');
     }
-    public function storeFaq(NewFaqRequest $request) : RedirectResponse 
+#    public function storeFaq(NewFaqRequest $request) : RedirectResponse 
+#    {
+#        $validatedData = $request->validated();
+#        if($this->faqModel->storeFaq($validatedData)) 
+#            return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiunta con successo.');
+#        else
+ #           return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della FAQ.');
+#    }
+    public function storeFaq(NewFaqRequest $request): JsonResponse
     {
+        Log::info('metodo storeFaq attivato');
         $validatedData = $request->validated();
-        if($this->faqModel->storeFaq($validatedData)) 
-            return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiunta con successo.');
-        else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della FAQ.');
+
+        if ($this->faqModel->storeFaq($validatedData)) {
+            return response()->json(['redirect' => route('gestioneFaq')]); 
+
+        } else {
+            return response()->json(['error' => 'Errore durante l\'aggiunta del disturbo.'], 422);
+
+        }
     }
+
     public function updateFaq(Request $request, $id): RedirectResponse
     {
         $validatedData = $request->validate([
