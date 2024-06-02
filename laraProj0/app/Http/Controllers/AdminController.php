@@ -57,7 +57,7 @@ class AdminController extends Controller
         return view('gestioneDisturbi')->with('disturbi', $disturbi);
     }
 
-    public function storeDisturbo(DisturboRequest $request): RedirectResponse
+    public function storeDisturbo(DisturboRequest $request): JsonResponse
     {
 
 
@@ -68,9 +68,11 @@ class AdminController extends Controller
         $riuscito = $this->disturbiModel->storeDisturbo($validatedData);
 
         if ($riuscito) {
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del disturbo.');
+            return response()->json(['redirect' => route('gestioneDisturbi')]); 
+
         } else {
-            return redirect()->route('gestioneDisturbi');
+            return response()->json(['error' => 'Errore durante l\'aggiunta del disturbo.'], 422);
+
         }
     }
 
@@ -84,21 +86,23 @@ class AdminController extends Controller
 
         if ($riuscito) {
             return redirect()->route('gestioneDisturbi');
+            
+            
         } else {
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del disturbo.');
         }
     }
     
-    public function updateDisturbo(DisturboRequest $request)
+    public function updateDisturbo(DisturboRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
         $riuscito = $this->disturbiModel->updateDisturbo($validated);
 
         if ($riuscito) {
-            return redirect()->route('gestioneDisturbi');
+            return response()->json(['redirect' => route('gestioneDisturbi')]); 
         } else {
-            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del disturbo.');
+            return response()->json(['error' => 'Errore durante la modifica del disturbo.'], 422);
         }
     }
     
@@ -115,16 +119,17 @@ class AdminController extends Controller
     }
     
 
-    public function storeFarmaco(FarmacoRequest $request)
+    public function storeFarmaco(FarmacoRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
         Log::info('metodo storeFarmaco attivato');
         $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
 
         if ($riuscito) {
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del farmaco.');
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
+
         } else {
-            return redirect()->route('gestioneFarmaciAttivita');
+            return response()->json(['error' => 'Errore durante l\'aggiunta del farmaco.'], 422);
         }
     }    
 
@@ -152,7 +157,7 @@ class AdminController extends Controller
         if ($riuscito) {    
             return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
         } else {
-            return response()->json(['error' => 'Errore durante l\'eliminazione del farmaco.'], 422);
+            return response()->json(['error' => 'Errore durante la modifica del farmaco.'], 422);
         }
     }
 
@@ -160,7 +165,7 @@ class AdminController extends Controller
 
     //attivita
     
-    public function storeAttivita(AttivitaRequest $request){
+    public function storeAttivita(AttivitaRequest $request):JsonResponse{
         Log::info($request);
         $validatedData = $request->validated();
         Log::info('metodo storeAttivita attivato');
@@ -168,9 +173,9 @@ class AdminController extends Controller
         $riuscito = $this->attivitaModel->storeAttivita($validatedData);
 
         if ($riuscito) {
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio dell\'attività.');
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
         } else {
-            return redirect()->route('gestioneFarmaciAttivita');
+            return response()->json(['error' => 'Errore durante l\'aggiunta dell\'attivita.'], 422);
         }
     }
 
@@ -189,7 +194,7 @@ class AdminController extends Controller
         }
     }
 
-    public function updateAttivita(AttivitaRequest $request)
+    public function updateAttivita(AttivitaRequest $request):JsonResponse
     {
         Log::info($request);
         $validated = $request->validated();
@@ -197,9 +202,9 @@ class AdminController extends Controller
         $riuscito = $this->attivitaModel->updateAttivita($validated);
 
         if ($riuscito) {
-            return redirect()->route('gestioneFarmaciAttivita');
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
         } else {
-            return redirect()->back()->with('error', 'Errore durante l\'eliminazione dell\'attività.');
+            return response()->json(['error' => 'Errore durante la modifica dell\'attivita.'], 422);
         }
     }
 

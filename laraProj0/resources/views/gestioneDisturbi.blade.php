@@ -41,7 +41,7 @@
         <button id="btnAggiungiDisturbo" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4">Aggiungi Disturbo</button>
     </div>
     <div id="formNuovoDisturbo" class="mt-4" style="display:none">
-        <form action="{{ route('gestioneDisturbi.store') }}" method="post">
+        <form id="nuovoDisturboForm" action="{{ route('gestioneDisturbi.store') }}" method="post">
             @csrf
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
             <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Aggiungi Disturbo</h1>
@@ -49,26 +49,14 @@
             <div class="bg-white p-4 rounded">
                 <div class="mb-6 flex justify-between">
                     <div>
-                        <label for="nome" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                        <input name="nome" type="text" id="nome" placeholder="Nome" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        @if ($errors->first('nome'))
-                        <ul class="errors">
-                            @foreach ($errors->get('nome') as $message)
-                            <li class="text-red">{{ $message }}</li>
-                            @endforeach
-                        </ul>
-                        @endif
+                        <label for="nomeDisturboNuovo" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                        <input name="nome" type="text" id="nomeDisturboNuovo" placeholder="Nome" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
                     </div>
                     <div>
-                        <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">Categoria</label>
-                        <input name="categoria" type="text" id="categoria" placeholder="Categoria" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        @if ($errors->first('categoria'))
-                        <ul class="errors">
-                            @foreach ($errors->get('categoria') as $message)
-                            <li class="text-red">{{ $message }}</li>
-                            @endforeach
-                        </ul>
-                        @endif
+                        <label for="categoriaDisturboNuovo" class="block text-gray-700 text-sm font-bold mb-2">Categoria</label>
+                        <input name="categoria" type="text" id="categoriaDisturboNuovo" placeholder="Categoria" class="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
                     </div>
                 </div>
                 <div class="flex justify-center gap-x-14">
@@ -127,8 +115,8 @@
             });
 
             $('#btnAnnulla').on('click', function() {
-                
-                resetForm('#formNuovoDisturbo', ['#nome', '#categoria']);
+
+                resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
                 $('#btnAggiungiDisturbo').show();
             });
 
@@ -147,7 +135,7 @@
                 //mostra il form
 
                 toggleForms('#formModificaDisturbo', '#formNuovoDisturbo');
-                resetForm('#formNuovoDisturbo', ['#nome', '#categoria']);
+                resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
                 $("#btnAggiungiDisturbo").hide();
 
             });
@@ -157,11 +145,11 @@
                 $('#btnAggiungiDisturbo').show();
             });
 
-          
 
 
 
-           
+
+
 
 
 
@@ -180,36 +168,36 @@
                 });
             });
 
-        });
 
 
-        //per la validazione della modifica con ajax
-        $(function() {
-            var actionUrl = "{{ route('gestioneDisturbi.update') }}";
-            var formId = 'formModificaDisturbo'; //a questa assegnamo l'id della form
-            $(":input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-                //quando mi sposto su un altro elemento di input, estraggo l'id
-                var formElementId = $(this).attr('id');
-                doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+            //per la validazione della modifica con ajax
+            $(function() {
+                var actionUrl = "{{ route('gestioneDisturbi.update') }}";
+                var formId = 'modificaDisturboForm'; //a questa assegnamo l'id della form
+                $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+                    //quando mi sposto su un altro elemento di input, estraggo l'id
+                    var formElementId = $(this).attr('id');
+                    doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+                });
+                $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+                    event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+                    doFormValidation(actionUrl, formId); //valida l'intera form
+                });
             });
-            $("#btnEffettuaMod").on('submit', function(event) { //sarebbe l id della form. 
-                event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-                doFormValidation(actionUrl, formId); //valida l'intera form
-            });
-        });
 
-        //per la validazione dell'inserimento con ajax
-        $(function() {
-            var actionUrl = "{{ route('gestioneDisturbi.store') }}";
-            var formId = 'formNuovoDisturbo'; //a questa assegnamo l'id della form
-            $(":input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-                //quando mi sposto su un altro elemento di input, estraggo l'id
-                var formElementId = $(this).attr('id');
-                doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
-            });
-            $("#btnAggiungi").on('submit', function(event) { //sarebbe l id della form. 
-                event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-                doFormValidation(actionUrl, formId); //valida l'intera form
+            //per la validazione dell'inserimento con ajax
+            $(function() {
+                var actionUrl = "{{ route('gestioneDisturbi.store') }}";
+                var formId = 'nuovoDisturboForm'; //a questa assegnamo l'id della form
+                $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+                    //quando mi sposto su un altro elemento di input, estraggo l'id
+                    var formElementId = $(this).attr('id');
+                    doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+                });
+                $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+                    event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+                    doFormValidation(actionUrl, formId); //valida l'intera form
+                });
             });
         });
     </script>
