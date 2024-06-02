@@ -26,4 +26,11 @@ class NewFaqRequest extends FormRequest
             'risposta' => 'required|max:1000',
         ];
     }
+
+    protected function failedValidation(Validator $validator): HttpResponseException
+    {
+        throw new HttpResponseException(response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY));
+        //passiamo all exception linsieme dei messaggi derrore e Response::HTTP_UNPROCESSABLE_ENTITY che è una costante predefinita, che genera il codice 422
+        
+    }
 }
