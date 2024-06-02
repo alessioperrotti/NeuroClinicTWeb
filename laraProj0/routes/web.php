@@ -168,10 +168,7 @@ Route::post('/faq/{id}', [AdminController::class, 'eliminaFaq'])
 Route::post('/faq/update/{id}', [AdminController::class, 'updateFaq'])
     ->name('faq.update');
 
-Route::post('/faq/validate-field', [FaqController::class, 'validateField'])
-    ->name('faq.validateField');
-
-Route::post('/faq/store', [FaqController::class, 'store'])
+Route::post('/faq/store', [AdminController::class, 'storeFaq'])
     ->name('faq.store');
 
 Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])

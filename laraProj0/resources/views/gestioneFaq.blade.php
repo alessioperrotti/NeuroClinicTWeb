@@ -76,37 +76,21 @@
         $(hideFormId).hide();
     }
 
-    //codice per l'aggiunta del disturbo
-    $('#btnAggiungiFaq').on('click', function() {
-        toggleForms('#formNuovaFaq', '#btnAggiungiFaq');
-
-    });
-
-    $('#btnAnnulla').on('click', function() {
-
-        resetForm('#formNuovaFaq', ['#domanda', '#risposta']);
-        $('#btnAggiungiFaq').show();
-    });
-
-    //codice per la modifica del disturbo
-    $(document).on('click', '.btnModifica', function() {
-        //estrae i valori del tasto btnModifica
-        const id = $(this).data('id');
-        const nome = $(this).data('nome');
-        const categoria = $(this).data('categoria');
-
-        //riempe i campi del form
-        $('#nomeMod').val(nome);
-        $('#categoriaMod').val(categoria);
-        $('#idMod').val(id);
-
-        //mostra il form
-
-        toggleForms('#formModificaDisturbo', '#formNuovaFaq');
-        resetForm('#formNuovaFaq', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
-        $("#btnAggiungiFaq").hide();
-
-    });
+            //per la validazione dell'inserimento con ajax
+    $(function() {
+                var actionUrl = "{{ route('faq.store') }}";
+                var formId = 'formNuovaFaq'; //a questa assegnamo l'id della form
+                $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+                    //quando mi sposto su un altro elemento di input, estraggo l'id
+                    var formElementId = $(this).attr('id');
+                    var inputName = $(this).attr('name');
+                    doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+                });
+                $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+                    event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+                    doFormValidation(actionUrl, formId); //valida l'intera form
+                });
+            });
 
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
