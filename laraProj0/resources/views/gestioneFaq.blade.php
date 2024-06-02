@@ -62,6 +62,7 @@
     </div>
 </div>
 
+<script src="{{ asset('js/functions.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
