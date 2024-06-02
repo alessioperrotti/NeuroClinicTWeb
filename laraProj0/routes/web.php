@@ -162,17 +162,18 @@ Route::post('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::
     ->name('aggiornaClinicoAdmin.edit')->middleware('can:isAdmin');
 #--------------------------------------------------------------------#
                     #ROTTE GESTIONE FAQ
+                    
+Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])
+    ->name('gestioneFaq');
+
 Route::post('/faq/{id}', [AdminController::class, 'eliminaFaq'])
     ->name('faq.elimina');
                     
 Route::post('/faq/update/{id}', [AdminController::class, 'updateFaq'])
     ->name('faq.update');
 
-Route::post('/faq/store', [AdminController::class, 'storeFaq'])
+Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
     ->name('faq.store');
-
-Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])
-    ->name('gestioneFaq');
 
 #Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
 #    ->name('gestioneFaq.store')->middleware('can:isAdmin');

@@ -3,6 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+// Aggiunti per response JSON
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\Log;
+use Psy\Readline\Hoa\Console;
+use Symfony\Component\HttpFoundation\Response;
 
 class NewFaqRequest extends FormRequest
 {
