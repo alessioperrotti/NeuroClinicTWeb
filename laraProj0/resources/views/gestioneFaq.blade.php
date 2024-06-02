@@ -41,7 +41,7 @@
     
         
         <!-- Contenitore per il form di inserimento nuova FAQ , inizialmente nascosto -->
-        <form id="formNuovaFaq" action="{{ route('gestioneFaq.store')}}" method="POST" style="display: none;">
+        <form id="formNuovaFaq" action="{{ route('faq.store')}}" method="POST" style="display: none;">
             @csrf
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
             <div class="bg-white p-4 rounded-lg">
@@ -54,8 +54,8 @@
                     <textarea id="risposta" name="risposta" placeholder="Risposta" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button id="btnAnnullaInserimento" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button id="btnAggiungi"type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -64,6 +64,50 @@
 
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
+    $(document).ready(function() {
+
+    function resetForm(formId, fields) {
+        $(formId).hide();
+        fields.forEach(field => $(field).val(''));
+    }
+
+    function toggleForms(showFormId, hideFormId) {
+        $(showFormId).show();
+        $(hideFormId).hide();
+    }
+
+    //codice per l'aggiunta del disturbo
+    $('#btnAggiungiFaq').on('click', function() {
+        toggleForms('#formNuovaFaq', '#btnAggiungiFaq');
+
+    });
+
+    $('#btnAnnulla').on('click', function() {
+
+        resetForm('#formNuovaFaq', ['#domanda', '#risposta']);
+        $('#btnAggiungiFaq').show();
+    });
+
+    //codice per la modifica del disturbo
+    $(document).on('click', '.btnModifica', function() {
+        //estrae i valori del tasto btnModifica
+        const id = $(this).data('id');
+        const nome = $(this).data('nome');
+        const categoria = $(this).data('categoria');
+
+        //riempe i campi del form
+        $('#nomeMod').val(nome);
+        $('#categoriaMod').val(categoria);
+        $('#idMod').val(id);
+
+        //mostra il form
+
+        toggleForms('#formModificaDisturbo', '#formNuovaFaq');
+        resetForm('#formNuovaFaq', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
+        $("#btnAggiungiFaq").hide();
+
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
         var backButton = document.getElementById('back_button');
@@ -105,6 +149,7 @@
             span.textContent = "+";
         }
     }
+});
 </script>
 
 @endsection
