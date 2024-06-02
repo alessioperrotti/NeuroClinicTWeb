@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Model;
 
 class PasswordController extends Controller
 {
@@ -39,7 +40,7 @@ class PasswordController extends Controller
 
         //aggiorno la password
         $user->password = Hash::make($request->nuovaPwd);
-        $user->save();
+        $user->Model::save();
 
         Auth::logout(); //logout dell'utente
 

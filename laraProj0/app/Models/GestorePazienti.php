@@ -44,6 +44,7 @@ class GestorePazienti extends Model
             $user->save();
             $paziente = New Paziente;
             $paziente->fill($validatedData);
+            $paziente->terCambiata = false;
             $paziente->save();
             DB::commit();
             return true;

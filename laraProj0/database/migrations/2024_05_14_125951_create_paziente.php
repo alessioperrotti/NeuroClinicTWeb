@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('telefono', 13);
             $table->string('email', 40);
             $table->string('clinico', 20)->references('username')->on('clinico');
+            $table->boolean('terCambiata'); // true se la terapia è stata cambiata e non ancora visualizzata
         });
     }
 

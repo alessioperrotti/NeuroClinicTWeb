@@ -97,7 +97,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'MI',
                 'telefono' => '3201234567',
                 'email' => 'martina.ricci@example.com',
-                'clinico' => 'clinclin'
+                'clinico' => 'clinclin',
+                'terCambiata' => false
             ],
             [
                 'username' => 'dianaprince',
@@ -111,7 +112,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'RM',
                 'telefono' => '3312345678',
                 'email' => 'diana.prince@example.com',
-                'clinico' => 'natasharomanoff'
+                'clinico' => 'natasharomanoff',
+                'terCambiata' => false
             ],
             [
                 'username' => 'peterparker',
@@ -125,7 +127,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'NY',
                 'telefono' => '3403456789',
                 'email' => 'peter.parker@example.com',
-                'clinico' => 'wandamaximoff'
+                'clinico' => 'wandamaximoff',
+                'terCambiata' => false
             ],
             [
                 'username' => 'maryjane',
@@ -139,7 +142,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'NY',
                 'telefono' => '3454567890',
                 'email' => 'mary.jane@example.com',
-                'clinico' => 'clinclin'
+                'clinico' => 'clinclin',
+                'terCambiata' => false
             ],
             [
                 'username' => 'clarkkent',
@@ -153,7 +157,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'MP',
                 'telefono' => '3475678901',
                 'email' => 'clark.kent@example.com',
-                'clinico' => 'pietromaximoff'
+                'clinico' => 'pietromaximoff',
+                'terCambiata' => false
             ],
             [
                 'username' => 'brucewayne',
@@ -167,7 +172,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'GT',
                 'telefono' => '3496789012',
                 'email' => 'bruce.wayne@example.com',
-                'clinico' => 'scottlang'
+                'clinico' => 'scottlang',
+                'terCambiata' => false
             ],
         ]);
 

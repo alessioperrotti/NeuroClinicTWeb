@@ -5,10 +5,40 @@
 @section('content')
 @isset($paziente)
 <h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Cartella clinica di {{ $paziente->nome . " " . $paziente->cognome }}</h1>
-@endisset
+@endisset  <!-- spostare in basso -->
 <div class="flex flex-col items-center">
     <div name="container_terapia" class="bg-white mx-16 mb-6 rounded-xl shadow-md h-auto p-8">
-        <h3 class="text-2xl font-semibold">Disturbi diagnosticati</h3>
+        <h3 class="text-2xl font-semibold">Anagrafica Paziente</h3>
+        <hr class="h-0.5 my-2 bg-cyan-600">
+        <ul style="list-style-type: disc" class="ml-6">
+            @isset($paziente)
+                <li class="mb-4">
+                    <p class="font-semibold inline">Nome: </p>
+                    <p class="inline">{{ $paziente->nome . " " . $paziente->cognome}}</p>
+                </li>
+                <li class="mb-4">
+                    <p class="font-semibold inline">Data di nascita: </p>
+                    <p class="inline">{{ \Carbon\Carbon::parse($paziente->dataNasc)->format('d-m-Y')}}</p>
+                </li>
+                <li class="mb-4">
+                    <p class="font-semibold inline">Genere: </p>
+                    <p class="inline">{{ $paziente->genere}}</p>
+                </li>
+                <li class="mb-4">
+                    <p class="font-semibold inline">Indirizzo: </p>
+                    <p class="inline">{{ $paziente->via . " " . $paziente->civico . ", " . $paziente->citta . " (" . $paziente->prov . ")"}}</p>
+                </li>
+                <li class="mb-4">
+                    <p class="font-semibold inline">Telefono: </p>
+                    <p class="inline">{{ $paziente->telefono}}</p>
+                </li>
+                <li class="mb-4">
+                    <p class="font-semibold inline">Indirizzo E-mail: </p>
+                    <p class="inline">{{ $paziente->email}}</p>
+                </li>
+            @endisset
+        </ul>
+        <h3 class="text-2xl mt-10 font-semibold">Disturbi diagnosticati</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
             @isset($disturbi)
@@ -20,7 +50,7 @@
                 <li ><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
             @endif
         </ul>
-        <h3 class="text-2xl font-semibold mt-6">Terapia attiva</h3>
+        <h3 class="text-2xl font-semibold mt-10">Terapia attiva</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
             @isset($farmaci)

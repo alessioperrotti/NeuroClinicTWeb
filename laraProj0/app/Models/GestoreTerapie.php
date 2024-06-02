@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\Resources\Prescrizione;
 use App\Models\Resources\Pianificazione;
 use App\Models\Resources\Diagnosi;
+use App\Models\Resources\Paziente;
 use Illuminate\Support\Facades\Log;
 
 class GestoreTerapie extends Model
@@ -78,6 +79,7 @@ class GestoreTerapie extends Model
             ]);
 
             $terapia->save();
+            Paziente::where('username', $userPaz)->update(['terCambiata' => true]); // setta terCambiata a true
 
             if(isset($validatedData['farmaco'])){
                 foreach($validatedData['farmaco'] as $item){
