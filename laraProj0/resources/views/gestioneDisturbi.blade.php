@@ -177,7 +177,8 @@
                 $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
                     //quando mi sposto su un altro elemento di input, estraggo l'id
                     var formElementId = $(this).attr('id');
-                    doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+                    var inputName = $(this).attr('name');
+                    doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
                 });
                 $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
                     event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
@@ -192,7 +193,8 @@
                 $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
                     //quando mi sposto su un altro elemento di input, estraggo l'id
                     var formElementId = $(this).attr('id');
-                    doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+                    var inputName = $(this).attr('name');
+                    doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
                 });
                 $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
                     event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione

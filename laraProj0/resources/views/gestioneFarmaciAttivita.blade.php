@@ -63,8 +63,8 @@
                     <input type="hidden" id="idFarmacoMod" name="id">
 
 
-                    <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <label for="descrFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                    <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <label for="descrFarmacoMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
                     <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </textarea>
                 </div>
@@ -181,9 +181,9 @@
                     <input type="hidden" id="idAttivitaMod" name="id">
 
                     <label for="nomeAttivitaMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                    <input type="text" id="nomeAttivitaMod" name="nome" placeholder="Nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="nomeAttivitaMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
-                    <label for="descrAttivitaMod" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                    <label for="descrAttivitaMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
                     <textarea id="descrAttivitaMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
@@ -204,9 +204,9 @@
                 <div class=" mb-6 mx-3 ">
 
                     <label for="nomeAttivita" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                    <input type="text" id="nomeAttivita" placeholder="Nome" name="nome" class="shadow mb-7 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="nomeAttivita" placeholder="Nome" name="nome" class="shadow mb-1 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
-                    <label for="descrAttivita" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                    <label for="descrAttivita" class="block mt-2 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
                     <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
@@ -357,7 +357,8 @@
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
-            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+            var inputName = $(this).attr('name'); //estraggo il nome dell'input
+            doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
         });
         $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
 
@@ -374,7 +375,9 @@
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
-            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+            var inputName = $(this).attr('name'); //estraggo il nome dell'input
+
+            doElemValidation(formElementId, actionUrl, formId, inputName ); //questa funzione fa la validazione. funzione definita sul file function.js
         });
         $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
@@ -391,7 +394,8 @@
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
-            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+            var inputName = $(this).attr('name'); //estraggo il nome dell'input
+            doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
         });
         $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
@@ -408,7 +412,8 @@
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
-            doElemValidation(formElementId, actionUrl, formId); //questa funzione fa la validazione. funzione definita sul file function.js
+            var inputName = $(this).attr('name'); //estraggo il nome dell'input
+            doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
         });
         $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione

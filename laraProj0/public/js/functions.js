@@ -1,10 +1,10 @@
 
-$(document).ready(function () {
+
 
 function getErrorHtml(elemErrors) {
     if ((typeof (elemErrors) === 'undefined') || (elemErrors.length < 1)) //guarda se ci sono elementi da visualizzare 
         return;
-    var out = '<ul class="errors">'; //genera la tag ul
+    var out = '<ul class="errors text-red-500">'; //genera la tag ul
     for (var i = 0; i < elemErrors.length; i++) {
         out += '<li>' + elemErrors[i] + '</li>'; //dentro di questa genera tanti tag li quanti gli errori
     }
@@ -12,7 +12,7 @@ function getErrorHtml(elemErrors) {
     return out;
 }
 
-function doElemValidation(id, actionUrl, formId) {
+function doElemValidation(id, actionUrl, formId, inputName) {
     //dick prende in input l'id dell'elemento, url, lid della form
     var formElems;
 
@@ -65,7 +65,6 @@ function doElemValidation(id, actionUrl, formId) {
     }
 
     formElems = new FormData(); //creiamo un oggetto di tipo formdata che struttura tutte le info che si mandano al server al submit
-    var inputName = $("#" + id).attr('name'); //estraiamo il nome dell'elemento
     formElems.append(inputName, inputVal); //aggiungiamo il valore di input 
     addFormToken(); //aggiungiamo il token
     sendAjaxReq(); //manda la richiesta ajax
@@ -110,4 +109,4 @@ function doFormValidation(actionUrl, formId) {
 
 
 
-});
+
