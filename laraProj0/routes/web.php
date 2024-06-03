@@ -28,15 +28,6 @@ Route::get('/faq', function () {
 })
 ->name('faq');
 
-Route::get('/home_paz', [PazController::class, 'index'])
-->name('homePaziente')->middleware('can:isPaziente'); 
-
-
-
-Route::get('/home_paz/nuovo_ep' , function () {
-    return view('inserimentoNuovoEvento');
-})
-->name('inserimentoNuovoEvento');
 
 // Sezione clinico
 
@@ -170,6 +161,32 @@ Route::post('/home_admin/disturbi/update', [AdminController::class, 'updateDistu
     ->name('gestioneDisturbi.update');
 
 //FINE VISTA DISTURBI
+
+// Sezione Paziente
+
+Route::get('/home_paz/cambia_pwd', [PazController::class, 'showPassChange'])
+->middleware('auth')->name('cambiaPwdPaziente');
+
+Route::get('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'edit'])
+->name('aggiornaDatiPaziente');
+
+Route::post('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'update'])
+->name('paziente.update');
+
+Route::get('/home_paz/cartella/{userPaz}' , [PazController::class, 'showCartClinica']) 
+->name('cartellaClinicaPaziente')->middleware('can:isPaziente');
+
+Route::post('/cambia_pwd', [PasswordController::class, 'update_pwd'])
+->middleware('auth')->name('password.update');
+
+Route::get('/home_paz', [PazController::class, 'index'])
+->name('homePaziente')->middleware('can:isPaziente'); 
+
+
+Route::get('/home_paz/nuovo_ep' , function () {
+    return view('inserimentoNuovoEvento');
+})
+->name('inserimentoNuovoEvento');
 
 
 require __DIR__.'/auth.php';
