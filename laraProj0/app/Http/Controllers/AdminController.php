@@ -47,6 +47,7 @@ class AdminController extends Controller
         $admin = $user->paziente;
         return view('homeAdmin'); 
     }
+################################################################################################
     #SEZIONA FAQ
     public function viewGestioneFaq()
     {
@@ -137,6 +138,39 @@ class AdminController extends Controller
         else
             return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
     }
+
+    #ANALISI DEI DATI
+    public function viewAnalisiDati()
+    {
+        $pazienti = $this->pazientiModel->getPazienti();
+        foreach ($pazienti as $paziente) {
+            $paziente->numeroCambiTerapia = $this->getNumeroCambiTerapia($paziente->username);
+        }
+        $mediaPazientiPerClinico = $this->cliniciModel->mediaPazientiPerClinico();
+        $mediaDisturbiPerPaziente = $this->pazientiModel->mediaDisturbiMotoriPerPaziente();
+        $disturbiMotori = $this->disturbiModel->getDisturbi();
+        return view('analisiDati')
+            ->with('mediaPazientiPerClinico',$mediaPazientiPerClinico)
+            ->with('mediaDisturbiPerPaziente',$mediaDisturbiPerPaziente)
+            ->with('disturbiMotori',$disturbiMotori)
+            ->with('pazienti', $pazienti);
+    }
+    public function getEpisodiDisturbo($id)
+    {
+        $numeroEpisodi = Episodio::where('disturbo', $id)->count();
+        return response()->json(['numeroEpisodi' => $numeroEpisodi]);
+    }
+    public function getNumeroCambiTerapia($username) {
+        $numeroTerapie = Terapia::where('paziente', $username)->count();
+        $numeroCambiTerapia = $numeroTerapie - 1;
+        return $numeroCambiTerapia;
+    }
+
+####################################################################################################################
+
+
+
+
     #SEZIONE DISTURBI
     public function viewDisturbi()
     {
@@ -186,30 +220,5 @@ class AdminController extends Controller
         return redirect()->route('listaPaz');   
     }
 
-    #ANALISI DEI DATI
-    public function viewAnalisiDati()
-    {
-        $pazienti = $this->pazientiModel->getPazienti();
-        foreach ($pazienti as $paziente) {
-            $paziente->numeroCambiTerapia = $this->getNumeroCambiTerapia($paziente->username);
-        }
-        $mediaPazientiPerClinico = $this->cliniciModel->mediaPazientiPerClinico();
-        $mediaDisturbiPerPaziente = $this->pazientiModel->mediaDisturbiMotoriPerPaziente();
-        $disturbiMotori = $this->disturbiModel->getDisturbi();
-        return view('analisiDati')
-            ->with('mediaPazientiPerClinico',$mediaPazientiPerClinico)
-            ->with('mediaDisturbiPerPaziente',$mediaDisturbiPerPaziente)
-            ->with('disturbiMotori',$disturbiMotori)
-            ->with('pazienti', $pazienti);
-    }
-    public function getEpisodiDisturbo($id)
-    {
-        $numeroEpisodi = Episodio::where('disturbo', $id)->count();
-        return response()->json(['numeroEpisodi' => $numeroEpisodi]);
-    }
-    public function getNumeroCambiTerapia($username) {
-        $numeroTerapie = Terapia::where('paziente', $username)->count();
-        $numeroCambiTerapia = $numeroTerapie - 1;
-        return $numeroCambiTerapia;
-    }
+    
 }
