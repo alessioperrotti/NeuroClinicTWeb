@@ -32,11 +32,7 @@ Route::get('/faq', function () {
 ->name('faq');
 
 Route::get('/home_paz', [PazController::class, 'index'])
-->name('homePaziente')->middleware('can:isPaziente'); 
-
-
-Route::get('/home_paz/cambia_pwd', [PazController::class, 'showPassChange'])
-->middleware('auth')->name('cambiaPwdPaziente');
+->name('homePaziente')->middleware('can:isPaziente');
 
 Route::get('/home_paz/nuovo_ep' , function () {
     return view('inserimentoNuovoEvento');
@@ -47,15 +43,6 @@ Route::get('/home_clin/nuovo_paz',function () {
     return view('nuovoPaziente');
 })
 ->name('nuovoPaziente');
-
-Route::get('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'edit'])
-->name('aggiornaDatiPaziente');
-
-Route::post('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'update'])
-->name('paziente.update');
-
-Route::get('/home_paz/cartella/{userPaz}' , [PazController::class, 'showCartClinica']) 
-->name('cartellaClinicaPaziente')->middleware('can:isPaziente');
 
 Route::get('/home_admin', function () {
     return view('homeAdmin');
@@ -77,24 +64,20 @@ Route::get('/home_admin/clinici/nuovo_clin', function () {
 })
 ->name('nuovoClinico');
 
-
 Route::get('/home_admin/disturbi', function () {
     return view('gestioneDisturbi');
 })
 ->name('gestioneDisturbi');
-
 
 Route::get('/home_admin/clinici', function () {
     return view('gestioneClinici');
 })
 ->name('gestioneClinici');
 
-
 Route::get('/home_admin/farmaci_attivita', function () {
     return view('gestioneFarmaciAttivita');
 })
 ->name('gestioneFarmaciAttivita');
-
 
 Route::get('/home_admin/aggiorna_faq', function () {
     return view('gestioneFaq');
@@ -132,7 +115,19 @@ Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
 })
 ->name('modificaTerapia'); // rotta per sviluppo
 
+require __DIR__.'/auth.php';
+
+Route::get('/home_paz/cambia_pwd', [PazController::class, 'showPassChange'])
+->middleware('auth')->name('cambiaPwdPaziente');
+
+Route::get('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'edit'])
+->name('aggiornaDatiPaziente');
+
+Route::post('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'update'])
+->name('paziente.update');
+
+Route::get('/home_paz/cartella/{userPaz}' , [PazController::class, 'showCartClinica']) 
+->name('cartellaClinicaPaziente')->middleware('can:isPaziente');
+
 Route::post('/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->middleware('auth')->name('password.update');
-
-require __DIR__.'/auth.php';
