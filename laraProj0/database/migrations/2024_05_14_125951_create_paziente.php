@@ -19,12 +19,13 @@ return new class extends Migration
             $table->date('dataNasc');
             $table->string('genere', 1);
             $table->string('via', 30);
-            $table->integer('civico')->unsigned();
+            $table->string('civico', 5);
             $table->string('citta', 30);
             $table->string('prov', 2);
             $table->string('telefono', 13);
             $table->string('email', 40);
             $table->string('clinico', 20)->references('username')->on('clinico');
+            $table->boolean('terCambiata'); // true se la terapia è stata cambiata e non ancora visualizzata
         });
     }
 

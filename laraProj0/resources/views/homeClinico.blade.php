@@ -19,16 +19,21 @@
             </a>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="{{ route('listaPazienti')}}">CARTELLE CLINICHE</a>
-                    <a href="{{ route('nuovoPaziente')}}">REGISTRA PAZIENTE</a>
-                    <a href="">LOGOUT</a>
+                    <a href="{{ route('listaPazienti')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLE CLINICHE</a>
+                    <a href="{{ route('nuovoPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">REGISTRA PAZIENTE</a>
+                    @auth
+                        <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        @csrf
+                        </form>
+                    @endauth
                 </nav>
             </div>
         </div>
     </header>
    
     @isset($clinico)
-    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, @yield('utente')</h1>
+    <h1 class="text-black font-bold text-5xl mx-8 mt-32">Benvenuto, {{$clinico->nome . " " . $clinico->cognome}}</h1>
     <br>
     <div class="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
         <h1 class="text-black text-3xl">Dati anagrafici</h1>
@@ -80,7 +85,9 @@
         </div>
         <br>
         <div class=" flex justify-center items-center">
-            <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 ">Cambia password</button>
+            <a href="{{ route('cambiaPwdClinico')}}">
+                <button class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">Cambia password</button>
+            </a>
         </div>
     </div>
     @endisset
@@ -100,10 +107,23 @@
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
                 <a href="{{ route('nuovoPaziente')}}">
                     <!-- cambiare immagine -->
-                    <img src="{{ url('images/nuovo_evento.png')}}" alt="Nuovo evento">
+                    <img src="{{ asset('images/aggiungi_paziente.png')}}" alt="Nuovo evento">
                 </a>
             </button>
             <p class="text-center text-2xl text-black">Registra Paziente</p>
         </div>
     </div>
 </body>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        var changed = json_encode($changed);
+        if(changed){
+            alert("Non hai ancora modificato la password, ti consigliamo di farlo al più presto.");
+        }
+
+    });
+
+    
+</script>

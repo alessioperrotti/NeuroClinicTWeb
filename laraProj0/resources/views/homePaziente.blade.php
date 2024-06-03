@@ -21,9 +21,14 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="{{ route('cartellaClinicaPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLA CLINICA</a>
+                    <a href="{{ route('cartellaClinicaPaziente', ['userPaz' => $paziente->username])}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLA CLINICA</a>
                     <a href="{{ route('inserimentoNuovoEvento')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">NUOVO EVENTO</a>
-                    <a href="{{ route('home') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
+                    @auth
+                        <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
+                    @endauth
                 </nav>
             </div>
         </div>
@@ -71,7 +76,7 @@
         <br>
         <br>
         <div class=" flex justify-center items-center"> 
-            <a href="{{ route('aggiornaDatiPaziente') }}" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">
+            <a href="{{ route('aggiornaDatiPaziente', $paziente->username) }}" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500 cursor-pointer">
                 Aggiorna i tuoi dati
             </a>
         </div>
@@ -97,7 +102,7 @@
     <hr class="h-1 my-10 bg-cyan-600 m-28">
     <div class="mx-96">
         <div class="max-w-52 float-left   mb-10 ">
-            <a href="{{ route('cartellaClinicaPaziente') }}">
+            <a href="{{ route('cartellaClinicaPaziente', ['userPaz' => $paziente->username]) }}">
                 <img src="{{ asset('images\cartella_clinica.png') }}" alt="Cartella clinica" class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
             </a>
             <p class="mt-1 text-center text-2xl text-black">Cartella clinica</p>

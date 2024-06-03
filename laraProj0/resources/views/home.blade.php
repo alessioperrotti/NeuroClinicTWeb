@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script> 
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>NeuroClinic | Home </title>
     <style>
         .anchor::before {
@@ -18,22 +18,32 @@
             margin-top: -140px; /* Altezza dell'header */
             visibility: hidden;
         }
-    </style>    
+    </style>
 </head>
 <body class="bg-cyan-50">
     <header class="fixed top-0 left-0 right-0 z-20">  <!-- sarebbe carino mettere un backdrop blur-->
         <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8 backdrop-filter backdrop-blur-sm bg-opacity-90">
-            <div> 
+            <div>
                 <a href="{{ route('home') }}">
                     <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
                 </a>
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
+
                     <a href="#who" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CHI SIAMO</a>
                     <a href="{{ route('faq') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">FAQ</a>
                     <a href="#contact" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CONTATTACI</a>
-                    <a href="{{ route('login') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
+                    @guest
+                        <a href="{{ route('login') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
+                    @endguest
+                    @can('isPaziente')
+                        <a href="{{ route('homePaziente') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
+                    @endcan
+                    @can('isClinico')
+                        <a href="{{ route('homeClinico') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
+                    @endcan
+
                 </nav>
             </div>
         </div>
@@ -49,16 +59,16 @@
         <div class="p-8">
             <h1 id="who" class="text-black font-extrabold text-2xl anchor">Chi siamo</h1>
             <br>
-            <p class="text-slate-700">Siamo una clinica neuroriabilitativa dedicata al miglioramento 
-                della qualità della vita dei nostri pazienti attraverso terapie innovative e personalizzate. 
-                Con un team multidisciplinare di professionisti altamente qualificati, ci impegniamo a fornire 
+            <p class="text-slate-700">Siamo una clinica neuroriabilitativa dedicata al miglioramento
+                della qualità della vita dei nostri pazienti attraverso terapie innovative e personalizzate.
+                Con un team multidisciplinare di professionisti altamente qualificati, ci impegniamo a fornire
                 un approccio completo e compassato alla riabilitazione neurologica.
             </p>
             <br>
-            <p class="text-slate-700">La nostra missione è quella di essere un faro di speranza e di sostegno 
-                per coloro che affrontano sfide neurologiche quali ictus, lesioni cerebrali traumatiche, sclerosi 
-                multipla, malattia di Parkinson, e altre condizioni complesse. Ogni paziente è un 
-                individuo unico, e ci sforziamo di offrire un trattamento personalizzato che tenga conto delle 
+            <p class="text-slate-700">La nostra missione è quella di essere un faro di speranza e di sostegno
+                per coloro che affrontano sfide neurologiche quali ictus, lesioni cerebrali traumatiche, sclerosi
+                multipla, malattia di Parkinson, e altre condizioni complesse. Ogni paziente è un
+                individuo unico, e ci sforziamo di offrire un trattamento personalizzato che tenga conto delle
                 loro esigenze specifiche e dei loro obiettivi di riabilitazione.
             </p>
         </div>
@@ -72,15 +82,15 @@
             <img src="images/schermo.gif" alt="Gruppo di medici">
         </div>
         <div class="p-8">
-            <p class="text-slate-700">Presso Neuro Clinic, integriamo le più recenti scoperte scientifiche 
-                con le migliori pratiche cliniche per offrire una gamma completa di servizi di riabilitazione, 
-                tra cui terapia occupazionale, terapia fisica, terapia del linguaggio e terapia cognitiva. 
-                Utilizziamo anche tecnologie all'avanguardia, come la robotica e la realtà virtuale, per 
+            <p class="text-slate-700">Presso Neuro Clinic, integriamo le più recenti scoperte scientifiche
+                con le migliori pratiche cliniche per offrire una gamma completa di servizi di riabilitazione,
+                tra cui terapia occupazionale, terapia fisica, terapia del linguaggio e terapia cognitiva.
+                Utilizziamo anche tecnologie all'avanguardia, come la robotica e la realtà virtuale, per
                 ottimizzare i risultati della riabilitazione.
             </p>
             <br>
-            <p class="text-slate-700">La nostra visione è quella di essere un punto di riferimento 
-                nell'ambito della riabilitazione neurologica, dove l'innovazione, la compassione e l'empatia 
+            <p class="text-slate-700">La nostra visione è quella di essere un punto di riferimento
+                nell'ambito della riabilitazione neurologica, dove l'innovazione, la compassione e l'empatia
                 si fondono per creare un ambiente di cura e di crescita per tutti coloro che serviamo.
             </p>
         </div>
@@ -94,7 +104,7 @@
                 <h3 class="font-bold text-center text-3xl text-slate-700">"Eccellente"</h3>
                 <br>
                 <p class="text-center text-slate-400">Un servizio di altissima qualità e grande professionalità.
-                    Gli specialisti di NeuroClinic ci hanno permesso di ottenere risultati 
+                    Gli specialisti di NeuroClinic ci hanno permesso di ottenere risultati
                     in cui neanche noi speravamo più.
                 </p>
             </div>
@@ -147,7 +157,7 @@
 
     <footer>
         <div class="bg-cyan-600 w-auto h-[200px] justify-between items-center flex p-8">
-            <div> 
+            <div>
                 <a href="{{ route('home') }}">
                     <img src="images/logo_bianco.svg" class="h-20" alt="Logo">
                 </a>
@@ -171,6 +181,6 @@
         </div>
     </footer>
 
-    
+
 </body>
 </html>

@@ -13,9 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('diagnosi', function (Blueprint $table) {
+            $table->id('id');
             $table->string('paziente', 20)->references('username')->on('paziente');
-            $table->string('disturbo', 30)->references('nome', 30)->on('distmotorio');
-            $table->date('data');
+            $table->integer('disturbo')->references('id')->on('distmotorio');
+            $table->datetime('data');
         });
     }
 

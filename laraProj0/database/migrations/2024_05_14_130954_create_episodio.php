@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('durata')->unsigned();
             $table->integer('intensita')->unsigned();
             $table->string('paziente', 20)->references('username')->on('paziente');
-            $table->string('disturbo', 30)->references('nome')->on('distmotorio');
+            $table->integer('disturbo')->references('id')->on('distmotorio');
         });
     }
 

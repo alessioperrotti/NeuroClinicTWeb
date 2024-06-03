@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ['username' => 'scottlang', 'password' => Hash::make('password22'), 'usertype' => 'C'],
         ]);
 
+
         DB::table('clinico')->insert([
             [
                 'username' => 'tonystark',
@@ -82,6 +83,7 @@ class DatabaseSeeder extends Seeder
             
         ]);
 
+
         DB::table('paziente')->insert([
             [
                 'username' => 'pazipazi',
@@ -95,7 +97,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'MI',
                 'telefono' => '3201234567',
                 'email' => 'martina.ricci@example.com',
-                'clinico' => 'tonystark'
+                'clinico' => 'clinclin',
+                'terCambiata' => false
             ],
             [
                 'username' => 'dianaprince',
@@ -109,7 +112,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'RM',
                 'telefono' => '3312345678',
                 'email' => 'diana.prince@example.com',
-                'clinico' => 'natasharomanoff'
+                'clinico' => 'natasharomanoff',
+                'terCambiata' => false
             ],
             [
                 'username' => 'peterparker',
@@ -123,7 +127,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'NY',
                 'telefono' => '3403456789',
                 'email' => 'peter.parker@example.com',
-                'clinico' => 'wandamaximoff'
+                'clinico' => 'wandamaximoff',
+                'terCambiata' => false
             ],
             [
                 'username' => 'maryjane',
@@ -137,7 +142,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'NY',
                 'telefono' => '3454567890',
                 'email' => 'mary.jane@example.com',
-                'clinico' => 'wandamaximoff'
+                'clinico' => 'clinclin',
+                'terCambiata' => false
             ],
             [
                 'username' => 'clarkkent',
@@ -151,7 +157,8 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'MP',
                 'telefono' => '3475678901',
                 'email' => 'clark.kent@example.com',
-                'clinico' => 'pietromaximoff'
+                'clinico' => 'pietromaximoff',
+                'terCambiata' => false
             ],
             [
                 'username' => 'brucewayne',
@@ -165,10 +172,534 @@ class DatabaseSeeder extends Seeder
                 'prov' => 'GT',
                 'telefono' => '3496789012',
                 'email' => 'bruce.wayne@example.com',
-                'clinico' => 'scottlang'
+                'clinico' => 'scottlang',
+                'terCambiata' => false
             ],
         ]);
 
 
+        DB::table('distmotorio')->insert([
+            [
+                'nome' => 'Paralisi cerebrale',
+                'categoria' => 'movimento e postura'
+            ],
+            [
+                'nome' => 'Mioclono',
+                'categoria' => 'ipercinetici'
+            ],
+            [
+                'nome' => 'Atassia',
+                'categoria' => 'coordinazione motoria'
+            ],
+            [
+                'nome' => 'Parkinsonismo',
+                'categoria' => 'ipocinetici'
+            ],
+            ['nome' => 'Distrofia muscolare', 'categoria' => 'distrofie muscolari'],
+            ['nome' => 'Corea', 'categoria' => 'movimenti involontari'],
+            ['nome' => 'Sindromi piramidali', 'categoria' => 'lesioni piramidali'],
+            ['nome' => 'Distonia', 'categoria' => 'distonie'],
+            ['nome' => 'Sindrome di Tourette', 'categoria' => 'tourette'],
+            ['nome' => 'Sindrome delle gambe senza riposo', 'categoria' => 'sensoriale'],
+            ['nome' => 'Tremore essenziale', 'categoria' => 'tremori'],
+            ['nome' => 'Sindrome di Guillain-Barré', 'categoria' => 'lesioni nervose'],
+            ['nome' => 'Neuropatia periferica', 'categoria' => 'neuropatie'],
+            ['nome' => 'Sclerosi laterale amiotrofica', 'categoria' => 'lesioni del motoneurone']
+        ]);
+
+
+        DB::table('farmaco')->insert([
+            [
+                'nome' => 'Levodopa 100mg',
+                'descr' => 'Trattamento principale per il Parkinson, riduce i sintomi motori aumentando i livelli di dopamina nel cervello.'
+            ],
+            [
+                'nome' => 'Carbidopa 25mg',
+                'descr' => "Utilizzato in combinazione con Levodopa, previene la sua degradazione prematura, aumentando l'efficacia terapeutica."
+            ],
+            [
+                'nome' => 'Baclofen 10mg',
+                'descr' => "Rilassante muscolare usato per alleviare spasmi muscolari, crampi e rigidità associati a disturbi neurologici."
+            ],
+            [
+                'nome' => 'Gabapentin 300mg',
+                'descr' => "Anticonvulsivante e analgesico per il trattamento di neuropatie, dolore neuropatico e alcune forme di epilessia."
+            ],
+            [
+                'nome' => 'Dantrolene 25mg',
+                'descr' => "Utilizzato per il trattamento della spasticità muscolare, agisce direttamente sul muscolo scheletrico per ridurre la contrazione."
+            ],
+            [
+                'nome' => 'Diazepam 5mg',
+                'descr' => "Benzodiazepina che allevia ansia, spasmi muscolari e convulsioni, oltre a essere usata come sedativo."
+            ],
+            [
+                'nome' => 'Tolcapone 100mg',
+                'descr' => "Inibitore della COMT che prolunga l'effetto della Levodopa nel trattamento del Parkinson, migliorando la gestione dei sintomi."
+            ],
+            [
+                'nome' => 'Ropinirole 0.25mg',
+                'descr' => "Agonista della dopamina usato per trattare i sintomi del Parkinson e la sindrome delle gambe senza riposo."
+            ],
+            [
+                'nome' => 'Pramipexole 0.125mg',
+                'descr' => "Agonista della dopamina efficace nel trattamento del Parkinson e della sindrome delle gambe senza riposo, migliorando il controllo motorio."
+            ],
+            [
+                'nome' => 'Tizanidine 2mg',
+                'descr' => "Rilassante muscolare che tratta spasmi muscolari causati da sclerosi multipla, lesioni spinali e altre condizioni."
+            ]
+        ]);
+
+
+        DB::table('attivita')->insert([
+            [
+                'nome' => 'Fisioterapia',
+                'descr' => 'Trattamento riabilitativo che utilizza esercizi fisici per migliorare la mobilità e ridurre il dolore nei pazienti con disturbi motori.'
+            ],
+            [
+                'nome' => 'Terapia Occupazionale',
+                'descr' => 'Attività che aiuta i pazienti a migliorare le abilità motorie necessarie per le attività quotidiane e l\'indipendenza.'
+            ],
+            [
+                'nome' => 'Idroterapia',
+                'descr' => 'Terapia che utilizza l\'acqua per facilitare i movimenti, ridurre la spasticità e migliorare la forza muscolare.'
+            ],
+            [
+                'nome' => 'Terapia con Onde d\'Urto',
+                'descr' => 'Utilizza onde acustiche per stimolare la rigenerazione dei tessuti e ridurre il dolore nei disturbi muscoloscheletrici.'
+            ],
+            [
+                'nome' => 'Esercizi di Equilibrio',
+                'descr' => 'Programmi specifici di esercizi per migliorare l\'equilibrio e ridurre il rischio di cadute nei pazienti con disturbi motori.'
+            ],
+            [
+                'nome' => 'Terapia Manuale',
+                'descr' => 'Interventi pratici eseguiti da fisioterapisti per mobilizzare articolazioni e tessuti molli, migliorando la funzione motoria.'
+            ],
+            [
+                'nome' => 'Riabilitazione Robotica',
+                'descr' => 'Utilizzo di dispositivi robotici per supportare e migliorare il recupero dei movimenti nei pazienti con deficit motori.'
+            ],
+            [
+                'nome' => 'Elettrostimolazione',
+                'descr' => 'Applicazione di correnti elettriche per stimolare i muscoli, migliorare la forza e ridurre la spasticità.'
+            ],
+            [
+                'nome' => 'Terapia Cognitivo-Motoria',
+                'descr' => 'Combina esercizi cognitivi e fisici per migliorare la coordinazione motoria e le funzioni cognitive nei pazienti.'
+            ],
+            [
+                'nome' => 'Yoga Terapeutico',
+                'descr' => 'Utilizzo di posture, respirazione e meditazione per migliorare la flessibilità, la forza e il benessere generale nei pazienti con disturbi motori.'
+            ]
+        ]);
+
+        
+        DB::table('episodio')->insert([
+            [
+                'data' => '2023-01-15',
+                'ora' => '08:30:00',
+                'durata' => 30,
+                'intensita' => 5,
+                'paziente' => 'pazipazi',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-02-20',
+                'ora' => '14:00:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'dianaprince',
+                'disturbo' => 2
+            ],
+            [
+                'data' => '2023-03-12',
+                'ora' => '10:15:00',
+                'durata' => 20,
+                'intensita' => 4,
+                'paziente' => 'peterparker',
+                'disturbo' => 3
+            ],
+            [
+                'data' => '2023-04-05',
+                'ora' => '09:45:00',
+                'durata' => 60,
+                'intensita' => 8,
+                'paziente' => 'maryjane',
+                'disturbo' => 4
+            ],
+            [
+                'data' => '2023-05-22',
+                'ora' => '11:30:00',
+                'durata' => 35,
+                'intensita' => 6,
+                'paziente' => 'clarkkent',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-06-14',
+                'ora' => '15:00:00',
+                'durata' => 40,
+                'intensita' => 5,
+                'paziente' => 'brucewayne',
+                'disturbo' => 2
+            ],
+            [
+                'data' => '2023-07-09',
+                'ora' => '08:00:00',
+                'durata' => 50,
+                'intensita' => 7,
+                'paziente' => 'pazipazi',
+                'disturbo' => 3
+            ],
+            [
+                'data' => '2023-08-21',
+                'ora' => '12:45:00',
+                'durata' => 30,
+                'intensita' => 4,
+                'paziente' => 'dianaprince',
+                'disturbo' => 4
+            ],
+            [
+                'data' => '2023-09-10',
+                'ora' => '09:30:00',
+                'durata' => 25,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-10-03',
+                'ora' => '14:15:00',
+                'durata' => 55,
+                'intensita' => 8,
+                'paziente' => 'maryjane',
+                'disturbo' => 2
+            ],
+            [
+                'data' => '2023-11-19',
+                'ora' => '10:45:00',
+                'durata' => 60,
+                'intensita' => 7,
+                'paziente' => 'clarkkent',
+                'disturbo' => 3
+            ],
+            [
+                'data' => '2023-12-01',
+                'ora' => '08:15:00',
+                'durata' => 40,
+                'intensita' => 5,
+                'paziente' => 'brucewayne',
+                'disturbo' => 4
+            ],
+            [
+                'data' => '2023-01-25',
+                'ora' => '11:00:00',
+                'durata' => 30,
+                'intensita' => 4,
+                'paziente' => 'pazipazi',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-02-15',
+                'ora' => '13:00:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'dianaprince',
+                'disturbo' => 2
+            ],
+            [
+                'data' => '2023-03-22',
+                'ora' => '10:30:00',
+                'durata' => 20,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 3
+            ],
+            [
+                'data' => '2023-04-12',
+                'ora' => '09:15:00',
+                'durata' => 60,
+                'intensita' => 9,
+                'paziente' => 'maryjane',
+                'disturbo' => 4
+            ],
+            [
+                'data' => '2023-05-28',
+                'ora' => '11:45:00',
+                'durata' => 35,
+                'intensita' => 8,
+                'paziente' => 'clarkkent',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-06-18',
+                'ora' => '15:15:00',
+                'durata' => 50,
+                'intensita' => 6,
+                'paziente' => 'brucewayne',
+                'disturbo' => 2
+            ],
+            [
+                'data' => '2023-07-19',
+                'ora' => '08:30:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'pazipazi',
+                'disturbo' => 3
+            ],
+            [
+                'data' => '2023-08-30',
+                'ora' => '12:30:00',
+                'durata' => 30,
+                'intensita' => 5,
+                'paziente' => 'dianaprince',
+                'disturbo' => 4
+            ],
+            [
+                'data' => '2023-09-22',
+                'ora' => '09:00:00',
+                'durata' => 25,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-10-15',
+                'ora' => '14:45:00',
+                'durata' => 55,
+                'intensita' => 8,
+                'paziente' => 'maryjane',
+                'disturbo' => 2
+            ],
+            [
+                'data' => '2023-11-29',
+                'ora' => '10:00:00',
+                'durata' => 60,
+                'intensita' => 9,
+                'paziente' => 'clarkkent',
+                'disturbo' => 3
+            ],
+            [
+                'data' => '2023-12-12',
+                'ora' => '08:45:00',
+                'durata' => 40,
+                'intensita' => 5,
+                'paziente' => 'brucewayne',
+                'disturbo' => 4
+            ],
+            [
+                'data' => '2023-01-30',
+                'ora' => '11:15:00',
+                'durata' => 30,
+                'intensita' => 4,
+                'paziente' => 'pazipazi',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-02-25',
+                'ora' => '13:15:00',
+                'durata' => 45,
+                'intensita' => 7,
+                'paziente' => 'dianaprince',
+                'disturbo' => 2
+            ],
+            [
+                'data' => '2023-03-29',
+                'ora' => '10:45:00',
+                'durata' => 20,
+                'intensita' => 6,
+                'paziente' => 'peterparker',
+                'disturbo' => 3
+            ],
+            [
+                'data' => '2023-04-20',
+                'ora' => '09:30:00',
+                'durata' => 60,
+                'intensita' => 9,
+                'paziente' => 'maryjane',
+                'disturbo' => 4
+            ],
+            [
+                'data' => '2023-05-30',
+                'ora' => '11:30:00',
+                'durata' => 35,
+                'intensita' => 8,
+                'paziente' => 'clarkkent',
+                'disturbo' => 1
+            ],
+            [
+                'data' => '2023-06-25',
+                'ora' => '15:30:00',
+                'durata' => 50,
+                'intensita' => 6,
+                'paziente' => 'brucewayne',
+                'disturbo' => 2
+            ]
+        ]);
+
+
+        DB::table('terapia')->insert([
+            [
+                'data' => '2023-01-01 09:00:00',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-01-15 11:30:00',
+                'paziente' => 'dianaprince'
+            ],
+            [
+                'data' => '2023-02-01 14:00:00',
+                'paziente' => 'peterparker'
+            ],
+            [
+                'data' => '2023-02-15 08:45:00',
+                'paziente' => 'maryjane'
+            ],
+            [
+                'data' => '2023-03-01 16:30:00',
+                'paziente' => 'clarkkent'
+            ],
+            [
+                'data' => '2023-03-15 10:15:00',
+                'paziente' => 'brucewayne'
+            ],
+            [
+                'data' => '2023-04-01 12:00:00',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-04-15 13:45:00',
+                'paziente' => 'dianaprince'
+            ],
+            [
+                'data' => '2023-05-01 09:30:00',
+                'paziente' => 'peterparker'
+            ],
+            [
+                'data' => '2023-05-15 15:00:00',
+                'paziente' => 'maryjane'
+            ],
+            [
+                'data' => '2023-06-01 11:00:00',
+                'paziente' => 'clarkkent'
+            ],
+            [
+                'data' => '2023-06-15 14:30:00',
+                'paziente' => 'brucewayne'
+            ],
+            [
+                'data' => '2023-07-01 08:00:00',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-07-15 17:45:00',
+                'paziente' => 'dianaprince'
+            ],
+            [
+                'data' => '2023-08-01 10:30:00',
+                'paziente' => 'peterparker'
+            ],
+            [
+                'data' => '2023-08-15 13:00:00',
+                'paziente' => 'maryjane'
+            ],
+            [
+                'data' => '2023-09-01 09:45:00',
+                'paziente' => 'clarkkent'
+            ],
+            [
+                'data' => '2023-09-15 16:00:00',
+                'paziente' => 'brucewayne'
+            ],
+            [
+                'data' => '2023-10-01 07:30:00',
+                'paziente' => 'pazipazi'
+            ],
+            [
+                'data' => '2023-10-15 15:30:00',
+                'paziente' => 'dianaprince'
+            ]
+        ]);
+        
+
+        DB::table('prescrizione')->insert([
+            ['freq' => '1 volta al giorno', 'terapia' => 1, 'farmaco' => 1],
+            ['freq' => '2 volte al giorno', 'terapia' => 2, 'farmaco' => 2],
+            ['freq' => '1 volta al giorno', 'terapia' => 3, 'farmaco' => 3],
+            ['freq' => '3 volte al giorno', 'terapia' => 4, 'farmaco' => 4],
+            ['freq' => '1 volta al giorno', 'terapia' => 5, 'farmaco' => 5],
+            ['freq' => '2 volte al giorno', 'terapia' => 6, 'farmaco' => 6],
+            ['freq' => '1 volta al giorno', 'terapia' => 7, 'farmaco' => 7],
+            ['freq' => '3 volte al giorno', 'terapia' => 8, 'farmaco' => 8],
+            ['freq' => '1 volta al giorno', 'terapia' => 9, 'farmaco' => 9],
+            ['freq' => '2 volte al giorno', 'terapia' => 10, 'farmaco' => 10],
+            ['freq' => '1 volta al giorno', 'terapia' => 11, 'farmaco' => 1],
+            ['freq' => '3 volte al giorno', 'terapia' => 12, 'farmaco' => 2],
+            ['freq' => '1 volta al giorno', 'terapia' => 13, 'farmaco' => 3],
+            ['freq' => '2 volte al giorno', 'terapia' => 14, 'farmaco' => 4],
+            ['freq' => '1 volta al giorno', 'terapia' => 15, 'farmaco' => 5],
+            ['freq' => '3 volte al giorno', 'terapia' => 16, 'farmaco' => 6],
+            ['freq' => '1 volta al giorno', 'terapia' => 17, 'farmaco' => 7],
+            ['freq' => '2 volte al giorno', 'terapia' => 18, 'farmaco' => 8],
+            ['freq' => '1 volta al giorno', 'terapia' => 19, 'farmaco' => 9],
+            ['freq' => '3 volte al giorno', 'terapia' => 20, 'farmaco' => 10],
+        ]);
+
+
+        DB::table('pianificazione')->insert([
+            ['freq' => '2 volte a settimana', 'terapia' => 1, 'attivita' => 1],
+            ['freq' => '3 volte a settimana', 'terapia' => 2, 'attivita' => 2],
+            ['freq' => '1 volta a settimana', 'terapia' => 3, 'attivita' => 3],
+            ['freq' => '4 volte a settimana', 'terapia' => 4, 'attivita' => 4],
+            ['freq' => '5 volte a settimana', 'terapia' => 5, 'attivita' => 5],
+            ['freq' => '6 volte a settimana', 'terapia' => 6, 'attivita' => 6],
+            ['freq' => '7 volte a settimana', 'terapia' => 7, 'attivita' => 7],
+            ['freq' => '2 volte a settimana', 'terapia' => 8, 'attivita' => 8],
+            ['freq' => '3 volte a settimana', 'terapia' => 9, 'attivita' => 9],
+            ['freq' => '1 volta a settimana', 'terapia' => 10, 'attivita' => 10],
+            ['freq' => '4 volte a settimana', 'terapia' => 11, 'attivita' => 1],
+            ['freq' => '5 volte a settimana', 'terapia' => 12, 'attivita' => 2],
+            ['freq' => '6 volte a settimana', 'terapia' => 13, 'attivita' => 3],
+            ['freq' => '7 volte a settimana', 'terapia' => 14, 'attivita' => 4],
+            ['freq' => '2 volte a settimana', 'terapia' => 15, 'attivita' => 5],
+            ['freq' => '3 volte a settimana', 'terapia' => 16, 'attivita' => 6],
+            ['freq' => '1 volta a settimana', 'terapia' => 17, 'attivita' => 7],
+            ['freq' => '4 volte a settimana', 'terapia' => 18, 'attivita' => 8],
+            ['freq' => '5 volte a settimana', 'terapia' => 19, 'attivita' => 9],
+            ['freq' => '6 volte a settimana', 'terapia' => 20, 'attivita' => 10],
+        ]);
+        
+        
+        DB::table('diagnosi')->insert([
+            ['paziente' => 'pazipazi', 'disturbo' => 4, 'data' => '2023-01-01 09:15:00'],
+            ['paziente' => 'dianaprince', 'disturbo' => 8, 'data' => '2023-02-01 10:30:00'],
+            ['paziente' => 'peterparker', 'disturbo' => 3, 'data' => '2023-03-01 11:45:00'],
+            ['paziente' => 'maryjane', 'disturbo' => 2, 'data' => '2023-04-01 08:00:00'],
+            ['paziente' => 'clarkkent', 'disturbo' => 14, 'data' => '2023-05-01 13:20:00'],
+            ['paziente' => 'brucewayne', 'disturbo' => 4, 'data' => '2023-06-01 14:35:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 8, 'data' => '2023-07-01 15:50:00'],
+            ['paziente' => 'dianaprince', 'disturbo' => 3, 'data' => '2023-08-01 09:05:00'],
+            ['paziente' => 'peterparker', 'disturbo' => 2, 'data' => '2023-09-01 10:10:00'],
+            ['paziente' => 'maryjane', 'disturbo' => 14, 'data' => '2023-10-01 11:25:00'],
+            ['paziente' => 'clarkkent', 'disturbo' => 4, 'data' => '2023-11-01 12:40:00'],
+            ['paziente' => 'brucewayne', 'disturbo' => 8, 'data' => '2023-12-01 13:55:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 3, 'data' => '2024-01-01 14:00:00'],
+            ['paziente' => 'dianaprince', 'disturbo' => 2, 'data' => '2024-02-01 15:15:00'],
+            ['paziente' => 'peterparker', 'disturbo' => 14, 'data' => '2024-03-01 09:30:00'],
+            ['paziente' => 'maryjane', 'disturbo' => 4, 'data' => '2024-04-01 10:45:00'],
+            ['paziente' => 'clarkkent', 'disturbo' => 8, 'data' => '2024-05-01 12:00:00'],
+            ['paziente' => 'brucewayne', 'disturbo' => 3, 'data' => '2024-03-01 13:15:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 2, 'data' => '2024-04-01 14:30:00'],
+            ['paziente' => 'dianaprince', 'disturbo' => 14, 'data' => '2024-01-01 15:45:00'],
+            ['paziente' => 'peterparker', 'disturbo' => 4, 'data' => '2024-04-01 09:50:00'],
+            ['paziente' => 'maryjane', 'disturbo' => 8, 'data' => '2024-02-01 11:05:00'],
+            ['paziente' => 'clarkkent', 'disturbo' => 3, 'data' => '2024-03-01 12:20:00'],
+            ['paziente' => 'brucewayne', 'disturbo' => 2, 'data' => '2024-05-01 13:35:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 14, 'data' => '2024-01-01 14:50:00'],
+        ]);
+        
+        
     }
 }
