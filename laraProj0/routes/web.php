@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PazController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,5 +134,48 @@ Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
     return view('modificaTerapia');
 })
 ->name('modificaTerapia'); // rotta per sviluppo
+
+
+
+Route::get('/home_clin', [ClinController::class, 'index'])
+->name('homeClinico')->middleware('can:isClinico');
+
+Route::get('/home_clin/lista_paz', [ClinController::class, 'viewPazienti'])
+->name('listaPazienti')->middleware('can:isClinico');
+
+Route::get('/home_clin/lista_paz/cart_clinica/{userPaz}', [ClinController::class, 'showCartClinica'])
+->name('cartellaClin2')->middleware('can:isClinico'); 
+
+Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia/{userPaz}', [ClinController::class, 'showModTerapia'])
+->name('modificaTerapia')->middleware('can:isClinico');
+
+Route::post('/home_clin/lista_paz/cart_clinica/mod_terapia/{userPaz}', [ClinController::class, 'storeTerapia'])
+->name('modificaTerapia.store')->middleware('can:isClinico');
+
+Route::get('/home_clin/nuovo_paz', [ClinController::class, 'addPaziente'])
+->name('nuovoPaziente')->middleware('can:isClinico');
+
+Route::post('/home_clin/nuovo_paz', [ClinController::class, 'storePaziente'])
+->name('nuovoPaziente.store')->middleware('can:isClinico');
+
+Route::get('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinController::class, 'showModDiagnosi'])
+->name('modificaDiagnosi')->middleware('can:isClinico');
+
+Route::post('home_clin/lista_paz/cart_clinica/mod_diagnosi/{userPaz}', [ClinController::class, 'storeDiagnosi'])
+->name('modificaDiagnosi.store')->middleware('can:isClinico');
+
+Route::get('/home_clin/aggiorna_clin', [ClinController::class, 'showModClinico'])
+->name('aggiornaClinico')->middleware('can:isClinico');
+
+Route::post('/home_clin/aggiorna_clin', [ClinController::class, 'updateClinico'])
+->name('aggiornaClinico.edit')->middleware('can:isClinico');
+
+Route::get('/home_clin/cambia_pwd', [ClinController::class, 'showPassChange'])
+->name('cambiaPwdClinico')->middleware('auth');
+
+Route::put('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
+->name('password.update')->middleware('auth');
+
+require __DIR__.'/auth.php';
 
 require __DIR__.'/auth.php';
