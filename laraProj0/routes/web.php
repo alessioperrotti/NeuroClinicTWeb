@@ -115,14 +115,6 @@ Route::get('/home_clin/lista_paz',function () {
 ->name('listaPazienti');
 
 
-Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
-    ->name('listaPaz')->middleware('can:isAdmin'); 
-
-
-Route::post('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
-    ->name('eliminaPaziente')->middleware('can:isAdmin');
-
-
 Route::get('/home_clin/lista_paz/cart_clinica',function () {
     return view('cartellaClin2');
 })
@@ -175,6 +167,13 @@ Route::post('/faq/update/{id}', [AdminController::class, 'updateFaq'])
 Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
     ->name('faq.store');
 
-#Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
-#    ->name('gestioneFaq.store')->middleware('can:isAdmin');
+#--------------------------------------------------------------------#
+                    #ROTTE GESTIONE PAZIENTI
+
+Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
+    ->name('listaPaz')->middleware('can:isAdmin'); 
+                
+Route::post('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
+    ->name('eliminaPaziente')->middleware('can:isAdmin');
+    
 require __DIR__.'/auth.php';

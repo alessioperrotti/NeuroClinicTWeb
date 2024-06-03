@@ -14,11 +14,13 @@ use App\Models\Resources\Episodio;
 use App\Models\Resources\Terapia;
 use App\Models\Resources\Clinico;
 use App\Http\Requests\NewFaqRequest;
+use App\Http\Requests\UpdateFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
 use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
 
 class AdminController extends Controller
 {
@@ -56,38 +58,38 @@ class AdminController extends Controller
         $this->faqModel->deleteFaq($id);
         return redirect()->route('gestioneFaq');
     }
-#    public function storeFaq(NewFaqRequest $request) : RedirectResponse 
-#    {
-#        $validatedData = $request->validated();
-#        if($this->faqModel->storeFaq($validatedData)) 
-#            return redirect()->action([AdminController::class, 'viewGestioneFaq'])->with('success', 'FAQ aggiunta con successo.');
-#        else
- #           return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio della FAQ.');
-#    }
+
     public function storeFaq(NewFaqRequest $request): JsonResponse
     {
         Log::info('metodo storeFaq attivato');
         $validatedData = $request->validated();
 
-        if ($this->faqModel->storeFaq($validatedData)) {
+        if ($this->faqModel->storeFaq($validatedData)){
+            Log::info('FAQ salvata correttamente, reindirizzamento a gestioneFaq');
             return response()->json(['redirect' => route('gestioneFaq')]); 
-
-        } else {
-            return response()->json(['error' => 'Errore durante l\'aggiunta del disturbo.'], 422);
-
         }
+        else{
+            Log::error('Errore durante l\'aggiunta della FAQ');
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
+        }
+        
     }
 
-    public function updateFaq(Request $request, $id): RedirectResponse
+    public function updateFaq(UpdateFaqRequest $request, $id): JsonResponse
     {
-        $validatedData = $request->validate([
-            'risposta' => 'required|string'
-        ]);
-        
-        if(!$this->faqModel->updateFaq($validatedData, $id))
-            return redirect()->action([AdminController::class, 'viewGestioneFaq']);
-        else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento della FAQ.');
+        Log::info('metodo updateFaq attivato');
+        $validatedData = $request->validated();
+       
+        if($this->faqModel->updateFaq($validatedData, $id))
+        {
+            Log::info('FAQ modificata correttamente, reindirizzamento a gestioneFaq');
+            return response()->json(['redirect' => route('gestioneFaq')]); 
+        } 
+       else
+       {
+            Log::error('Errore durante la modifica della FAQ');
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
+        }
     }
 
     #SEZIONE CLINICI

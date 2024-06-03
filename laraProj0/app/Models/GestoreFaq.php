@@ -32,13 +32,13 @@ class GestoreFaq extends Model
             $faq->fill($validatedData);
             $faq->save();
             DB::commit();
+            return true;
         } 
         catch (\Exception $e) {
             DB::rollBack();
             Log::error('Errore durante il salvataggio della FAQ: ' . $e->getMessage());
             return false;
         }
-        return true;
     }
     public function updateFaq($validatedData, $id): bool
     {

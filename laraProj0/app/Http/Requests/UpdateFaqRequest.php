@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Psy\Readline\Hoa\Console;
 use Symfony\Component\HttpFoundation\Response;
 
-class NewFaqRequest extends FormRequest
+class UpdateFaqRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,11 +28,8 @@ class NewFaqRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'domanda' => 'required|max:250',
             'risposta' => 'required|max:1000',
         ];
-
-
         return $rules;
     }
 
