@@ -82,12 +82,17 @@ class PazController extends Controller
         $farmaci = $this->gestTerModel->getFarmaciByTer($terId);
         $attivita = $this->gestTerModel->getAttivitaByTer($terId);
 
+
         return view('cartellaClinicaPaziente')
                 ->with('paziente', $paziente)
                 ->with('episodi', $episodi)
                 ->with('disturbi', $disturbi)
                 ->with('farmaci', $farmaci)
                 ->with('attivita', $attivita);
+
     }
 
+    public function showPassChange() : View {
+        return view('cambiaPwdPaziente');
+    }
 }
