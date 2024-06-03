@@ -10,6 +10,7 @@ class Farmaco extends Model
 {
     protected $table = 'farmaco';
     public $timestamps = false;
+    protected $fillable = ['nome', 'descr'];
 
     public function terapie()
     {

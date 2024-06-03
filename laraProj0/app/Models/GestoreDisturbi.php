@@ -62,7 +62,7 @@ class GestoreDisturbi extends Model
             $id = $data['idMod'];
             $disturbo = DistMotorio::findOrFail($id);
             $disturbo->nome = $data['nomeMod'];
-            $disturbo->categoria = $data['categoriaMod'];
+            $disturbo->categoria = $data['categoria'];
             $disturbo->save();
             DB::commit();
             return true;
