@@ -14,7 +14,6 @@
 
         <form method="POST" action="{{ route('paziente.update', $paziente->username)}}">
             @csrf
-            @method('PUT')
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
