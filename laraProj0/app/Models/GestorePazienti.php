@@ -8,6 +8,8 @@ use App\Models\Resources\Paziente;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Resources\User;
+use App\Models\Resources\Terapia;
 
 class GestorePazienti extends Model
 {
@@ -53,6 +55,31 @@ class GestorePazienti extends Model
             DB::rollBack();
             return false;
         }
+    }
+
+    public function mediaDisturbiMotoriPerPaziente() {
+        $numeroPazienti = Paziente::count();
+    
+        if ($numeroPazienti == 0) {
+            return 0;
+        }
+    
+        $numeroDisturbiTotali = 0;
+    
+        $pazienti = Paziente::all();
+        foreach ($pazienti as $paziente) {
+            $disturbiUnici = $paziente->episodi()->with('disturbo')->get()->unique('disturbo.id')->count();
+            $numeroDisturbiTotali += $disturbiUnici;
+        }
+    
+        $media = $numeroDisturbiTotali / $numeroPazienti;
+    
+        return $media;
+    }
+    public function getNumeroCambiTerapia($username) {
+        $numeroTerapie = Terapia::where('paziente', $username)->count();
+        $numeroCambiTerapia = $numeroTerapie - 1;
+        return $numeroCambiTerapia;
     }
 
 }
