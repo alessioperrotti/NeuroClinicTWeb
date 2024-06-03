@@ -79,7 +79,7 @@
 
         // Funzione per impostare la validazione del form
         function setupValidation(actionUrl, formId, modifica) {
-            if (!false) {
+            if (!modifica) {
                 // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
                 $("#" + formId + " :input").on('blur', function() {
                     // Ottiene l'ID e il nome dell'input attualmente in focus
