@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\HttpFoundation\Response;
 
 class NewPazienteRequest extends FormRequest
 {
@@ -35,5 +38,11 @@ class NewPazienteRequest extends FormRequest
             'username' => 'required|max:20|unique:user,username',
             'clinico' => 'required',
         ];
+    }
+
+
+    protected function failedValidation(Validator $validator): HttpResponseException
+    {
+        throw new HttpResponseException(response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY));
     }
 }
