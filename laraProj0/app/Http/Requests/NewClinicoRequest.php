@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClinicoRequest extends FormRequest
+class NewClinicoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,7 @@ class UpdateClinicoRequest extends FormRequest
             'cognome' => 'required|max:30',
             'dataNasc' => 'required|date|before:today|date_format:Y-m-d',
             'ruolo' => 'required|max:20',
+            'username' => 'required|max:20|unique:user,username',
             'specializ' => 'required|max:30',
         ];
     }

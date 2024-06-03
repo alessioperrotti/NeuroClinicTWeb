@@ -20,4 +20,8 @@ class Episodio extends Model
     {
         return $this->belongsTo(DistMotorio::class, 'disturbo', 'id');
     }
+    public function disturbo()
+    {
+        return $this->belongsTo(DistMotorio::class, 'disturbo', 'id');
+    }
 }

@@ -12,29 +12,62 @@
     border-0 border-b-2 border-gray-300 focus:border-black
      text-gray-700 leading-tight  focus:outline-none" >
                
-    <form id="listaClinici" class="mb-4">
-
-        <div class="flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-            <span class="font-bold">Dottor Bavaro</span>
-            <div class="flex mr-2 gap-x-4">
-                <button id="btnModifica">
-                    <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
-                </button>
-                <button id="btnElimina">
-                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">    
-                </button>
-            </div>
-        </div>
-        <!-- da aggiungere clinici -->
-    </form>
+     <ul id="listaClinici" class="mb-4 list-none">
+        @isset($clinici)
+            @foreach ($clinici as $clinico)
+                <li class="clinico flex justify-between items-center bg-white p-2 rounded-lg mb-2">
+                    <span class=" font-bold">{{ $clinico->nome . " " . $clinico->cognome }}</span>
+                    <div class="flex mr-2 gap-x-4">
+                        <form action="{{ route('aggiornaClinicoAdmin', $clinico->username) }}" method="GET">
+                            <button id="btnModifica">
+                                <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+                            </button>
+                        </form>
+                        <form action="{{ route('clinico.elimina', $clinico->username) }}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo clinico?');"> 
+                            @csrf
+                            <button type="submit">
+                                <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            @endforeach
+        @endisset
+    </ul>
 
     <div class="flex justify-center  mt-10">
         <!-- Bottone per aggiungere un nuovo clinico -->
         <button id="btnAggiungiClinico" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">
-            Aggiungi clinico
+            <a href="{{ route('nuovoClinico') }}" class="btn" id="btnAggiungiClinico">Aggiungi Clinico</a>
         </button>
     </div>
     
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Sovrascrive il pulsante "Indietro"
+        //Prendo l'elemento con Id=back_button, a questo elemento sovrascrivo  
+        //l'attributo onclick in modo che quando viene cliccato eseguo la funzione
+        //che imposta window.location.href sulla route {{ route('homeAdmin') }} (window.location.href è una proprietà in JavaScript che rappresenta l'URL della pagina corrente)
+        var backButton = document.getElementById('back_button');
+        backButton.onclick = function() {
+            window.location.href = "{{ route('homeAdmin') }}";
+        };
+        $(document).ready(function() {
+            // Filtro per cognome jQuery
+            $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
+                                                        //l'evento input si verifica quando il contenuto dell'elemento input cambia.
+                var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
+                $('.clinico').each(function() {        //per ogni elemento con classe "clinico" esguo questa funzione
+                    var fullName = $(this).find('span').text().toLowerCase(); //estraggo il nome completo che so essere nell'elemento span
+                                                                            // all'interno dell'elemento con classe clinico (l'elemento della lista in questo caso)
+                    var cognome = fullName.split(' ').pop(); // Prende l'ultimo elemento come cognome così anche se il clinico ha 2 nomi trova comunque il cognome
+                    $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il clinico in base al filtro
+                });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
+            });                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
+        });    
+    });                                                 
+</script>
 
 @endsection

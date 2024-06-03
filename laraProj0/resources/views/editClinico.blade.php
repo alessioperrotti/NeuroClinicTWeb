@@ -7,7 +7,7 @@
     <h1 class="text-5xl font-bold  mt-5 mb-8 gap-y-5">Modifica clinico {{$clinico->nome . " " . $clinico->cognome}}</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
-        <form action="{{ route('aggiornaClinico.edit', $clinico->username) }}" method="POST">
+        <form action="{{ route('aggiornaClinicoAdmin.edit', $clinico) }}" method="POST">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
@@ -25,8 +25,8 @@
                 <div>
                     <label class="block text-gray-700">Ruolo</label>
                     <select name="ruolo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                        <option value="Medico" @if($clinico->ruolo == 'Medico') selected @endif>Medico</option>
-                        <option value="Fisioterapista" @if($clinico->ruolo == 'Fisioterapista') selected @endif>Fisioterapista</option>
+                        <option value="medico" {{ $clinico->ruolo == 'medico' ? 'selected' : '' }}>Medico</option>
+                        <option value="fisioterapia" {{ $clinico->ruolo == 'fisioterapia' ? 'selected' : '' }}>Fisioterapia</option>
                     </select>
                 </div>
                 <div>
