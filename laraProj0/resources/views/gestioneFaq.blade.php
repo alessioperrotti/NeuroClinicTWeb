@@ -20,6 +20,7 @@
                         <div class="accordion-content mt-2 hidden">
                             <form id="formModificaFaq-{{ $faq->id }}" action="{{ route('faq.update', $faq->id) }}" method="POST">
                                 <textarea id="rispostaModifica-{{ $faq->id }}" name="risposta" class="w-full border-2" rows="4">{{$faq->risposta}}</textarea>
+                                <input type="hidden" name="domanda" value="{{$faq->domanda}}">
                                 <div class="flex gap-2 mt-2">
                                     @csrf
                                     <button type="submit" class="bg-blue-500 text-white py-1 px-3 rounded mt-2">Salva nuova risposta</button>
@@ -79,16 +80,14 @@
 
         // Funzione per impostare la validazione del form
         function setupValidation(actionUrl, formId, modifica) {
-            if (!modifica) {
-                // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
-                $("#" + formId + " :input").on('blur', function() {
-                    // Ottiene l'ID e il nome dell'input attualmente in focus
-                    var formElementId = $(this).attr('id');
-                    var inputName = $(this).attr('name');
-                    // Chiama la funzione di validazione per l'elemento corrente
-                    doElemValidation(formElementId, actionUrl, formId, inputName);
-                });
-            }
+            // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
+            $("#" + formId + " :input").on('blur', function() {
+                // Ottiene l'ID e il nome dell'input attualmente in focus
+                var formElementId = $(this).attr('id');
+                var inputName = $(this).attr('name');
+                // Chiama la funzione di validazione per l'elemento corrente
+                doElemValidation(formElementId, actionUrl, formId, inputName);
+            });
             
             // Aggiunge un listener per l'evento 'submit' del form
             $("#" + formId).on('submit', function(event) {

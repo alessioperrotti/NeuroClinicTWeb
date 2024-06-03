@@ -75,7 +75,7 @@ class AdminController extends Controller
         
     }
 
-    public function updateFaq(UpdateFaqRequest $request, $id): JsonResponse
+    public function updateFaq(NewFaqRequest $request, $id): JsonResponse
     {
         Log::info('metodo updateFaq attivato');
         $validatedData = $request->validated();
