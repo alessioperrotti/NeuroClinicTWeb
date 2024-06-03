@@ -3,6 +3,8 @@
 use App\Http\Controllers\PazController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClinController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +177,57 @@ Route::get('/home_clin/cambia_pwd', [ClinController::class, 'showPassChange'])
 
 Route::put('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
+
+
+#--------------------------------------------------------------------#
+    #ROTTA ANALISI DEI DATI
+    Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
+    ->name('analisiDati')->middleware('can:isAdmin');
+#ROTTA ANALISI DEI DATI NUMERO EPISODI PER DISTURBO
+Route::get('/episodi-disturbo/{id}', [AdminController::class, 'getEpisodiDisturbo'])
+    ->name('episodi.disturbo');
+    #--------------------------------------------------------------------#
+                    #ROTTE X GESTIONE CLINICI
+Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
+    ->name('gestioneClinici')->middleware('can:isAdmin');
+
+Route::post('/clinico/{id}', [AdminController::class, 'eliminaClinico'])
+    ->name('clinico.elimina')->middleware('can:isAdmin');
+
+Route::get('/home_admin/clinici/nuovo_clin', [AdminController::class, 'viewNuovoClinico'])
+    ->name('nuovoClinico')->middleware('can:isAdmin');
+
+Route::post('/nuovoClinico', [AdminController::class, 'storeClinico'])
+    ->name('nuovoClinico.store')->middleware('can:isAdmin');
+
+Route::get('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'viewAggiornaClinico'])
+    ->name('aggiornaClinicoAdmin')->middleware('can:isAdmin');
+
+Route::post('/home_admin/clinici/aggiornaClinico/{userClin}', [AdminController::class, 'updateClinico'])
+    ->name('aggiornaClinicoAdmin.edit')->middleware('can:isAdmin');
+#--------------------------------------------------------------------#
+                    #ROTTE GESTIONE FAQ
+                    
+Route::get('/home_admin/aggiorna_faq', [AdminController::class, 'viewGestioneFaq'])
+    ->name('gestioneFaq');
+
+Route::post('/faq/{id}', [AdminController::class, 'eliminaFaq'])
+    ->name('faq.elimina');
+                    
+Route::post('/faq/update/{id}', [AdminController::class, 'updateFaq'])
+    ->name('faq.update');
+
+Route::post('/home_admin/aggiorna_faq', [AdminController::class, 'storeFaq'])
+    ->name('faq.store');
+
+#--------------------------------------------------------------------#
+                    #ROTTE GESTIONE PAZIENTI
+
+Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
+    ->name('listaPaz')->middleware('can:isAdmin'); 
+                
+Route::post('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
+    ->name('eliminaPaziente')->middleware('can:isAdmin');
 
 require __DIR__.'/auth.php';
 
