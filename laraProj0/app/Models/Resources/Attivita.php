@@ -11,8 +11,14 @@ class Attivita extends Model
     public $timestamps = false;
     protected $fillable = ['nome', 'descr'];
 
+
+    protected $fillable = ['nome', 'descr'];
+    
+    
     public function terapie()
     {
         return $this->hasMany(Terapia::class, 'terapia', 'id');
     }
+
+
 }
