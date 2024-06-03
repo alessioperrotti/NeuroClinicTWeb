@@ -2,12 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttivitaRequest;
+use App\Http\Requests\DisturboRequest;
+use App\Http\Requests\FarmacoRequest;
+use App\Http\Requests\NewDisturboRequest;
+use App\Http\Requests\NewFarmacoRequest;
+use App\Http\Requests\UpdateDisturboRequest;
+use App\Http\Requests\UpdateFarmacoRequest;
+use App\Models\GestoreAttivita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\GestoreDisturbi;
+use App\Models\GestoreFarmaci;
+use App\Models\GestoreTerapie;
+use App\Models\Resources\DistMotorio;
+use Illuminate\Database\Eloquent\Casts\Json;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Psy\Readline\Hoa\Console;
 use App\Models\GestorePazienti;
 use App\Models\Resources\Paziente;
 use App\Models\Resources\Faq;
-use Illuminate\Support\Facades\Auth;
-use App\Models\GestoreDisturbi;
 use App\Models\GestoreFaq;
 use App\Models\GestoreClinici;
 use App\Models\Resources\Episodio;
@@ -17,10 +35,7 @@ use App\Http\Requests\NewFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
 use App\Http\Requests\UpdateClinicoRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\JsonResponse;
+
 
 class AdminController extends Controller
 {
