@@ -12,8 +12,30 @@
     @show
     @section('scripts')
     @show
+    
 </head>
 <body class="bg-cyan-50">
+    <script>
+
+        $(document).ready(function() {
+            
+            function togglePassword(inputId, eyeId) {
+                const input = document.getElementById(inputId);
+                const eye = document.getElementById(eyeId);
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    eye.src ="{{asset('images/eye-slash-solid.png')}}";
+                    eye.alt = 'Hide password';
+                } else {
+                    input.type = 'password';
+                    eye.src = "{{asset('images/eye-solid.png')}}";
+                    eye.alt = 'Show password';
+                }
+        
+            }
+        });
+    </script>
     <header>
         <div class="bg-cyan-600 h-[100px] flex items-center justify-center">
             <a href="{{ route('home') }}">

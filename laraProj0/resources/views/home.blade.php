@@ -35,13 +35,16 @@
                     <a href="{{ route('faq') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">FAQ</a>
                     <a href="#contact" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CONTATTACI</a>
                     @guest
-                        <a href="{{ route('login') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
+                        <a href="{{ route('login') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGIN</a>
                     @endguest
                     @can('isPaziente')
                         <a href="{{ route('homePaziente') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
                     @endcan
                     @can('isClinico')
                         <a href="{{ route('homeClinico') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
+                    @endcan
+                    @can('isAdmin')
+                        <a href="{{ route('homeAdmin') }}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">AREA RISERVATA</a>
                     @endcan
 
                 </nav>

@@ -72,16 +72,16 @@ class PazController extends Controller
         return redirect()->route('homePaziente', ['username' => $paziente->username ])->with('success', 'Dati paziente aggiornati con successo.');
     }
 
-    public function showCartClinica($userPaz) : View {
+    public function showCartClinica() : View {
 
-        $paziente = Paziente::find($userPaz);
-        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz);
+        $paziente = Auth::user()->paziente;
+        $userPaz = $paziente->username;
+        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('data');
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
-        $terId = $terapia->pluck('id');   //recupero l'id della terapia attiva
-        $farmaci = $this->gestTerModel->getFarmaciByTer($terId);
-        $attivita = $this->gestTerModel->getAttivitaByTer($terId);
-
+        $terId = $terapia->id;
+        $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
+        $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
 
         return view('cartellaClinicaPaziente')
                 ->with('paziente', $paziente)

@@ -10,10 +10,6 @@ class Attivita extends Model
     protected $table = 'attivita';
     public $timestamps = false;
     protected $fillable = ['nome', 'descr'];
-
-
-    protected $fillable = ['nome', 'descr'];
-    
     
     public function terapie()
     {

@@ -2,6 +2,8 @@
 
 @section('title', 'Cambia Password')
 
+
+
 @section('content')
 <div class="flex flex-col items-center justify-center gap-y-2">
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Modifica password</h1>
@@ -64,5 +66,6 @@
         </form>
     </div>
 </div>
+
 
 @endsection
