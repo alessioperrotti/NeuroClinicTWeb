@@ -39,17 +39,22 @@ use App\Http\Requests\UpdateClinicoRequest;
 
 class AdminController extends Controller
 {
-    protected $adminModel;
-    protected $pazientiModel;
     protected $disturbiModel;
+    protected $farmaciModel;
+    protected $attivitaModel;
+    protected $pazientiModel;
     protected $cliniciModel;
+    protected $faqModel;
 
     public function __construct()
     {
 
         Log::info('AdminController inizializzato');
         #$this->middleware('can:isAdmin');
-        $this->disturbiModel = new GestoreDisturbi();
+        $this->middleware('can:isAdmin');
+        $this->disturbiModel = new GestoreDisturbi;
+        $this->farmaciModel = new GestoreFarmaci;
+        $this->attivitaModel = new GestoreAttivita;
         $this->pazientiModel= new GestorePazienti;
         $this->cliniciModel= new GestoreClinici;
         $this->faqModel= new GestoreFaq;
@@ -63,7 +68,22 @@ class AdminController extends Controller
         return view('homeAdmin'); 
     }
 ################################################################################################
-    #SEZIONA FAQ
+    #SEZIONE PAZIENTI   
+    public function mostraPazienti()
+    {
+        $pazienti=$this->pazientiModel->getPazienti();
+        #return view('listaPaz')->with('pazienti',$pazienti);
+        return response()
+        ->view('listaPaz', ['pazienti' => $pazienti]);
+        
+    } 
+    public function eliminaPaziente($username)
+    {
+        $this->pazientiModel->eliminaPaz($username);
+        $pazienti = $this->pazientiModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
+        return redirect()->route('listaPaz');   
+    }
+   #SEZIONA FAQ
     public function viewGestioneFaq()
     {
         $faqs=$this->faqModel->getFaqs();
