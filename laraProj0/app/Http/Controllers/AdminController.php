@@ -168,57 +168,163 @@ class AdminController extends Controller
 
 ####################################################################################################################
 
-
-
-
-    #SEZIONE DISTURBI
+    //DISTURBI
     public function viewDisturbi()
     {
         Log::info('metodo viewDisturbo attivato');
-
-        $disturbi=$this->disturbiModel->getDisturbi();
-        return view('gestioneDisturbi')->with('disturbi',$disturbi);
+        $disturbi = $this->disturbiModel->getDisturbi();
+        return view('gestioneDisturbi')->with('disturbi', $disturbi);
     }
 
-    public function storeDisturbo(NewDisturboRequest $request): RedirectResponse {
-    
+    public function storeDisturbo(DisturboRequest $request): JsonResponse
+    {
+
 
         Log::info('metodo storeDisturbo attivato');
         $validatedData = $request->validated();
-/*
-        $user = new User([
-            'username' => $validatedData['username'],
-            'password' => Hash::make('stdpassword'),
-            'usertype' => 'A'
+
+
+        $riuscito = $this->disturbiModel->storeDisturbo($validatedData);
+
+        if ($riuscito) {
+            return response()->json(['redirect' => route('gestioneDisturbi')]); 
+
+        } else {
+            return response()->json(['error' => 'Errore durante l\'aggiunta del disturbo.'], 422);
+
+        }
+    }
+
+    public function deleteDisturbo(Request $request)
+    {
+        $validated = $request->validate([
+            'idDel' => 'required',
         ]);
-        $user->save();
-        devo capire a cosa serve nell'aggiunta del paziente. credo qui non serva???
-        
-        */
-        $disturbo = new DistMotorio;
-        $disturbo->fill($validatedData);
-        $disturbo->save();
 
-        return redirect()->action([AdminController::class, 'index']);
+        $riuscito = $this->disturbiModel->deleteDisturbo($validated);
+
+        if ($riuscito) {
+            return redirect()->route('gestioneDisturbi');
+            
+            
+        } else {
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del disturbo.');
+        }
+    }
+    
+    public function updateDisturbo(DisturboRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $riuscito = $this->disturbiModel->updateDisturbo($validated);
+
+        if ($riuscito) {
+            return response()->json(['redirect' => route('gestioneDisturbi')]); 
+        } else {
+            return response()->json(['error' => 'Errore durante la modifica del disturbo.'], 422);
+        }
+    }
+    
+
+
+    //VISTA FARMACI_ATTIVITA
+    //farmaci
+    public function viewFarmaciAttivita()
+    {
+        $farmaci = $this->farmaciModel->getFarmaci();
+        $attivita = $this->attivitaModel->getAttivita();
+        return view('gestioneFarmaciAttivita')->with('farmaci', $farmaci)->with('attivita',$attivita);
 
     }
+    
 
-
-    public function mostraPazienti()
+    public function storeFarmaco(FarmacoRequest $request): JsonResponse
     {
-        $pazienti=$this->pazientiModel->getPazienti();
-        #return view('listaPaz')->with('pazienti',$pazienti);
-        return response()
-        ->view('listaPaz', ['pazienti' => $pazienti]);
-        
-    } 
+        $validatedData = $request->validated();
+        Log::info('metodo storeFarmaco attivato');
+        $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
 
-    public function eliminaPaziente($username)
+        if ($riuscito) {
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
+
+        } else {
+            return response()->json(['error' => 'Errore durante l\'aggiunta del farmaco.'], 422);
+        }
+    }    
+
+    public function deleteFarmaco(Request $request)
     {
-        $this->pazientiModel->eliminaPaz($username);
-        $pazienti = $this->pazientiModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
-        return redirect()->route('listaPaz');   
+        $validated = $request->validate([
+            'idDel' => 'required',
+        ]);
+
+        $riuscito = $this->farmaciModel->deleteFarmaco($validated);
+
+        if ($riuscito) {
+            return redirect()->route('gestioneFarmaciAttivita');
+        } else {
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del farmaco.');
+        }
     }
 
+    public function updateFarmaco(FarmacoRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $riuscito = $this->farmaciModel->updateFarmaco($validated);
+
+        if ($riuscito) {    
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
+        } else {
+            return response()->json(['error' => 'Errore durante la modifica del farmaco.'], 422);
+        }
+    }
+
+    
+
+    //attivita
+    
+    public function storeAttivita(AttivitaRequest $request):JsonResponse{
+        Log::info($request);
+        $validatedData = $request->validated();
+        Log::info('metodo storeAttivita attivato');
+
+        $riuscito = $this->attivitaModel->storeAttivita($validatedData);
+
+        if ($riuscito) {
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
+        } else {
+            return response()->json(['error' => 'Errore durante l\'aggiunta dell\'attivita.'], 422);
+        }
+    }
+
+    public function deleteAttivita(Request $request)
+    {
+        $validated = $request->validate([
+            'idDel' => 'required',
+        ]);
+
+        $riuscito = $this->attivitaModel->deleteAttivita($validated);
+
+        if ($riuscito) {
+            return redirect()->route('gestioneFarmaciAttivita');
+        } else {
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione dell\'attività.');
+        }
+    }
+
+    public function updateAttivita(AttivitaRequest $request):JsonResponse
+    {
+        Log::info($request);
+        $validated = $request->validated();
+
+        $riuscito = $this->attivitaModel->updateAttivita($validated);
+
+        if ($riuscito) {
+            return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
+        } else {
+            return response()->json(['error' => 'Errore durante la modifica dell\'attivita.'], 422);
+        }
+    }
     
 }
