@@ -22,11 +22,6 @@ Route::get('/', function () {
 })
 ->name('home');
 
-/*
-Route::get('/login', function () {
-    return view('login');
-})
-->name('login'); */
 
 Route::get('/faq', function () {
     return view('faq');
@@ -37,107 +32,13 @@ Route::get('/home_paz', [PazController::class, 'index'])
 ->name('homePaziente')->middleware('can:isPaziente'); 
 
 
-Route::get('/home_paz/cambia_pwd', function () {
-    return view('cambiaPwdPaziente');
-})
-->name('cambiaPwdPaziente');
 
 Route::get('/home_paz/nuovo_ep' , function () {
     return view('inserimentoNuovoEvento');
 })
 ->name('inserimentoNuovoEvento');
 
-Route::get('/home_clin/nuovo_paz',function () {
-    return view('nuovoPaziente');
-})
-->name('nuovoPaziente')->middleware('can:isClinico');
-
-Route::get('/home_paz/aggiorna_dati' , function () {
-    return view('aggiornaDatiPaziente');
-})
-->name('aggiornaDatiPaziente');
-
-Route::get('/home_paz/cartella' , function () {
-    return view('cartellaClinicaPaziente');
-})
-->name('cartellaClinicaPaziente');
-
-Route::get('/home_admin', function () {
-    return view('homeAdmin');
-})
-->name('homeAdmin')->middleware('can:isAdmin');
-
-Route::get('/home_admin/lista_paz', function () {
-    return view('listaPaz');
-})
-->name('listaPaz');
-
-Route::get('/home_admin/analisi_dati', function () {
-    return view('analisiDati');
-})
-->name('analisiDati');
-
-Route::get('/home_admin/clinici/nuovo_clin', function () {
-    return view('nuovoClinico');
-})
-->name('nuovoClinico');
-
-
-Route::get('/home_admin/disturbi', function () {
-    return view('gestioneDisturbi');
-})
-->name('gestioneDisturbi');
-
-
-Route::get('/home_admin/clinici', function () {
-    return view('gestioneClinici');
-})
-->name('gestioneClinici');
-
-
-Route::get('/home_admin/farmaci_attivita', function () {
-    return view('gestioneFarmaciAttivita');
-})
-->name('gestioneFarmaciAttivita');
-
-
-Route::get('/home_admin/aggiorna_faq', function () {
-    return view('gestioneFaq');
-})
-->name('gestioneFaq');
-
-Route::get('/home_clin',function () {
-    return view('homeClinico');
-})
-->name('homeClinico');
-
-Route::get('/home_clin/aggiorna_clin',function () {
-    return view('aggiornaClinico');
-})
-->name('aggiornaClinico');
-
-Route::get('/home_clin/lista_paz',function () {
-    return view('listaPazienti');
-})
-->name('listaPazienti');
-
-/*
-Route::get('/home_clin/lista_paz/cart_clinica/userPaz/{userPaz}',function () {
-    return view('cartellaClin2');
-})
-->name('cartellaClin2'); */
-
-Route::get('/home_clin/lista_paz/cart_clinica',function () {
-    return view('cartellaClin2');
-})
-->name('cartellaClin2'); // rotta per sviluppo
-
-Route::get('/home_clin/lista_paz/cart_clinica/mod_terapia',function () {
-    return view('modificaTerapia');
-})
-->name('modificaTerapia'); // rotta per sviluppo
-
-
+// Sezione clinico
 
 Route::get('/home_clin', [ClinController::class, 'index'])
 ->name('homeClinico')->middleware('can:isClinico');
@@ -181,8 +82,8 @@ Route::put('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 
 #--------------------------------------------------------------------#
     #ROTTA ANALISI DEI DATI
-    Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
-    ->name('analisiDati')->middleware('can:isAdmin');
+Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
+->name('analisiDati')->middleware('can:isAdmin');
 #ROTTA ANALISI DEI DATI NUMERO EPISODI PER DISTURBO
 Route::get('/episodi-disturbo/{id}', [AdminController::class, 'getEpisodiDisturbo'])
     ->name('episodi.disturbo');
@@ -229,6 +130,46 @@ Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
 Route::post('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
     ->name('eliminaPaziente')->middleware('can:isAdmin');
 
-require __DIR__.'/auth.php';
+
+//INIZIO VISTA FARMACI_ATTIVITA
+Route::get('/home_admin/farmaci_attivita', [AdminController::class, "viewFarmaciAttivita"])
+    ->name('gestioneFarmaciAttivita');
+//rotte per gestione farmaci
+Route::post('/home_admin/farmaci_attivita/farmaco', [AdminController::class, 'storeFarmaco'])
+    ->name('gestioneFarmaci.store');
+
+Route::post('/home_admin/farmaci_attivita/farmaco/delete', [AdminController::class, 'deleteFarmaco'])
+    ->name('gestioneFarmaci.delete');
+
+Route::post('/home_admin/farmaci_attivita/farmaco/update', [AdminController::class, 'updateFarmaco'])
+    ->name('gestioneFarmaci.update');
+//rotte per gestione attivita
+Route::post('/home_admin/farmaci_attivita/attivita', [AdminController::class, 'storeAttivita'])
+    ->name('gestioneAttivita.store');
+
+Route::post('/home_admin/farmaci_attivita/attivita/delete', [AdminController::class, 'deleteAttivita'])
+    ->name('gestioneAttivita.delete');
+
+Route::post('/home_admin/farmaci_attivita/attivita/update', [AdminController::class, 'updateAttivita'])
+    ->name('gestioneAttivita.update');
+//FINE VISTA FARMACI_ATTIVITA
+
+//INIZIO VISTA DISTURBI
+Route::get('/home_admin/disturbi', [AdminController::class, 'viewDisturbi'])
+    ->name('gestioneDisturbi');
+
+//rotte per gestione disturbi
+
+Route::post('/home_admin/disturbi', [AdminController::class, 'storeDisturbo'])
+    ->name('gestioneDisturbi.store');
+
+Route::post('/home_admin/disturbi/delete', [AdminController::class, 'deleteDisturbo'])
+    ->name('gestioneDisturbi.delete');
+
+Route::post('/home_admin/disturbi/update', [AdminController::class, 'updateDisturbo'])
+    ->name('gestioneDisturbi.update');
+
+//FINE VISTA DISTURBI
+
 
 require __DIR__.'/auth.php';
