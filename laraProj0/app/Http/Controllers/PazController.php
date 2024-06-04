@@ -14,11 +14,12 @@ use App\Models\GestoreTerapie;
 use App\Models\GestoreDistubi;
 use App\Models\GestorePazienti;
 use App\Models\GestoreClinici;
+use App\Models\Resources\Episodio;
+use Illuminate\Support\Facades\Hash;
 /*use App\Models\Resources\Attivita;
 use App\Models\Resources\Clinico;
 use App\Models\Resources\Diagnosi;
 use App\Models\Resources\DistMotorio;
-use App\Models\Resources\Episodio;
 use App\Models\Resources\Farmaco;
 use App\Models\Resources\Terapia;*/
 
@@ -42,7 +43,15 @@ class PazController extends Controller
     public function index(): View {
         $user = Auth::user();
         $paziente = $user->paziente;
-        return view('homePaziente')->with('paziente', $paziente);
+        if ($user->password == Hash::make('stdpassword')) {  /* se la password è quella di default si mostrerà un alert */
+            $changed = true;
+        } 
+        else {
+            $changed = false;
+        }
+        return view('homePaziente')
+        ->with('paziente', $paziente)
+        ->with('changed', $changed);
     }
 
     public function edit($username) {
@@ -96,4 +105,31 @@ class PazController extends Controller
         return view('cambiaPwdPaziente');
     }
     
+    public function showNuovoEpisodio() : View {
+        $userPaz = Auth::user()->paziente->username;
+        $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
+        return view('inserimentoNuovoEvento', compact('disturbi'))
+                ->with('disturbi', $disturbi);
+    }
+
+    public function storeEpisodio(Request $request) {
+        $request->validate([
+            'data' => 'required|date|before:today|date_format:Y-m-d',
+            'ora' => 'required|date_format:H:i',
+            'durata' => 'required|integer|min:1|digits_between:1,120',
+        ]);
+
+        $userPaz = Auth::user()->paziente->username;
+
+        Episodio::create([
+            'data' => $request->data,
+            'ora' => $request->ora,
+            'durata' => $request->durata,
+            'intensita' => $request->intensita,
+            'paziente' => $userPaz,
+            'disturbo' => $request->disturbo,
+        ]);
+        
+        return redirect()->route('homePaziente')->with('success', 'Episodio inserito con successo!');
+    }
 }

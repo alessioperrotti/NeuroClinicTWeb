@@ -6,11 +6,12 @@
 <div class="flex flex-col items-center justify-center gap-y-2">
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Inserimento nuovo evento di disturbo motorio</h1>
     <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12">
-        <form>
+        <form id="evento-form" method="POST" action="{{route('inserimentoNuovoEvento.store')}}">
+            @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700 font-semibold">Disturbo</label>
-                    <select name="disturbo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <select id="disturbo" name="disturbo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                         @isset($disturbi)
                         @foreach($disturbi as $disturbo)
                             <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option> <!-- Adatta id e name ai tuoi attributi -->
@@ -20,19 +21,19 @@
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold">Data</label>
-                    <input name="data" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <input id="data" name="data" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold">Ora</label>
-                    <input name="ora" type="time" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <input id="ora" name="ora" type="time" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold">Durata (minuti)</label>
-                    <input name="durata" type="number" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <input id="durata" name="durata" type="number" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold">Intensità</label>
-                    <select name="intensità" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <select id="intensita" name="intensita" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

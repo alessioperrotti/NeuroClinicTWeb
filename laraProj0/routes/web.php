@@ -182,10 +182,11 @@ Route::post('/cambia_pwd', [PasswordController::class, 'update_pwd'])
 Route::get('/home_paz', [PazController::class, 'index'])
 ->name('homePaziente')->middleware('can:isPaziente');
 
-Route::get('/home_paz/nuovo_ep' , function () {
-    return view('inserimentoNuovoEvento');
-})
+Route::get('/home_paz/nuovo_ep' , [PazController::class, 'showNuovoEpisodio'])
 ->name('inserimentoNuovoEvento');
+
+Route::post('/home_paz/nuovo_ep' , [PazController::class, 'storeEpisodio'])
+->name('inserimentoNuovoEvento.store');
 
 
 require __DIR__.'/auth.php';
