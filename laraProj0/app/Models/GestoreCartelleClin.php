@@ -46,10 +46,10 @@ class GestoreCartelleClin extends Model
 
         $terapia = Terapia::where('paziente', $userPaz)->orderBy('data', 'desc')->first();
 
-        if($terapia != null) {
+        if($terapia != null) {  
             return $terapia;
         }
-        else {
+        else {  // se non esiste terapia attiva (perchè il paziente è nuovo), ne creiamo una "vuota"
             $data = Carbon::now()->toDateTimeString();
             $terapia = new Terapia([
                 'data' => $data,
