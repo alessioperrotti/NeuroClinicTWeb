@@ -149,17 +149,6 @@
             @endisset
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Sovrascrive il pulsante "Indietro"
-            //Prendo l'elemento con Id=back_button, a questo elemento sovrascrivo  
-            //l'attributo onclick in modo che quando viene cliccato eseguo la funzione
-            //che imposta window.location.href sulla route {{ route('gestioneClinici') }} (window.location.href è una proprietà in JavaScript che rappresenta l'URL della pagina corrente)
-            var backButton = document.getElementById('back_button');
-            backButton.onclick = function() {
-                window.location.href = "{{ route('homeAdmin') }}";
-            };
-        });  
-
         // Aggiunge un listener per il pulsante "Aggiungi FAQ" per mostrare il form
         document.getElementById('btnAggiungiFaq').addEventListener('click', function() {
             document.getElementById('formNuovaFaq').style.display = 'block';
