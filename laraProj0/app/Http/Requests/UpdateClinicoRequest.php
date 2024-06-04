@@ -28,11 +28,11 @@ class UpdateClinicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:30',
-            'cognome' => 'required|max:30',
-            'dataNasc' => 'required|date|before:today|date_format:Y-m-d',
+            'nome' => 'required|max:30|alpha',
+            'cognome' => 'required|max:30|alpha',
+            'dataNasc' => 'required|date|before:today|date_format:Y-m-d|after:1900-01-01',
             'ruolo' => 'required|max:20',
-            'specializ' => 'required|max:30',
+            'specializ' => 'required|max:30|alpha',
         ];
     }
     protected function failedValidation(Validator $validator): HttpResponseException
