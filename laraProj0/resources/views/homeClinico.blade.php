@@ -50,7 +50,7 @@
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Data di nascita</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$clinico->dataNasc}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{\Carbon\Carbon::parse($clinico->dataNasc)->format('d-m-Y')}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">

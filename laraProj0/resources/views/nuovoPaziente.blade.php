@@ -9,19 +9,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-$(function () {
-    var actionUrl = "{{ route('nuovoPaziente.store')}}";  // chiamata per la submit ma anche per la validazione
-    var formId = 'addpaziente';
-$(":input").on('blur', function (event) {  /* prendiamo tutti gli elementi di input e assegnamo 
-    un handler all'evento di blur (perdita del focus) */
-        var formElementId = $(this).attr('id');
-        doElemValidation(formElementId, actionUrl, formId);  // la funzione è definita in functions.js
+
+    $(function() {
+
+        var actionUrl = "{{ route('nuovoPaziente.store') }}";
+        var formId = 'addPaziente'; //a questa assegnamo l'id della form
+        $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            var inputName = $(this).attr('name');
+            doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(actionUrl, formId); //valida l'intera form
+        });
     });
-    $("#addpaziente").on('submit', function (event) {  // assegnamo un handler per il submit
-        event.preventDefault();  // disabilitiamo il processo standard di submit
-        doFormValidation(actionUrl, formId);  // altra funzione di functions.js
-    });
-});
+
 </script>
 
 @endsection
