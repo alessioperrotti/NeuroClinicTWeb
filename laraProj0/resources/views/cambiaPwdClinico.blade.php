@@ -13,8 +13,7 @@
                 </div>
             @endif
         <form method="POST" action="{{ route('password.update')}}" class="mb-10">   
-            @csrf 
-            @method('PUT')
+            @csrf
             
                 <label for="vecchiaPwd" class="block text-gray-700 font-semibold text-xl">Vecchia Password</label>
                 <div class="relative">
