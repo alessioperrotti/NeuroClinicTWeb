@@ -37,12 +37,12 @@ class ClinController extends Controller
     public function index(): View {
         $user = Auth::user();
         $clinico = $user->clinico;
-        if ($user->password == Hash::make('stdpassword')) {  /* se la password è quella di 
+        if (Hash::check('stdpassword', $user->password)) {  /* se la password è quella di 
                                                                 default si mostrerà un alert */
-            $changed = true;
+            $changed = false;
         } 
         else {
-            $changed = false;
+            $changed = true;
         }
         return view('homeClinico')
             ->with('clinico', $clinico)
