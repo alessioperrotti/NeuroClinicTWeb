@@ -120,10 +120,9 @@
 
         var changed = json_encode($changed);
         if(changed){
-            alert("Non hai ancora modificato la password, ti consigliamo di farlo al più presto.");
+            alert("Non hai ancora modificato la password (stdpassowrd), ti consigliamo di farlo al più presto.");
         }
 
     });
 
-    
 </script>
