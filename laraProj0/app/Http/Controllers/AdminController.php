@@ -150,11 +150,10 @@ class AdminController extends Controller
     }
     public function storeClinico(NewClinicoRequest $request): JsonResponse
     {
-        log::info('metodo storeClinico del controller attivato');
         $validatedData = $request->validated();
-        if($this->cliniciModel->storeClinico($validatedData))
-            return response()->json(['redirect' => route('viewGestioneClinici')]);
-        else
+        if($this->cliniciModel->storeClinico($validatedData)){
+            return response()->json(['redirect' => route('gestioneClinici')]);
+        }else
             return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
     public function viewAggiornaClinico($userClin)
@@ -167,7 +166,7 @@ class AdminController extends Controller
         $validatedData = $request->validated();
         log::info("dati validati");
         if($this->cliniciModel->updateClinico($validatedData, $userClin))
-            return response()->json(['redirect' => route('viewGestioneClinici')]);
+            return response()->json(['redirect' => route('gestioneClinici')]);
         else
             return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
