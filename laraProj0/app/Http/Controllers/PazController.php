@@ -95,4 +95,5 @@ class PazController extends Controller
     public function showPassChange() : View {
         return view('cambiaPwdPaziente');
     }
+    
 }

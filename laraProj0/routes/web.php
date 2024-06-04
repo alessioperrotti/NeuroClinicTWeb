@@ -180,8 +180,7 @@ Route::post('/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->middleware('auth')->name('password.update');
 
 Route::get('/home_paz', [PazController::class, 'index'])
-->name('homePaziente')->middleware('can:isPaziente'); 
-
+->name('homePaziente')->middleware('can:isPaziente');
 
 Route::get('/home_paz/nuovo_ep' , function () {
     return view('inserimentoNuovoEvento');

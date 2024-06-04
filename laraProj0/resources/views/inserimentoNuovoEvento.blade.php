@@ -11,9 +11,9 @@
                 <div>
                     <label class="block text-gray-700 font-semibold">Disturbo</label>
                     <select name="disturbo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                        @isset($diturbo)
-                        @foreach($diturbo as $disturbo)
-                            <option value="{{ $disturbo->id }}">{{ $disturbo->name }}</option> <!-- Adatta id e name ai tuoi attributi -->
+                        @isset($disturbi)
+                        @foreach($disturbi as $disturbo)
+                            <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option> <!-- Adatta id e name ai tuoi attributi -->
                         @endforeach
                         @endisset
                     </select>
