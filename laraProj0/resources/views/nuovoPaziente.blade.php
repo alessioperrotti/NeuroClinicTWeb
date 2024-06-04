@@ -36,19 +36,19 @@ $(":input").on('blur', function (event) {  /* prendiamo tutti gli elementi di in
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700">Nome</label>
-                    <input name="nome" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
+                    <input id="nome" name="nome" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Nome">
                 </div>
                 <div>
                     <label class="block text-gray-700">Cognome</label>
-                    <input name="cognome" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
+                    <input id="cognome" name="cognome" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Cognome">
                 </div>
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
-                    <input name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
+                    <input id="dataNasc" name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Data di nascita">
                 </div>
                 <div>
                     <label class="block text-gray-700">Genere</label>
-                    <select name="genere" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <select id="genere" name="genere" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                         <option value="M" class="text-gray-700">Uomo</option>
                         <option value="F" class="text-gray-700">Donna</option>
                         <option value="A" class="text-gray-700">Altro</option>
@@ -57,21 +57,21 @@ $(":input").on('blur', function (event) {  /* prendiamo tutti gli elementi di in
                 <div class="flex">
                     <div class="basis-2/3">
                         <label class="block text-gray-700">Via</label>
-                        <input name="via" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Via">
+                        <input id="via" name="via" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Via">
                     </div>
                     <div class="basis-1/3 pl-2">
                         <label class="block text-gray-700">Civico</label>
-                        <input name="civico" type="text" maxlength="5" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Civico">
+                        <input id="civico" name="civico" type="text" maxlength="5" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Civico">
                     </div>
                 </div>
                 <div class="flex">
                     <div class="basis-2/3">
                         <label class="block text-gray-700">Città</label>
-                        <input name="citta" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Città">
+                        <input id="citta" name="citta" type="text" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Città">
                     </div>
                     <div class="basis-1/3 pl-2">
                         <label class="block text-gray-700">Provincia</label>
-                        <select name="prov" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                        <select id="prov" name="prov" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                             @isset($province)
                             @foreach($province as $provincia)
                                 <option value={{$provincia}} class="text-gray-700">{{$provincia}}</option>
@@ -82,19 +82,19 @@ $(":input").on('blur', function (event) {  /* prendiamo tutti gli elementi di in
                 </div>
                 <div>
                     <label class="block text-gray-700">Telefono</label>
-                    <input name="telefono" type="tel" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
+                    <input id="telefono" name="telefono" type="tel" maxlength="30" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Telefono">
                 </div>
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
-                    <input name="email" type="email" maxlength="40" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Email">
+                    <input id="email" name="email" type="email" maxlength="40" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Email">
                 </div>
                 <div>
                     <label class="block text-gray-700">Username</label>
-                    <input name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
+                    <input id="username" name="username" type="text" maxlength="20" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Username">
                 </div>
                 <div>
                     <label class="block text-gray-700">Clinico Associato</label>
-                    <select name="clinico" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <select id="clinico" name="clinico" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                     @isset($clinici)
                         @foreach($clinici as $clinico)
                         <option value={{$clinico->username}}>{{$clinico->nome . " " . $clinico->cognome}}</option>
@@ -104,8 +104,8 @@ $(":input").on('blur', function (event) {  /* prendiamo tutti gli elementi di in
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 gap-x-24">
-                <input type="reset" value="Annulla Inserimento" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400">
-                <input type="submit" value="Conferma Inserimento" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500">
+                <input type="reset" value="Annulla Inserimento" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer">
+                <input type="submit" value="Conferma Inserimento" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 cursor-pointer">
             </div>
         </form>
     </div>

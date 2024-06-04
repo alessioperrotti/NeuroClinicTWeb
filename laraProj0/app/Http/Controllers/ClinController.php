@@ -68,10 +68,12 @@ class ClinController extends Controller
 
         if ($this->gestPazModel->storePaziente($validatedData)) {
 
-            return redirect()->action([ClinController::class, 'index']);
+            //return redirect()->action([ClinController::class, 'index']);
+            return response()->json(['redirect' => route('homeClinico')]);
         }
         else {
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del paziente.');
+            //return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del paziente.');
+            return response()->json(['error' => 'Errore durante l\'aggiunta del paziente.'], 422);
         }
         
     }
