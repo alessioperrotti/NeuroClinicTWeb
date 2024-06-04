@@ -14,6 +14,7 @@ use App\Models\GestoreTerapie;
 use App\Models\GestoreDisturbi;
 use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
 
 
 class ClinController extends Controller
@@ -62,7 +63,7 @@ class ClinController extends Controller
         return view('nuovoPaziente')->with('province', $province)->with('clinici', $clinici);
     }
 
-    public function storePaziente(NewPazienteRequest $request) : RedirectResponse {
+    public function storePaziente(NewPazienteRequest $request) : JsonResponse {
 
         $validatedData = $request->validated();
 
