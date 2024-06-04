@@ -165,16 +165,16 @@ class ClinController extends Controller
                 ->with('clinico', $clinico);
     }
 
-    public function updateClinico(UpdateClinicoRequest  $request) : RedirectResponse
+    public function updateClinico(UpdateClinicoRequest  $request) : JsonResponse
     {
         
         $validatedData = $request->validated();
         $userClin = Auth::user()->clinico->username;
         
         if($this->gestClinModel->updateClinico($validatedData, $userClin))
-            return redirect()->action([ClinController::class, 'index']);
+            return response()->json(['redirect' => route('homeClinico')]);
         else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
+            return response()->json(['error' => 'Errore durante l\'aggiunta del paziente.'], 422);
     }
 
     public function showPassChange () : View {
