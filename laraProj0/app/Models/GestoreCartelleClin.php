@@ -11,6 +11,7 @@ use App\Models\Resources\DistMotorio;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Resources\Terapia;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class GestoreCartelleClin extends Model
 {
@@ -44,7 +45,19 @@ class GestoreCartelleClin extends Model
     public function getTerapiaAttivaByPaz($userPaz): Terapia {
 
         $terapia = Terapia::where('paziente', $userPaz)->orderBy('data', 'desc')->first();
-        return $terapia;
+
+        if($terapia != null) {
+            return $terapia;
+        }
+        else {
+            $data = Carbon::now()->toDateTimeString();
+            $terapia = new Terapia([
+                'data' => $data,
+                'paziente' => $userPaz
+            ]);
+            $terapia->save();
+            return $terapia;
+        }
         
     }
 }

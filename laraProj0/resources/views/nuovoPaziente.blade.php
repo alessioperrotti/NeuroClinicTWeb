@@ -13,7 +13,7 @@
     $(function() {
 
         var actionUrl = "{{ route('nuovoPaziente.store') }}";
-        var formId = 'addPaziente'; //a questa assegnamo l'id della form
+        var formId = 'addpaziente'; //a questa assegnamo l'id della form
         $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
