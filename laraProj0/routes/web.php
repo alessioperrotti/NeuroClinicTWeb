@@ -121,6 +121,8 @@ Route::get('/home_admin/lista_paz', [AdminController::class, 'mostraPazienti'])
 Route::post('/home_admin/elimina_paziente/{id}', [AdminController::class, 'eliminaPaziente'])
     ->name('eliminaPaziente')->middleware('can:isAdmin');
 
+Route::get('/home_admin', [AdminController::class, 'index'])
+->name('homeAdmin')->middleware('can:isAdmin');
 
 //INIZIO VISTA FARMACI_ATTIVITA
 Route::get('/home_admin/farmaci_attivita', [AdminController::class, "viewFarmaciAttivita"])
