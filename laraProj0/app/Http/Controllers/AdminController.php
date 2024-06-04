@@ -148,30 +148,28 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
         
     }
-    public function storeClinico(NewClinicoRequest $request): RedirectResponse
+    public function storeClinico(NewClinicoRequest $request): JsonResponse
     {
         log::info('metodo storeClinico del controller attivato');
         $validatedData = $request->validated();
         if($this->cliniciModel->storeClinico($validatedData))
-            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+            return response()->json(['redirect' => route('viewGestioneClinici')]);
         else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del clinico.');
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
     public function viewAggiornaClinico($userClin)
     {
         $clinico = $this->cliniciModel->getClinico($userClin);
         return view('editClinico')->with('clinico', $clinico);
     }
-    public function updateClinico(UpdateClinicoRequest  $request ,$userClin)
+    public function updateClinico(UpdateClinicoRequest  $request ,$userClin):JsonResponse
     {
-        
-        log::info('metodo updateClinico del controller attivato');
         $validatedData = $request->validated();
         log::info("dati validati");
         if($this->cliniciModel->updateClinico($validatedData, $userClin))
-            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+            return response()->json(['redirect' => route('viewGestioneClinici')]);
         else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
 
     #ANALISI DEI DATI
