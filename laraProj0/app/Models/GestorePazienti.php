@@ -8,12 +8,11 @@ use App\Models\Resources\Paziente;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Resources\User;
+use App\Models\User;
 use App\Models\Resources\Terapia;
 
 class GestorePazienti extends Model
 {
-    use HasFactory;
 
     public function getPazienti(): Collection
     {

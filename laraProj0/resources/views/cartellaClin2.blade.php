@@ -7,7 +7,7 @@
 <h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Cartella clinica di {{ $paziente->nome . " " . $paziente->cognome }}</h1>
 @endisset  <!-- spostare in basso -->
 <div class="flex flex-col items-center">
-    <div name="container_terapia" class="bg-white mx-16 mb-6 rounded-xl shadow-md h-auto p-8">
+    <div name="container_terapia" class="bg-white mx-16 mb-6 rounded-xl shadow-md h-auto p-8 min-w-[800px]">
         <h3 class="text-2xl font-semibold">Anagrafica Paziente</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
@@ -46,7 +46,7 @@
                 <li class="mb-4">{{ $disturbo->nome}}
                 @endforeach
             @endisset
-            @if($disturbi == null)
+            @if($disturbi->isEmpty())
                 <li ><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
             @endif
         </ul>
@@ -72,7 +72,7 @@
             @endisset
 
             @if($attivita == null)
-                <li><p class="font-semibold">Non ci sono attvità pianificate.</p>
+                <li><p class="font-semibold mt-2">Non ci sono attvità pianificate.</p>
             @endif
         </ul>
     </div>

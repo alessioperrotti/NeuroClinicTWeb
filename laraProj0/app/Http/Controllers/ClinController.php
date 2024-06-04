@@ -14,6 +14,7 @@ use App\Models\GestoreTerapie;
 use App\Models\GestoreDisturbi;
 use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
 
 
 class ClinController extends Controller
@@ -62,16 +63,18 @@ class ClinController extends Controller
         return view('nuovoPaziente')->with('province', $province)->with('clinici', $clinici);
     }
 
-    public function storePaziente(NewPazienteRequest $request) : RedirectResponse {
+    public function storePaziente(NewPazienteRequest $request) : JsonResponse {
 
         $validatedData = $request->validated();
 
         if ($this->gestPazModel->storePaziente($validatedData)) {
 
-            return redirect()->action([ClinController::class, 'index']);
+            //return redirect()->action([ClinController::class, 'index']);
+            return response()->json(['redirect' => route('homeClinico')]);
         }
         else {
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del paziente.');
+            //return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del paziente.');
+            return response()->json(['error' => 'Errore durante l\'aggiunta del paziente.'], 422);
         }
         
     }

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 class GestoreDisturbi extends Model
 {
-    use HasFactory;
 
     public function getDisturbi():Collection {
         $disturbi = DistMotorio::all();
