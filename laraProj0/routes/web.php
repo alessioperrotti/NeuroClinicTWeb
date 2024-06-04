@@ -71,8 +71,6 @@ Route::put('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
 
 
-Route::get('/home_admin', [AdminController::class, 'index'])
-->name('homeAdmin'); 
 #--------------------------------------------------------------------#
     #ROTTA ANALISI DEI DATI
 Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
