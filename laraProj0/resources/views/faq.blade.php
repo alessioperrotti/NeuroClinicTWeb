@@ -2,6 +2,21 @@
 
 @section('title', 'FAQ')
 
+@section('scripts')
+
+@parent
+<script>
+    $(document).ready(function(){
+        
+        $(".faq").each(function(){
+            $(this).find("#arrow").click(function(){
+                $(this).parent().next().slideToggle(); // next prende il div successivo al div genitore di arrow
+            });
+        });
+    });
+</script>
+@endsection
+
 @section('content')
 <div class="flex flex-row flex-nowrap">
     <div name="textring" class="basis-1/3 items-center mt-10">
@@ -16,9 +31,14 @@
         
         @isset($faqs)
         @foreach($faqs as $faq)
-        <div name="card q&a" class="bg-white shadow rounded-2xl h-16 my-3 mr-8 p-8 items-center justify-between flex flex-row">
-            <h2 class="font-semibold text-gray-800">{{$faq->domanda}}</h2>
-            <img src="{{ asset('images/down.png')}}" class="h-8" alt="Down Arrow">
+        <div name="card" class="faq bg-white shadow rounded-2xl my-3 mr-8 p-6 flex flex-col">
+            <div class="items-center justify-between flex flex-row">
+                <h2 class="font-semibold text-gray-800">{{$faq->domanda}}</h2>
+                <img src="{{ asset('images/down.png')}}" id="arrow" class="h-8 cursor-pointer" alt="Down Arrow">
+            </div>
+            <div id="answer" class="hidden mt-2">
+                <p class="text-gray-500">{{$faq->risposta}}</p>
+            </div>
         </div>
         @endforeach
         @endisset
