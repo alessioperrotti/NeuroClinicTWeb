@@ -6,7 +6,7 @@
 <div class="flex flex-col items-center justify-center gap-y-2">
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Inserimento nuovo evento di disturbo motorio</h1>
     <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12">
-        <form id="evento-form" method="POST" action="{{route('inserimentoNuovoEvento.store')}}">
+        <form id="evento-form" method="POST">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
@@ -46,6 +46,9 @@
                         <option value="10">10</option>
                     </select>
                 </div>
+                <div>
+                    <input id="paziente" name="paziente" hidden value={{$userPaz}}>
+                </div>
             </div>
             <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">
                 <input name="annulla" type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
@@ -54,6 +57,36 @@
         </form>
     </div>
 </div>
+
+<script src="{{ asset('js/functions.js') }}"></script>
+
+<script>
+    
+    function setupValidation(actionUrl, formId) {
+            // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
+            $("#" + formId + " :input").on('blur', function() {
+                // Ottiene l'ID e il nome dell'input attualmente in focus
+                var formElementId = $(this).attr('id');
+                var inputName = $(this).attr('name');
+                // Chiama la funzione di validazione per l'elemento corrente
+                doElemValidation(formElementId, actionUrl, formId, inputName);
+            });
+            
+            // Aggiunge un listener per l'evento 'submit' del form
+            $("#" + formId).on('submit', function(event) {
+            // Previene l'invio predefinito del form
+            event.preventDefault();
+            // Chiama la funzione di validazione per l'intero form
+            doFormValidation(actionUrl, formId);
+            });
+        }
+
+        $(function() {
+            var actionUrl = "{{ route('inserimentoNuovoEvento.store') }}";
+            var formId = 'evento-form';
+            setupValidation(actionUrl, formId);
+        });
+</script>
 @endsection
 
 

@@ -16,6 +16,11 @@ use App\Models\GestorePazienti;
 use App\Models\GestoreClinici;
 use App\Models\Resources\Episodio;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\NewEventoRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use App\Models\GestoreEventi;
 /*use App\Models\Resources\Attivita;
 use App\Models\Resources\Clinico;
 use App\Models\Resources\Diagnosi;
@@ -31,6 +36,7 @@ class PazController extends Controller
     protected $gestPazModel;
     protected $gestCartModel;
     protected $gestTerModel;
+    protected $gestEventModel;
 
     public function __construct()
     {
@@ -38,16 +44,17 @@ class PazController extends Controller
         $this->gestPazModel = new GestorePazienti;
         $this->gestCartModel = new GestoreCartelleClin;
         $this->gestTerModel = new GestoreTerapie;
+        $this->gestEventModel = new GestoreEventi;
     }
     
     public function index(): View {
         $user = Auth::user();
         $paziente = $user->paziente;
         if ($user->password == Hash::make('stdpassword')) {  /* se la password è quella di default si mostrerà un alert */
-            $changed = true;
+            $changed = false;
         } 
         else {
-            $changed = false;
+            $changed = true;
         }
         return view('homePaziente')
         ->with('paziente', $paziente)
@@ -109,27 +116,20 @@ class PazController extends Controller
         $userPaz = Auth::user()->paziente->username;
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         return view('inserimentoNuovoEvento', compact('disturbi'))
-                ->with('disturbi', $disturbi);
+                ->with('disturbi', $disturbi)
+                ->with('userPaz', $userPaz);
     }
 
-    public function storeEpisodio(Request $request) {
-        $request->validate([
-            'data' => 'required|date|before:today|date_format:Y-m-d',
-            'ora' => 'required|date_format:H:i',
-            'durata' => 'required|integer|min:1|digits_between:1,120',
-        ]);
-
-        $userPaz = Auth::user()->paziente->username;
-
-        Episodio::create([
-            'data' => $request->data,
-            'ora' => $request->ora,
-            'durata' => $request->durata,
-            'intensita' => $request->intensita,
-            'paziente' => $userPaz,
-            'disturbo' => $request->disturbo,
-        ]);
+    public function storeEpisodio(NewEventoRequest $request): JsonResponse {
         
-        return redirect()->route('homePaziente')->with('success', 'Episodio inserito con successo!');
+        $validatedData = $request->validated();
+        $riuscito=$this->gestEventModel->storeEpisodio($validatedData);
+        
+        if ($riuscito) {
+            return response()->json(['redirect' => route('homePaziente')]);
+        }
+        else {
+            return response()->json(['error' => 'Errore durante l\'aggiunta dell\'episodio.'], 422);
+        }
     }
 }
