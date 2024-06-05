@@ -10,15 +10,18 @@
             <p class="mb-4">Asked</p>
             <p>Questions</p>
         </div>
-        <img src="{{ url('images/anello.png')}}" class="z-0 h-[500px] pt-5" alt="Decoration">
+        <img src="{{ asset('images/anello.png')}}" class="z-0 h-[500px] pt-5" alt="Decoration">
     </div>
     <div name="q&a" class="basis-2/3 mt-24">
-        <!-- prototipo card q&a -->
-        <!-- foreach {echo } -->
+        
+        @isset($faqs)
+        @foreach($faqs as $faq)
         <div name="card q&a" class="bg-white shadow rounded-2xl h-16 my-3 mr-8 p-8 items-center justify-between flex flex-row">
-            <h2 class="font-semibold text-gray-800">Come posso prenotare una visita presso la vostra clinica?</h2>
-            <img src="{{ url('images/down.png')}}" class="h-8" alt="Down Arrow">
+            <h2 class="font-semibold text-gray-800">{{$faq->domanda}}</h2>
+            <img src="{{ asset('images/down.png')}}" class="h-8" alt="Down Arrow">
         </div>
+        @endforeach
+        @endisset
     </div>
 </div>
 <div class="flex justify-center">
@@ -48,7 +51,7 @@
     </div>
 </div>
 <div class="flex justify-end">
-    <img src="{{ url('images/riccio.png')}}" class="h-[700px] z-0" alt="Decoration">
+    <img src="{{ asset('images/riccio.png')}}" class="h-[700px] z-0" alt="Decoration">
 </div>
 <footer>
     <div class="bg-cyan-600 w-auto h-[200px] justify-between items-center flex p-8">
@@ -61,15 +64,15 @@
             <h4 class="font-bold text-white text-xl mr-8">Informazioni di Contatto</h4>
             <br>
             <div class="flex items-center space-x-1">
-                <img src="{{ url('images/location_pin.png')}}" class="h-4">
+                <img src="{{ asset('images/location_pin.png')}}" class="h-4">
                 <p class="font-sans text-white">Piazza Enrico Malatesta, 1 60121 Ancona (AN)</p>
             </div>
             <div class="flex items-center space-x-1">
-                <img src="{{ url('images/phone.png')}}" class="h-4">
+                <img src="{{ asset('images/phone.png')}}" class="h-4">
                 <p class="font-sans text-white">Tel <a href="tel:3549783214">+39 354 978 3214</a></p>
             </div>
             <div class="flex items-center space-x-1">
-                <img src="{{ url('images/email.png')}}" class="h-4">
+                <img src="{{ asset('images/email.png')}}" class="h-4">
                 <p class="font-sans text-white">Email <a href="mailto:info@neuroclinic.it">info@neuroclinic.it</a></p>
             </div>
         </div>
