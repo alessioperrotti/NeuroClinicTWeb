@@ -63,11 +63,13 @@
             <img src="{{ asset('images/banner2.gif')}}" alt="Banner Homepage">
             <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
                 <h1 class="font-bold text-6xl text-white">Riabilitazione neurologica personalizzata</h1>
+            </div>
         </div>
         <div id="slide3" class="hidden slide">
             <img src="{{ asset('images/banner3.gif')}}" alt="Banner Homepage">
             <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
                 <h1 class="font-bold text-6xl text-white">Un team di professionisti al tuo servizio</h1>
+            </div>
         </div>
     </div>
     <div class="h-[40px]"></div>
