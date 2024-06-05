@@ -647,7 +647,7 @@ class DatabaseSeeder extends Seeder
             ['freq' => '3 volte al giorno', 'terapia' => 20, 'farmaco' => 10],
         ]);
 
-        
+
         DB::table('pianificazione')->insert([
             ['freq' => '2 volte a settimana', 'terapia' => 1, 'attivita' => 1],
             ['freq' => '3 volte a settimana', 'terapia' => 2, 'attivita' => 2],

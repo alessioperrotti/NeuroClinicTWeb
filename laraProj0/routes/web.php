@@ -4,7 +4,6 @@ use App\Http\Controllers\PazController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClinController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\MessaggiController;
 use App\Http\Controllers\PasswordController;
 
 /*
@@ -193,16 +192,6 @@ Route::get('/home_paz/nuovo_ep' , function () {
     return view('inserimentoNuovoEvento');
 })
 ->name('inserimentoNuovoEvento');
-
-
-//rotte messaggi //per ora l'auth non lo considero
-
-Route::post('/home_paz/getmessaggi', [MessaggiController::class, 'getConversazione'])
-->name('getConversazione');
-
-Route::post('/home_paz/sendmessaggio', [MessaggiController::class, 'sendMessaggio'])
-->name('sendMessaggio');
-
 
 
 require __DIR__.'/auth.php';

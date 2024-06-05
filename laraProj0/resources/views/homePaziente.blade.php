@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <title>NeuroClinic | Home Paziente </title>
 </head>
 
@@ -24,7 +22,7 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a id="openChat" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">SCRIVI AL TUO CLINICO</a>
+                    <a class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">SCRIVI AL TUO CLINICO</a>
                     <a href="{{ route('cartellaClinicaPaziente', ['userPaz' => $paziente->username])}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLA CLINICA</a>
                     <a href="{{ route('inserimentoNuovoEvento')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">NUOVO EVENTO</a>
                     @auth
@@ -119,146 +117,22 @@
         </div>
     </div>
     <div class="container mx-auto text-center">
-        <div class="hidden fixed top-32 right-4 border border-gray-300 rounded-lg shadow-lg bg-white w-96 " id="chatPopup">
+        <div class="fixed top-32 right-4 border border-gray-300 rounded-lg shadow-lg bg-white w-80 max-h-96 overflow-y-auto" id="chatPopup">
             <div class="flex justify-between items-center bg-cyan-600 text-white px-4 py-2 rounded-t-lg">
                 <span>Conversazione</span>
                 <button type="button" class="close text-white font-bold" id="closeChatBtn">&times;</button>
             </div>
-            <div class="p-4 text-left max-h-72 overflow-y-auto" id="messages">
-                <div class="mb-2"><strong>Utente 1:</strong> Ciao! v</div>
+            <div class="p-4 text-left" id="messages">
+                <div class="mb-2"><strong>Utente 1:</strong> Ciao!</div>
                 <div class="mb-2"><strong>Utente 2:</strong> Ciao, come stai?</div>
-                <div><strong>Utente 1:</strong>
-                    <div class="flex justify-between">
-                        <div>
-                            Bene, grazie. E tu?
-                        </div>
-                        <div class="w-10">
-                            <h1 class="text-slate-500 text-xs right-0 text-right "> 12:58</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <strong>Utente 1:</strong>
-                    <div class="flex justify-between">
-                        <div>
-                            Bene, grazie. E tu?
-                        </div>
-                        <div class="relative"> 
-                            <h1 class="text-slate-500 text-xs absolute bottom-0 right-0">12:58</h1> 
-                    </div>
-                </div>
-
-
+                <div class="mb-2"><strong>Utente 1:</strong> Bene, grazie. E tu?</div>
+                
             </div>
             <div class="p-4 border-t border-gray-300">
-                <textarea id="messageInput" class="w-full p-2 border border-gray-300 rounded mb-2 resize-none" placeholder="Scrivi un messaggio..."></textarea>
+                <textarea id="messageInput" class="w-full p-2 border border-gray-300 rounded mb-2" placeholder="Scrivi un messaggio..."></textarea>
                 <button id="sendMessageBtn" class="w-full px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-500">Invia</button>
             </div>
         </div>
     </div>
 
-
-    <script>
-        $(document).ready(function() {
-
-
-            //ricevi messaggi
-            function riceviMessaggi() {
-                //ricevi messaggi
-                formElems = {
-                    '_token': '{{ csrf_token() }}',
-                    'mandante': 'pazipazi',
-                    'ricevente': 'clinclin'
-                };
-
-                $.ajax({
-                    url: "{{route('getConversazione')}}",
-                    method: 'POST',
-                    data: formElems,
-                    success: function(response) {
-                        console.log("messaggi ricevuti")
-
-
-                        $('#messages').html(''); //svuota i messaggi
-
-                        // $data.forEach(element => {
-                        //     // $('#messages').val('');//svuota i messaggi
-                        //     // $('#messages').append('<div class="message mb-2"><strong>' + element.mandante + ':</strong> ' + element.contenuto + '</div>');
-                        // });
-                        console.log(response);
-
-                        for (var key in response) {
-                            var messaggio = response[key];
-                            //voglio solo vedere l'ora e i minuti
-                            var data = new Date(messaggio.created_at);
-                            ora = data.getHours() + ':' + data.getMinutes();
-                            da_aggiungere = '<div><strong>' +messaggio.mandante+':</strong> '+'<div class="flex justify-between"><div>'+messaggio.contenuto+'<div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">'+ora+ '</h1></div></div>';           
-                            
-                            
-                            $('#messages').append(da_aggiungere);
-                        }
-                    }
-                });
-            }
-
-
-
-            // riceviMessaggi();
-            // setInterval(riceviMessaggi, 5000); //ogni 5 secondi ricevi i messaggi
-
-
-            $('#closeChatBtn').click(function() {
-                $('#chatPopup').hide();
-            });
-
-            $('#openChat').click(function() {
-                $('#chatPopup').show();
-            });
-
-
-            // Invia messaggio
-            $('#sendMessageBtn').on('click', function() {
-                var message = $('#messageInput').val();
-
-                $('#messageInput').val('');
-
-                if (message.trim() !== '') {
-
-                    formElems = {
-                        '_token': '{{ csrf_token() }}',
-                        'contenuto': message,
-                        'mandante': 'pazipazi',
-                        'ricevente': 'clinclin'
-                    };
-
-                    // Invia il messaggio al server
-                    $.ajax({
-                        url: "{{route('sendMessaggio')}}",
-                        method: 'POST',
-                        data: formElems,
-                        success: function(data) {
-                            console.log("messaggio inviatooo")
-                        }
-                    });
-
-                    // // Per ora, aggiungiamo il messaggio direttamente
-                    // $('#messages').append('<div class="message mb-2"><strong>Tu:</strong> ' + message + '</div>');
-                    // $('#messageInput').val('');
-
-                    setTimeout(riceviMessaggi, 500);
-
-
-                }
-
-
-
-            });
-
-
-
-
-
-        });
-    </script>
 </body>
