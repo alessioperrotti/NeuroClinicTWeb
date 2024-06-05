@@ -51,7 +51,7 @@
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Data di nascita</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$paziente->dataNasc}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{ \Carbon\Carbon::parse($paziente->dataNasc)->format('d-m-Y')}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
@@ -61,7 +61,7 @@
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Indirizzo</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$paziente->via . " " . $paziente->civico . " " . $paziente->citta . " " . $paziente->prov}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$paziente->via . " " . $paziente->civico . ", " . $paziente->citta . " (" . $paziente->prov . ")"}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
