@@ -699,6 +699,50 @@ class DatabaseSeeder extends Seeder
             ['paziente' => 'brucewayne', 'disturbo' => 2, 'data' => '2024-05-01 13:35:00'],
             ['paziente' => 'pazipazi', 'disturbo' => 14, 'data' => '2024-01-01 14:50:00'],
         ]);
+
+
+        DB::table('faq')->insert([
+            [
+                'domanda' => 'Quali sono gli strumenti utilizzati nella riabilitazione neurologica?',
+                'risposta' => 'Utilizziamo strumenti all\'avanguardia come robotica riabilitativa, elettrostimolatori e dispositivi di realtà virtuale per aiutare i pazienti nel recupero.'
+            ],
+            [
+                'domanda' => 'Che tipo di trattamenti offrite per i pazienti con ictus?',
+                'risposta' => 'Offriamo trattamenti personalizzati che includono terapia fisica, terapia occupazionale e logopedia per migliorare la mobilità, la funzionalità e la comunicazione.'
+            ],
+            [
+                'domanda' => 'Quali qualifiche hanno i vostri terapisti?',
+                'risposta' => 'I nostri terapisti sono tutti laureati in fisioterapia, terapia occupazionale o logopedia e hanno specializzazioni in riabilitazione neurologica.'
+            ],
+            [
+                'domanda' => 'Quanto durano generalmente le sessioni di riabilitazione?',
+                'risposta' => 'Le sessioni di riabilitazione durano generalmente da 45 minuti a un\'ora, a seconda delle necessità specifiche del paziente.'
+            ],
+            [
+                'domanda' => 'È possibile ricevere assistenza domiciliare?',
+                'risposta' => 'Sì, offriamo servizi di riabilitazione a domicilio per pazienti che non possono recarsi in clinica.'
+            ],
+            [
+                'domanda' => 'Quali sono i benefici della riabilitazione neurologica?',
+                'risposta' => 'La riabilitazione neurologica aiuta a migliorare la mobilità, la forza, la coordinazione e la qualità della vita dei pazienti con lesioni o malattie neurologiche.'
+            ],
+            [
+                'domanda' => 'Come posso prenotare una visita?',
+                'risposta' => 'Può prenotare una visita chiamando il nostro numero di telefono o compilando il modulo di prenotazione sul nostro sito web.'
+            ],
+            [
+                'domanda' => 'Quali servizi offrite per i pazienti con sclerosi multipla?',
+                'risposta' => 'Offriamo programmi di esercizi personalizzati, terapia occupazionale e supporto psicologico per aiutare i pazienti con sclerosi multipla a gestire i sintomi e migliorare la qualità della vita.'
+            ],
+            [
+                'domanda' => 'Avete programmi specifici per i bambini?',
+                'risposta' => 'Sì, abbiamo programmi di riabilitazione specifici per bambini con disturbi neurologici, inclusi terapia fisica, occupazionale e logopedia.'
+            ],
+            [
+                'domanda' => 'Quali tecnologie innovative utilizzate?',
+                'risposta' => 'Utilizziamo tecnologie innovative come la realtà virtuale, la robotica riabilitativa e l\'elettrostimolazione per ottimizzare i risultati della riabilitazione.'
+            ]
+        ]);
         
         
     }
