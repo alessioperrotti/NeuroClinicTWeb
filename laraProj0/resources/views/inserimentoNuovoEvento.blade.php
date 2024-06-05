@@ -5,8 +5,8 @@
 @section('content')
 <div class="flex flex-col items-center justify-center gap-y-2">
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Inserimento nuovo evento di disturbo motorio</h1>
-    <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12">
-        <form id="evento-form" method="POST">
+    <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12 mb-12">
+        <form id="evento-form" method="POST" action="{{ route('inserimentoNuovoEvento.store') }}">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
@@ -28,7 +28,7 @@
                     <input id="ora" name="ora" type="time" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                 </div>
                 <div>
-                    <label class="block text-gray-700 font-semibold">Durata (minuti)</label>
+                    <label class="block text-gray-700 font-semibold">Durata (secondi)</label>
                     <input id="durata" name="durata" type="number" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                 </div>
                 <div>
@@ -56,6 +56,33 @@
             </div>
         </form>
     </div>
+</div>
+<hr class="h-0.5 my-2 bg-cyan-600 mx-4">
+<h2 class="text-3xl font-bold ml-5 mt-5 mb-8">Episodi registrati</h2>
+<div class=" text-lg container mx-auto p-4 w-full max-w-4xl mt-6">
+
+    @isset($episodi)
+    @foreach ($episodi as $episodio)
+        <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2" data-disturbo="{{$episodio->disturbo->nome}}" data-intensita="{{$episodio->intensita}}">
+            <div class="flex flex-row space-x-2">
+                <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
+                <p class="text-gray-500 font-semibold">{{"(Intensità:" . $episodio->intensita . ")"}}</p>
+            </div>
+            <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
+            <form action="{{route('episodio.elimina', $episodio->id)}}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?');"> 
+                @csrf
+                <button type="submit">
+                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                </button>
+            </form>
+        </div>
+    @endforeach
+    @endisset
+
+    @if($episodi == null)
+        <li><p class="font-semibold">Non ci sono episodi segnalati.</p>
+    @endif
+
 </div>
 
 <script src="{{ asset('js/functions.js') }}"></script>

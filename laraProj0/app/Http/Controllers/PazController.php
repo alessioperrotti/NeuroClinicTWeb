@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\GestoreEventi;
 use App\Http\Requests\NewPazienteRequest;
+use Illuminate\Http\RedirectResponse;
+use App\Models\Resources\Disturbo;
+
 /*use App\Models\Resources\Attivita;
 use App\Models\Resources\Clinico;
 use App\Models\Resources\Diagnosi;
@@ -108,9 +111,11 @@ class PazController extends Controller
     public function showNuovoEpisodio() : View {
         $userPaz = Auth::user()->paziente->username;
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
+        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('disturbo');
         return view('inserimentoNuovoEvento', compact('disturbi'))
                 ->with('disturbi', $disturbi)
-                ->with('userPaz', $userPaz);
+                ->with('userPaz', $userPaz)
+                ->with('episodi', $episodi);
     }
 
     public function storeEpisodio(NewEventoRequest $request): JsonResponse {
@@ -124,5 +129,14 @@ class PazController extends Controller
         else {
             return response()->json(['error' => 'Errore durante l\'aggiunta dell\'episodio.'], 422);
         }
+    }
+
+    public function eliminaDisturbo($id): RedirectResponse
+    {
+        if(!$this->gestEventModel->deleteEpisodio($id))        
+            return redirect()->back()->with('success', 'Episodio eliminato con successo.');
+        else
+            return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
+        
     }
 }

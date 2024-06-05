@@ -188,5 +188,8 @@ Route::get('/home_paz/nuovo_ep' , [PazController::class, 'showNuovoEpisodio'])
 Route::post('/home_paz/nuovo_ep' , [PazController::class, 'storeEpisodio'])
 ->name('inserimentoNuovoEvento.store');
 
+Route::post('/home_paz/nuovo_ep/{id}', [PazController::class, 'eliminaDisturbo'])
+->name('episodio.elimina')->middleware('can:isPaziente');
+
 
 require __DIR__.'/auth.php';

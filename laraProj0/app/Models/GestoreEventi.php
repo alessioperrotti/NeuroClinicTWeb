@@ -29,4 +29,21 @@ class GestoreEventi extends Model
             return false;
         }
     }
+
+    public function deleteEpisodio($id): bool
+    {
+        DB::beginTransaction();
+        try {
+            $episodio = Episodio::find($id);
+            $episodio->delete();
+            DB::commit();
+            return true;
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Errore durante la cancellazione dell\'episodio: ' . $e->getMessage());
+            return false;
+        }
+    }
+
 }
