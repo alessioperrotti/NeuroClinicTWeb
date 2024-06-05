@@ -124,7 +124,7 @@
         console.log("sono pronto");
         var changed = @json($changed);
         console.log(changed);
-        if(changed){
+        if(!changed){
             alert("Non hai ancora modificato la password (stdpassowrd), ti consigliamo di farlo al più presto.");
         }
 
