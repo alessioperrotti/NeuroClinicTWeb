@@ -1,5 +1,10 @@
 @extends('layouts.basic')
 
+@section('title')
+Analisi Dati
+@endsection
+
+
 @section('content')
 <div class='m-4 px-10'>
     <div class='flex justify-center'>
@@ -86,6 +91,3 @@
 
 @endsection
 
-@section('title')
-Analisi Dati
-@endsection

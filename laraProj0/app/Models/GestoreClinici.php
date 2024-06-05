@@ -85,6 +85,6 @@ class GestoreClinici extends Model
         }
     
         $media = $numeroPazienti / $numeroClinici;
-        return $media;
+        return round($media, 2);
     }
 }

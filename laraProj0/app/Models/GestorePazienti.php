@@ -74,7 +74,7 @@ class GestorePazienti extends Model
     
         $media = $numeroDisturbiTotali / $numeroPazienti;
     
-        return $media;
+        return round($media, 2);
     }
     public function getNumeroCambiTerapia($username) {
         $numeroTerapie = Terapia::where('paziente', $username)->count();
