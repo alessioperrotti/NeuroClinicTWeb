@@ -25,13 +25,13 @@ class NewPazienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:30|alpha',
-            'cognome' => 'required|max:30|alpha',
+            'nome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
+            'cognome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'dataNasc' => 'required|date|before:today|after:1900-01-01',
             'genere' => 'required|min:0|max:1',
-            'via' => 'required|max:30',
+            'via' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'civico' => 'required|string|max:5',
-            'citta' => 'required|max:30',
+            'citta' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'prov' => 'required|max:2',
             'telefono' => 'required|min:10|max:13',
             'email' => 'required|email|max:40|unique:paziente,email',

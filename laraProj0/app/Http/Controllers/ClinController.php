@@ -171,10 +171,13 @@ class ClinController extends Controller
         $validatedData = $request->validated();
         $userClin = Auth::user()->clinico->username;
         
-        if($this->gestClinModel->updateClinico($validatedData, $userClin))
+        if($this->gestClinModel->updateClinico($validatedData, $userClin)) {
+            Log::info('Clinico aggiornato');
             return response()->json(['redirect' => route('homeClinico')]);
-        else
+        }
+        else {
             return response()->json(['error' => 'Errore durante l\'aggiunta del paziente.'], 422);
+        }
     }
 
     public function showPassChange () : View {

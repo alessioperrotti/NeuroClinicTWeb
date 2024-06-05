@@ -22,12 +22,12 @@ class NewClinicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:30',
-            'cognome' => 'required|max:30',
+            'nome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
+            'cognome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'dataNasc' => 'required|date|before:today|date_format:Y-m-d',
             'ruolo' => 'required|max:20',
             'username' => 'required|max:20|unique:user,username',
-            'specializ' => 'required|max:30',
+            'specializ' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
         ];
     }
 }
