@@ -125,7 +125,7 @@
                 <button type="button" class="close text-white font-bold" id="closeChatBtn">&times;</button>
             </div>
             <div class="p-4 text-left max-h-60 overflow-y-auto" id="messages">
-
+               
 
             </div>
             <div class="p-4 border-t border-gray-300">
@@ -134,123 +134,120 @@
             </div>
 
 
-
-        </div>
-    </div>
-
-    <script>
-        $(document).ready(function() {
+            <script>
+                $(document).ready(function() {
 
 
-            //ricevi messaggi
-            function riceviMessaggi() {
-                //ricevi messaggi
-                formElems = {
-                    '_token': '{{ csrf_token() }}',
-                    'mandante': 'pazipazi',
-                    'ricevente': 'clinclin'
-                };
+                    //ricevi messaggi
+                    function riceviMessaggi() {
+                        //ricevi messaggi
+                        formElems = {
+                            '_token': '{{ csrf_token() }}',
+                            'mandante': 'pazipazi',
+                            'ricevente': 'clinclin'
+                        };
 
-                $.ajax({
-                    url: "{{route('getConversazione')}}",
-                    method: 'POST',
-                    data: formElems,
-                    success: function(response) {
-                        console.log("messaggi ricevuti")
-
-
-                        $('#messages').html(''); //svuota i messaggi
-
-                        // $data.forEach(element => {
-                        //     // $('#messages').val('');//svuota i messaggi
-                        //     // $('#messages').append('<div class="message mb-2"><strong>' + element.mandante + ':</strong> ' + element.contenuto + '</div>');
-                        // });
-                        console.log(response);
-
-                        for (var key in response) {
-                            var messaggio = response[key];
-                            //voglio solo vedere l'ora e i minuti
-                            var data = new Date(messaggio.updated_at);
-
-                            console.log(data);
-
-                            // Ottieni giorno, mese, ora e minuti
-                            var day = data.getDate().toString().padStart(2, '0');
-                            var month = (data.getMonth() + 1).toString().padStart(2, '0'); // I mesi sono indicizzati da 0
-                            var hours = data.getHours().toString().padStart(2, '0');
-                            var minutes = data.getMinutes().toString().padStart(2, '0');
+                        $.ajax({
+                            url: "{{route('getConversazione')}}",
+                            method: 'POST',
+                            data: formElems,
+                            success: function(response) {
+                                console.log("messaggi ricevuti")
 
 
-                            var datames = day + '/' + month + ' ' + hours + ':' + minutes;
+                                $('#messages').html(''); //svuota i messaggi
+
+                                // $data.forEach(element => {
+                                //     // $('#messages').val('');//svuota i messaggi
+                                //     // $('#messages').append('<div class="message mb-2"><strong>' + element.mandante + ':</strong> ' + element.contenuto + '</div>');
+                                // });
+                                console.log(response);
+
+                                for (var key in response) {
+                                    var messaggio = response[key];
+                                    //voglio solo vedere l'ora e i minuti
+                                    var data = new Date(messaggio.updated_at);
+
+                                    console.log(data);
+
+                                    // Ottieni giorno, mese, ora e minuti
+                                    var day = data.getDate().toString().padStart(2, '0');
+                                    var month = (data.getMonth() + 1).toString().padStart(2, '0'); // I mesi sono indicizzati da 0
+                                    var hours = data.getHours().toString().padStart(2, '0');
+                                    var minutes = data.getMinutes().toString().padStart(2, '0');
+
+
+                                    var datames = day + '/' + month + ' ' + hours + ':' + minutes;
 
 
 
-                            //da_aggiungere = '<div><strong>' +messaggio.mandante+':</strong> '+'<div class="flex justify-between"><div>'+messaggio.contenuto+'<div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">'+ora+ '</h1></div></div>';           
+                                    //da_aggiungere = '<div><strong>' +messaggio.mandante+':</strong> '+'<div class="flex justify-between"><div>'+messaggio.contenuto+'<div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">'+ora+ '</h1></div></div>';           
 
 
-                            da_aggiungere = '<div class="mb-2"><strong>' + messaggio.mandante + '</strong><div class="flex justify-between"><div>' + messaggio.contenuto + '</div><div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">' + datames + '</h1></div></div></div>';
+                                    da_aggiungere = '<div class="mb-2"><strong>' + messaggio.mandante + '</strong><div class="flex justify-between"><div>' + messaggio.contenuto + '</div><div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">' + datames + '</h1></div></div></div>';
 
 
-                            $('#messages').append(da_aggiungere);
-                        }
+                                    $('#messages').append(da_aggiungere);
+                                }
+                            }
+                        });
                     }
-                });
-            }
 
 
 
-            riceviMessaggi();
-            setInterval(riceviMessaggi, 5000); //ogni 5 secondi ricevi i messaggi
+                    riceviMessaggi();
+                    setInterval(riceviMessaggi, 5000); //ogni 5 secondi ricevi i messaggi
 
 
-            $('#closeChatBtn').click(function() {
-                $('#chatPopup').hide();
-            });
+                    $('#closeChatBtn').click(function() {
+                        $('#chatPopup').hide();
+                    });
 
-            $('#openChat').click(function() {
-                $('#chatPopup').show();
-            });
+                    $('#openChat').click(function() {
+                        $('#chatPopup').show();
+                    });
 
 
-            // Invia messaggio
-            $('#sendMessageBtn').on('click', function() {
-                var message = $('#messageInput').val();
+                    // Invia messaggio
+                    $('#sendMessageBtn').on('click', function() {
+                        var message = $('#messageInput').val();
 
-                $('#messageInput').val('');
+                        $('#messageInput').val('');
 
-                if (message.trim() !== '') {
+                        if (message.trim() !== '') {
 
-                    formElems = {
-                        '_token': '{{ csrf_token() }}',
-                        'contenuto': message,
-                        'mandante': 'pazipazi',
-                        'ricevente': 'clinclin'
-                    };
+                            formElems = {
+                                '_token': '{{ csrf_token() }}',
+                                'contenuto': message,
+                                'mandante': 'pazipazi',
+                                'ricevente': 'clinclin'
+                            };
 
-                    // Invia il messaggio al server
-                    $.ajax({
-                        url: "{{route('sendMessaggio')}}",
-                        method: 'POST',
-                        data: formElems,
-                        success: function(data) {
-                            console.log("messaggio inviatooo")
+                            // Invia il messaggio al server
+                            $.ajax({
+                                url: "{{route('sendMessaggio')}}",
+                                method: 'POST',
+                                data: formElems,
+                                success: function(data) {
+                                    console.log("messaggio inviatooo")
+                                }
+                            });
+
+                           
+
+                            setTimeout(riceviMessaggi, 500);
+
+
                         }
+
+
+
                     });
 
 
 
-                    setTimeout(riceviMessaggi, 500);
 
 
-                }
-
-
-
-            });
-
-
-
-
-        });
-    </script>
+                });
+            </script>
 </body>
