@@ -14,6 +14,8 @@ use App\Models\GestoreTerapie;
 use App\Models\GestoreDistubi;
 use App\Models\GestorePazienti;
 use App\Models\GestoreClinici;
+use App\Models\Resources\Clinico;
+
 /*use App\Models\Resources\Attivita;
 use App\Models\Resources\Clinico;
 use App\Models\Resources\Diagnosi;
@@ -42,7 +44,8 @@ class PazController extends Controller
     public function index(): View {
         $user = Auth::user();
         $paziente = $user->paziente;
-        return view('homePaziente')->with('paziente', $paziente);
+        $clinico = Clinico::findOrFail($paziente->clinico);
+        return view('homePaziente')->with('paziente', $paziente)->with('clinico', $clinico);
     }
 
     public function edit($username) {
