@@ -144,7 +144,7 @@
 
             //ricevi messaggi
             function riceviMessaggi() {
-
+                //ricevi messaggi
                 formElems = {
                     '_token': '{{ csrf_token() }}',
                     'mandante': 'pazipazi',
@@ -161,7 +161,10 @@
 
                         $('#messages').html(''); //svuota i messaggi
 
-
+                        // $data.forEach(element => {
+                        //     // $('#messages').val('');//svuota i messaggi
+                        //     // $('#messages').append('<div class="message mb-2"><strong>' + element.mandante + ':</strong> ' + element.contenuto + '</div>');
+                        // });
                         console.log(response);
 
                         for (var key in response) {
@@ -197,7 +200,6 @@
 
 
             riceviMessaggi();
-            $('#messages').scrollTop($('#messages')[0].scrollHeight); //scrolla giu in automatico
             setInterval(riceviMessaggi, 5000); //ogni 5 secondi ricevi i messaggi
 
 
@@ -238,7 +240,7 @@
 
 
                     setTimeout(riceviMessaggi, 500);
-                    setTimeout(function(){$('#messages').scrollTop($('#messages')[0].scrollHeight)},700);
+
 
                 }
 
@@ -251,6 +253,4 @@
 
         });
     </script>
-
-
 </body>
