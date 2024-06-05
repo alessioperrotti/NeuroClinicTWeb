@@ -51,6 +51,7 @@
     <div name="contact form" class="absolute flex flex-col justify-center items-center z-10">
         <h1 class="font-bold text-5xl text-gray-800">Hai altre domande? Contattaci</h1>
         <form class="flex flex-col mt-20 items-center">
+            @csrf
             <div class="mb-6">
                 <label for="email" class="font-semibold">E-Mail</label>
                 <br>
@@ -66,7 +67,7 @@
                 <br>
                 <textarea id="messaggio" placeholder="Scrivi qui il tuo messaggio" class="border rounded-md h-[150px] w-[336px] bg-transparent align-top p-2 resize-none"></textarea>
             </div>
-            <input type="submit" class="bg-cyan-600 rounded-xl mt-8 w-[200px] h-[60px] text-white font-semibold" value="Invia Messaggio">
+            <input type="submit" class="bg-cyan-600 rounded-xl mt-8 w-[200px] h-[60px] text-white font-semibold cursor-pointer" value="Invia Messaggio">
         </form>
     </div>
 </div>
