@@ -51,7 +51,7 @@ class PazController extends Controller
     public function index(): View {
         $user = Auth::user();
         $paziente = $user->paziente;
-        if ($user->password == Hash::make('stdpassword')) {  /* se la password è quella di default si mostrerà un alert */
+        if (Hash::check('stdpassword', $user->password)) {  /* se la password è quella di default si mostrerà un alert */
             $changed = false;
         } 
         else {
