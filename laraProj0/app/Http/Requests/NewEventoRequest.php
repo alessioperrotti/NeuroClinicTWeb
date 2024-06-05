@@ -13,7 +13,7 @@ class NewEventoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,8 +28,8 @@ class NewEventoRequest extends FormRequest
             'ora' => 'required|date_format:H:i',
             'durata' => 'required|integer|min:1|digits_between:1,120',
             'intensita' => 'required|integer|min:1|max:10',
-            'disturbo' => 'required|integer|exists:disturbo,id',
-            'paziente' => 'required|string|exists:paziente,username',
+            'disturbo' => 'required',
+            'paziente' => 'required',
         ];
     }
 

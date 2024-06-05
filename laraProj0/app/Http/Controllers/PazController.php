@@ -21,6 +21,7 @@ use App\Http\Requests\NewEventoRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\GestoreEventi;
+use App\Http\Requests\NewPazienteRequest;
 /*use App\Models\Resources\Attivita;
 use App\Models\Resources\Clinico;
 use App\Models\Resources\Diagnosi;
@@ -61,32 +62,24 @@ class PazController extends Controller
         ->with('changed', $changed);
     }
 
-    public function edit($username) {
+    public function edit($username): View{
         $paziente = Paziente::findOrFail($username);
-        return view('aggiornaDatiPaziente', compact('paziente'));
+        return view('aggiornaDatiPaziente', compact('paziente'))
+        ->with('clinico', $paziente->clinico);
     }
 
-    public function update(Request $request, $username)
-    {
-        $request->validate([
-            'nome' => 'required|string|max:30|alpha',
-            'cognome' => 'required|string|max:30|alpha',
-            'dataNasc' => 'required|date|before:today|date_format:Y-m-d'    ,
-            'genere' => 'required|string|max:1',
-            'via' => 'required|string|max:30',
-            'civico' => 'required|string|max:5',
-            'citta' => 'required|string|max:30',
-            'prov' => 'required|string|max:2',
-            'telefono' => 'required|string|max:13',
-            'email' => 'required|string|email|max:40|unique:paziente,email',
-        ]);
+    public function update(NewPazienteRequest $request, $username): Jsonresponse {
 
+        $validatedData = $request->validated();
         $paziente = Paziente::findOrFail($username);
-
-        $paziente->update($request->all());
-        
-        return redirect()->route('homePaziente', ['username' => $paziente->username ])->with('success', 'Dati paziente aggiornati con successo.');
+        $riuscito = $this->gestPazModel->updatePaziente($validatedData, $username);
+        if (!$riuscito) {
+            return response()->json(['error' => 'Errore durante l\'aggiornamento dei dati del paziente.'], 422);
+        }
+        $paziente->refresh();
+        return response()->json(['redirect' => route('homePaziente')]);
     }
+    
 
     public function showCartClinica() : View {
 
