@@ -147,11 +147,9 @@
 
                 formElems = {
                     '_token': '{{ csrf_token() }}',
-                    'mandante': '{{$paziente->username}}',
-                    'ricevente': '{{$paziente->clinico}}'
+                    'mandante': 'pazipazi',
+                    'ricevente': 'clinclin'
                 };
-
-
 
                 $.ajax({
                     url: "{{route('getConversazione')}}",
@@ -185,12 +183,9 @@
 
 
                             //da_aggiungere = '<div><strong>' +messaggio.mandante+':</strong> '+'<div class="flex justify-between"><div>'+messaggio.contenuto+'<div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">'+ora+ '</h1></div></div>';           
-                            
-                            if (messaggio.mandante = '{{$paziente->username}}') {
-                                var mand = 'Tu';}
-                            else { var mand = '{{$clinico->nome}} {{$clinico->cognome}}' }
 
-                            da_aggiungere = '<div class="mb-2"><strong>' + mand + '</strong><div class="flex justify-between"><div>' + messaggio.contenuto + '</div><div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">' + datames + '</h1></div></div></div>';
+
+                            da_aggiungere = '<div class="mb-2"><strong>' + messaggio.mandante + '</strong><div class="flex justify-between"><div>' + messaggio.contenuto + '</div><div class="relative"><h1 class="text-slate-500 text-xs absolute bottom-0 right-0">' + datames + '</h1></div></div></div>';
 
 
                             $('#messages').append(da_aggiungere);
@@ -204,7 +199,6 @@
             riceviMessaggi();
             $('#messages').scrollTop($('#messages')[0].scrollHeight); //scrolla giu in automatico
             setInterval(riceviMessaggi, 5000); //ogni 5 secondi ricevi i messaggi
-
 
 
             $('#closeChatBtn').click(function() {
@@ -227,8 +221,8 @@
                     formElems = {
                         '_token': '{{ csrf_token() }}',
                         'contenuto': message,
-                        'mandante': '{{$paziente->username}}',
-                        'ricevente': '{{$paziente->clinico}}'
+                        'mandante': 'pazipazi',
+                        'ricevente': 'clinclin'
                     };
 
                     // Invia il messaggio al server
@@ -244,9 +238,7 @@
 
 
                     setTimeout(riceviMessaggi, 500);
-                    setTimeout(function() {
-                        $('#messages').scrollTop($('#messages')[0].scrollHeight)
-                    }, 700);
+                    setTimeout(function(){$('#messages').scrollTop($('#messages')[0].scrollHeight)},700);
 
                 }
 
