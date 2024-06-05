@@ -52,7 +52,13 @@
         </div>
     </header>
     <div class="relative">
-        <img src="{{ url('images/banner2.gif')}}" alt="Banner Homepage">
+            
+        <div class="slides relative w-full overflow-hidden">
+            <!-- IMMAGINI CAROSELLO -->
+            <img src="{{ url('images/banner2.gif')}}" alt="Banner 1" class="w-full">
+            <img src="{{ url('images/gruppo_medici.gif')}}" alt="Banner 2" class="w-full hidden">
+            <img src="{{ url('images/schermo.gif')}}" alt="Banner 3" class="w-full hidden">
+        </div>
         <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
             <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
         </div>
@@ -186,4 +192,42 @@
 
 
 </body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // indice slide corrente 
+        let i = 0;
+        // Seleziona tutti gli elementi img all'interno del contenitore con la classe 'slides'
+        const $slides = $(".slides img");
+
+        // Seleziona tutti gli elementi con la classe 'dot'
+        const $dots = $(".dot");
+
+        // Funzione per mostrare la slide corrispondente all'indice passato
+        function showSlide(index) {
+            // Per ogni slide, aggiungi o rimuovi la classe 'hidden' in base all'indice
+            $slides.each(function (i) {
+                $(this).toggleClass("hidden", i !== index);
+            });
+            
+            // Per ogni puntino di navigazione, aggiorna le classi per indicare la slide corrente
+            $dots.each(function (i) {
+                $(this).toggleClass("bg-white", i === index); // Imposta il puntino corrente come bianco
+                $(this).toggleClass("bg-gray-400", i !== index); // Imposta gli altri puntini come grigi
+            });
+        }
+        // Funzione per passare alla slide successiva
+        function nextSlide() {
+            // Incrementa l'indice della slide corrente e calcola il modulo per tornare a 0 se supera il numero di slide
+            i = (i + 1) % $slides.length;
+            // Mostra la slide corrispondente al nuovo indice
+            showSlide(i);
+        }
+        // Mostra la prima slide inizialmente
+        showSlide(i);
+        // Imposta un intervallo per cambiare automaticamente slide ogni 3 secondi
+        setInterval(nextSlide, 3000);
+    });
+</script>
 </html>
