@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\NewMessaggioRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -169,8 +171,7 @@ class ClinController extends Controller
                 ->with('clinico', $clinico);
     }
 
-    public function updateClinico(UpdateClinicoRequest  $request) : JsonResponse
-    {
+    public function updateClinico(UpdateClinicoRequest  $request) : JsonResponse {
         
         $validatedData = $request->validated();
         $userClin = Auth::user()->clinico->username;
@@ -194,8 +195,23 @@ class ClinController extends Controller
         $userClin = Auth::user()->username;
         $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userClin);
         $messaggiInv = $this->gestMsgModel->getMsgInviati($userClin);
+        $pazienti = $this->gestClinModel->getPazientiByClin($userClin);
+        
         return view('messaggiClinico')
             ->with('messaggiRic', $messaggiRic)
-            ->with('messaggiInv', $messaggiInv);
+            ->with('messaggiInv', $messaggiInv)
+            ->with('pazienti', $pazienti);
+    }
+
+    public function sendMessaggio(NewMessaggioRequest $request) : RedirectResponse {
+
+        $validatedData = $request->validated();
+
+        if ($this->gestMsgModel->sendMessaggio($validatedData)) {
+            return redirect()->action([ClinController::class, 'showMessaggi']);
+        }
+        else {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'invio del messaggio.');
+        }
     }
 }

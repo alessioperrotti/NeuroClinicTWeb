@@ -54,4 +54,24 @@ class GestoreMessaggi extends Model
         }
         return $messaggi;
     }
+
+    public function sendMessaggio($validatedData) : bool {
+
+        $messaggio = new Messaggio(
+            [
+                'mittente' => Auth::user()->username,
+                'destin' => $validatedData['destinatario'],
+                'contenuto' => $validatedData['contenuto']
+            ]
+        );
+        $messaggio->letto = false;
+
+        try {
+            $messaggio->save();
+        } catch (\Exception $e) {
+            return false;
+        }
+        return true;
+
+    }
 }

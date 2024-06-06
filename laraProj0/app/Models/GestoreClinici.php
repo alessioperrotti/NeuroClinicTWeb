@@ -76,6 +76,7 @@ class GestoreClinici extends Model
         }
         return true;
     }
+
     public function mediaPazientiPerClinico(){
         $numeroClinici = Clinico::count();
         $numeroPazienti = Paziente::count();
@@ -86,5 +87,15 @@ class GestoreClinici extends Model
     
         $media = $numeroPazienti / $numeroClinici;
         return $media;
+    }
+
+    public function getPazientiByClin($userClin) : Collection {
+        
+        $clinico = Clinico::findOrFail($userClin);
+        $pazienti = new Collection;
+        foreach($clinico->pazienti as $paz) {
+            $pazienti->add($paz);
+        }
+        return $pazienti;
     }
 }
