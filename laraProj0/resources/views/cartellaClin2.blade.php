@@ -72,7 +72,7 @@
             @endisset
 
             @if($attivita == null)
-                <li><p class="font-semibold mt-2">Non ci sono attvità pianificate.</p>
+                <li><p class="font-semibold mt-2">Non ci sono attività pianificate.</p>
             @endif
         </ul>
     </div>
