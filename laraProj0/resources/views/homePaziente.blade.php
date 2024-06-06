@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <title>NeuroClinic | Home Paziente </title>
 </head>
@@ -116,3 +117,18 @@
     </div>
 
 </body>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        console.log("sono pronto");
+        var changed = @json($changed);
+        console.log(changed);
+        if(!changed){
+            alert("Non hai ancora modificato la password (stdpassowrd), ti consigliamo di farlo al più presto.");
+        }
+
+    });
+
+</script>
+</html>

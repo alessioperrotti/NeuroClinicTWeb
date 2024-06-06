@@ -37,12 +37,12 @@ class ClinController extends Controller
     public function index(): View {
         $user = Auth::user();
         $clinico = $user->clinico;
-        if ($user->password == Hash::make('stdpassword')) {  /* se la password è quella di 
+        if (Hash::check('stdpassword', $user->password)) {  /* se la password è quella di 
                                                                 default si mostrerà un alert */
-            $changed = true;
+            $changed = false;
         } 
         else {
-            $changed = false;
+            $changed = true;
         }
         return view('homeClinico')
             ->with('clinico', $clinico)
@@ -165,16 +165,19 @@ class ClinController extends Controller
                 ->with('clinico', $clinico);
     }
 
-    public function updateClinico(UpdateClinicoRequest  $request) : RedirectResponse
+    public function updateClinico(UpdateClinicoRequest  $request) : JsonResponse
     {
         
         $validatedData = $request->validated();
         $userClin = Auth::user()->clinico->username;
         
-        if($this->gestClinModel->updateClinico($validatedData, $userClin))
-            return redirect()->action([ClinController::class, 'index']);
-        else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
+        if($this->gestClinModel->updateClinico($validatedData, $userClin)) {
+            Log::info('Clinico aggiornato');
+            return response()->json(['redirect' => route('homeClinico')]);
+        }
+        else {
+            return response()->json(['error' => 'Errore durante l\'aggiunta del paziente.'], 422);
+        }
     }
 
     public function showPassChange () : View {

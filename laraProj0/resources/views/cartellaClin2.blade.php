@@ -72,7 +72,7 @@
             @endisset
 
             @if($attivita == null)
-                <li><p class="font-semibold mt-2">Non ci sono attvità pianificate.</p>
+                <li><p class="font-semibold mt-2">Non ci sono attività pianificate.</p>
             @endif
         </ul>
     </div>
@@ -90,6 +90,8 @@
     </div>
 </div>
 <hr class="h-1 my-10 bg-cyan-600 m-28">
+
+@if(!$episodi->isEmpty())
 <h2 class="text-3xl font-bold ml-5 mt-5 mb-8">Episodi registrati</h2>
 <div class="flex mx-[15%] justify-between">
     <div name="filtro1" class="space-x-2 flex items-center">
@@ -156,10 +158,15 @@
         </div>
     @endforeach
     @endisset
-
-    @if($episodi == null)
-        <li><p class="font-semibold">Non ci sono episodi segnalati.</p>
     @endif
+
+    @if($episodi->isEmpty())
+    <div class="flex justify-center">
+        <h2 class="text-2xl font-bold ml-5 mt-2 mb-12">Gli episodi registrati verranno mostrati qui</h2>
+    </div>
+    @endif
+
+    
 
 </div>
 <script type="text/javascript">

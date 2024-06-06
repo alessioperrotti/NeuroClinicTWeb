@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>NeuroClinic | Home </title>
     <style>
         .anchor::before {
@@ -21,11 +22,11 @@
     </style>
 </head>
 <body class="bg-cyan-50">
-    <header class="fixed top-0 left-0 right-0 z-20">  <!-- sarebbe carino mettere un backdrop blur-->
+    <header class="fixed top-0 left-0 right-0 z-20">  
         <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8 backdrop-filter backdrop-blur-sm bg-opacity-90">
             <div>
                 <a href="{{ route('home') }}">
-                    <img src="images/logo_bianco.svg" class="h-16" alt="Logo">
+                    <img src="{{ asset('images/logo_bianco.svg') }}" class="h-16" alt="Logo">
                 </a>
             </div>
             <div>
@@ -51,10 +52,24 @@
             </div>
         </div>
     </header>
-    <div class="relative">
-        <img src="{{ url('images/banner2.gif')}}" alt="Banner Homepage">
-        <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
-            <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
+    <div class="relative" name="banner slideshow">
+        <div id="slide1" class="slide">
+            <img src="{{ asset('images/banner1.gif')}}" alt="Banner Homepage">
+            <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
+                <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
+            </div>
+        </div>
+        <div id="slide2" class="hidden slide">
+            <img src="{{ asset('images/banner2.gif')}}" alt="Banner Homepage">
+            <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
+                <h1 class="font-bold text-6xl text-white">Riabilitazione neurologica personalizzata</h1>
+            </div>
+        </div>
+        <div id="slide3" class="hidden slide">
+            <img src="{{ asset('images/banner3.gif')}}" alt="Banner Homepage">
+            <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
+                <h1 class="font-bold text-6xl text-white">Un team di professionisti al tuo servizio</h1>
+            </div>
         </div>
     </div>
     <div class="h-[40px]"></div>
@@ -183,7 +198,12 @@
             </div>
         </div>
     </footer>
-
-
 </body>
+<script>
+    $(document).ready(function(
+        
+        // non so come fare per far funzionare lo slideshow
+    ))
+</script>
+
 </html>

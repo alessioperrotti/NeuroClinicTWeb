@@ -1,16 +1,12 @@
 <?php
 
 namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
-// Aggiunti per response JSON
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Support\Facades\Log;
-use Psy\Readline\Hoa\Console;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClinicoRequest extends FormRequest
+class NewEventoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,13 +24,15 @@ class UpdateClinicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',  // regola regex per accettare solo lettere e spazi
-            'cognome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
-            'dataNasc' => 'required|date|before:today|date_format:Y-m-d',
-            'ruolo' => 'required|max:20',
-            'specializ' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
+            'data' => 'required|date|before:today|date_format:Y-m-d',
+            'ora' => 'required|date_format:H:i',
+            'durata' => 'required|integer|min:1|digits_between:1,120',
+            'intensita' => 'required|integer|min:1|max:10',
+            'disturbo' => 'required',
+            'paziente' => 'required',
         ];
     }
+
     protected function failedValidation(Validator $validator): HttpResponseException
     {
         throw new HttpResponseException(response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY));

@@ -20,27 +20,29 @@ class PasswordController extends Controller
     {
         //validazione dei dati della form
         $request->validate([
-            'vecchiaPwd' => 'required',    
+            'vecchiaPassword' => 'required', 
+            'nuovaPassword' => 'required|min:8',
+            'confermaPassword' => 'required'
         ]);
 
         $user = Auth::user(); //recupero l'utente autenticato   
 
         //controllo se la password attuale è corretta
-        if(!Hash::check($request->vecchiaPwd, $user->password)) {
-            return back()->withErrors(['vecchiaPwd' => 'La password attuale non è corretta']);
+        if(!Hash::check($request['vecchiaPassword'], $user->password)) {
+            return back()->withErrors(['vecchiaPassword' => 'La password attuale non è corretta']);
         }
 
-        if($request->vecchiaPwd == $request->nuovaPwd) {
-            return back()->withErrors(['nuovaPwd' => 'La nuova password non può essere uguale a quella attuale']);
+        if($request['vecchiaPassword'] == $request['nuovaPassword']) {
+            return back()->withErrors(['nuovaPassword' => 'La nuova password non può essere uguale a quella attuale']);
         }
 
-        if($request->nuovaPwd != $request->confermaPwd) {
-            return back()->withErrors(['confermaPwd' => 'La password non coincide ']);
+        if($request['nuovaPassword'] != $request['confermaPassword']) {
+            return back()->withErrors(['confermaPassword' => 'La password non coincide ']);
         }
 
         //aggiorno la password
         $user->password = Hash::make($request->nuovaPwd);
-        $user->Model::save();
+        $user->save();
 
         Auth::logout(); //logout dell'utente
 
