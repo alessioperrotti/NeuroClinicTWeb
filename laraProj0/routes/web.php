@@ -57,7 +57,7 @@ Route::post('/home_clin/aggiorna_clin', [ClinController::class, 'updateClinico']
 Route::get('/home_clin/cambia_pwd', [ClinController::class, 'showPassChange'])
 ->name('cambiaPwdClinico')->middleware('auth');
 
-Route::put('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
+Route::post('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
 
 
@@ -164,11 +164,12 @@ Route::get('/home_paz', [PazController::class, 'index'])
 Route::post('/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
 
-//cambiare questa rotta ed aggiungere la rotta store
-Route::get('/home_paz/nuovo_ep' , function () {
-    return view('inserimentoNuovoEvento');
-})
-->name('inserimentoNuovoEvento');
+
+Route::post('/home_paz/nuovo_ep' , [PazController::class, 'storeEpisodio'])
+->name('inserimentoNuovoEvento.store');
+
+Route::post('/home_paz/nuovo_ep/{id}', [PazController::class, 'eliminaDisturbo'])
+->name('episodio.elimina')->middleware('can:isPaziente');
 
 
 require __DIR__.'/auth.php';

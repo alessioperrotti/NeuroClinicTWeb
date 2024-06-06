@@ -55,6 +55,21 @@ class GestorePazienti extends Model
             return false;
         }
     }
+    
+    public function updatePaziente($validatedData, $username) : bool {
+        DB::beginTransaction();
+        try {
+            $paziente = Paziente::findOrFail($username);
+            $paziente->fill($validatedData);
+            $paziente->save();
+            DB::commit();
+            return true;
+        } 
+        catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
 
     public function mediaDisturbiMotoriPerPaziente() {
         $numeroPazienti = Paziente::count();
