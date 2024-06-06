@@ -12,6 +12,7 @@ use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
 use App\Models\GestoreDisturbi;
+use App\Models\GestoreMessaggi;
 use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
@@ -24,6 +25,7 @@ class ClinController extends Controller
     protected $gestCartModel;
     protected $gestTerModel;
     protected $gestDistModel;
+    protected $gestMsgModel;
 
     public function __construct()
     {
@@ -32,6 +34,8 @@ class ClinController extends Controller
         $this->gestCartModel = new GestoreCartelleClin;
         $this->gestTerModel = new GestoreTerapie;
         $this->gestDistModel = new GestoreDisturbi;
+        $this->gestMsgModel = new GestoreMessaggi;
+
     }
 
     public function index(): View {
@@ -183,5 +187,15 @@ class ClinController extends Controller
     public function showPassChange () : View {
         
         return view('cambiaPwdClinico');
+    }
+
+    public function showMessaggi() : View {
+
+        $userClin = Auth::user()->username;
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userClin);
+        $messaggiInv = $this->gestMsgModel->getMsgInviati($userClin);
+        return view('messaggiClinico')
+            ->with('messaggiRic', $messaggiRic)
+            ->with('messaggiInv', $messaggiInv);
     }
 }

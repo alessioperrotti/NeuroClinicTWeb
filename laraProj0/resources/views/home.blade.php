@@ -184,15 +184,15 @@
                 <h4 class="font-bold text-white text-xl mr-8">Informazioni di Contatto</h4>
                 <br>
                 <div class="flex items-center space-x-1">
-                    <img src="{{ url('images/location_pin.png')}}" class="h-4">
+                    <img src="{{ asset('images/location_pin.png')}}" class="h-4">
                     <p class="font-sans text-white">Piazza Enrico Malatesta, 1 60121 Ancona (AN)</p>
                 </div>
                 <div class="flex items-center space-x-1">
-                    <img src="{{ url('images/phone.png')}}" class="h-4">
+                    <img src="{{ asset('images/phone.png')}}" class="h-4">
                     <p class="font-sans text-white">Tel <a href="tel:3549783214">+39 354 978 3214</a></p>
                 </div>
                 <div class="flex items-center space-x-1">
-                    <img src="{{ url('images/email.png')}}" class="h-4">
+                    <img src="{{ asset('images/email.png')}}" class="h-4">
                     <p class="font-sans text-white">Email <a href="mailto:info@neuroclinic.it">info@neuroclinic.it</a></p>
                 </div>
             </div>

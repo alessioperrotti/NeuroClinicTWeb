@@ -18,6 +18,7 @@
             </a>
             <div>
                 <nav class="space-x-4 text-white text-sm">
+                    <a href="{{ route('messaggiClinico')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer">MESSAGGI</a>
                     <a href="{{ route('listaPazienti')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLE CLINICHE</a>
                     <a href="{{ route('nuovoPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">REGISTRA PAZIENTE</a>
                     @auth
