@@ -60,6 +60,9 @@ Route::get('/home_clin/cambia_pwd', [ClinController::class, 'showPassChange'])
 Route::get('/home_clin/messaggi', [ClinController::class, 'showMessaggi'])
 ->name('messaggiClinico')->middleware('can:isClinico');
 
+Route::post('/home_clin/messaggi', [ClinController::class, 'sendMessaggio'])
+->name('messaggioClinico.send')->middleware('can:isClinico');
+
 Route::post('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
 

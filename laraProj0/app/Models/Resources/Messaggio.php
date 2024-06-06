@@ -9,7 +9,7 @@ use App\Models\User;
 class Messaggio extends Model
 {
     protected $table = 'messaggio';
-    protected $fillable = ['destinatario', 'contenuto'];
+    protected $fillable = ['mittente','destin', 'contenuto'];
 
     public function mittente() {
         return $this->belongsTo(User::class, 'mittente', 'username');

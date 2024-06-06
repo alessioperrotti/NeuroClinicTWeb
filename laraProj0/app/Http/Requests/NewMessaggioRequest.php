@@ -11,7 +11,7 @@ class NewMessaggioRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class NewMessaggioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'destin' => 'required',
+            'contenuto' => 'required'
         ];
     }
 }
