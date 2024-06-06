@@ -66,7 +66,7 @@
                             <h3 class="font-bold text-2xl">Da {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
                             <p class="text-gray-500">{{ $msgR->created_at}}</p>
                         </div>
-                        <p class="text-gray-600">{{ $msgR->testo}}</p>
+                        <p class="text-gray-600">{{ $msgR->contenuto}}</p>
                     </div>
                 @endforeach
             @endisset
@@ -90,9 +90,10 @@
             @endisset
         </div>
         <div id="nuovo" class="inline hidden messaggi border p-8 flex-grow"> 
-            <form class="flex flex-col justify-center" method="POST" action="{{ route('messaggioClinico.send')}}">
+            <form class="flex flex-col justify-center" method="POST" action="{{ route('messaggioPaziente.send')}}">
                 @csrf
                 <div>
+                    <input type="hidden" name="destin" value="{{$clinico->username}}">
                     <label for="messaggio" class="font-semibold mt-4">Messaggio</label>
                     <textarea name="contenuto" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
                     <div class="flex flex-col justify-center items-center">

@@ -18,10 +18,13 @@ use App\Models\Resources\Episodio;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\NewEventoRequest;
+use App\Http\Requests\NewMessaggioRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\GestoreEventi;
 use App\Http\Requests\NewPazienteRequest;
+use App\Models\GestoreMessaggi;
+use App\Models\Resources\Clinico;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Resources\Disturbo;
 
@@ -41,6 +44,7 @@ class PazController extends Controller
     protected $gestCartModel;
     protected $gestTerModel;
     protected $gestEventModel;
+    protected $gestMsgModel;
 
     public function __construct()
     {
@@ -49,29 +53,32 @@ class PazController extends Controller
         $this->gestCartModel = new GestoreCartelleClin;
         $this->gestTerModel = new GestoreTerapie;
         $this->gestEventModel = new GestoreEventi;
+        $this->gestMsgModel = new GestoreMessaggi;
     }
-    
-    public function index(): View {
+
+    public function index(): View
+    {
         $user = Auth::user();
         $paziente = $user->paziente;
         if (Hash::check('stdpassword', $user->password)) {  /* se la password è quella di default si mostrerà un alert */
             $changed = false;
-        } 
-        else {
+        } else {
             $changed = true;
         }
         return view('homePaziente')
-        ->with('paziente', $paziente)
-        ->with('changed', $changed);
+            ->with('paziente', $paziente)
+            ->with('changed', $changed);
     }
 
-    public function edit($username): View{
+    public function edit($username): View
+    {
         $paziente = Paziente::findOrFail($username);
         return view('aggiornaDatiPaziente', compact('paziente'))
-        ->with('clinico', $paziente->clinico);
+            ->with('clinico', $paziente->clinico);
     }
 
-    public function update(NewPazienteRequest $request, $username): Jsonresponse {
+    public function update(NewPazienteRequest $request, $username): Jsonresponse
+    {
 
         $validatedData = $request->validated();
         $paziente = Paziente::findOrFail($username);
@@ -82,9 +89,10 @@ class PazController extends Controller
         $paziente->refresh();
         return response()->json(['redirect' => route('homePaziente')]);
     }
-    
 
-    public function showCartClinica() : View {
+
+    public function showCartClinica(): View
+    {
 
         $paziente = Auth::user()->paziente;
         $userPaz = $paziente->username;
@@ -96,47 +104,74 @@ class PazController extends Controller
         $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
 
         return view('cartellaClinicaPaziente')
-                ->with('paziente', $paziente)
-                ->with('episodi', $episodi)
-                ->with('disturbi', $disturbi)
-                ->with('farmaci', $farmaci)
-                ->with('attivita', $attivita);
-
+            ->with('paziente', $paziente)
+            ->with('episodi', $episodi)
+            ->with('disturbi', $disturbi)
+            ->with('farmaci', $farmaci)
+            ->with('attivita', $attivita);
     }
 
-    public function showPassChange() : View {
+    public function showPassChange(): View
+    {
         return view('cambiaPwdPaziente');
     }
-    
-    public function showNuovoEpisodio() : View {
+
+    public function showNuovoEpisodio(): View
+    {
         $userPaz = Auth::user()->paziente->username;
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('disturbo');
         return view('inserimentoNuovoEvento', compact('disturbi'))
-                ->with('disturbi', $disturbi)
-                ->with('userPaz', $userPaz)
-                ->with('episodi', $episodi);
+            ->with('disturbi', $disturbi)
+            ->with('userPaz', $userPaz)
+            ->with('episodi', $episodi);
     }
 
-    public function storeEpisodio(NewEventoRequest $request): JsonResponse {
-        
+    public function storeEpisodio(NewEventoRequest $request): JsonResponse
+    {
+
         $validatedData = $request->validated();
-        $riuscito=$this->gestEventModel->storeEpisodio($validatedData);
-        
+        $riuscito = $this->gestEventModel->storeEpisodio($validatedData);
+
         if ($riuscito) {
             return response()->json(['redirect' => route('homePaziente')]);
-        }
-        else {
+        } else {
             return response()->json(['error' => 'Errore durante l\'aggiunta dell\'episodio.'], 422);
         }
     }
 
     public function eliminaDisturbo($id): RedirectResponse
     {
-        if(!$this->gestEventModel->deleteEpisodio($id))        
+        if (!$this->gestEventModel->deleteEpisodio($id))
             return redirect()->back()->with('success', 'Episodio eliminato con successo.');
         else
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
-        
+    }
+
+    public function showMessaggi(): View
+    {
+
+        $userPaz = Auth::user()->username;
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userPaz);
+        $messaggiInv = $this->gestMsgModel->getMsgInviati($userPaz);
+        $clinico = Clinico::find(Auth::user()->paziente->clinico);
+
+        return view('messaggiPaziente')
+            ->with('messaggiRic', $messaggiRic)
+            ->with('messaggiInv', $messaggiInv)
+            ->with('clinico', $clinico);
+            
+    }
+
+    public function sendMessaggio(NewMessaggioRequest $request): RedirectResponse
+    {
+
+        $validatedData = $request->validated();
+
+        if ($this->gestMsgModel->sendMessaggio($validatedData)) {
+            return redirect()->action([PazController::class, 'showMessaggi']);
+        } else {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'invio del messaggio.');
+        }
     }
 }

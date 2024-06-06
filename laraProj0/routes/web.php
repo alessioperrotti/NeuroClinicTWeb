@@ -68,6 +68,7 @@ Route::post('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 
 
 
+
 // Sezione amministratore
 
 Route::get('/home_admin/analisi_dati',[AdminController::class, 'viewAnalisiDati'])
@@ -178,6 +179,16 @@ Route::post('/home_paz/nuovo_ep' , [PazController::class, 'storeEpisodio'])
 
 Route::post('/home_paz/nuovo_ep/{id}', [PazController::class, 'eliminaDisturbo'])
 ->name('episodio.elimina')->middleware('can:isPaziente');
+
+Route::get('/home_paz/messaggi', [PazController::class, 'showMessaggi'])
+->name('messaggiPaziente')->middleware('can:isPaziente');
+
+Route::post('/home_paz/messaggi', [PazController::class, 'sendMessaggio'])
+->name('messaggioPaziente.send')->middleware('can:isPaziente');
+
+
+
+
 
 
 require __DIR__.'/auth.php';

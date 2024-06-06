@@ -66,7 +66,7 @@
                             <h3 class="font-bold text-2xl">Da {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
                             <p class="text-gray-500">{{ $msgR->created_at}}</p>
                         </div>
-                        <p class="text-gray-600">{{ $msgR->testo}}</p>
+                        <p class="text-gray-600">{{ $msgR->contenuto}}</p>
                     </div>
                 @endforeach
             @endisset
