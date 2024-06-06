@@ -702,10 +702,7 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('faq')->insert([
-            [
-                'domanda' => 'Quali sono gli strumenti utilizzati nella riabilitazione neurologica?',
-                'risposta' => 'Utilizziamo strumenti all\'avanguardia come robotica riabilitativa, elettrostimolatori e dispositivi di realtà virtuale per aiutare i pazienti nel recupero.'
-            ],
+            
             [
                 'domanda' => 'Che tipo di trattamenti offrite per i pazienti con ictus?',
                 'risposta' => 'Offriamo trattamenti personalizzati che includono terapia fisica, terapia occupazionale e logopedia per migliorare la mobilità, la funzionalità e la comunicazione.'
@@ -715,12 +712,8 @@ class DatabaseSeeder extends Seeder
                 'risposta' => 'I nostri terapisti sono tutti laureati in fisioterapia, terapia occupazionale o logopedia e hanno specializzazioni in riabilitazione neurologica.'
             ],
             [
-                'domanda' => 'Quanto durano generalmente le sessioni di riabilitazione?',
-                'risposta' => 'Le sessioni di riabilitazione durano generalmente da 45 minuti a un\'ora, a seconda delle necessità specifiche del paziente.'
-            ],
-            [
-                'domanda' => 'È possibile ricevere assistenza domiciliare?',
-                'risposta' => 'Sì, offriamo servizi di riabilitazione a domicilio per pazienti che non possono recarsi in clinica.'
+                'domanda' => 'Quanto durano generalmente le riabilitazioni?',
+                'risposta' => 'Le sessioni di riabilitazione durano generalmente da due a dodici mesi, a seconda delle necessità specifiche del paziente.'
             ],
             [
                 'domanda' => 'Quali sono i benefici della riabilitazione neurologica?',
@@ -728,7 +721,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'domanda' => 'Come posso prenotare una visita?',
-                'risposta' => 'Può prenotare una visita chiamando il nostro numero di telefono o compilando il modulo di prenotazione sul nostro sito web.'
+                'risposta' => "Può prenotare una visita chiamando il nostro numero di telefono o contattandoci all'indirizzo e-mail indicato sul nostro sito web."
             ],
             [
                 'domanda' => 'Quali servizi offrite per i pazienti con sclerosi multipla?',
