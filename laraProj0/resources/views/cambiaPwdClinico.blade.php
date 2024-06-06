@@ -17,45 +17,50 @@
             
                 <label for="vecchiaPwd" class="block text-gray-700 font-semibold text-xl">Vecchia Password</label>
                 <div class="relative">
-                    <input id="vecchiaPwd" name="vecchiaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 ">
+                    <input id="vecchiaPwd" name="vecchiaPassword" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 ">
                     <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('vecchiaPwd', 'eyeId1')">
                         <img id="eyeId1" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                     </button>
                 </div>
 
-            @error('vecchiaPwd')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-            @enderror
-
+                @if ($errors->first('vecchiaPassword'))
+                <ul class="errors">
+                    @foreach ($errors->get('vecchiaPassword') as $message)
+                    <li><strong>{{ $message }}</strong></li>
+                    @endforeach
+                </ul>
+                @endif
             <label for="nuovaPwd" class="block text-gray-700 font-semibold text-xl">Nuova Password</label>
             <div class="relative">
-                <input id="nuovaPwd" name="nuovaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " required>
+                <input id="nuovaPwd" name="nuovaPassword" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " >
                 <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('nuovaPwd', 'eyeId2')">
                     <img id="eyeId2" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                 </button>
             </div>
 
-            @error('nuovaPwd')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-            @enderror
+            @if ($errors->first('nuovaPassword'))
+                <ul class="errors">
+                    @foreach ($errors->get('nuovaPassword') as $message)
+                    <li><strong>{{ $message }}</strong></li>
+                    @endforeach
+                </ul>
+                @endif
 
             <label for="confermaPwd" class="block text-gray-700 font-semibold text-xl">Conferma Nuova Password</label>
             <div class="relative">
-                <input id="confermaPwd" name="confermaPwd" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " required>
+                <input id="confermaPwd" name="confermaPassword" type="password" class="border-black border bg-cyan-100 w-full my-3 rounded-xl pl-2 " >
                 <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-700" onclick="togglePassword('confermaPwd', 'eyeId3')">
                     <img id="eyeId3" src="{{asset('images/eye-solid.png')}}" alt="toggle" class="w-5">
                 </button>
             </div>
 
-            @error('confermaPwd')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-            @enderror
+            @if ($errors->first('confermaPassword'))
+                <ul class="errors">
+                    @foreach ($errors->get('confermaPassword') as $message)
+                    <li><strong>{{ $message }}</strong></li>
+                    @endforeach
+                </ul>
+                @endif
 
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
                 <input name="annulla" type="reset" value="Annulla Modifiche" class="cursor-pointer bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400" >
