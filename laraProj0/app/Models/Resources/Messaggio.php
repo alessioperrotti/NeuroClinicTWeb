@@ -18,4 +18,9 @@ class Messaggio extends Model
     public function destinatario() {
         return $this->belongsTo(User::class, 'destin', 'username');
     }
+
+    public function segnaLetto() {
+        $this->letto = true;
+        $this->save();
+    }
 }

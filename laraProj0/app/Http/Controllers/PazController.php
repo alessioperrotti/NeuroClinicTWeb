@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Resources\Paziente;
+use App\Models\Resources\Messaggio;
 use App\Models\User;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
@@ -65,9 +66,20 @@ class PazController extends Controller
         } else {
             $changed = true;
         }
+
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti(Auth::user()->username);
+        $nuoviMsg = 0;
+
+        foreach($messaggiRic as $msg) {
+            if(!$msg->letto){
+                $nuoviMsg += 1;
+            }
+        }
+
         return view('homePaziente')
             ->with('paziente', $paziente)
-            ->with('changed', $changed);
+            ->with('changed', $changed)
+            ->with('nuoviMsg', $nuoviMsg);
     }
 
     public function edit($username): View
@@ -155,6 +167,11 @@ class PazController extends Controller
         $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userPaz)->sortByDesc('created_at');
         $messaggiInv = $this->gestMsgModel->getMsgInviati($userPaz)->sortByDesc('created_at');
         $clinico = Clinico::find(Auth::user()->paziente->clinico);
+
+        foreach($messaggiRic as $msg) {
+            $messaggio = Messaggio::find($msg->id);
+            $messaggio->segnaLetto();
+        }
 
         return view('messaggiPaziente')
             ->with('messaggiRic', $messaggiRic)

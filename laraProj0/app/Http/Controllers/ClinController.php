@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
 use App\Models\Resources\Paziente;
+use App\Models\Resources\Messaggio;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
@@ -50,9 +51,21 @@ class ClinController extends Controller
         else {
             $changed = true;
         }
+
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti(Auth::user()->username);
+        $nuoviMsg = 0;
+
+        foreach($messaggiRic as $msg) {
+            if(!$msg->letto){
+                $nuoviMsg += 1;
+            }
+        }
+
+
         return view('homeClinico')
             ->with('clinico', $clinico)
-            ->with('changed', $changed);
+            ->with('changed', $changed)
+            ->with('nuoviMsg', $nuoviMsg);
     }
 
     public function addPaziente(): View {
@@ -196,6 +209,11 @@ class ClinController extends Controller
         $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userClin)->sortByDesc('created_at');
         $messaggiInv = $this->gestMsgModel->getMsgInviati($userClin)->sortByDesc('created_at');
         $pazienti = $this->gestClinModel->getPazientiByClin($userClin);
+
+        foreach($messaggiRic as $msg) {
+            $messaggio = Messaggio::find($msg->id);
+            $messaggio->segnaLetto();
+        }
         
         return view('messaggiClinico')
             ->with('messaggiRic', $messaggiRic)

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('mittente', 20)->references('username')->on('user');
             $table->string('destin', 20)->references('username')->on('user');
             $table->string('contenuto', 1000);
-            $table->tinyInteger('letto'); // per bool
+            $table->boolean('letto'); // per bool
         });
     }
 

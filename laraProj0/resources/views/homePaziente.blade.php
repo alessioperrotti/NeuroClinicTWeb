@@ -23,7 +23,14 @@
             </div>
             <div>
                 <nav class="space-x-4 text-white text-sm">
-                    <a href="{{ route('messaggiPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer">MESSAGGI</a>
+                    <a href="{{ route('messaggiClinico')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer inline-flex items-center"> 
+                        <p>MESSAGGI</p>
+                        @if ($nuoviMsg > 0)
+                            <span class="ml-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                                {{ $nuoviMsg }}
+                            </span>
+                        @endif  
+                    </a>
                     <a href="{{ route('cartellaClinicaPaziente', ['userPaz' => $paziente->username])}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLA CLINICA</a>
                     <a href="{{ route('inserimentoNuovoEvento')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">NUOVO EVENTO</a>
                     @auth
