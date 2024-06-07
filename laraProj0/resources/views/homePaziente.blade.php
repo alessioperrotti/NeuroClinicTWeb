@@ -71,7 +71,7 @@
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
             <p class="text-black font-bold text-base basis-1/2">Indirizzo</p>
-            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$paziente->via . " " . $paziente->civico . " " . $paziente->citta . " " . $paziente->prov}}</p>
+            <p class="text-gray-400 font-semibold text-base basis-1/2">{{$paziente->via . " " . $paziente->civico . ", " . $paziente->citta . " (" . $paziente->prov . ")"}}</p>
         </div>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <div class="flex">
