@@ -72,7 +72,7 @@
             @endif
             @isset($messaggiRic)
             @foreach($messaggiRic as $msgR)
-            <div class="bg-gray-50 rounded-lg shadow-md pb-1">
+            <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
                 <div class="flex flex-row justify-between px-4 pt-1">
                     <h3 class="font-semibold">Da {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
                     <p class="text-gray-500">{{ $msgR->created_at}}</p>

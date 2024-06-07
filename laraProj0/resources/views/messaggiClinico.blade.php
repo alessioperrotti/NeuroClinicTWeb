@@ -56,7 +56,7 @@
 
 @section('content')
 <h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Messaggi con i pazienti</h1>
-<div class="bg-white rounded-xl shadow-md mx-10 p-8 mb-12">
+<div class="bg-white rounded-xl shadow-md mx-10 pt-8 pr-8 pl-8 pb-2 mb-12">
     <div class="flex flex-row justify-left space-x-4">
         <a id="a_ricevuti" class="hover:bg-gray-300 p-1 rounded-md cursor-pointer text-xl font-semibold">Ricevuti</a>
         <a id="a_inviati" class="hover:bg-gray-300 p-1 rounded-md cursor-pointer text-xl font-semibold">Inviati</a>
@@ -72,7 +72,7 @@
             @endif
             @isset($messaggiRic)
             @foreach($messaggiRic as $msgR)
-            <div class="bg-gray-50 rounded-lg shadow-md pb-1">
+            <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
                 <div class="flex flex-row justify-between px-4 pt-1">
                     <h3 class="font-semibold">Da {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
                     <p class="text-gray-500">{{ $msgR->created_at}}</p>
@@ -90,7 +90,7 @@
             @endif
             @isset($messaggiInv)
             @foreach($messaggiInv as $msgI)
-            <div class="bg-gray-50 rounded-lg shadow-md pb-1">
+            <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
                 <div class="flex flex-row justify-between px-4 pt-1">
                     <h3 class="font-semibold">A: {{ $msgI->destin->nome . " " . $msgI->destin->cognome}}</h3>
                     <p class="text-gray-500">{{ $msgI->created_at}}</p>
