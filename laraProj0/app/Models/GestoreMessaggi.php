@@ -22,13 +22,13 @@ class GestoreMessaggi extends Model
 
             if (Auth::user()->usertype == 'C') {
                 $mittente = Paziente::find($msg->mittente);  // il mittente è sicuramente un paziente
-                $msg->mittente = $mittente;  // 
+                $msg->mittente = $mittente;  
                 $messaggi->add($msg);
             }
 
             else if (Auth::user()->usertype == 'P') {
                 $mittente = Clinico::find($msg->mittente);  // il mittente è sicuramente un clinico
-                $msg->mittente = $mittente;  // 
+                $msg->mittente = $mittente;  
                 $messaggi->add($msg);
             }
         }

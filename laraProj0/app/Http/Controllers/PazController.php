@@ -152,8 +152,8 @@ class PazController extends Controller
     {
 
         $userPaz = Auth::user()->username;
-        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userPaz);
-        $messaggiInv = $this->gestMsgModel->getMsgInviati($userPaz);
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userPaz)->sortByDesc('created_at');
+        $messaggiInv = $this->gestMsgModel->getMsgInviati($userPaz)->sortByDesc('created_at');
         $clinico = Clinico::find(Auth::user()->paziente->clinico);
 
         return view('messaggiPaziente')

@@ -193,8 +193,8 @@ class ClinController extends Controller
     public function showMessaggi() : View {
 
         $userClin = Auth::user()->username;
-        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userClin);
-        $messaggiInv = $this->gestMsgModel->getMsgInviati($userClin);
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userClin)->sortByDesc('created_at');
+        $messaggiInv = $this->gestMsgModel->getMsgInviati($userClin)->sortByDesc('created_at');
         $pazienti = $this->gestClinModel->getPazientiByClin($userClin);
         
         return view('messaggiClinico')
