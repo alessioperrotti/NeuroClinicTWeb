@@ -18,10 +18,6 @@ Analisi Dati
                 <h2>{{$mediaPazientiPerClinico}}</h2>
             </div>
             <hr>
-            <div class='flex justify-between px-5 gap-x-4 py-3'>
-                <h2 class='w-1/3 font-semibold'>Media disturbi motori registrati per paziente</h2>
-                <h2>{{$mediaDisturbiPerPaziente}}</h2>
-            </div>
             <hr>
             <div class='flex justify-between px-5 gap-x-4 py-3'>
                 <h2 class='w-1/3 font-semibold'>Disturbo motorio</h2>
@@ -49,13 +45,15 @@ Analisi Dati
                         <tr class="sticky top-0 bg-white">
                             <th class="px-4 py-2 font-semibold uppercase tracking-wider">Paziente</th>
                             <th class="px-4 py-2 font-semibold uppercase tracking-wider">Numero cambi terapia</th>
+                            <th class="px-4 py-2 font-semibold uppercase tracking-wider">Media di eventi di disturbi </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($pazienti as $paziente)
                             <tr class="paziente">
                                 <td class="px-4 py-2"> {{ $paziente->nome }} {{ $paziente->cognome }}</td>
-                                <td class="px-40 py-2">{{ $paziente->numeroCambiTerapia }}</td>
+                                <td class="px-4 py-2">{{ $paziente->numeroCambiTerapia }}</td>
+                                <td class="px-4 py-2">{{ $paziente->mediaEventiDiDisturbi }}</td>
                             </tr>
                         @endforeach
                     </tbody>

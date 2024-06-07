@@ -35,6 +35,7 @@ use App\Http\Requests\NewFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
 use App\Http\Requests\UpdateClinicoRequest;
+use App\Models\GestoreCartelleClin;
 
 
 class AdminController extends Controller
@@ -45,6 +46,7 @@ class AdminController extends Controller
     protected $pazientiModel;
     protected $cliniciModel;
     protected $faqModel;
+    protected $cartelleModel;
 
     public function __construct()
     {
@@ -58,6 +60,7 @@ class AdminController extends Controller
         $this->pazientiModel= new GestorePazienti;
         $this->cliniciModel= new GestoreClinici;
         $this->faqModel= new GestoreFaq;
+        $this->cartelleModel= new GestoreCartelleClin;
           
     }
 
@@ -176,14 +179,14 @@ class AdminController extends Controller
     {
         $pazienti = $this->pazientiModel->getPazienti();
         foreach ($pazienti as $paziente) {
-            $paziente->numeroCambiTerapia = $this->getNumeroCambiTerapia($paziente->username);
+            $paziente->numeroCambiTerapia = $this->pazientiModel->getNumeroCambiTerapia($paziente->username);
+            $disturbi=                      $this->cartelleModel->getDisturbiByPaz($paziente->username);
+            $paziente->mediaEventiDiDisturbi = $this->pazientiModel->mediaEventiDiDisturbi($paziente,$disturbi);
         }
         $mediaPazientiPerClinico = $this->cliniciModel->mediaPazientiPerClinico();
-        $mediaDisturbiPerPaziente = $this->pazientiModel->mediaDisturbiMotoriPerPaziente();
         $disturbiMotori = $this->disturbiModel->getDisturbi();
         return view('analisiDati')
             ->with('mediaPazientiPerClinico',$mediaPazientiPerClinico)
-            ->with('mediaDisturbiPerPaziente',$mediaDisturbiPerPaziente)
             ->with('disturbiMotori',$disturbiMotori)
             ->with('pazienti', $pazienti);
     }
@@ -191,11 +194,6 @@ class AdminController extends Controller
     {
         $numeroEpisodi = Episodio::where('disturbo', $id)->count();
         return response()->json(['numeroEpisodi' => $numeroEpisodi]);
-    }
-    public function getNumeroCambiTerapia($username) {
-        $numeroTerapie = Terapia::where('paziente', $username)->count();
-        $numeroCambiTerapia = $numeroTerapie - 1;
-        return $numeroCambiTerapia;
     }
 
 ####################################################################################################################

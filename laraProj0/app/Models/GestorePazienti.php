@@ -57,29 +57,30 @@ class GestorePazienti extends Model
         }
     }
 
-    public function mediaDisturbiMotoriPerPaziente() {
-        $numeroPazienti = Paziente::count();
-    
-        if ($numeroPazienti == 0) {
-            return 0;
+    public function mediaEventiDiDisturbi($paziente, $disturbi)
+    {
+        // Conta il numero di disturbi
+        $numeroDisturbi = $disturbi->count();
+        // estraggo id
+        $disturboIds = $disturbi->pluck('id');
+        
+        // Conta il numero di episodi relativi ai disturbi "attivi"
+        $numeroEpisodi = $paziente->episodi()->whereIn('disturbo', $disturboIds)->count();
+        
+        if ($numeroDisturbi > 0) {
+            $mediaEventiDiDisturbi = ($numeroEpisodi + $numeroDisturbi) / 2;
+        } else {
+            $mediaEventiDiDisturbi = 0; 
         }
-    
-        $numeroDisturbiTotali = 0;
-    
-        $pazienti = Paziente::all();
-        foreach ($pazienti as $paziente) {
-            $disturbiUnici = $paziente->episodi()->with('disturbo')->get()->unique('disturbo.id')->count();
-            $numeroDisturbiTotali += $disturbiUnici;
-        }
-    
-        $media = $numeroDisturbiTotali / $numeroPazienti;
-    
-        return round($media, 2);
+        
+        return round($mediaEventiDiDisturbi, 2);
     }
+
     public function getNumeroCambiTerapia($username) {
         $numeroTerapie = Terapia::where('paziente', $username)->count();
         $numeroCambiTerapia = $numeroTerapie - 1;
         return $numeroCambiTerapia;
     }
+    
 
 }
