@@ -43,4 +43,10 @@
             @endif
         </ul>
     </div>
+    <a href="{{ route('terapiePassate')}}">
+        <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
+            Visualizza Storico Terapie
+        </button>
+    </a>
+</div>
 @endsection

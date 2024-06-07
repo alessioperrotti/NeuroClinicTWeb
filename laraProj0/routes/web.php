@@ -162,7 +162,7 @@ Route::get('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'edit']
 Route::post('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'update'])
 ->name('paziente.update')->middleware('can:isPaziente');
 
-Route::get('/home_paz/cartella/{userPaz}' , [PazController::class, 'showCartClinica']) 
+Route::get('/home_paz/cartella' , [PazController::class, 'showCartClinica']) 
 ->name('cartellaClinicaPaziente')->middleware('can:isPaziente');
 
 Route::get('/home_paz', [PazController::class, 'index'])
@@ -186,6 +186,8 @@ Route::get('/home_paz/messaggi', [PazController::class, 'showMessaggi'])
 Route::post('/home_paz/messaggi', [PazController::class, 'sendMessaggio'])
 ->name('messaggioPaziente.send')->middleware('can:isPaziente');
 
+Route::get('/home_paz/cartella/ter_passate' , [PazController::class, 'showTerPassate']) 
+->name('terapiePassate')->middleware('can:isPaziente');
 
 
 

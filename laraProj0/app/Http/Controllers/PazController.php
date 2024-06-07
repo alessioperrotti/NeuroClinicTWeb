@@ -191,4 +191,24 @@ class PazController extends Controller
             return redirect()->back()->with('error', 'Si è verificato un errore durante l\'invio del messaggio.');
         }
     }
+
+    public function showTerPassate() : View {
+
+        $paziente = Auth::user()->paziente;
+        $userPaz = $paziente->username;
+        $terapie = $this->gestTerModel->getTerapieByPaz($userPaz)->sortByDesc('data');
+        $terIds = $terapie->pluck('id');
+        $terAssoc = array();
+
+        foreach($terIds as $terId) {
+            $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
+            $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
+            $terAssoc[$terId] = ['farmaci' => $farmaci, 'attivita' => $attivita, 'dataTer' => $terapie->find($terId)->data];
+        }
+
+        return view('terapiePassate')
+            ->with('paziente', $paziente)
+            ->with('terAssoc', $terAssoc);
+
+    }
 }

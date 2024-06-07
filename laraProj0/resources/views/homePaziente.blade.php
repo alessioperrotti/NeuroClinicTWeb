@@ -112,7 +112,7 @@
     <hr class="h-1 my-10 bg-cyan-600 m-28">
     <div class="mx-96">
         <div class="max-w-52 float-left   mb-10 ">
-            <a href="{{ route('cartellaClinicaPaziente', ['userPaz' => $paziente->username]) }}">
+            <a href="{{ route('cartellaClinicaPaziente') }}">
                 <img src="{{ asset('images\cartella_clinica.png') }}" alt="Cartella clinica" class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
             </a>
             <p class="mt-1 text-center text-2xl text-black">Cartella clinica</p>

@@ -149,5 +149,11 @@ class GestoreTerapie extends Model
                     return false;
             }
     }
+
+    public function getTerapieByPaz($userPaz) : Collection {
+        
+        $terapie = Terapia::where('paziente', $userPaz)->get();
+        return $terapie;
+    }
     
 }
