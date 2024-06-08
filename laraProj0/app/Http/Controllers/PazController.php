@@ -67,6 +67,7 @@ class PazController extends Controller
             $changed = true;
         }
 
+
         $messaggiRic = $this->gestMsgModel->getMsgRicevuti(Auth::user()->username);
         $nuoviMsg = 0;
 
@@ -107,6 +108,8 @@ class PazController extends Controller
     {
 
         $paziente = Auth::user()->paziente;
+        $paziente->terCambiata = false;
+        $paziente->save();
         $userPaz = $paziente->username;
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('data');
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
