@@ -24,7 +24,7 @@ class NewEventoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'data' => 'required|date|before:today|date_format:Y-m-d',
+            'data' => 'required|date|before:tomorrow|after:2000-01-01|date_format:Y-m-d',
             'ora' => 'required|date_format:H:i',
             'durata' => 'required|integer|min:1|digits_between:1,120',
             'intensita' => 'required|integer|min:1|max:10',

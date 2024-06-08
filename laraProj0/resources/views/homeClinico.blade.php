@@ -125,7 +125,6 @@
 
     $(document).ready(function() {
 
-        console.log("sono pronto");
         var changed = @json($changed);
         console.log(changed);
         if(!changed){

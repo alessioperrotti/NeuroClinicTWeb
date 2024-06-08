@@ -51,8 +51,8 @@
                 </div>
             </div>
             <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">
-                <input name="annulla" type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
-                <input name="conferma" type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 cursor-pointer "></input>
+                <input name="annulla" type="reset" value="Annulla Inserimento" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
+                <input id="submit" name="conferma" type="submit" value="Conferma Inserimento" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 cursor-pointer "></input>
             </div>
         </form>
     </div>
@@ -90,7 +90,8 @@
 <script src="{{ asset('js/functions.js') }}"></script>
 
 <script>
-    
+
+    // correggere: dovrebbe stare tutto in $(document).ready(function() { ... });
     function setupValidation(actionasset, formId) {
             // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
             $("#" + formId + " :input").on('blur', function() {
@@ -111,6 +112,11 @@
         }
 
         $(function() {
+
+            $('#submit').on('click', function() {
+                alert('Nuovo evento inserito correttamente')
+            });
+
             var actionasset = "{{ route('inserimentoNuovoEvento.store') }}";
             var formId = 'evento-form';
             setupValidation(actionasset, formId);
