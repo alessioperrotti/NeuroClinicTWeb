@@ -45,7 +45,16 @@
 </div>
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function () {
+        // Sovrascrive il pulsante "Indietro"
+        //Prendo l'elemento con Id=back_button, a questo elemento sovrascrivo  
+        //l'attributo onclick in modo che quando viene cliccato eseguo la funzione
+        //che imposta window.location.href sulla route {{ route('gestioneClinici') }} (window.location.href è una proprietà in JavaScript che rappresenta l'URL della pagina corrente)
+        var backButton = document.getElementById('back_button');
+        backButton.onclick = function() {
+            window.location.href = "{{ route('gestioneClinici') }}";
+        };
+
         // Funzione per impostare la validazione del form
         function setupValidation(actionUrl, formId, modifica) {
                 // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
@@ -70,16 +79,7 @@
             var formId = 'formModificaClinico';
             setupValidation(actionUrl, formId, false);
         });
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        // Sovrascrive il pulsante "Indietro"
-        //Prendo l'elemento con Id=back_button, a questo elemento sovrascrivo  
-        //l'attributo onclick in modo che quando viene cliccato eseguo la funzione
-        //che imposta window.location.href sulla route {{ route('gestioneClinici') }} (window.location.href è una proprietà in JavaScript che rappresenta l'URL della pagina corrente)
-        var backButton = document.getElementById('back_button');
-        backButton.onclick = function() {
-            window.location.href = "{{ route('gestioneClinici') }}";
-        };
+
     });                                                 
 </script>
 

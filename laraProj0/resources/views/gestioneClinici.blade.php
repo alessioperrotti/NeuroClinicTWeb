@@ -54,19 +54,18 @@
         backButton.onclick = function() {
             window.location.href = "{{ route('homeAdmin') }}";
         };
-        $(document).ready(function() {
-            // Filtro per cognome jQuery
-            $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
-                                                        //l'evento input si verifica quando il contenuto dell'elemento input cambia.
-                var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
-                $('.clinico').each(function() {        //per ogni elemento con classe "clinico" esguo questa funzione
-                    var fullName = $(this).find('span').text().toLowerCase(); //estraggo il nome completo che so essere nell'elemento span
-                                                                            // all'interno dell'elemento con classe clinico (l'elemento della lista in questo caso)
-                    var cognome = fullName.split(' ').pop(); // Prende l'ultimo elemento come cognome così anche se il clinico ha 2 nomi trova comunque il cognome
-                    $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il clinico in base al filtro
-                });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
-            });                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
-        });    
+        // Filtro per cognome jQuery
+        $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
+                                                     //l'evento input si verifica quando il contenuto dell'elemento input cambia.
+            var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
+            $('.clinico').each(function() {        //per ogni elemento con classe "clinico" esguo questa funzione
+                var fullName = $(this).find('span').text().toLowerCase(); //estraggo il nome completo che so essere nell'elemento span
+                                                                         // all'interno dell'elemento con classe clinico (l'elemento della lista in questo caso)
+                var cognome = fullName.split(' ').pop(); // Prende l'ultimo elemento come cognome così anche se il clinico ha 2 nomi trova comunque il cognome
+                $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il clinico in base al filtro
+            });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
+        });                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
+           
     });                                                 
 </script>
 

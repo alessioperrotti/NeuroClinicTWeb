@@ -51,9 +51,9 @@
                 event.preventDefault();
             }
         });
-        $(document).ready(function() {
-            // Filtro per cognome jQuery
-            $('#cognomePaziente').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomePaziente
+        
+        // Filtro per cognome jQuery
+        $('#cognomePaziente').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomePaziente
                                                         //l'evento input si verifica quando il contenuto dell'elemento input cambia.
                 var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
                 $('.paziente').each(function() {        //per ogni elemento con classe "paziente" esguo questa funzione
@@ -63,8 +63,10 @@
                     $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il paziente in base al filtro
                 });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
             }); 
-        });                                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
-    });                                                     // preso all'inizio
+                                                       // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
+                                                         // preso all'inizio
+    });
+            
 </script>
 
 @endsection
