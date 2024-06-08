@@ -22,11 +22,11 @@
     </style>
 </head>
 <body class="bg-cyan-50">
-    <header class="fixed top-0 left-0 right-0 z-20">  
+    <header class="fixed top-0 left-0 right-0 z-20">  <!-- sarebbe carino mettere un backdrop blur-->
         <div class="bg-cyan-600 h-[100px] flex items-center justify-between p-8 backdrop-filter backdrop-blur-sm bg-opacity-90">
             <div>
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('images/logo_bianco.svg') }}" class="h-16" alt="Logo">
+                    <img src="{{ asset('images/logo_bianco.svg')}}" class="h-16" alt="Logo">
                 </a>
             </div>
             <div>
@@ -52,24 +52,28 @@
             </div>
         </div>
     </header>
-    <div class="relative" name="banner slideshow">
-        <div id="slide1" class="slide">
-            <img src="{{ asset('images/banner1.gif')}}" alt="Banner Homepage">
-            <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
-                <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
-            </div>
+    <div class="relative slide hidden">     
+        <div class="relative w-full overflow-hidden">
+            <img src="{{ asset('images/banner1.gif')}}" alt="Banner 1" class="w-full h-[585px]">
         </div>
-        <div id="slide2" class="hidden slide">
-            <img src="{{ asset('images/banner2.gif')}}" alt="Banner Homepage">
-            <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
-                <h1 class="font-bold text-6xl text-white">Riabilitazione neurologica personalizzata</h1>
-            </div>
+        <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
+            <h1 class="font-bold text-6xl text-white">Ogni passo è una vittoria</h1>
         </div>
-        <div id="slide3" class="hidden slide">
-            <img src="{{ asset('images/banner3.gif')}}" alt="Banner Homepage">
-            <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
-                <h1 class="font-bold text-6xl text-white">Un team di professionisti al tuo servizio</h1>
-            </div>
+    </div>
+    <div class="relative slide hidden">     
+        <div class="relative w-full overflow-hidden">
+            <img src="{{ asset('images/banner2.gif')}}" alt="Banner 2" class="w-full h-[585px]">
+        </div>
+        <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
+            <h1 class="font-bold text-6xl text-white">Il tuo benessere, il nostro impegno</h1>
+        </div>
+    </div>
+    <div class="relative slide hidden">     
+        <div class="relative w-full overflow-hidden">
+            <img src="{{ asset('images/banner3.gif')}}" alt="Banner 3" class="w-full h-[585px]">
+        </div>
+        <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
+            <h1 class="font-bold text-6xl text-white">Vicini a te ed al tuo percorso</h1>
         </div>
     </div>
     <div class="h-[40px]"></div>
@@ -198,12 +202,28 @@
             </div>
         </div>
     </footer>
-</body>
-<script>
-    $(document).ready(function(
-        
-        // non so come fare per far funzionare lo slideshow
-    ))
-</script>
 
+
+</body>
+
+<script>
+    $(document).ready(function() {
+        let currentIndex = 0;
+        const slides = $('.slide');
+        const slideCount = slides.length;
+
+        function showSlide(index) {
+            slides.removeClass('block').addClass('hidden');
+            slides.eq(index).removeClass('hidden').addClass('block');
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slideCount;
+            showSlide(currentIndex);
+        }
+
+        showSlide(currentIndex);
+        setInterval(nextSlide, 4000); // Cambia slide ogni 4 secondi
+    });
+</script>
 </html>
