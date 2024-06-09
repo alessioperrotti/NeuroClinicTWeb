@@ -175,11 +175,12 @@ class PazController extends Controller
             $messaggio = Messaggio::find($msg->id);
             $messaggio->segnaLetto();
         }
-        Log::info($messaggiRic);
+      
         return view('messaggiPaziente')
             ->with('messaggiRic', $messaggiRic)
             ->with('messaggiInv', $messaggiInv)
             ->with('clinico', $clinico);
+            
             
     }
 

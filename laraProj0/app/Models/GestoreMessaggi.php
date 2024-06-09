@@ -15,7 +15,17 @@ use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Log;
 
 class GestoreMessaggi extends Model
-{
+{   
+    public function trovaPersona($username)
+    {
+        $persona = Paziente::find($username);
+        if ($persona === null) {
+            $persona = Clinico::find($username);
+        }
+        return $persona;
+    }
+    
+
     public function getMsgRicevuti($username): Collection
     {
 
@@ -29,17 +39,34 @@ class GestoreMessaggi extends Model
 
                 //se i messaggi hanno una risposta avranno dei valori diversi da null
                 if ($msg->risposta != null) {
+
                     $risposta = Messaggio::find($msg->risposta);
+                    $mittente = $this->trovaPersona($risposta->mittente);
+                    $risposta->mittente = $mittente;
                     $msg->risposta = $risposta;
+
                 }
+
 
                 $messaggi->add($msg);
             } else if (Auth::user()->usertype == 'P') {
                 $mittente = Clinico::find($msg->mittente);  // il mittente è sicuramente un clinico
                 $msg->mittente = $mittente;
 
+
                 if ($msg->risposta != null) {
+                    Log::info("Risposta non nulla");
+
                     $risposta = Messaggio::find($msg->risposta);
+
+                    Log::info($risposta);
+                    $mittente = $this->trovaPersona($risposta->mittente);
+
+                    Log::info($mittente);
+                    $risposta->mittente = $mittente;
+
+                    Log::info($risposta);
+
                     $msg->risposta = $risposta;
                 }
 
@@ -66,7 +93,7 @@ class GestoreMessaggi extends Model
                 //se i messaggi hanno una risposta avranno dei valori diversi da null
                 if ($msg->risposta != null) {
                     $risposta = Messaggio::find($msg->risposta);
-                    $mittente = Paziente::find($risposta->mittente);
+                    $mittente = $this->trovaPersona($risposta->mittente);
                     $risposta->mittente = $mittente;
                     $msg->risposta = $risposta;
                 }
@@ -81,7 +108,8 @@ class GestoreMessaggi extends Model
                 //se i messaggi hanno una risposta avranno dei valori diversi da null
                 if ($msg->risposta != null) {
                     $risposta = Messaggio::find($msg->risposta);
-                    $mittente = Clinico::find($risposta->mittente);
+
+                    $mittente = $this->trovaPersona($risposta->mittente);
                     $risposta->mittente = $mittente;
                     $msg->risposta = $risposta;
                 }
@@ -106,7 +134,7 @@ class GestoreMessaggi extends Model
                 'mittente' => Auth::user()->username,
                 'destin' => $validatedData['destin'],
                 'contenuto' => $validatedData['contenuto'],
-           
+
             ]
         );
         $messaggio->letto = false;
@@ -115,9 +143,8 @@ class GestoreMessaggi extends Model
         }
 
         try {
-            
+
             $messaggio->save();
-            
         } catch (\Exception $e) {
             Log::error($e);
             return false;

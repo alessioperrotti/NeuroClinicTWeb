@@ -115,21 +115,24 @@
             @foreach($messaggiRic as $msgR)
             <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
                 <div class="flex flex-row justify-between px-4 pt-1">
-                    <h3 class="font-semibold">Da {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
+                    <div class="flex">
+                        <h3 class="font-semibold">Da {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
+                        @if($msgR->risposta != null)
+                        <h3 class="ml-5 font-semibold text-gray-400">Risposta al messaggio di {{$msgR->risposta->mittente->nome}} {{$msgR->risposta->mittente->cognome}} del {{$msgR->risposta->created_at}}</h3>
+                        @endif
+                    </div>
                     <div class="flex">
                         <p class="text-gray-500">{{ $msgR->created_at}}</p>
                         <button class="a_nuovo_risp mx-3" data-idRisp="{{$msgR->id}}" data-Mitt='{{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}' data-idData="{{ $msgR->created_at}}" data-idMitt='{{$msgR->mittente->username}}'> Rispondi </button>
                     </div>
 
                 </div>
-                @if($msgR->risposta != null)
-                <div class="px-4 pt-1">
-                    <h3 class="font-semibold">Risposta al messaggio di {{$msgR->risposta->mittente->nome}} del {{$msgR->risposta->created_at}}</h3>
-                </div>
-                @endif
                 <p class="text-gray-600 px-4">{{ $msgR->contenuto}}</p>
             </div>
             @endforeach
+
+
+
             @endisset
         </div>
         <div id="inviati" class="messaggi hidden relative h-[400px] overflow-y-auto">
@@ -145,7 +148,7 @@
                     <div class="flex">
                         <h3 class="font-semibold">A: {{ $msgI->destin->nome . " " . $msgI->destin->cognome}}</h3>
                         @if($msgI->risposta != null)
-                        <h3 class="ml-5 font-semibold text-gray-400">Risposta al messaggio di {{$msgI->risposta->mittente->nome}} del {{$msgI->risposta->created_at}}</h3>
+                        <h3 class="ml-5 font-semibold text-gray-400">Risposta al messaggio di {{$msgI->risposta->mittente->nome}} {{$msgI->risposta->mittente->cognome}} del {{$msgI->risposta->created_at}}</h3>
                         @endif
                     </div>
 

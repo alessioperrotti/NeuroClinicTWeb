@@ -219,6 +219,8 @@ class ClinController extends Controller
             ->with('messaggiRic', $messaggiRic)
             ->with('messaggiInv', $messaggiInv)
             ->with('pazienti', $pazienti);
+        
+            
     }
 
     public function sendMessaggio(NewMessaggioRequest $request) : RedirectResponse {
