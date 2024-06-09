@@ -31,16 +31,15 @@
     </ul>
 </div>
 
+<script src="{{ asset('js/functions.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
-        //Prendo l'elemento con Id=back_button, a questo elemento sovrascrivo  
-        //l'attributo onclick in modo che quando viene cliccato eseguo la funzione
-        //che imposta window.location.href sulla route {{ route('homeAdmin') }} (window.location.href è una proprietà in JavaScript che rappresenta l'URL della pagina corrente)
-        var backButton = document.getElementById('back_button');
-        backButton.onclick = function() {
-            window.location.href = "{{ route('homeAdmin') }}";
-        };
+        $(function() {
+            elem_id = "back_button";
+            rotta = "{{ route('homeAdmin') }}";
+            sovrascriviOnClick(back_button,"homeAdmin");
+        });
 
         // Conferma per l'eliminazione del paziente:
         //prendo l'elemento form con classe delete-form e gli aggiungo un gestore degli eventi 

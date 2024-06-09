@@ -118,10 +118,11 @@
         /// FUNZIONI PER SOVRASCRIVERE COMPORTAMENTO BTN INDIETRO ///
         
         // Sovrascrive il pulsante "Indietro"
-        var backButton = document.getElementById('back_button');
-        backButton.onclick = function() {
-            window.location.href = "{{ route('homeAdmin') }}";
-        };
+        $(function() {
+            elem_id = "back_button";
+            rotta = "{{ route('homeAdmin') }}";
+            sovrascriviOnClick(back_button,"homeAdmin");
+        });
 
         /////////////////////////////////
 
