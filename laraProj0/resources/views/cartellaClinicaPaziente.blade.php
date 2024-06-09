@@ -1,6 +1,7 @@
 @extends('layouts.basic')
 @section('title', 'Cartella Paziente')
 
+
 @section('content')
 <h1 class="text-5xl font-bold ml-5 mt-5 mb-8">Cartella clinica di {{$paziente->nome . " " . $paziente->cognome}}</h1>
 <div class="flex flex-col items-center">
@@ -43,4 +44,10 @@
             @endif
         </ul>
     </div>
+    <a href="{{ route('terapiePassate')}}">
+        <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white hover:bg-cyan-500">
+            Visualizza Storico Terapie
+        </button>
+    </a>
+</div>
 @endsection

@@ -1,17 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\NewMessaggioRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
 use App\Models\Resources\Paziente;
+use App\Models\Resources\Messaggio;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
 use App\Models\GestoreDisturbi;
+use App\Models\GestoreMessaggi;
 use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
@@ -24,6 +28,7 @@ class ClinController extends Controller
     protected $gestCartModel;
     protected $gestTerModel;
     protected $gestDistModel;
+    protected $gestMsgModel;
 
     public function __construct()
     {
@@ -32,6 +37,8 @@ class ClinController extends Controller
         $this->gestCartModel = new GestoreCartelleClin;
         $this->gestTerModel = new GestoreTerapie;
         $this->gestDistModel = new GestoreDisturbi;
+        $this->gestMsgModel = new GestoreMessaggi;
+
     }
 
     public function index(): View {
@@ -44,9 +51,21 @@ class ClinController extends Controller
         else {
             $changed = true;
         }
+
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti(Auth::user()->username);
+        $nuoviMsg = 0;
+
+        foreach($messaggiRic as $msg) {
+            if(!$msg->letto){
+                $nuoviMsg += 1;
+            }
+        }
+
+
         return view('homeClinico')
             ->with('clinico', $clinico)
-            ->with('changed', $changed);
+            ->with('changed', $changed)
+            ->with('nuoviMsg', $nuoviMsg);
     }
 
     public function addPaziente(): View {
@@ -165,8 +184,7 @@ class ClinController extends Controller
                 ->with('clinico', $clinico);
     }
 
-    public function updateClinico(UpdateClinicoRequest  $request) : JsonResponse
-    {
+    public function updateClinico(UpdateClinicoRequest  $request) : JsonResponse {
         
         $validatedData = $request->validated();
         $userClin = Auth::user()->clinico->username;
@@ -183,5 +201,37 @@ class ClinController extends Controller
     public function showPassChange () : View {
         
         return view('cambiaPwdClinico');
+    }
+
+    public function showMessaggi() : View {
+
+        $userClin = Auth::user()->username;
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userClin)->sortByDesc('created_at');
+        $messaggiInv = $this->gestMsgModel->getMsgInviati($userClin)->sortByDesc('created_at');
+        $pazienti = $this->gestClinModel->getPazientiByClin($userClin);
+
+        foreach($messaggiRic as $msg) {
+            $messaggio = Messaggio::find($msg->id);
+            $messaggio->segnaLetto();
+        }
+        
+        return view('messaggiClinico')
+            ->with('messaggiRic', $messaggiRic)
+            ->with('messaggiInv', $messaggiInv)
+            ->with('pazienti', $pazienti);
+        
+            
+    }
+
+    public function sendMessaggio(NewMessaggioRequest $request) : RedirectResponse {
+        Log::info('Invio messaggio');
+        $validatedData = $request->validated();
+        
+        if ($this->gestMsgModel->sendMessaggio($validatedData)) {
+            return redirect()->action([ClinController::class, 'showMessaggi']);
+        }
+        else {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'invio del messaggio.');
+        }
     }
 }

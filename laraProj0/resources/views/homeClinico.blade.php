@@ -18,6 +18,14 @@
             </a>
             <div>
                 <nav class="space-x-4 text-white text-sm">
+                    <a href="{{ route('messaggiClinico')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer inline-flex items-center"> 
+                        <p>MESSAGGI</p>
+                        @if ($nuoviMsg > 0)
+                            <span class="ml-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                                {{ $nuoviMsg }}
+                            </span>
+                        @endif  
+                    </a>
                     <a href="{{ route('listaPazienti')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLE CLINICHE</a>
                     <a href="{{ route('nuovoPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">REGISTRA PAZIENTE</a>
                     @auth
@@ -117,7 +125,6 @@
 
     $(document).ready(function() {
 
-        console.log("sono pronto");
         var changed = @json($changed);
         console.log(changed);
         if(!changed){

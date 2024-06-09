@@ -51,8 +51,8 @@
                 </div>
             </div>
             <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">
-                <input name="annulla" type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
-                <input name="conferma" type="submit" value="Conferma Modifiche" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 cursor-pointer "></input>
+                <input name="annulla" type="reset" value="Annulla Inserimento" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
+                <input id="submit" name="conferma" type="submit" value="Conferma Inserimento" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 cursor-pointer "></input>
             </div>
         </form>
     </div>
@@ -68,13 +68,15 @@
                 <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
                 <p class="text-gray-500 font-semibold">{{"(Intensità:" . $episodio->intensita . ")"}}</p>
             </div>
-            <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
-            <form action="{{route('episodio.elimina', $episodio->id)}}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?');"> 
-                @csrf
-                <button type="submit">
-                    <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
-                </button>
-            </form>
+            <div class="flex items-center space-x-4">
+                <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
+                <form action="{{route('episodio.elimina', $episodio->id)}}" method="POST" class="delete-form inline" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?');"> 
+                    @csrf
+                    <button type="submit">
+                        <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                    </button>
+                </form>
+            </div>
         </div>
     @endforeach
     @endisset
@@ -88,15 +90,16 @@
 <script src="{{ asset('js/functions.js') }}"></script>
 
 <script>
-    
-    function setupValidation(actionUrl, formId) {
+
+    // correggere: dovrebbe stare tutto in $(document).ready(function() { ... });
+    function setupValidation(actionasset, formId) {
             // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
             $("#" + formId + " :input").on('blur', function() {
                 // Ottiene l'ID e il nome dell'input attualmente in focus
                 var formElementId = $(this).attr('id');
                 var inputName = $(this).attr('name');
                 // Chiama la funzione di validazione per l'elemento corrente
-                doElemValidation(formElementId, actionUrl, formId, inputName);
+                doElemValidation(formElementId, actionasset, formId, inputName);
             });
             
             // Aggiunge un listener per l'evento 'submit' del form
@@ -104,14 +107,19 @@
             // Previene l'invio predefinito del form
             event.preventDefault();
             // Chiama la funzione di validazione per l'intero form
-            doFormValidation(actionUrl, formId);
+            doFormValidation(actionasset, formId);
             });
         }
 
         $(function() {
-            var actionUrl = "{{ route('inserimentoNuovoEvento.store') }}";
+
+            $('#submit').on('click', function() {
+                alert('Nuovo evento inserito correttamente')
+            });
+
+            var actionasset = "{{ route('inserimentoNuovoEvento.store') }}";
             var formId = 'evento-form';
-            setupValidation(actionUrl, formId);
+            setupValidation(actionasset, formId);
         });
 </script>
 @endsection

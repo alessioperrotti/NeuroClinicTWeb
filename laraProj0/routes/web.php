@@ -57,8 +57,15 @@ Route::post('/home_clin/aggiorna_clin', [ClinController::class, 'updateClinico']
 Route::get('/home_clin/cambia_pwd', [ClinController::class, 'showPassChange'])
 ->name('cambiaPwdClinico')->middleware('auth');
 
+Route::get('/home_clin/messaggi', [ClinController::class, 'showMessaggi'])
+->name('messaggiClinico')->middleware('can:isClinico');
+
+Route::post('/home_clin/messaggi', [ClinController::class, 'sendMessaggio'])
+->name('messaggioClinico.send')->middleware('can:isClinico');
+
 Route::post('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
+
 
 
 
@@ -155,7 +162,7 @@ Route::get('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'edit']
 Route::post('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'update'])
 ->name('paziente.update')->middleware('can:isPaziente');
 
-Route::get('/home_paz/cartella/{userPaz}' , [PazController::class, 'showCartClinica']) 
+Route::get('/home_paz/cartella' , [PazController::class, 'showCartClinica']) 
 ->name('cartellaClinicaPaziente')->middleware('can:isPaziente');
 
 Route::get('/home_paz', [PazController::class, 'index'])
@@ -164,12 +171,26 @@ Route::get('/home_paz', [PazController::class, 'index'])
 Route::post('/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
 
+Route::get('/home_paz/nuovo_ep' , [PazController::class, 'showNuovoEpisodio'])
+->name('inserimentoNuovoEvento')->middleware('can:isPaziente');
 
 Route::post('/home_paz/nuovo_ep' , [PazController::class, 'storeEpisodio'])
 ->name('inserimentoNuovoEvento.store');
 
 Route::post('/home_paz/nuovo_ep/{id}', [PazController::class, 'eliminaDisturbo'])
 ->name('episodio.elimina')->middleware('can:isPaziente');
+
+Route::get('/home_paz/messaggi', [PazController::class, 'showMessaggi'])
+->name('messaggiPaziente')->middleware('can:isPaziente');
+
+Route::post('/home_paz/messaggi', [PazController::class, 'sendMessaggio'])
+->name('messaggioPaziente.send')->middleware('can:isPaziente');
+
+Route::get('/home_paz/cartella/ter_passate' , [PazController::class, 'showTerPassate']) 
+->name('terapiePassate')->middleware('can:isPaziente');
+
+
+
 
 
 require __DIR__.'/auth.php';

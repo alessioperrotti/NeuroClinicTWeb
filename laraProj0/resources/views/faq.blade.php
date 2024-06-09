@@ -48,8 +48,14 @@
     <hr class="h-[3px] rounded bg-cyan-500 my-8 w-[70%]">
 </div>
 <div name="contact" class="flex justify-center">
-    <div name="contact form" class="absolute flex flex-col justify-center items-center z-10">
+    <div name="contact form" class="absolute flex flex-col justify-center h-full items-center z-10">
         <h1 class="font-bold text-5xl text-gray-800">Hai altre domande? Contattaci</h1>
+        <p class="text-center text-2xl p-[100px] pb-20">Le risposte alle domande più frequenti potrebbero non essere sufficienti <br>per 
+            chiarire i tuoi dubbi. Se hai bisogno di ulteriori informazioni, non esitare<br> a contattarci
+            mandandoci un messaggio all'indirizzo email che trovi qui sotto. Sarà nostra premura risponderti
+            al più presto possibile.
+        </p>
+        <!--
         <form class="flex flex-col mt-20 items-center">
             @csrf
             <div class="mb-6">
@@ -69,6 +75,12 @@
             </div>
             <input type="submit" class="bg-cyan-600 rounded-xl mt-8 w-[200px] h-[60px] text-white font-semibold cursor-pointer" value="Invia Messaggio">
         </form>
+        -->
+        <a href="mailto:info@neuroclinic.it">
+            <button type="button" class="p-3 bg-cyan-600 rounded-lg text-white text-xl hover:bg-cyan-500">
+                Scrivi una mail
+            </button>
+        </a>
     </div>
 </div>
 <div class="flex justify-end">
