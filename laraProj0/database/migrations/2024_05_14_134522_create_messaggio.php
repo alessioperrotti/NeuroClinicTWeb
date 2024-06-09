@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('destin', 20)->references('username')->on('user');
             $table->string('contenuto', 1000);
             $table->boolean('letto'); // per bool
+            $table->string('risposta', 20)->references('id')->on('messaggio')->nullable(); 
         });
     }
 

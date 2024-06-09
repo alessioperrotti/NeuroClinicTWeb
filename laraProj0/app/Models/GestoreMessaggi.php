@@ -10,50 +10,83 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\Resources\Paziente;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Resources\Clinico;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Log;
 
 class GestoreMessaggi extends Model
 {
-    public function getMsgRicevuti($username) : Collection {
+    public function getMsgRicevuti($username): Collection
+    {
 
         $messaggi = new Collection;
 
-        foreach(Messaggio::where('destin', $username)->get() as $msg) {
+        foreach (Messaggio::where('destin', $username)->get() as $msg) {
 
             if (Auth::user()->usertype == 'C') {
                 $mittente = Paziente::find($msg->mittente);  // il mittente è sicuramente un paziente
-                $msg->mittente = $mittente;  
-                $messaggi->add($msg);
-            }
+                $msg->mittente = $mittente;
 
-            else if (Auth::user()->usertype == 'P') {
+                //se i messaggi hanno una risposta avranno dei valori diversi da null
+                if ($msg->risposta != null) {
+                    $risposta = Messaggio::find($msg->risposta);
+                    $msg->risposta = $risposta;
+                }
+
+                $messaggi->add($msg);
+            } else if (Auth::user()->usertype == 'P') {
                 $mittente = Clinico::find($msg->mittente);  // il mittente è sicuramente un clinico
-                $msg->mittente = $mittente;  
+                $msg->mittente = $mittente;
+
+                if ($msg->risposta != null) {
+                    $risposta = Messaggio::find($msg->risposta);
+                    $msg->risposta = $risposta;
+                }
+
                 $messaggi->add($msg);
             }
         }
         return $messaggi;
     }
 
-    public function getMsgInviati($username) : Collection {
+    public function getMsgInviati($username): Collection
+    {
 
         $messaggi = new Collection;
 
-        foreach(Messaggio::where('mittente', $username)->get() as $msg) {
+        foreach (Messaggio::where('mittente', $username)->get() as $msg) {
 
             if (Auth::user()->usertype == 'C') {
                 $destinatario = Paziente::find($msg->destin);  // il destinatario è sicuramente un paziente
                 $mittente = Clinico::find(Auth::user()->username);
                 $msg->destin = $destinatario;
-                $msg->mittente = $mittente;  
-                $messaggi->add($msg);
-            }
+                $msg->mittente = $mittente;
 
-            else if (Auth::user()->usertype == 'P') {
+
+                //se i messaggi hanno una risposta avranno dei valori diversi da null
+                if ($msg->risposta != null) {
+                    $risposta = Messaggio::find($msg->risposta);
+                    $mittente = Paziente::find($risposta->mittente);
+                    $risposta->mittente = $mittente;
+                    $msg->risposta = $risposta;
+                }
+
+                $messaggi->add($msg);
+            } else if (Auth::user()->usertype == 'P') {
                 $destinatario = Clinico::find($msg->destin);  // il destinatario è sicuramente un clinico
                 $mittente = Paziente::find(Auth::user()->username);
-                $msg->destin = $destinatario;  
+                $msg->destin = $destinatario;
                 $msg->mittente = $mittente;
+
+                //se i messaggi hanno una risposta avranno dei valori diversi da null
+                if ($msg->risposta != null) {
+                    $risposta = Messaggio::find($msg->risposta);
+                    $mittente = Clinico::find($risposta->mittente);
+                    $risposta->mittente = $mittente;
+                    $msg->risposta = $risposta;
+                }
+
+
                 $messaggi->add($msg);
             }
 
@@ -64,24 +97,31 @@ class GestoreMessaggi extends Model
         return $messaggi;
     }
 
-    public function sendMessaggio($validatedData) : bool {
+    public function sendMessaggio($validatedData): bool
+    {
 
-
+        Log::info($validatedData);
         $messaggio = new Messaggio(
             [
                 'mittente' => Auth::user()->username,
                 'destin' => $validatedData['destin'],
-                'contenuto' => $validatedData['contenuto']
+                'contenuto' => $validatedData['contenuto'],
+           
             ]
         );
         $messaggio->letto = false;
+        if (isset($validatedData['risposta'])) {
+            $messaggio->risposta = $validatedData['risposta'];
+        }
 
         try {
+            
             $messaggio->save();
+            
         } catch (\Exception $e) {
+            Log::error($e);
             return false;
         }
         return true;
-
     }
 }

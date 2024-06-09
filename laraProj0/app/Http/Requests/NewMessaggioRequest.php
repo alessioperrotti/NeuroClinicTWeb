@@ -23,7 +23,8 @@ class NewMessaggioRequest extends FormRequest
     {
         return [
             'destin' => 'required',
-            'contenuto' => 'required'
+            'contenuto' => 'required',
+            'risposta' => 'nullable'
         ];
     }
 }
