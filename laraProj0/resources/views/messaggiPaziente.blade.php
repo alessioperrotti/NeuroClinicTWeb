@@ -113,7 +113,7 @@
                     <div class="flex">
                         <h3 class="font-semibold">Da: {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
                         @if($msgR->risposta != null)
-                        <h3 class="ml-5 font-semibold text-gray-400">Risposta al messaggio di {{$msgR->risposta->mittente->nome}} {{$msgR->risposta->mittente->cognome}} del {{$msgR->risposta->created_at}}</h3>
+                        <h3 class="ml-5 font-semibold text-gray-400">Risposta al tuo messaggio del {{$msgR->risposta->created_at}}</h3>
                         @endif
                     </div>
 
