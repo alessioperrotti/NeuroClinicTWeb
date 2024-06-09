@@ -75,6 +75,22 @@
             $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-3/5");
         });
 
+        $("#submit_risp").click(function() {
+            if ($("#contenuto_risp").val() == "") {
+                alert("Compila tutti i campi!");
+                return false;
+            } else {
+                alert("Messaggio inviato con successo!");
+                $("#nuovo_risp").addClass("hidden").removeClass("basis-2/5");
+                $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-3/5");
+            }
+        });
+
+        $("#reset_risp").click(function() {
+            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/5");
+            $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-3/5");
+        });
+
     });
 </script>
 @endsection
@@ -132,7 +148,7 @@
                         <h3 class="ml-5 font-semibold text-gray-400">Risposta al messaggio di {{$msgI->risposta->mittente->nome}} del {{$msgI->risposta->created_at}}</h3>
                         @endif
                     </div>
-                    
+
                     <p class="text-gray-500">{{ $msgI->created_at}}</p>
                 </div>
                 <p class="text-gray-600 px-4">{{ $msgI->contenuto}}</p>
@@ -174,11 +190,11 @@
                 <label id="risposta_rif" class="font-semibold mt-4"></label>
                 <input id="destin_risp" type="hidden" name="destin" class="mt-1 block w-full p-2 border border-gray-300 rounded-md mb-4" value="">
                 <label for="messaggio" class="font-semibold mt-4">Messaggio</label>
-                <textarea id="contenuto" name="contenuto" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
+                <textarea id="contenuto_risp" name="contenuto" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
                 <input id="risposta" name="risposta" type="hidden" value="">
                 <div class="flex flex-col justify-center items-center">
-                    <input id="submit" type="submit" class="bg-cyan-600 hover:bg-cyan-500 rounded-md mt-6 w-[150px] h-[35px] text-white cursor-pointer" value="Invia Messaggio">
-                    <input id="reset" type="reset" class="bg-gray-500 hover:bg-gray-400 rounded-md mt-4 w-[150px] h-[35px] text-white cursor-pointer" value="Annulla">
+                    <input id="submit_risp" type="submit" class="bg-cyan-600 hover:bg-cyan-500 rounded-md mt-6 w-[150px] h-[35px] text-white cursor-pointer" value="Invia Messaggio">
+                    <input id="reset_risp" type="reset" class="bg-gray-500 hover:bg-gray-400 rounded-md mt-4 w-[150px] h-[35px] text-white cursor-pointer" value="Annulla">
                 </div>
 
             </form>
