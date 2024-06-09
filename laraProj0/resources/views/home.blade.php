@@ -185,6 +185,11 @@
                 </a>
             </div>
             <div>
+                <h4 class="font-bold text-white text-xl mr-8">Link utili</h4>
+                <br>
+                <a href="{{ asset('Documentazione_grp01.pdf')}}" class="text-white underline">Documentazione di progetto</a>
+            </div>
+            <div>
                 <h4 class="font-bold text-white text-xl mr-8">Informazioni di Contatto</h4>
                 <br>
                 <div class="flex items-center space-x-1">
