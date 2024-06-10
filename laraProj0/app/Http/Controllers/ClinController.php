@@ -234,4 +234,19 @@ class ClinController extends Controller
             return redirect()->back()->with('error', 'Si è verificato un errore durante l\'invio del messaggio.');
         }
     }
+
+    public function deleteMessaggio() : RedirectResponse {
+        $id = $_POST['msgId'];
+        $msg = Messaggio::find($id);
+        $msg->eliminatoClin = true;
+
+        if($msg->eliminatoPaz) {  // se è stato eliminato anche dal paziente lo elimino dal db
+            $msg->delete();
+        }
+        else {
+            $msg->save();
+        }
+
+        return redirect()->action([ClinController::class, 'showMessaggi']);
+    }
 }

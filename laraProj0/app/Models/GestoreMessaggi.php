@@ -47,8 +47,11 @@ class GestoreMessaggi extends Model
 
                 }
 
+                if(!$msg->eliminatoClin){  // se è stato eliminato dal clinico non va mostrato
 
-                $messaggi->add($msg);
+                    $messaggi->add($msg);
+                }
+
             } else if (Auth::user()->usertype == 'P') {
                 $mittente = Clinico::find($msg->mittente);  // il mittente è sicuramente un clinico
                 $msg->mittente = $mittente;
@@ -70,7 +73,10 @@ class GestoreMessaggi extends Model
                     $msg->risposta = $risposta;
                 }
 
-                $messaggi->add($msg);
+                if(!$msg->eliminatoPaz){  // se è stato eliminato dal paziente non va mostrato
+
+                    $messaggi->add($msg);
+                }
             }
         }
         return $messaggi;
@@ -98,7 +104,11 @@ class GestoreMessaggi extends Model
                     $msg->risposta = $risposta;
                 }
 
-                $messaggi->add($msg);
+                if(!$msg->eliminatoClin){  // se è stato eliminato dal clinico non va mostrato
+
+                    $messaggi->add($msg);
+                }
+
             } else if (Auth::user()->usertype == 'P') {
                 $destinatario = Clinico::find($msg->destin);  // il destinatario è sicuramente un clinico
                 $mittente = Paziente::find(Auth::user()->username);
@@ -114,8 +124,10 @@ class GestoreMessaggi extends Model
                     $msg->risposta = $risposta;
                 }
 
+                if(!$msg->eliminatoPaz){  // se è stato eliminato dal paziente non va mostrato
 
-                $messaggi->add($msg);
+                    $messaggi->add($msg);
+                }
             }
 
             /* si sono "sovraccaricati" gli attributi di messaggio con i dati dei mittenti e destinatari.
@@ -138,6 +150,8 @@ class GestoreMessaggi extends Model
             ]
         );
         $messaggio->letto = false;
+        $messaggio->eliminatoClin = false;
+        $messaggio->eliminatoPaz = false;
         if (isset($validatedData['risposta'])) {
             $messaggio->risposta = $validatedData['risposta'];
         }

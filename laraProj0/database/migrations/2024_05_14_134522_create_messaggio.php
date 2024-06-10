@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('destin', 20)->references('username')->on('user');
             $table->string('contenuto', 1000);
             $table->boolean('letto'); // per bool
+            $table->boolean('eliminatoClin');
+            $table->boolean('eliminatoPaz');
             $table->string('risposta', 20)->references('id')->on('messaggio')->nullable(); 
         });
     }

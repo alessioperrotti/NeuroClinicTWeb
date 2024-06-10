@@ -215,4 +215,19 @@ class PazController extends Controller
             ->with('terAssoc', $terAssoc);
 
     }
+
+    public function deleteMessaggio() : RedirectResponse {
+        $id = $_POST['msgId'];
+        $msg = Messaggio::find($id);
+        $msg->eliminatoPaz = true;
+
+        if($msg->eliminatoClin) {  // se è stato eliminato anche dal clinico lo elimino dal db
+            $msg->delete();
+        }
+        else {
+            $msg->save();
+        }
+
+        return redirect()->action([PazController::class, 'showMessaggi']);
+    }
 }

@@ -29,8 +29,8 @@
                 <div>
                     <label class="block text-gray-700">Genere</label>
                     <select id="genere" name="genere" size="1" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" >
-                        <option value="M"  {{ $paziente->genere == 'M' ? 'selected' : '' }}>Maschio</option>
-                        <option value="F"  {{ $paziente->genere == 'F' ? 'selected' : '' }}>Femmina</option>
+                        <option value="M"  {{ $paziente->genere == 'M' ? 'selected' : '' }}>Uomo</option>
+                        <option value="F"  {{ $paziente->genere == 'F' ? 'selected' : '' }}>Donna</option>
                         <option value="A"  {{ $paziente->genere == 'A' ? 'selected' : '' }}>Altro</option>
                     </select>
                 </div>

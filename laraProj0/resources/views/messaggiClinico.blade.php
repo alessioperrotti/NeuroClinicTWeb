@@ -124,6 +124,12 @@
                     <div class="flex">
                         <p class="text-gray-500">{{ $msgR->created_at}}</p>
                         <button class="a_nuovo_risp mx-3" data-idRisp="{{$msgR->id}}" data-Mitt='{{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}' data-idData="{{ $msgR->created_at}}" data-idMitt='{{$msgR->mittente->username}}'> Rispondi </button>
+                        <p>|</p>
+                        <form method="POST" action="{{ route('messaggioClinico.delete')}}">
+                        @csrf
+                            <input type="hidden" name="msgId" value={{ $msgR->id}}>
+                            <button type="submit" class="mx-3">Elimina</button>
+                        </form>
                     </div>
 
                 </div>
@@ -151,8 +157,14 @@
                         <h3 class="ml-5 font-semibold text-gray-400">Risposta al messaggio di {{$msgI->risposta->mittente->nome}} {{$msgI->risposta->mittente->cognome}} del {{$msgI->risposta->created_at}}</h3>
                         @endif
                     </div>
-
-                    <p class="text-gray-500">{{ $msgI->created_at}}</p>
+                    <div class="flex">
+                        <p class="text-gray-500">{{ $msgI->created_at}}</p>
+                        <form method="POST" action="{{ route('messaggioClinico.delete')}}">
+                        @csrf
+                            <input type="hidden" name="msgId" value={{ $msgI->id}}>
+                            <button type="submit" class="mx-3">Elimina</button>
+                        </form>
+                    </div>
                 </div>
                 <p class="text-gray-600 px-4">{{ $msgI->contenuto}}</p>
             </div>

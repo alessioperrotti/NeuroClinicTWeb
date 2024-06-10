@@ -63,6 +63,9 @@ Route::get('/home_clin/messaggi', [ClinController::class, 'showMessaggi'])
 Route::post('/home_clin/messaggi', [ClinController::class, 'sendMessaggio'])
 ->name('messaggioClinico.send')->middleware('can:isClinico');
 
+Route::post('/home_clin/messaggi_del', [ClinController::class, 'deleteMessaggio'])
+->name('messaggioClinico.delete')->middleware('can:isClinico');
+
 Route::post('/home_clin/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');
 
@@ -188,6 +191,9 @@ Route::post('/home_paz/messaggi', [PazController::class, 'sendMessaggio'])
 
 Route::get('/home_paz/cartella/ter_passate' , [PazController::class, 'showTerPassate']) 
 ->name('terapiePassate')->middleware('can:isPaziente');
+
+Route::post('/home_paz/messaggi_del', [PazController::class, 'deleteMessaggio'])
+->name('messaggioPaziente.delete')->middleware('can:isPaziente');
 
 
 
