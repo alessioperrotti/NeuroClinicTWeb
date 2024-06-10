@@ -30,7 +30,7 @@ class UpdateClinicoRequest extends FormRequest
         return [
             'nome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',  // regola regex per accettare solo lettere e spazi
             'cognome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
-            'dataNasc' => 'required|date|before:today|date_format:Y-m-d',
+            'dataNasc' => 'required|date|before:today|date_format:Y-m-d|after:1900-01-01',
             'ruolo' => 'required|max:20',
             'specializ' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
         ];

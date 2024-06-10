@@ -62,53 +62,7 @@
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
     $(document).ready(function() {
-        // Funzione per resettare un form e nasconderlo
-        function resetForm(formId, fields) {
-            // Nasconde il form specificato
-            $(formId).hide();
-            // Resetta i campi del form
-            fields.forEach(field => $(field).val(''));
-        }
-
-        // Funzione per alternare la visibilità di due form
-        function toggleForms(showFormId, hideFormId) {
-            // Mostra il form specificato da showFormId
-            $(showFormId).show();
-            // Nasconde il form specificato da hideFormId
-            $(hideFormId).hide();
-        }
-
-        // Funzione per impostare la validazione del form
-        function setupValidation(actionUrl, formId, modifica) {
-            // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
-            $("#" + formId + " :input").on('blur', function() {
-                // Ottiene l'ID e il nome dell'input attualmente in focus
-                var formElementId = $(this).attr('id');
-                var inputName = $(this).attr('name');
-                // Chiama la funzione di validazione per l'elemento corrente
-                doElemValidation(formElementId, actionUrl, formId, inputName);
-            });
-            
-            // Aggiunge un listener per l'evento 'submit' del form
-            $("#" + formId).on('submit', function(event) {
-            // Previene l'invio predefinito del form
-            event.preventDefault();
-            // Chiama la funzione di validazione per l'intero form
-            doFormValidation(actionUrl, formId);
-            });
-        }
-
-        // Funzione per impostare la navigazione del pulsante
-        function setupButtonNavigation(buttonId, targetUrl) {
-            // Ottiene l'elemento del pulsante tramite ID
-            var button = document.getElementById(buttonId);
-            if (button) {
-                // Imposta l'azione del pulsante per navigare a targetUrl
-                button.onclick = function() {
-                    window.location.href = targetUrl;
-                };
-            }
-        }
+        /// FUNZIONI PER L'ACCORDION ///
 
         // Funzione per alternare la visibilità dell'accordion
         function toggleAccordion(element) {
@@ -130,6 +84,69 @@
                 span.textContent = "+";
             }
         }
+        // Assegna il listener per il click a tutti gli elementi accordion (elem con con classe flex e figli di elem con classe faq)
+        document.querySelectorAll('.faq > .flex').forEach(function(element) {
+            element.addEventListener('click', function() {
+                toggleAccordion(this);
+            });
+        });
+        /////////////////////////////////
+
+        /// FUNZIONI PER LA VISUALIZZAZIONE FORM PER AGGIUNGI FAQ ///
+
+        // Aggiunge un listener per il pulsante "Aggiungi FAQ" per mostrare il form
+        document.getElementById('btnAggiungiFaq').addEventListener('click', function() {
+            document.getElementById('formNuovaFaq').style.display = 'block';
+            // Scorre fino alla fine della pagina per mostrare il form
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+        // Aggiunge un listener per il pulsante "Annulla" per resettare e nascondere il form
+        document.getElementById('btnAnnulla').addEventListener('click', function() {
+            resetForm('#formNuovaFaq', ['#domanda', '#risposta']);
+        });
+
+        // Funzione per resettare un form e nasconderlo
+        function resetForm(formId, fields) {
+            // Nasconde il form specificato
+            $(formId).hide();
+            // Resetta i campi del form
+            fields.forEach(field => $(field).val(''));
+        }
+        /////////////////////////////////
+        
+        /// FUNZIONI PER SOVRASCRIVERE COMPORTAMENTO BTN INDIETRO ///
+        
+        // Sovrascrive il pulsante "Indietro"
+        $(function() {
+            elem_id = "back_button";
+            rotta = "{{ route('homeAdmin') }}";
+            sovrascriviOnClick(back_button,"homeAdmin");
+        });
+
+        /////////////////////////////////
+
+        /// FUNZIONI PER VERIFICHE ERRORI AJAX ///
+
+        // Funzione per impostare la validazione del form
+        function setupValidation(actionUrl, formId, modifica) {
+            // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
+            $("#" + formId + " :input").on('blur', function() {
+                // Ottiene l'ID e il nome dell'input attualmente in focus
+                var formElementId = $(this).attr('id');
+                var inputName = $(this).attr('name');
+                // Chiama la funzione di validazione per l'elemento corrente
+                doElemValidation(formElementId, actionUrl, formId, inputName);
+            });
+            
+            // Aggiunge un listener per l'evento 'submit' del form
+            $("#" + formId).on('submit', function(event) {
+            // Previene l'invio predefinito del form
+            event.preventDefault();
+            // Chiama la funzione di validazione per l'intero form
+            doFormValidation(actionUrl, formId);
+            });
+        }
 
             // Inizializza la validazione del form quando il documento è pronto
         $(function() {
@@ -148,30 +165,8 @@
                 @endforeach
             @endisset
         });
-
-        // Configura il pulsante di navigazione quando il contenuto del documento è caricato
-        document.addEventListener('DOMContentLoaded', function () {
-            setupButtonNavigation('back_button', "{{ route('homeAdmin') }}");
-        });
-
-        // Aggiunge un listener per il pulsante "Aggiungi FAQ" per mostrare il form
-        document.getElementById('btnAggiungiFaq').addEventListener('click', function() {
-            document.getElementById('formNuovaFaq').style.display = 'block';
-            // Scorre fino alla fine della pagina per mostrare il form
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-
-        // Aggiunge un listener per il pulsante "Annulla" per resettare e nascondere il form
-        document.getElementById('btnAnnulla').addEventListener('click', function() {
-            resetForm('#formNuovaFaq', ['#domanda', '#risposta']);
-        });
-
-        // Assegna il listener per il click a tutti gli elementi accordion
-        document.querySelectorAll('.faq > .flex').forEach(function(element) {
-            element.addEventListener('click', function() {
-                toggleAccordion(this);
-            });
-        });
+        /////////////////////////////////
+        
     });
 </script>
 @endsection

@@ -35,6 +35,7 @@ use App\Http\Requests\NewFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
 use App\Http\Requests\UpdateClinicoRequest;
+use App\Models\GestoreCartelleClin;
 
 
 class AdminController extends Controller
@@ -45,6 +46,7 @@ class AdminController extends Controller
     protected $pazientiModel;
     protected $cliniciModel;
     protected $faqModel;
+    protected $cartelleModel;
 
     public function __construct()
     {
@@ -58,6 +60,7 @@ class AdminController extends Controller
         $this->pazientiModel= new GestorePazienti;
         $this->cliniciModel= new GestoreClinici;
         $this->faqModel= new GestoreFaq;
+        $this->cartelleModel= new GestoreCartelleClin;
           
     }
 
@@ -148,30 +151,27 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
         
     }
-    public function storeClinico(NewClinicoRequest $request): RedirectResponse
+    public function storeClinico(NewClinicoRequest $request): JsonResponse
     {
-        log::info('metodo storeClinico del controller attivato');
         $validatedData = $request->validated();
-        if($this->cliniciModel->storeClinico($validatedData))
-            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
-        else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del clinico.');
+        if($this->cliniciModel->storeClinico($validatedData)){
+            return response()->json(['redirect' => route('gestioneClinici')]);
+        }else
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
     public function viewAggiornaClinico($userClin)
     {
         $clinico = $this->cliniciModel->getClinico($userClin);
         return view('editClinico')->with('clinico', $clinico);
     }
-    public function updateClinico(UpdateClinicoRequest  $request ,$userClin)
+    public function updateClinico(UpdateClinicoRequest  $request ,$userClin):JsonResponse
     {
-        
-        log::info('metodo updateClinico del controller attivato');
         $validatedData = $request->validated();
         log::info("dati validati");
         if($this->cliniciModel->updateClinico($validatedData, $userClin))
-            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+            return response()->json(['redirect' => route('gestioneClinici')]);
         else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
 
     #ANALISI DEI DATI
@@ -179,14 +179,14 @@ class AdminController extends Controller
     {
         $pazienti = $this->pazientiModel->getPazienti();
         foreach ($pazienti as $paziente) {
-            $paziente->numeroCambiTerapia = $this->getNumeroCambiTerapia($paziente->username);
+            $paziente->numeroCambiTerapia = $this->pazientiModel->getNumeroCambiTerapia($paziente->username);
+            $disturbi=                      $this->cartelleModel->getDisturbiByPaz($paziente->username);
+            $paziente->mediaEventiDiDisturbi = $this->pazientiModel->mediaEventiDiDisturbi($paziente,$disturbi);
         }
         $mediaPazientiPerClinico = $this->cliniciModel->mediaPazientiPerClinico();
-        $mediaDisturbiPerPaziente = $this->pazientiModel->mediaDisturbiMotoriPerPaziente();
         $disturbiMotori = $this->disturbiModel->getDisturbi();
         return view('analisiDati')
             ->with('mediaPazientiPerClinico',$mediaPazientiPerClinico)
-            ->with('mediaDisturbiPerPaziente',$mediaDisturbiPerPaziente)
             ->with('disturbiMotori',$disturbiMotori)
             ->with('pazienti', $pazienti);
     }
@@ -194,11 +194,6 @@ class AdminController extends Controller
     {
         $numeroEpisodi = Episodio::where('disturbo', $id)->count();
         return response()->json(['numeroEpisodi' => $numeroEpisodi]);
-    }
-    public function getNumeroCambiTerapia($username) {
-        $numeroTerapie = Terapia::where('paziente', $username)->count();
-        $numeroCambiTerapia = $numeroTerapie - 1;
-        return $numeroCambiTerapia;
     }
 
 ####################################################################################################################

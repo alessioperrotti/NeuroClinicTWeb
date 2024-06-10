@@ -7,31 +7,31 @@
     <h1 class="text-5xl font-bold  mt-5 mb-8 gap-y-5">Modifica clinico {{$clinico->nome . " " . $clinico->cognome}}</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
-        <form action="{{ route('aggiornaClinicoAdmin.edit', $clinico) }}" method="POST">
+        <form id="formModificaClinico" action="{{ route('aggiornaClinicoAdmin.edit', $clinico) }}" method="POST">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700">Nome</label>
-                    <input name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->nome}}>
+                    <input id="nome" name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->nome}}>
                 </div>
                 <div>
                     <label class="block text-gray-700">Cognome</label>
-                    <input name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->cognome}}>
+                    <input id="cognome" name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->cognome}}>
                 </div>
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
-                    <input name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->dataNasc}}>
+                    <input id="dataNasc" name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->dataNasc}}>
                 </div>
                 <div>
                     <label class="block text-gray-700">Ruolo</label>
-                    <select name="ruolo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <select id="ruolo" name="ruolo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                         <option value="medico" {{ $clinico->ruolo == 'medico' ? 'selected' : '' }}>Medico</option>
                         <option value="fisioterapia" {{ $clinico->ruolo == 'fisioterapia' ? 'selected' : '' }}>Fisioterapia</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-gray-700">Specializzazione</label>
-                    <input name="specializ" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->specializ}}>
+                    <input id="specializ" name="specializ" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value={{$clinico->specializ}}>
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
@@ -43,6 +43,7 @@
         </form>
     </div>
 </div>
+<script src="{{ asset('js/functions.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
@@ -53,6 +54,32 @@
         backButton.onclick = function() {
             window.location.href = "{{ route('gestioneClinici') }}";
         };
+
+        // Funzione per impostare la validazione del form
+        function setupValidation(actionUrl, formId, modifica) {
+                // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
+                $("#" + formId + " :input").on('blur', function() {
+                    // Ottiene l'ID e il nome dell'input attualmente in focus
+                    var formElementId = $(this).attr('id');
+                    var inputName = $(this).attr('name');
+                    // Chiama la funzione di validazione per l'elemento corrente
+                    doElemValidation(formElementId, actionUrl, formId, inputName);
+                });
+                
+                // Aggiunge un listener per l'evento 'submit' del form
+                $("#" + formId).on('submit', function(event) {
+                    // Previene l'invio predefinito del form
+                    event.preventDefault();
+                    // Chiama la funzione di validazione per l'intero form
+                    doFormValidation(actionUrl, formId);
+                });
+        }
+        $(function() {
+            var actionUrl = "{{ route('aggiornaClinicoAdmin.edit', $clinico) }}";
+            var formId = 'formModificaClinico';
+            setupValidation(actionUrl, formId, false);
+        });
+
     });                                                 
 </script>
 

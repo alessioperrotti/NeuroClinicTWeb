@@ -1,6 +1,13 @@
 
 
 
+function sovrascriviOnClick(elem_id, rotta){
+    var elem = document.getElementById(elem_id);
+        elem.onclick = function() {
+            window.location.href = rotta;
+        };
+}
+
 function getErrorHtml(elemErrors) {
     if ((typeof (elemErrors) === 'undefined') || (elemErrors.length < 1)) //guarda se ci sono elementi da visualizzare 
         return;
