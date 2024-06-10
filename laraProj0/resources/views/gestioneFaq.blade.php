@@ -121,7 +121,7 @@
         $(function() {
             elem_id = "back_button";
             rotta = "{{ route('homeAdmin') }}";
-            sovrascriviOnClick(back_button,"homeAdmin");
+            sovrascriviOnClick(elem_id,rotta);
         });
 
         /////////////////////////////////
