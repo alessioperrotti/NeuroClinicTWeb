@@ -30,7 +30,7 @@ class AttivitaRequest extends FormRequest
 
             'id' => '', //aggiunto per update
             'nome' => 'required|max:30',
-            'descr' => 'required|max:255',
+            'descr' => 'required|max:200',
 
         ];
     }

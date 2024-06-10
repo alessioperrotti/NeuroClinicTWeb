@@ -129,7 +129,7 @@
         /// FUNZIONI PER VERIFICHE ERRORI AJAX ///
 
         // Funzione per impostare la validazione del form
-        function setupValidation(actionUrl, formId, modifica) {
+        function setupValidation(actionUrl, formId) {
             // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
             $("#" + formId + " :input").on('blur', function() {
                 // Ottiene l'ID e il nome dell'input attualmente in focus
@@ -152,7 +152,7 @@
         $(function() {
             var actionUrl = "{{ route('faq.store') }}";
             var formId = 'formNuovaFaq';
-            setupValidation(actionUrl, formId, false);
+            setupValidation(actionUrl, formId);
         });
 
         // Per la validazione della modifica della FAQ con AJAX
@@ -161,7 +161,7 @@
                 @foreach ($faqs as $faq)
                     var actionUrl = "{{ route('faq.update', $faq->id) }}";
                     var formId = 'formModificaFaq-{{ $faq->id }}';
-                    setupValidation(actionUrl, formId, true);
+                    setupValidation(actionUrl, formId);
                 @endforeach
             @endisset
         });

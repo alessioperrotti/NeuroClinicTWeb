@@ -18,7 +18,7 @@
     <script>
 
         $(document).ready(function() {
-            
+            console.log(document.referrer);
             function togglePassword(inputId, eyeId) {
                 const input = document.getElementById(inputId);
                 const eye = document.getElementById(eyeId);
@@ -44,7 +44,8 @@
         </div>
     </header>
     <div class="text-gray-600">
-        <button id="back_button" onclick="window.history.back()" class="btn btn-secondary p-2">
+        <button id="back_button" onclick="window.location.href = document.referrer"
+                                 class="btn btn-secondary p-2">
 
             <p class="fas fa-arrow-left "></p> Indietro
 

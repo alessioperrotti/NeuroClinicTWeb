@@ -28,6 +28,7 @@ use App\Models\GestoreMessaggi;
 use App\Models\Resources\Clinico;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Resources\Disturbo;
+use App\Http\Requests\UpdatePazienteRequest;
 
 /*use App\Models\Resources\Attivita;
 use App\Models\Resources\Clinico;
@@ -90,7 +91,7 @@ class PazController extends Controller
             ->with('clinico', $paziente->clinico);
     }
 
-    public function update(NewPazienteRequest $request, $username): Jsonresponse
+    public function update(UpdatePazienteRequest $request, $username): Jsonresponse
     {
 
         $validatedData = $request->validated();

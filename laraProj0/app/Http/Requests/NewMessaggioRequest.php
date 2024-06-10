@@ -22,9 +22,9 @@ class NewMessaggioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'destin' => 'required',
-            'contenuto' => 'required',
-            'risposta' => 'nullable'
+            'destin' => 'required|max:20',
+            'contenuto' => 'required|max:1000',
+            'risposta' => 'nullable|max:20',
         ];
     }
 }
