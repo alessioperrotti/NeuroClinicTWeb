@@ -20,13 +20,12 @@ class GestoreFarmaci extends Model
         return $farmaci;
     }
 
-    public function deleteFarmaco($data): Bool
+    public function deleteFarmaco($idFarm): Bool
     {
 
         DB::beginTransaction();
         try {
-            $id = $data['idDel'];
-            $farmaco = Farmaco::findOrFail($id);
+            $farmaco = Farmaco::findOrFail($idFarm);
             $farmaco->delete();
 
             DB::commit();

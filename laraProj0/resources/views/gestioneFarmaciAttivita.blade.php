@@ -27,12 +27,9 @@
                     </button>
 
 
-                    <form action="{{route('gestioneFarmaci.delete')}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
+                    <form action="{{route('gestioneFarmaci.delete' , $farmaco->id)}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
                         @csrf
-
-                        <input type="hidden" name="idDel" value="{{$farmaco->id}}">
                         <button type="submit" class="btnEliminaFarmaco">
-
                             <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                         </button>
                     </form>
@@ -138,12 +135,9 @@
                     </button>
 
 
-                    <form action="{{route('gestioneAttivita.delete')}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questa attivita\'?')">
+                    <form action="{{route('gestioneAttivita.delete', $attivitasing->id)}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questa attivita\'?')">
                         @csrf
-
-                        <input type="hidden" name="idDel" value="{{$attivitasing->id}}">
                         <button type="submit" class="btnEliminaAttivita">
-
                             <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                         </button>
                     </form>
