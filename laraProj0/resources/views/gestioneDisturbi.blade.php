@@ -73,8 +73,8 @@
 
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
             <h1 class='text-lg font-bold ml-5 mt-5 mb-8 '>Modifica disturbo selezionato</h1>
-            <div class="bg-white p-4 rounded">
-                <div class="mb-6 flex justify-between">
+            <div class="bg-white p-4 rounded mb-10">
+                <div class="mb-6 flex justify-between mx-14">
                     <input type="hidden" id="idMod" name="id" value="">
                     <div>
                         <label for="nomeMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
