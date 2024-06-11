@@ -46,7 +46,7 @@ class PasswordController extends Controller
 
         Auth::logout(); //logout dell'utente
 
-        return redirect()->route('login')->with('status', 'Password modificata con successo');  //password cambiata con successo
+        return redirect()->route('login');  //password cambiata con successo
     }
 
 

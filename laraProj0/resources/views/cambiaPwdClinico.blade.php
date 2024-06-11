@@ -7,11 +7,7 @@
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Modifica password</h1>
     <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12">
         <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
+            
         <form method="POST" action="{{ route('password.update')}}" class="mb-10">   
             @csrf
             
