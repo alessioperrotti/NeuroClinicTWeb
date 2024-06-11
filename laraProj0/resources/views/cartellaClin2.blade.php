@@ -169,13 +169,15 @@
     
 
 </div>
+
+<script src="{{ asset('js/functions.js') }}"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
-        var backButton = document.getElementById('back_button');
-        backButton.onclick = function() {
-            window.location.href = "{{ route('listaPazienti') }}";
-        };
+
+        elem_id = "back_button";
+        rotta = "{{ route('listaPazienti') }}";
+        sovrascriviOnClick(elem_id,rotta);
 
         // -- Meccanismo di filtro --
         var disturbiSelect = $('select[name="filtroDisturbo[]"]');
