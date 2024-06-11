@@ -48,7 +48,7 @@
                 </div>
                 <div class="mb-6 mx-3">
                     <label for="risposta" class="block text-gray-700 text-sm font-bold mb-2">Risposta</label>
-                    <textarea id="risposta" name="risposta" placeholder="Risposta" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="risposta" name="risposta" placeholder="Risposta" class="shadow appearance-none border rounded-md h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
