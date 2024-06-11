@@ -43,8 +43,6 @@ class UpdatePazienteRequest extends FormRequest
                 'max:40',
                 Rule::unique('paziente', 'email')->ignore($username, 'username')
             ],
-            'username' => 'required',
-            'clinico' => 'required',
         ];
     }
     

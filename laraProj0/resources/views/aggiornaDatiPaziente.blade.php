@@ -179,14 +179,7 @@
                     <label class="block text-gray-700">E-Mail</label>
                     <input id="email" name="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->email}}">
                     
-                </div>
-
-                <div>
-                    <input id="clinico" name="clinico" hidden value={{$paziente->clinico}}>
-                </div>
-                <div>
-                    <input id="username" name="username" hidden value={{$paziente->username}}>
-                </div>
+                </div>                
             </div>
             <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">
                 <input name="annulla" type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
