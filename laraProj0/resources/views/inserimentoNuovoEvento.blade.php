@@ -91,36 +91,36 @@
 
 <script>
 
-    // correggere: dovrebbe stare tutto in $(document).ready(function() { ... });
+$(document).ready(function() {
     function setupValidation(actionasset, formId) {
-            // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
-            $("#" + formId + " :input").on('blur', function() {
-                // Ottiene l'ID e il nome dell'input attualmente in focus
-                var formElementId = $(this).attr('id');
-                var inputName = $(this).attr('name');
-                // Chiama la funzione di validazione per l'elemento corrente
-                doElemValidation(formElementId, actionasset, formId, inputName);
-            });
+        // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
+        $("#" + formId + " :input").on('blur', function() {
+            // Ottiene l'ID e il nome dell'input attualmente in focus
+            var formElementId = $(this).attr('id');
+            var inputName = $(this).attr('name');
+            // Chiama la funzione di validazione per l'elemento corrente
+            doElemValidation(formElementId, actionasset, formId, inputName);
+        });
             
-            // Aggiunge un listener per l'evento 'submit' del form
-            $("#" + formId).on('submit', function(event) {
+        // Aggiunge un listener per l'evento 'submit' del form
+        $("#" + formId).on('submit', function(event) {
             // Previene l'invio predefinito del form
             event.preventDefault();
             // Chiama la funzione di validazione per l'intero form
             doFormValidation(actionasset, formId);
-            });
-        }
-
-        $(function() {
-
-            $('#submit').on('click', function() {
-                alert('Nuovo evento inserito correttamente')
-            });
-
-            var actionasset = "{{ route('inserimentoNuovoEvento.store') }}";
-            var formId = 'evento-form';
-            setupValidation(actionasset, formId);
         });
+    }
+
+        
+        $('#submit').on('click', function() {
+            alert('Nuovo evento inserito correttamente')
+        });
+
+        var actionasset = "{{ route('inserimentoNuovoEvento.store') }}";
+        var formId = 'evento-form';
+        setupValidation(actionasset, formId);
+        
+});
 </script>
 @endsection
 
