@@ -62,7 +62,7 @@
 
                     <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <label for="descrFarmacoMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 resize-none leading-tight focus:outline-none focus:shadow-outline resize-none">
                     </textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
@@ -93,7 +93,7 @@
                     <input type="text" id="nomeFarmaco" name="nome" placeholder="Nome" class="shadow  appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <h1 class="text-sm mb-7 text-gray-600"> Il nome del farmaco deve essere seguito dalla grammatura</h1>
                     <label for="descrFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="descrFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
@@ -178,7 +178,7 @@
                     <input type="text" id="nomeAttivitaMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <label for="descrAttivitaMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrAttivitaMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="descrAttivitaMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaModAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
@@ -201,7 +201,7 @@
                     <input type="text" id="nomeAttivita" placeholder="Nome" name="nome" class="shadow mb-1 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <label for="descrAttivita" class="block mt-2 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
