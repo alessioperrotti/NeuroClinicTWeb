@@ -41,7 +41,7 @@ class PasswordController extends Controller
         }
 
         //aggiorno la password
-        $user->password = Hash::make($request->nuovaPwd);
+        $user->password = Hash::make($request->nuovaPassword);
         $user->save();
 
         Auth::logout(); //logout dell'utente
