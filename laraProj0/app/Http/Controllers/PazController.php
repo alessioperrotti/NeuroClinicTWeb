@@ -87,7 +87,8 @@ class PazController extends Controller
     public function edit($username): View
     {
         $paziente = Paziente::findOrFail($username);
-        return view('aggiornaDatiPaziente', compact('paziente'))
+        return view('aggiornaDatiPaziente')
+            ->with('paziente', $paziente)
             ->with('clinico', $paziente->clinico);
     }
 
@@ -137,7 +138,7 @@ class PazController extends Controller
         $userPaz = Auth::user()->paziente->username;
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('disturbo');
-        return view('inserimentoNuovoEvento', compact('disturbi'))
+        return view('inserimentoNuovoEvento')
             ->with('disturbi', $disturbi)
             ->with('userPaz', $userPaz)
             ->with('episodi', $episodi);

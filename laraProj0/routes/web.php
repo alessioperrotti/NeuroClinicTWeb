@@ -156,6 +156,9 @@ Route::post('/home_admin/disturbi/update', [AdminController::class, 'updateDistu
 
 // Sezione Paziente
 
+Route::get('/home_paz', [PazController::class, 'index'])
+->name('homePaziente')->middleware('can:isPaziente');
+
 Route::get('/home_paz/cambia_pwd', [PazController::class, 'showPassChange'])
 ->name('cambiaPwdPaziente')->middleware('auth');
 
@@ -167,9 +170,6 @@ Route::post('/home_paz/aggiorna_dati/{username}' , [PazController::class, 'updat
 
 Route::get('/home_paz/cartella' , [PazController::class, 'showCartClinica']) 
 ->name('cartellaClinicaPaziente')->middleware('can:isPaziente');
-
-Route::get('/home_paz', [PazController::class, 'index'])
-->name('homePaziente')->middleware('can:isPaziente');
 
 Route::post('/cambia_pwd', [PasswordController::class, 'update_pwd'])
 ->name('password.update')->middleware('auth');

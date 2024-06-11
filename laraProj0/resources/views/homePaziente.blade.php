@@ -35,9 +35,9 @@
                     <a href="{{ route('inserimentoNuovoEvento')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">NUOVO EVENTO</a>
                     @auth
                     <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                        @csrf
-                    </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
                     @endauth
                 </nav>
             </div>
