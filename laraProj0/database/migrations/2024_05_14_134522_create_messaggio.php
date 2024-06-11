@@ -21,7 +21,8 @@ return new class extends Migration
             $table->boolean('letto'); // per bool
             $table->boolean('eliminatoClin');
             $table->boolean('eliminatoPaz');
-            $table->string('risposta', 20)->references('id')->on('messaggio')->nullable(); 
+            $table->unsignedBigInteger('risposta')->nullable(); 
+            $table->foreign('risposta')->references('id')->on('messaggio')->onDelete('set null');
         });
     }
 
