@@ -23,7 +23,7 @@
                                 <input type="hidden" name="domanda" value="{{$faq->domanda}}">
                                 <div class="flex gap-2 mt-2">
                                     @csrf
-                                    <button type="submit" class="bg-blue-500 text-white py-1 px-3 rounded mt-2">Salva nuova risposta</button>
+                                    <button type="submit" class="bg-cyan-600 text-white py-1 px-3 rounded mt-2">Salva nuova risposta</button>
                             </form>
                             <form action="{{ route('faq.elimina', $faq->id) }}" method="POST" class="delete-form inline-block" onsubmit="return confirm('Sei sicuro di voler eliminare questa FAQ?');">
                                 @csrf
@@ -52,7 +52,7 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button id="btnAggiungi" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button id="btnAggiungi" type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
