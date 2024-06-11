@@ -67,7 +67,7 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
-                    <button type="submit" id="btnConfermaModFarmaco" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
+                    <button type="submit" id="btnConfermaModFarmaco" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
                 </div>
             </div>
         </form>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="btnConfermaInserimentoFarmaco" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="submit" id="btnConfermaInserimentoFarmaco" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaModAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
-                    <button type="submit" id="btnConfermaModAttivita" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
+                    <button type="submit" id="btnConfermaModAttivita" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
                 </div>
             </div>
         </form>
@@ -205,7 +205,7 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="btnConfermaInserimentoAttivita" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="submit" id="btnConfermaInserimentoAttivita" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </form>
         </div>
@@ -217,9 +217,11 @@
 <script>
     $(document).ready(function() {
 
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
+
         //script per farmaci
-
-
         function resetForm(formId, fields) {
             $(formId).hide();
             fields.forEach(field => $(field).val(''));
