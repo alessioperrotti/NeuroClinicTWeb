@@ -19,7 +19,7 @@
                         </div>
                         <div class="accordion-content mt-2 hidden">
                             <form id="formModificaFaq-{{ $faq->id }}" action="{{ route('faq.update', $faq->id) }}" method="POST">
-                                <textarea id="rispostaModifica-{{ $faq->id }}" name="risposta" class="w-full border-2" rows="4">{{$faq->risposta}}</textarea>
+                                <textarea id="rispostaModifica-{{ $faq->id }}" name="risposta" class="w-full border rounded-md resize-none p-2" rows="4">{{$faq->risposta}}</textarea>
                                 <input type="hidden" name="domanda" value="{{$faq->domanda}}">
                                 <div class="flex gap-2 mt-2">
                                     @csrf
