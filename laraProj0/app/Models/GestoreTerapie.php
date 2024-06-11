@@ -36,6 +36,25 @@ class GestoreTerapie extends Model
         $attivita = Attivita::all();
         return $attivita;
     }
+    
+    public function getTerapiaAttivaByPaz($userPaz): Terapia {
+
+        $terapia = Terapia::where('paziente', $userPaz)->orderBy('data', 'desc')->first();
+
+        if($terapia != null) {  
+            return $terapia;
+        }
+        else {  // se non esiste terapia attiva (perchè il paziente è nuovo), ne creiamo una "vuota"
+            $data = Carbon::now()->toDateTimeString();
+            $terapia = new Terapia([
+                'data' => $data,
+                'paziente' => $userPaz
+            ]);
+            $terapia->save();
+            return $terapia;
+        }
+        
+    }
 
     public function getFarmaciFreqByTer ($terId) : array {  // restituisce farmaci con frequenza
 

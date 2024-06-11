@@ -110,7 +110,7 @@ class ClinController extends Controller
         $paziente = Paziente::find($userPaz);
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('data');
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
-        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terapia = $this->gestTerModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
         $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
         $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
@@ -128,7 +128,7 @@ class ClinController extends Controller
         $paziente = Paziente::find($userPaz);
         $farmaci = $this->gestTerModel->getFarmaci();
         $attivita = $this->gestTerModel->getAttivita();
-        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terapia = $this->gestTerModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
         $farmTer = $this->gestTerModel->getFarmaciFreqByTer($terId);
         $attTer = $this->gestTerModel->getAttivitaFreqByTer($terId);
