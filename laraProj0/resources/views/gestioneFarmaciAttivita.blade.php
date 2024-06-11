@@ -215,6 +215,7 @@
 
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
+    
     $(document).ready(function() {
 
         elem_id = "back_button";
@@ -328,16 +329,7 @@
         cercaElemento("#cercaFarmaco", ".farmaco", ".nomeFarmaco");
         cercaElemento("#cercaAttivita", ".attivita", ".nomeAttivita");
 
-
-
-
-    });
-
-
-
-
-    //per la validazione della modifica del Farmaco con ajax
-    $(function() {
+        //per la validazione della modifica del Farmaco con ajax
         var actionUrl = "{{ route('gestioneFarmaci.update') }}";
         var formId = 'modificaFarmacoForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -352,10 +344,9 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
-    });
+        
 
-    //per la validazione dell'inserimento del Farmaco con ajax
-    $(function() {
+        //per la validazione dell'inserimento del Farmaco con ajax
         var actionUrl = "{{ route('gestioneFarmaci.store') }}";
         var formId = 'nuovoFarmacoForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -370,11 +361,10 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
-    });
+        
 
 
-    //per la validazione della modifica della Attivita con ajax
-    $(function() {
+        //per la validazione della modifica della Attivita con ajax
         var actionUrl = "{{ route('gestioneAttivita.update') }}";
         var formId = 'modificaAttivitaForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -388,11 +378,10 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
-    });
+        
 
 
-    //per la validazione del inserimento di una Attivita con ajax
-    $(function() {
+        //per la validazione del inserimento di una Attivita con ajax
         var actionUrl = "{{ route('gestioneAttivita.store') }}";
         var formId = 'nuovaAttivitaForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -406,7 +395,10 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
+
+
     });
+    
 </script>
 
 
