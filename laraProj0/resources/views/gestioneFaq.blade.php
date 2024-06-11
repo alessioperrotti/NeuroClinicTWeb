@@ -118,11 +118,10 @@
         /// FUNZIONI PER SOVRASCRIVERE COMPORTAMENTO BTN INDIETRO ///
         
         // Sovrascrive il pulsante "Indietro"
-        $(function() {
-            elem_id = "back_button";
-            rotta = "{{ route('homeAdmin') }}";
-            sovrascriviOnClick(elem_id,rotta);
-        });
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
+        
 
         /////////////////////////////////
 
@@ -148,23 +147,22 @@
             });
         }
 
-            // Inizializza la validazione del form quando il documento è pronto
-        $(function() {
-            var actionUrl = "{{ route('faq.store') }}";
-            var formId = 'formNuovaFaq';
-            setupValidation(actionUrl, formId);
-        });
+        // Inizializza la validazione del form per l'inserimento di una nuova FAQ con AJAX
+        
+        var actionUrl = "{{ route('faq.store') }}";
+        var formId = 'formNuovaFaq';
+        setupValidation(actionUrl, formId);
+        
 
         // Per la validazione della modifica della FAQ con AJAX
-        $(function() {
-            @isset($faqs)
-                @foreach ($faqs as $faq)
-                    var actionUrl = "{{ route('faq.update', $faq->id) }}";
-                    var formId = 'formModificaFaq-{{ $faq->id }}';
-                    setupValidation(actionUrl, formId);
-                @endforeach
-            @endisset
-        });
+        @isset($faqs)
+            @foreach ($faqs as $faq)
+                var actionUrl = "{{ route('faq.update', $faq->id) }}";
+                var formId = 'formModificaFaq-{{ $faq->id }}';
+                setupValidation(actionUrl, formId);
+            @endforeach
+         @endisset
+        
         /////////////////////////////////
         
     });
