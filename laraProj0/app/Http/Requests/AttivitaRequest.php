@@ -27,8 +27,6 @@ class AttivitaRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'id' => '', //aggiunto per update
             'nome' => 'required|max:30',
             'descr' => 'required|max:200',
 

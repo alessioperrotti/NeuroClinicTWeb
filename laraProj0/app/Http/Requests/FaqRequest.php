@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Psy\Readline\Hoa\Console;
 use Symfony\Component\HttpFoundation\Response;
 
-class NewFaqRequest extends FormRequest
+class FaqRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

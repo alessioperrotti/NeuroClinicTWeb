@@ -27,7 +27,6 @@ class DisturboRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['integer'],
             'nome'=> ['required', 'string', 'max:40'],
             'categoria'=> ['required', 'string', 'max:30'],
         ];

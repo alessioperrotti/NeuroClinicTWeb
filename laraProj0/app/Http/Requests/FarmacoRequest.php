@@ -30,7 +30,6 @@ class FarmacoRequest extends FormRequest
     {
         Log::info('FarmacoRequest');
         return [
-            'id' => '', //aggiunto per update
             'nome' => 'required|max:30',
             'descr' => 'required|max:200',
         ];

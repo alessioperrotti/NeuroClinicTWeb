@@ -23,7 +23,7 @@
                 <span class="nomeFarmaco font-bold">{{$farmaco->nome}}</span>
                 <div class="flex mr-2 gap-x-4">
                     <button class="btnModificaFarmaco" data-id="{{$farmaco->id}}" data-nome="{{$farmaco->nome}}" data-descr="{{$farmaco->descr}}">
-                        <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+                        <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
 
 
@@ -33,7 +33,7 @@
                         <input type="hidden" name="idDel" value="{{$farmaco->id}}">
                         <button type="submit" class="btnEliminaFarmaco">
 
-                            <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                            <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                         </button>
                     </form>
 
@@ -134,7 +134,7 @@
                 <span class="nomeAttivita font-bold">{{$attivitasing->nome}}</span>
                 <div class="flex mr-2 gap-x-4">
                     <button class="btnModificaAttivita" data-id="{{$attivitasing->id}}" data-nome="{{$attivitasing->nome}}" data-descr="{{$attivitasing->descr}}">
-                        <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+                        <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
 
 
@@ -144,7 +144,7 @@
                         <input type="hidden" name="idDel" value="{{$attivitasing->id}}">
                         <button type="submit" class="btnEliminaAttivita">
 
-                            <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                            <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                         </button>
                     </form>
 
@@ -302,12 +302,7 @@
         });
 
 
-
-
-
-
-
-        //funzione per vedere gli id degli elementi
+        //funzione per vedere gli id degli elementi (seleziona tutti gli elementi con id)
         $('[id]').each(function() {
             var id = this.id;
             var tagName = this.tagName;
@@ -341,10 +336,6 @@
 
 
     });
-
-
-
-
 
 
 

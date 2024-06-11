@@ -31,11 +31,11 @@ use App\Models\GestoreClinici;
 use App\Models\Resources\Episodio;
 use App\Models\Resources\Terapia;
 use App\Models\Resources\Clinico;
-use App\Http\Requests\NewFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
 use App\Http\Requests\UpdateClinicoRequest;
 use App\Models\GestoreCartelleClin;
+use App\Http\Requests\FaqRequest;
 
 
 class AdminController extends Controller
@@ -70,6 +70,8 @@ class AdminController extends Controller
         $admin = $user->paziente;
         return view('homeAdmin'); 
     }
+
+
 ################################################################################################
     #SEZIONE PAZIENTI   
     public function mostraPazienti()
@@ -80,27 +82,33 @@ class AdminController extends Controller
         ->view('listaPaz', ['pazienti' => $pazienti]);
         
     } 
+
+
     public function eliminaPaziente($username)
     {
         $this->pazientiModel->eliminaPaz($username);
         $pazienti = $this->pazientiModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
         return redirect()->route('listaPaz');   
     }
-   #SEZIONA FAQ
+
+
+   #SEZIONE FAQ
     public function viewGestioneFaq()
     {
         $faqs=$this->faqModel->getFaqs();
         return view('gestioneFaq')->with('faqs',$faqs); 
     }
+
+
     public function eliminaFaq($id)
     {
         $this->faqModel->deleteFaq($id);
         return redirect()->route('gestioneFaq');
     }
 
-    public function storeFaq(NewFaqRequest $request): JsonResponse
+
+    public function storeFaq(FaqRequest $request): JsonResponse
     {
-        Log::info('metodo storeFaq attivato');
         $validatedData = $request->validated();
 
         if ($this->faqModel->storeFaq($validatedData)){
@@ -114,9 +122,8 @@ class AdminController extends Controller
         
     }
 
-    public function updateFaq(NewFaqRequest $request, $id): JsonResponse
+    public function updateFaq(FaqRequest $request, $id): JsonResponse
     {
-        Log::info('metodo updateFaq attivato');
         $validatedData = $request->validated();
        
         if($this->faqModel->updateFaq($validatedData, $id))
@@ -151,6 +158,8 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
         
     }
+
+
     public function storeClinico(NewClinicoRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
@@ -159,11 +168,15 @@ class AdminController extends Controller
         }else
             return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
+
+
     public function viewAggiornaClinico($userClin)
     {
         $clinico = $this->cliniciModel->getClinico($userClin);
         return view('editClinico')->with('clinico', $clinico);
     }
+
+
     public function updateClinico(UpdateClinicoRequest  $request ,$userClin):JsonResponse
     {
         $validatedData = $request->validated();
@@ -245,6 +258,7 @@ class AdminController extends Controller
     public function updateDisturbo(DisturboRequest $request): JsonResponse
     {
         $validated = $request->validated();
+        $validated['id'] = $request->input('id');
 
         $riuscito = $this->disturbiModel->updateDisturbo($validated);
 
@@ -300,6 +314,7 @@ class AdminController extends Controller
     public function updateFarmaco(FarmacoRequest $request): JsonResponse
     {
         $validated = $request->validated();
+        $validated['id'] = $request->input('id');
 
         $riuscito = $this->farmaciModel->updateFarmaco($validated);
 
@@ -345,8 +360,8 @@ class AdminController extends Controller
 
     public function updateAttivita(AttivitaRequest $request):JsonResponse
     {
-        Log::info($request);
         $validated = $request->validated();
+        $validated['id'] = $request->input('id');
 
         $riuscito = $this->attivitaModel->updateAttivita($validated);
 
