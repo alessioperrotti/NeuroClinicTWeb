@@ -42,7 +42,7 @@
                 <a href="{{ route('gestioneClinici') }}">
                     <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded-md">Annulla Inserimento</button>
                 </a>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Conferma Inserimento</button>
+                <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white py-2 px-4 rounded-md">Conferma Inserimento</button>
             </div>
         </form>
     </div>
