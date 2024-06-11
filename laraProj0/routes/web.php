@@ -125,7 +125,7 @@ Route::get('/home_admin/farmaci_attivita', [AdminController::class, "viewFarmaci
 Route::post('/home_admin/farmaci_attivita/farmaco', [AdminController::class, 'storeFarmaco'])
 ->name('gestioneFarmaci.store')->middleware('can:isAdmin');
 
-Route::post('/home_admin/farmaci_attivita/farmaco/delete', [AdminController::class, 'deleteFarmaco'])
+Route::post('/home_admin/farmaci_attivita/farmaco/delete/{farmId}', [AdminController::class, 'deleteFarmaco'])
 ->name('gestioneFarmaci.delete')->middleware('can:isAdmin');
 
 Route::post('/home_admin/farmaci_attivita/farmaco/update', [AdminController::class, 'updateFarmaco'])
@@ -134,7 +134,7 @@ Route::post('/home_admin/farmaci_attivita/farmaco/update', [AdminController::cla
 Route::post('/home_admin/farmaci_attivita/attivita', [AdminController::class, 'storeAttivita'])
 ->name('gestioneAttivita.store')->middleware('can:isAdmin');
 
-Route::post('/home_admin/farmaci_attivita/attivita/delete', [AdminController::class, 'deleteAttivita'])
+Route::post('/home_admin/farmaci_attivita/attivita/delete/{attId}', [AdminController::class, 'deleteAttivita'])
 ->name('gestioneAttivita.delete')->middleware('can:isAdmin');
 
 Route::post('/home_admin/farmaci_attivita/attivita/update', [AdminController::class, 'updateAttivita'])

@@ -50,9 +50,6 @@ class AdminController extends Controller
 
     public function __construct()
     {
-
-        Log::info('AdminController inizializzato');
-        #$this->middleware('can:isAdmin');
         $this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi;
         $this->farmaciModel = new GestoreFarmaci;
@@ -112,11 +109,9 @@ class AdminController extends Controller
         $validatedData = $request->validated();
 
         if ($this->faqModel->storeFaq($validatedData)){
-            Log::info('FAQ salvata correttamente, reindirizzamento a gestioneFaq');
             return response()->json(['redirect' => route('gestioneFaq')]); 
         }
         else{
-            Log::error('Errore durante l\'aggiunta della FAQ');
             return response()->json(['error' => 'Regole non rispettate.'], 422);
         }
         
@@ -128,12 +123,10 @@ class AdminController extends Controller
        
         if($this->faqModel->updateFaq($validatedData, $id))
         {
-            Log::info('FAQ modificata correttamente, reindirizzamento a gestioneFaq');
             return response()->json(['redirect' => route('gestioneFaq')]); 
         } 
        else
        {
-            Log::error('Errore durante la modifica della FAQ');
             return response()->json(['error' => 'Regole non rispettate.'], 422);
         }
     }
@@ -180,7 +173,6 @@ class AdminController extends Controller
     public function updateClinico(UpdateClinicoRequest  $request ,$userClin):JsonResponse
     {
         $validatedData = $request->validated();
-        log::info("dati validati");
         if($this->cliniciModel->updateClinico($validatedData, $userClin))
             return response()->json(['redirect' => route('gestioneClinici')]);
         else
@@ -214,16 +206,12 @@ class AdminController extends Controller
     //DISTURBI
     public function viewDisturbi()
     {
-        Log::info('metodo viewDisturbo attivato');
         $disturbi = $this->disturbiModel->getDisturbi();
         return view('gestioneDisturbi')->with('disturbi', $disturbi);
     }
 
     public function storeDisturbo(DisturboRequest $request): JsonResponse
     {
-
-
-        Log::info('metodo storeDisturbo attivato');
         $validatedData = $request->validated();
 
 
@@ -285,7 +273,6 @@ class AdminController extends Controller
     public function storeFarmaco(FarmacoRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
-        Log::info('metodo storeFarmaco attivato');
         $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
 
         if ($riuscito) {
@@ -296,13 +283,10 @@ class AdminController extends Controller
         }
     }    
 
-    public function deleteFarmaco(Request $request)
+    public function deleteFarmaco($farmId)
     {
-        $validated = $request->validate([
-            'idDel' => 'required',
-        ]);
-
-        $riuscito = $this->farmaciModel->deleteFarmaco($validated);
+        
+        $riuscito = $this->farmaciModel->deleteFarmaco($farmId);
 
         if ($riuscito) {
             return redirect()->route('gestioneFarmaciAttivita');
@@ -330,10 +314,8 @@ class AdminController extends Controller
     //attivita
     
     public function storeAttivita(AttivitaRequest $request):JsonResponse{
-        Log::info($request);
+        
         $validatedData = $request->validated();
-        Log::info('metodo storeAttivita attivato');
-
         $riuscito = $this->attivitaModel->storeAttivita($validatedData);
 
         if ($riuscito) {
@@ -343,13 +325,10 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteAttivita(Request $request)
+    public function deleteAttivita($attId)
     {
-        $validated = $request->validate([
-            'idDel' => 'required',
-        ]);
-
-        $riuscito = $this->attivitaModel->deleteAttivita($validated);
+        
+        $riuscito = $this->attivitaModel->deleteAttivita($attId);
 
         if ($riuscito) {
             return redirect()->route('gestioneFarmaciAttivita');

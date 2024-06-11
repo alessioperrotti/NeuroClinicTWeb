@@ -27,12 +27,9 @@
                     </button>
 
 
-                    <form action="{{route('gestioneFarmaci.delete')}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
+                    <form action="{{route('gestioneFarmaci.delete' , $farmaco->id)}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
                         @csrf
-
-                        <input type="hidden" name="idDel" value="{{$farmaco->id}}">
                         <button type="submit" class="btnEliminaFarmaco">
-
                             <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                         </button>
                     </form>
@@ -65,12 +62,12 @@
 
                     <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <label for="descrFarmacoMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 resize-none leading-tight focus:outline-none focus:shadow-outline resize-none">
                     </textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
-                    <button type="submit" id="btnConfermaModFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma Modifiche</button>
+                    <button type="button" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
+                    <button type="submit" id="btnConfermaModFarmaco" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
                 </div>
             </div>
         </form>
@@ -79,7 +76,7 @@
 
     <div class="flex justify-center mt-10 mb-4">
         <!-- Bottone per aggiungere un nuovo Farmaco -->
-        <button id="btnAggiungiFarmaco" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg ">Aggiungi Farmaco</button>
+        <button id="btnAggiungiFarmaco" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg ">Aggiungi Farmaco</button>
     </div>
 
     <!-- Contenitore per il form di inserimento nuovo Farmaco, inizialmente nascosto -->
@@ -96,11 +93,11 @@
                     <input type="text" id="nomeFarmaco" name="nome" placeholder="Nome" class="shadow  appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <h1 class="text-sm mb-7 text-gray-600"> Il nome del farmaco deve essere seguito dalla grammatura</h1>
                     <label for="descrFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="descrFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="btnConfermaInserimentoFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button type="submit" id="btnConfermaInserimentoFarmaco" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -138,12 +135,9 @@
                     </button>
 
 
-                    <form action="{{route('gestioneAttivita.delete')}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questa attivita\'?')">
+                    <form action="{{route('gestioneAttivita.delete', $attivitasing->id)}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questa attivita\'?')">
                         @csrf
-
-                        <input type="hidden" name="idDel" value="{{$attivitasing->id}}">
                         <button type="submit" class="btnEliminaAttivita">
-
                             <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                         </button>
                     </form>
@@ -163,7 +157,7 @@
 
     <div class="flex justify-center  mt-10">
         <!-- Bottone per aggiungere un nuova attivita -->
-        <button id="btnAggiungiAttivita" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">Aggiungi Attivita</button>
+        <button id="btnAggiungiAttivita" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mb-4 ">Aggiungi Attivita</button>
     </div>
 
 
@@ -184,11 +178,11 @@
                     <input type="text" id="nomeAttivitaMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <label for="descrAttivitaMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrAttivitaMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="descrAttivitaMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaModAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
-                    <button type="submit" id="btnConfermaModAttivita" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma Modifiche</button>
+                    <button type="button" id="btnAnnullaModAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
+                    <button type="submit" id="btnConfermaModAttivita" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
                 </div>
             </div>
         </form>
@@ -207,11 +201,11 @@
                     <input type="text" id="nomeAttivita" placeholder="Nome" name="nome" class="shadow mb-1 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <label for="descrAttivita" class="block mt-2 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="btnConfermaInserimentoAttivita" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="button" id="btnAnnullaAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button type="submit" id="btnConfermaInserimentoAttivita" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </form>
         </div>
@@ -221,11 +215,14 @@
 
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
+    
     $(document).ready(function() {
 
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
+
         //script per farmaci
-
-
         function resetForm(formId, fields) {
             $(formId).hide();
             fields.forEach(field => $(field).val(''));
@@ -332,16 +329,7 @@
         cercaElemento("#cercaFarmaco", ".farmaco", ".nomeFarmaco");
         cercaElemento("#cercaAttivita", ".attivita", ".nomeAttivita");
 
-
-
-
-    });
-
-
-
-
-    //per la validazione della modifica del Farmaco con ajax
-    $(function() {
+        //per la validazione della modifica del Farmaco con ajax
         var actionUrl = "{{ route('gestioneFarmaci.update') }}";
         var formId = 'modificaFarmacoForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -356,10 +344,9 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
-    });
+        
 
-    //per la validazione dell'inserimento del Farmaco con ajax
-    $(function() {
+        //per la validazione dell'inserimento del Farmaco con ajax
         var actionUrl = "{{ route('gestioneFarmaci.store') }}";
         var formId = 'nuovoFarmacoForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -374,11 +361,10 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
-    });
+        
 
 
-    //per la validazione della modifica della Attivita con ajax
-    $(function() {
+        //per la validazione della modifica della Attivita con ajax
         var actionUrl = "{{ route('gestioneAttivita.update') }}";
         var formId = 'modificaAttivitaForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -392,11 +378,10 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
-    });
+        
 
 
-    //per la validazione del inserimento di una Attivita con ajax
-    $(function() {
+        //per la validazione del inserimento di una Attivita con ajax
         var actionUrl = "{{ route('gestioneAttivita.store') }}";
         var formId = 'nuovaAttivitaForm'; //a questa assegnamo l'id della form
         $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
@@ -410,7 +395,10 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(actionUrl, formId); //valida l'intera form
         });
+
+
     });
+    
 </script>
 
 
