@@ -48,15 +48,4 @@
 </div>
 @endsection
 
-@section('scripts')
-<script>
-   
-   $(document).ready(function(){
-        $('#pulsante').click(function(){
-            $('#password').attr('type', $('#password').attr('type') == 'password' ? 'text' : 'password');
-        });
-    });
 
-</script>
-
-@endsection

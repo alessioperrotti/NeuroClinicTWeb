@@ -17,7 +17,6 @@
 <body class="bg-cyan-50">
     <script>
 
-        $(document).ready(function() {
             console.log(document.referrer);
             function togglePassword(inputId, eyeId) {
                 const input = document.getElementById(inputId);
@@ -34,7 +33,7 @@
                 }
         
             }
-        });
+   
     </script>
     <header>
         <div class="bg-cyan-600 h-[100px] flex items-center justify-center">
