@@ -88,6 +88,7 @@ function doFormValidation(actionUrl, formId) {
             }
         },
         success: function (data) { //se non c'è una condizione di errore il server reindirizza al processo di errore
+            alert('Operazione andata a buon fine');
             console.log("tutto bene");
             window.location.replace(data.redirect);
         },
