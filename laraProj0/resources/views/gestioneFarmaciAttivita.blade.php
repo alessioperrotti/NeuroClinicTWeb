@@ -66,8 +66,8 @@
                     </textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
-                    <button type="submit" id="btnConfermaModFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma Modifiche</button>
+                    <button type="button" id="btnAnnullaModFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
+                    <button type="submit" id="btnConfermaModFarmaco" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
                 </div>
             </div>
         </form>
@@ -76,7 +76,7 @@
 
     <div class="flex justify-center mt-10 mb-4">
         <!-- Bottone per aggiungere un nuovo Farmaco -->
-        <button id="btnAggiungiFarmaco" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg ">Aggiungi Farmaco</button>
+        <button id="btnAggiungiFarmaco" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg ">Aggiungi Farmaco</button>
     </div>
 
     <!-- Contenitore per il form di inserimento nuovo Farmaco, inizialmente nascosto -->
@@ -96,8 +96,8 @@
                     <textarea id="descrFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="btnConfermaInserimentoFarmaco" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button type="submit" id="btnConfermaInserimentoFarmaco" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -157,7 +157,7 @@
 
     <div class="flex justify-center  mt-10">
         <!-- Bottone per aggiungere un nuova attivita -->
-        <button id="btnAggiungiAttivita" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mb-4 ">Aggiungi Attivita</button>
+        <button id="btnAggiungiAttivita" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mb-4 ">Aggiungi Attivita</button>
     </div>
 
 
@@ -181,8 +181,8 @@
                     <textarea id="descrAttivitaMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaModAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
-                    <button type="submit" id="btnConfermaModAttivita" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma Modifiche</button>
+                    <button type="button" id="btnAnnullaModAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
+                    <button type="submit" id="btnConfermaModAttivita" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma Modifiche</button>
                 </div>
             </div>
         </form>
@@ -204,8 +204,8 @@
                     <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="flex justify-center gap-x-14">
-                    <button type="button" id="btnAnnullaAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="btnConfermaInserimentoAttivita" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="button" id="btnAnnullaAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
+                    <button type="submit" id="btnConfermaInserimentoAttivita" class="bg-cyan-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </form>
         </div>
