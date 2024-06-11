@@ -35,11 +35,10 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
-        $(function() {
-            elem_id = "back_button";
-            rotta = "{{ route('homeAdmin') }}";
-            sovrascriviOnClick(elem_id,rotta);
-        });
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
+        
 
         // Conferma per l'eliminazione del paziente:
         //prendo l'elemento form con classe delete-form e gli aggiungo un gestore degli eventi 

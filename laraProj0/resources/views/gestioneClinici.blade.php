@@ -48,11 +48,10 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
-        $(function() {
-            elem_id = "back_button";
-            rotta = "{{ route('homeAdmin') }}";
-            sovrascriviOnClick(elem_id,rotta);
-        });
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
+        
         
         // Filtro per cognome jQuery
         $('#cognomeClinico').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomeClinico
