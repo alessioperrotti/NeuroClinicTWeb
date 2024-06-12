@@ -95,8 +95,7 @@
 
 </div>
 
-@endsection
-@section('scripts')
+
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
     $(document).ready(function() {

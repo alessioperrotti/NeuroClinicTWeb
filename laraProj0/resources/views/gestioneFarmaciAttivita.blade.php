@@ -213,8 +213,7 @@
 </div>
 </div>
 
-@endsection
-@section('script')
+
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
     
