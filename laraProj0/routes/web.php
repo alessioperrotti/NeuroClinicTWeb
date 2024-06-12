@@ -83,8 +83,11 @@ Route::get('/episodi-disturbo/{id}', [AdminController::class, 'getEpisodiDisturb
 Route::get('/home_admin/clinici', [AdminController::class, 'viewGestioneClinici'])
 ->name('gestioneClinici')->middleware('can:isAdmin');
 
-Route::post('/clinico/{id}', [AdminController::class, 'eliminaClinico'])
+Route::post('/clinico/{userClin}', [AdminController::class, 'eliminaClinico'])
 ->name('clinico.elimina')->middleware('can:isAdmin');
+
+Route::get('home_admin/clinici/nuove_associazioni/{userClin}', [AdminController::class, 'viewNuoveAssociazioni'])
+->name('nuoveAssociazioni')->middleware('can:isAdmin');
 
 Route::get('/home_admin/clinici/nuovo_clin', [AdminController::class, 'viewNuovoClinico'])
 ->name('nuovoClinico')->middleware('can:isAdmin');

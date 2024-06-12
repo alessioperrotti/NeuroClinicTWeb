@@ -12,27 +12,61 @@ use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\GestoreMessaggi;
 
 class GestoreClinici extends Model
 {
+
+    protected $gestMsgModel;
+
+    public function __construct()
+    {
+        $this->gestMsgModel = new GestoreMessaggi;
+    }
+
     public function getClinici() : Collection {
         $clinici = Clinico::all();
         return $clinici;
     }
+
+    public function getCliniciExcept($userClin) : Collection {
+        $clinici = Clinico::where('username', '!=', $userClin)->get();
+        return $clinici;
+    }
+
+
     public function deleteClinico($id) : bool {
+
         DB::beginTransaction();
         try {
+
+            $pazienti = $this->getPazientiByClin($id);
+
+            foreach($pazienti as $paz) {
+                $paz->clinico = $_POST[$paz->username];
+                $paz->save();
+            }
+
+            $this->gestMsgModel->deleteMessaggiByUser($id);
+
             $clinico = Clinico::findOrFail($id);
+            $user = User::findOrFail($id);
+
+            // elim messaggi
             $clinico->delete();
+            $user->delete();
 
             DB::commit();
+            return true;
+            
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Errore durante l\'eliminazione del clinico: ' . $e->getMessage());
             return false;   
         }
-        return true;
     }
+
+
     public function storeClinico($validatedData): bool
     {
         DB::beginTransaction();
@@ -58,10 +92,14 @@ class GestoreClinici extends Model
         }
         return true;
     }
+
+
     public function getClinico($userClin) {
         $clinico = Clinico::findOrFail($userClin);
         return $clinico;
     }
+
+
     public function updateClinico($validatedData, $userClin): bool {
         DB::beginTransaction();
         try {

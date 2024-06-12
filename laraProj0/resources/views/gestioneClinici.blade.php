@@ -20,15 +20,14 @@
                     <div class="flex mr-2 gap-x-4">
                         <form action="{{ route('aggiornaClinicoAdmin', $clinico->username) }}" method="GET">
                             <button id="btnModifica">
-                                <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+                                <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                             </button>
                         </form>
-                        <form action="{{ route('clinico.elimina', $clinico->username) }}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo clinico?');"> 
-                            @csrf
+                        <a href="{{ route('nuoveAssociazioni', $clinico->username) }}"> 
                             <button type="submit">
-                                <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                                <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                             </button>
-                        </form>
+                        </a>
                     </div>
                 </li>
             @endforeach

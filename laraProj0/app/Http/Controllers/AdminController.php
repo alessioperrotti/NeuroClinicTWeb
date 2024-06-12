@@ -36,6 +36,7 @@ use App\Http\Requests\NewClinicoRequest;
 use App\Http\Requests\UpdateClinicoRequest;
 use App\Models\GestoreCartelleClin;
 use App\Http\Requests\FaqRequest;
+use Illuminate\View\View;
 
 
 class AdminController extends Controller
@@ -137,19 +138,36 @@ class AdminController extends Controller
         $clinici=$this->cliniciModel->getClinici();
         return view('gestioneClinici')->with('clinici',$clinici); 
     }
+
     //AGGIUNGI CLINICO
     public function viewNuovoClinico()
     {
         return view('newClinico');
     }
+
+
     // Elimina un clinico
-    public function eliminaClinico($id): RedirectResponse
+    public function eliminaClinico($userClin): RedirectResponse
     {
-        if(!$this->cliniciModel->deleteClinico($id))        
-            return redirect()->back()->with('success', 'Clinico eliminato con successo.');
-        else
+        if($this->cliniciModel->deleteClinico($userClin)) {   
+            
+            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+        }
+        else {
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
+        }
         
+    }
+
+    public function viewNuoveAssociazioni($userClin) : View {
+
+        $clinici = $this->cliniciModel->getCliniciExcept($userClin);
+        $pazienti = $this->cliniciModel->getPazientiByClin($userClin);
+
+        return view('nuoveAssocClinico')
+            ->with('userClin', $userClin)
+            ->with('clinici', $clinici)
+            ->with('pazienti', $pazienti);
     }
 
 
