@@ -14,34 +14,34 @@
             window.location.href = "{{ route('homePaziente') }}";
         };
 
-        $("#ricevuti").addClass("flex-grow").removeClass("basis-3/5");
+        $("#ricevuti").addClass("flex-grow").removeClass("basis-4/6");
 
         $("#a_ricevuti").click(function() {
-            $("#ricevuti").removeClass("hidden basis-3/5").addClass("flex-grow");
-            $("#inviati").addClass("hidden basis-3/5").removeClass("flex-grow");
-            $("#nuovo").addClass("hidden").removeClass("basis-2/5");
-            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/5");
+            $("#ricevuti").removeClass("hidden basis-4/6").addClass("flex-grow");
+            $("#inviati").addClass("hidden basis-4/6").removeClass("flex-grow");
+            $("#nuovo").addClass("hidden").removeClass("basis-2/6");
+            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/6");
 
         });
 
         $("#a_inviati").click(function() {
-            $("#ricevuti").addClass("hidden basis-3/5").removeClass("flex-grow");
-            $("#inviati").removeClass("hidden basis-3/5").addClass("flex-grow");
-            $("#nuovo").addClass("hidden").removeClass("basis-2/5");
-            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/5");
+            $("#ricevuti").addClass("hidden basis-4/6").removeClass("flex-grow");
+            $("#inviati").removeClass("hidden basis-4/6").addClass("flex-grow");
+            $("#nuovo").addClass("hidden").removeClass("basis-2/6");
+            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/6");
 
         });
 
         $("#a_nuovo").click(function() {
-            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/5");
-            $("#nuovo").removeClass("hidden").addClass("basis-2/5");
-            $("#ricevuti, #inviati").removeClass("flex-grow").addClass("basis-3/5");
+            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/6");
+            $("#nuovo").removeClass("hidden").addClass("basis-2/6");
+            $("#ricevuti, #inviati").removeClass("flex-grow").addClass("basis-4/6");
         });
 
         $(".a_nuovo_risp").click(function() {
-            $("#nuovo").addClass("hidden").removeClass("basis-2/5");
-            $("#nuovo_risp").removeClass("hidden").addClass("basis-2/5");
-            $("#ricevuti, #inviati").removeClass("flex-grow").addClass("basis-3/5");
+            $("#nuovo").addClass("hidden").removeClass("basis-2/6");
+            $("#nuovo_risp").removeClass("hidden").addClass("basis-2/6");
+            $("#ricevuti, #inviati").removeClass("flex-grow").addClass("basis-4/6");
             var idRisp = $(this).data('idrisp');
             var Mitt = $(this).data('mitt');
             var idData = $(this).data('iddata');
@@ -59,15 +59,15 @@
                 return false;
             } else {
                 alert("Messaggio inviato con successo!");
-                $("#nuovo").addClass("hidden").removeClass("basis-2/5");
-                $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-3/5");
+                $("#nuovo").addClass("hidden").removeClass("basis-2/6");
+                $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-4/6");
             }
 
         });
 
         $("#reset").click(function() {
-            $("#nuovo").addClass("hidden").removeClass("basis-2/5");
-            $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-3/5");
+            $("#nuovo").addClass("hidden").removeClass("basis-2/6");
+            $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-4/6");
         });
 
         $("#submit_risp").click(function() {
@@ -76,14 +76,14 @@
                 return false;
             } else {
                 alert("Messaggio inviato con successo!");
-                $("#nuovo_risp").addClass("hidden").removeClass("basis-2/5");
-                $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-3/5");
+                $("#nuovo_risp").addClass("hidden").removeClass("basis-2/6");
+                $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-4/6");
             }
         });
 
         $("#reset_risp").click(function() {
-            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/5");
-            $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-3/5");
+            $("#nuovo_risp").addClass("hidden").removeClass("basis-2/6");
+            $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-4/6");
 
         });
     });
@@ -111,24 +111,22 @@
             <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
                 <div class="flex flex-row justify-between px-4 pt-1">
                     <div class="flex">
-                        <h3 class="font-semibold">Da: {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
-                        @if($msgR->risposta != null)
-                        <h3 class="ml-5 font-semibold text-gray-400">Risposta al tuo messaggio del {{$msgR->risposta->created_at}}</h3>
-                        @endif
+                        <h3 class="font-semibold">Da: {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>   
                     </div>
-
                     <div class="flex">
                         <p class="text-gray-500">{{ $msgR->created_at}}</p>
-                        <button class="a_nuovo_risp mx-3" data-idRisp="{{$msgR->id}}" data-Mitt='{{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}' data-idData="{{ $msgR->created_at}}" data-idMitt='{{$msgR->mittente->username}}'> Rispondi </button>
+                        <button class="a_nuovo_risp mx-2" data-idRisp="{{$msgR->id}}" data-Mitt='{{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}' data-idData="{{ $msgR->created_at}}" data-idMitt='{{$msgR->mittente->username}}'> Rispondi </button>
                         <p>|</p>
-                        <form method="POST" action="{{ route('messaggioPaziente.delete')}}">
+                        <form method="POST" action="{{ route('messaggioPaziente.delete', $msgR->id)}}">
                         @csrf
-                            <input type="hidden" name="msgId" value={{ $msgR->id}}>
-                            <button type="submit" class="mx-3">Elimina</button>
+                            <button type="submit" class="mx-2">Elimina</button>
                         </form>
                     </div>
                 </div>
-                <p class="text-gray-600 px-4">{{ $msgR->contenuto}}</p>
+                @if($msgR->risposta != null)
+                    <h3 class="text-gray-400 px-3">{{"[Risposta al tuo messaggio del " . $msgR->risposta->created_at . "]"}}</h3>
+                @endif
+                <p class="text-gray-600 px-4 mt-1">{{ $msgR->contenuto}}</p>
             </div>
             @endforeach
             @endisset
@@ -145,20 +143,19 @@
                 <div class="flex flex-row justify-between px-4 pt-1">
                     <div class="flex">
                         <h3 class="font-semibold">A: {{ $msgI->destin->nome . " " . $msgI->destin->cognome}}</h3>
-                        @if($msgI->risposta != null)
-                        <h3 class="ml-5 font-semibold text-gray-400">Risposta al messaggio di {{$msgI->risposta->mittente->nome}} del {{$msgI->risposta->created_at}}</h3>
-                        @endif
                     </div>
                     <div class="flex">
                         <p class="text-gray-500">{{ $msgI->created_at}}</p>
-                        <form method="POST" action="{{ route('messaggioPaziente.delete')}}">
+                        <form method="POST" action="{{ route('messaggioPaziente.delete', $msgI->id)}}">
                         @csrf
-                            <input type="hidden" name="msgId" value={{ $msgI->id}}>
-                            <button type="submit" class="mx-3">Elimina</button>
+                            <button type="submit" class="mx-2">Elimina</button>
                         </form>
                     </div>
                 </div>
-                <p class="text-gray-600 px-4">{{ $msgI->contenuto}}</p>
+                @if($msgI->risposta != null)
+                    <h3 class="text-gray-400 px-3">Risposta al messaggio di {{$msgI->risposta->mittente->nome}} del {{$msgI->risposta->created_at}}</h3>
+                @endif
+                <p class="text-gray-600 px-4 mt-1">{{ $msgI->contenuto}}</p>
             </div>
             @endforeach
             @endisset

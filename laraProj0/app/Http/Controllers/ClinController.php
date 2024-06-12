@@ -235,9 +235,9 @@ class ClinController extends Controller
         }
     }
 
-    public function deleteMessaggio() : RedirectResponse {
-        $id = $_POST['msgId'];
-        $msg = Messaggio::find($id);
+    public function deleteMessaggio($msgId) : RedirectResponse {
+        
+        $msg = Messaggio::find($msgId);
         $msg->eliminatoClin = true;
 
         if($msg->eliminatoPaz) {  // se è stato eliminato anche dal paziente lo elimino dal db

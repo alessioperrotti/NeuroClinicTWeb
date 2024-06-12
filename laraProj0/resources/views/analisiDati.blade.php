@@ -17,7 +17,7 @@ Analisi Dati
                 <h2 class='w-1/3 font-semibold'>Media pazienti per clinico</h2>
                 <h2>{{$mediaPazientiPerClinico}}</h2>
             </div>
-            <hr>
+            <hr class="mb-8">
             <div class='flex justify-between px-5 gap-x-4 py-4'>
                 <h2 class='w-1/3 font-semibold'>Disturbo motorio</h2>
                 <select id="disturboSelect">
@@ -27,11 +27,10 @@ Analisi Dati
                     @endforeach
                 </select>
             </div>
-            <div class='flex justify-between px-5 gap-x-4 py-4'>
-                <h2 class='w-1/3 font-semibold'>Numero di eventi totali registrati</h2>
+            <div class='flex justify-between px-5 gap-x-4 py-4 items-center'>
+                <h2 class='w-1/3 font-semibold'>Numero di eventi totali registrati:</h2>
                 <h2 id="numEpisodi"></h2>
             </div>
-            <hr>
         </div>
 
         <div class="w-1/2 border border-gray-300 rounded flex flex-col h-80">

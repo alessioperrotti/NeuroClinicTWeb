@@ -218,9 +218,9 @@ class PazController extends Controller
 
     }
 
-    public function deleteMessaggio() : RedirectResponse {
-        $id = $_POST['msgId'];
-        $msg = Messaggio::find($id);
+    public function deleteMessaggio($msgId) : RedirectResponse {
+
+        $msg = Messaggio::find($msgId);
         $msg->eliminatoPaz = true;
 
         if($msg->eliminatoClin) {  // se è stato eliminato anche dal clinico lo elimino dal db
