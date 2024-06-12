@@ -161,7 +161,7 @@
                     </div>
                 </div>
                 @if($msgI->risposta != null)
-                    <h3 class="text-gray-400 px-3">Risposta al messaggio di {{$msgI->risposta->mittente->nome}} {{$msgI->risposta->mittente->cognome}} del {{$msgI->risposta->created_at}}</h3>
+                <h3 class="text-gray-400 px-3">{{"[Risposta al messaggio di " . $msgI->risposta->mittente->nome . " del " $msgI->risposta->created_at . "]"}}</h3>
                 @endif
                 <p class="text-gray-600 px-4 mt-1">{{ $msgI->contenuto}}</p>
             </div>
