@@ -231,7 +231,6 @@ class ClinController extends Controller
     }
 
     public function sendMessaggio(NewMessaggioRequest $request) : RedirectResponse {
-        Log::info('Invio messaggio');
         $validatedData = $request->validated();
         
         if ($this->gestMsgModel->sendMessaggio($validatedData)) {

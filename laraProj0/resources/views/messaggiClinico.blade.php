@@ -67,7 +67,7 @@
             }
 
         });
-        
+
 
         $("#reset").click(function() {
             $("#nuovo").addClass("hidden").removeClass("basis-2/6");
@@ -75,7 +75,7 @@
         });
 
         $("#submit_risp").click(function() {
-            if ($("#contenuto_risp").val() == "" || ) {
+            if ($("#contenuto_risp").val() == "") {
                 alert("Compila tutti i campi!");
                 return false;
             } else {
@@ -174,10 +174,13 @@
                     <label for="destin" class="font-semibold">Destinatario</label>
                     <select id="destin" name="destin" class="mt-1 block w-full p-2 border border-gray-300 rounded-md mb-4">
                         @isset($pazienti)
-                        @foreach($pazienti as $paziente)
-                        <option value={{$paziente->username}} class="text-gray-700">{{$paziente->nome . " " . $paziente->cognome}}</option>
-                        @endforeach
+                            @foreach($pazienti as $paziente)
+                            <option value={{$paziente->username}} class="text-gray-700">{{$paziente->nome . " " . $paziente->cognome}}</option>
+                            @endforeach
                         @endisset
+                        @if($pazienti->isEmpty())
+                            <option value="" class="text-gray-700">Nessun paziente disponibile</option>
+                        @endif
                     </select>
                     <label for="messaggio" class="font-semibold mt-4">Messaggio</label>
                     <textarea id="contenuto" name="contenuto" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
