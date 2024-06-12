@@ -61,12 +61,11 @@
 </div>
 
 @endsection
-
-@section('script')
+@section('scripts')
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
-    $(document).ready(function() {
-
+    //document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function() {
         elem_id = "back_button";
         rotta = "{{ route('homeClinico') }}";
         sovrascriviOnClick(elem_id,rotta);
