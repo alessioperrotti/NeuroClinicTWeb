@@ -113,7 +113,7 @@
         //codice per l'aggiunta del disturbo
         $('#btnAggiungiDisturbo').on('click', function() {
             toggleForms('#formNuovoDisturbo', '#btnAggiungiDisturbo');
-
+            window.scrollTo(0, document.body.scrollHeight);
         });
 
         $('#btnAnnulla').on('click', function() {
