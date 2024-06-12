@@ -692,6 +692,8 @@ class DatabaseSeeder extends Seeder
             ['paziente' => 'clarkkent', 'disturbo' => 8, 'data' => '2024-05-01 12:00:00'],
             ['paziente' => 'brucewayne', 'disturbo' => 3, 'data' => '2024-03-01 13:15:00'],
             ['paziente' => 'pazipazi', 'disturbo' => 2, 'data' => '2024-04-01 14:30:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 3, 'data' => '2024-04-01 14:30:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 1, 'data' => '2024-04-01 14:30:00'],
             ['paziente' => 'dianaprince', 'disturbo' => 14, 'data' => '2024-01-01 15:45:00'],
             ['paziente' => 'peterparker', 'disturbo' => 4, 'data' => '2024-04-01 09:50:00'],
             ['paziente' => 'maryjane', 'disturbo' => 8, 'data' => '2024-02-01 11:05:00'],
