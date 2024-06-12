@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
-                <a href="{{ route('aggiornaClinico') }}">
+                <a href="{{ route('homeClinico') }}">
                     <button type="button" class="bg-gray-500 hover:bg-gray-400 text-white py-2 px-4 rounded-md">Annulla Modifica</button>
                 </a>
                 <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white py-2 px-4 rounded-md">Conferma Modifica</button>
