@@ -120,6 +120,13 @@ class PazController extends Controller
         $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
         $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
 
+        // se non ci sono disturbi, li setto a null piuttosto che mandare una collection vuota
+        if ($disturbi->every(function ($value) {
+            return is_null($value);
+        })) {
+            $disturbi = null;
+        }
+
         return view('cartellaClinicaPaziente')
             ->with('paziente', $paziente)
             ->with('episodi', $episodi)
