@@ -166,7 +166,7 @@ class ClinController extends Controller
 
     public function storeDiagnosi($userPaz) : RedirectResponse {
 
-        $validatedData = $_POST;
+        $validatedData = $_POST; //avrò i value delle checkbox checked, quindi gli id dei disturbi diagnosticati
         Log::info($validatedData);
 
         if ($this->gestTerModel->storeDiagnosi($userPaz, $validatedData)) {
