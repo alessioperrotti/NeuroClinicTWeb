@@ -20,9 +20,8 @@
                 </div>
 
                 @if ($errors->first('vecchiaPassword'))
-                    {{$message=$errors->get('vecchiaPassword')}}
                     <ul class="errors">
-                        <li><strong>{{ $message }}</strong></li>
+                        <li><strong>{{ $errors->first('vecchiaPassword') }}</strong></li>
                     </ul>
                 @endif
             <label for="nuovaPwd" class="block text-gray-700 font-semibold text-xl">Nuova Password</label>
@@ -34,9 +33,8 @@
             </div>
 
             @if ($errors->first('nuovaPassword'))
-                {{$message=$errors->get('nuovaPassword')}}
                 <ul class="errors">
-                    <li><strong>{{ $message }}</strong></li>
+                    <li><strong>{{ $errors->first('nuovaPassword') }}</strong></li>
                 </ul>
             @endif
 
@@ -49,11 +47,10 @@
             </div>
 
             @if ($errors->first('confermaPassword'))
-                {{$message= $errors->get('confermaPassword') }}
                 <ul class="errors">
-                    <li><strong>{{ $message }}</strong></li>
+                    <li><strong>{{ $errors->first('confermaPassword') }}</strong></li>
                 </ul>
-                @endif
+            @endif
 
             <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
                 <input name="annulla" type="reset" value="Annulla Modifiche" class="cursor-pointer bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400" >

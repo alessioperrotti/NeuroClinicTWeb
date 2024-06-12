@@ -24,9 +24,8 @@
                
 
                 @if ($errors->first('vecchiaPassword'))
-                    {{$message=$errors->get('vecchiaPassword')}}
                     <ul class="errors">
-                        <li><strong>{{ $message }}</strong></li>
+                        <li><strong>{{ $errors->first('vecchiaPassword') }}</strong></li>
                     </ul>
                 @endif
 
@@ -40,9 +39,8 @@
 
                
                 @if ($errors->first('nuovaPassword'))
-                    {{$message=$errors->get('nuovaPassword')}}
                     <ul class="errors">
-                        <li><strong>{{ $message }}</strong></li>
+                        <li><strong>{{ $errors->first('nuovaPassword') }}</strong></li>
                     </ul>
                 @endif
 
@@ -56,9 +54,8 @@
 
                 
                 @if ($errors->first('confermaPassword'))
-                    {{$message=$errors->get('confermaPassword')}}
                     <ul class="errors">
-                        <li><strong>{{ $message }}</strong></li>
+                        <li><strong>{{ $errors->first('confermaPassword') }}</strong></li>
                     </ul>
                 @endif
 
@@ -71,4 +68,4 @@
     </div>
 
 
-    @endsectionz
+    @endsection
