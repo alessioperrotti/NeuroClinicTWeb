@@ -20,7 +20,7 @@
                 </div>
 
                 @if ($errors->first('vecchiaPassword'))
-                    {{$errors->get('vecchiaPassword') as $message}}
+                    {{$message=$errors->get('vecchiaPassword')}}
                     <ul class="errors">
                         <li><strong>{{ $message }}</strong></li>
                     </ul>
@@ -34,7 +34,7 @@
             </div>
 
             @if ($errors->first('nuovaPassword'))
-                {{$errors->get('nuovaPassword') as $message}}
+                {{$message=$errors->get('nuovaPassword')}}
                 <ul class="errors">
                     <li><strong>{{ $message }}</strong></li>
                 </ul>
@@ -49,7 +49,7 @@
             </div>
 
             @if ($errors->first('confermaPassword'))
-                {{$errors->get('confermaPassword') as $message}}
+                {{$message= $errors->get('confermaPassword') }}
                 <ul class="errors">
                     <li><strong>{{ $message }}</strong></li>
                 </ul>
