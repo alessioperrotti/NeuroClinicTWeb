@@ -83,8 +83,7 @@ class AdminController extends Controller
 
     public function eliminaPaziente($username)
     {
-        $this->pazientiModel->eliminaPaz($username);
-        $pazienti = $this->pazientiModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
+        $this->pazientiModel->eliminaPaz($username); 
         return redirect()->route('listaPaz');   
     }
 

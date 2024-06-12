@@ -56,8 +56,6 @@
         });
 
 
-
-
         $("#submit").click(function() {
             if ($("#contenuto").val() == "" || $("#destin").val() == "") {
                 alert("Compila tutti i campi!");
@@ -69,6 +67,7 @@
             }
 
         });
+        
 
         $("#reset").click(function() {
             $("#nuovo").addClass("hidden").removeClass("basis-2/6");
@@ -76,7 +75,7 @@
         });
 
         $("#submit_risp").click(function() {
-            if ($("#contenuto_risp").val() == "") {
+            if ($("#contenuto_risp").val() == "" || ) {
                 alert("Compila tutti i campi!");
                 return false;
             } else {
@@ -173,7 +172,7 @@
                 @csrf
                 <div>
                     <label for="destin" class="font-semibold">Destinatario</label>
-                    <select name="destin" class="mt-1 block w-full p-2 border border-gray-300 rounded-md mb-4">
+                    <select id="destin" name="destin" class="mt-1 block w-full p-2 border border-gray-300 rounded-md mb-4">
                         @isset($pazienti)
                         @foreach($pazienti as $paziente)
                         <option value={{$paziente->username}} class="text-gray-700">{{$paziente->nome . " " . $paziente->cognome}}</option>
