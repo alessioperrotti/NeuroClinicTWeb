@@ -21,7 +21,7 @@
                         <form action="{{ route('eliminaPaziente', $paziente->username) }}" method="POST" class="delete-form">
                             @csrf
                             <button type="submit">
-                                <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                                <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                             </button>
                         </form>
                     </div>
