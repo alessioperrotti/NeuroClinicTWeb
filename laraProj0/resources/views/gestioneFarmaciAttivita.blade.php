@@ -330,70 +330,70 @@
         cercaElemento("#cercaAttivita", ".attivita", ".nomeAttivita");
 
         //per la validazione della modifica del Farmaco con ajax
-        var actionUrl = "{{ route('gestioneFarmaci.update') }}";
-        var formId = 'modificaFarmacoForm'; //a questa assegnamo l'id della form
-        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+        var modActionUrlF = "{{ route('gestioneFarmaci.update') }}";
+        var modFormIdF = 'modificaFarmacoForm'; //a questa assegnamo l'id della form
+        $("#" + modFormIdF + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
             var inputName = $(this).attr('name'); //estraggo il nome dell'input
-            doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+            doElemValidation(formElementId, modActionUrlF, modFormIdF, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
         });
-        $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+        $("#" + modFormIdF).on('submit', function(event) { //sarebbe l id della form. 
 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-            doFormValidation(actionUrl, formId); //valida l'intera form
+            doFormValidation(modActionUrlF, modFormIdF); //valida l'intera form
         });
         
 
         //per la validazione dell'inserimento del Farmaco con ajax
-        var actionUrl = "{{ route('gestioneFarmaci.store') }}";
-        var formId = 'nuovoFarmacoForm'; //a questa assegnamo l'id della form
-        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+        var newActionUrlF = "{{ route('gestioneFarmaci.store') }}";
+        var newFormIdF = 'nuovoFarmacoForm'; //a questa assegnamo l'id della form
+        $("#" + newFormIdF + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
             var inputName = $(this).attr('name'); //estraggo il nome dell'input
 
-            doElemValidation(formElementId, actionUrl, formId, inputName ); //questa funzione fa la validazione. funzione definita sul file function.js
+            doElemValidation(formElementId, newActionUrlF, newFormIdF, inputName ); //questa funzione fa la validazione. funzione definita sul file function.js
         });
-        $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+        $("#" + newFormIdF).on('submit', function(event) { //sarebbe l id della form. 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-            doFormValidation(actionUrl, formId); //valida l'intera form
+            doFormValidation(newActionUrlF, newFormIdF); //valida l'intera form
         });
         
 
 
         //per la validazione della modifica della Attivita con ajax
-        var actionUrl = "{{ route('gestioneAttivita.update') }}";
-        var formId = 'modificaAttivitaForm'; //a questa assegnamo l'id della form
-        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+        var modActionUrlA = "{{ route('gestioneAttivita.update') }}";
+        var modFormIdA = 'modificaAttivitaForm'; //a questa assegnamo l'id della form
+        $("#" + modFormIdA + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
             var inputName = $(this).attr('name'); //estraggo il nome dell'input
-            doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+            doElemValidation(formElementId, modActionUrlA, modFormIdA, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
         });
-        $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+        $("#" + modFormIdA).on('submit', function(event) { //sarebbe l id della form. 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-            doFormValidation(actionUrl, formId); //valida l'intera form
+            doFormValidation(modActionUrlA, modFormIdA); //valida l'intera form
         });
         
 
 
         //per la validazione del inserimento di una Attivita con ajax
-        var actionUrl = "{{ route('gestioneAttivita.store') }}";
-        var formId = 'nuovaAttivitaForm'; //a questa assegnamo l'id della form
-        $("#" + formId + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
+        var newActionUrlA = "{{ route('gestioneAttivita.store') }}";
+        var newFormIdA = 'nuovaAttivitaForm'; //a questa assegnamo l'id della form
+        $("#" + newFormIdA + " :input ").on('blur', function(event) { //tutti gli elementi di tipo input, 
             //quando mi sposto su un altro elemento di input, estraggo l'id
             var formElementId = $(this).attr('id');
             console.log(formElementId);
             var inputName = $(this).attr('name'); //estraggo il nome dell'input
-            doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+            doElemValidation(formElementId, newActionUrlA, newFormIdA, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
         });
-        $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
+        $("#" + newFormIdA).on('submit', function(event) { //sarebbe l id della form. 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-            doFormValidation(actionUrl, formId); //valida l'intera form
+            doFormValidation(newActionUrlA, newFormIdA); //valida l'intera form
         });
 
 

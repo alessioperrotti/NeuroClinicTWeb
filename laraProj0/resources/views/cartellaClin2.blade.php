@@ -41,14 +41,17 @@
         <h3 class="text-2xl mt-10 font-semibold">Disturbi diagnosticati</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
-            @isset($disturbi)
-                @foreach($disturbi as $disturbo)
-                <li class="mb-4">{{ $disturbo->nome}}
-                @endforeach
-            @endisset
-            @if($disturbi->isEmpty())
+
+            @if($disturbi == null)
                 <li ><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
+            @else
+                @foreach($disturbi as $disturbo)
+                    @if($disturbo)
+                        <li class="mb-4">{{ $disturbo->nome}}
+                    @endif
+                @endforeach
             @endif
+            
         </ul>
         <h3 class="text-2xl font-semibold mt-10">Terapia attiva</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
