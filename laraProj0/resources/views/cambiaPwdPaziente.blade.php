@@ -25,9 +25,7 @@
 
                 @if ($errors->first('vecchiaPassword'))
                 <ul class="errors">
-                    @foreach ($errors->get('vecchiaPassword') as $message)
                     <li><strong>{{ $message }}</strong></li>
-                    @endforeach
                 </ul>
                 @endif
 
@@ -42,9 +40,7 @@
                
                 @if ($errors->first('nuovaPassword'))
                 <ul class="errors">
-                    @foreach ($errors->get('nuovaPassword') as $message)
                     <li><strong>{{ $message }}</strong></li>
-                    @endforeach
                 </ul>
                 @endif
 
@@ -59,9 +55,7 @@
                 
                 @if ($errors->first('confermaPassword'))
                 <ul class="errors">
-                    @foreach ($errors->get('confermaPassword') as $message)
                     <li><strong>{{ $message }}</strong></li>
-                    @endforeach
                 </ul>
                 @endif
 
