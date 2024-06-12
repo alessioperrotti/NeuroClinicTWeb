@@ -50,4 +50,18 @@
         </button>
     </a>
 </div>
+
+<script src="{{ asset('js/functions.js') }}"></script>
+<script>
+
+    $(document).ready(function(){
+
+        elem_id = "back_button";
+        rotta = "{{ route('homePaziente') }}";
+        sovrascriviOnClick(elem_id,rotta);
+    });
+
+</script>
+
 @endsection
+
