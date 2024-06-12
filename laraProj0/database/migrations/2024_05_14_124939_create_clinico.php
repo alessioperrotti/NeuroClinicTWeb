@@ -13,12 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clinico', function (Blueprint $table) {
-            $table->string('username', 20)->references('username')->on('user');
+            $table->string('username', 20)->primary();
             $table->string('nome', 30);
             $table->string('cognome', 30);
             $table->date('dataNasc');
             $table->string('ruolo', 20);
             $table->string('specializ', 30);
+            $table->foreign('username')->references('username')->on('user')->onDelete('cascade');
         });
     }
 

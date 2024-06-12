@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('intensita')->unsigned();
             $table->string('paziente', 20)->references('username')->on('paziente');
             $table->unsignedBigInteger('disturbo');
-            $table->foreing('disturbo')->references('id')->on('distmotorio')->onDelete('cascade');
+            $table->foreign('disturbo')->references('id')->on('distmotorio')->onDelete('cascade');
         });
     }
 

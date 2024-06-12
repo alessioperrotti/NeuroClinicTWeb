@@ -161,6 +161,14 @@ class GestoreTerapie extends Model
                         ]);
                         $diagnosi->save();
                     }
+                } else {
+                    
+                    $diagnosi = new Diagnosi([
+                        'data' => $data,
+                        'paziente' => $userPaz,
+                        'disturbo' => null
+                    ]);
+                    $diagnosi->save();
                 }
                 
                 DB::commit();
