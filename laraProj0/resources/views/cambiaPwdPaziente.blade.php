@@ -24,9 +24,10 @@
                
 
                 @if ($errors->first('vecchiaPassword'))
-                <ul class="errors">
-                    <li><strong>{{ $message }}</strong></li>
-                </ul>
+                    {{$errors->get('vecchiaPassword') as $message}}
+                    <ul class="errors">
+                        <li><strong>{{ $message }}</strong></li>
+                    </ul>
                 @endif
 
                 <label for="nuovaPwd" class="block text-gray-700 font-semibold text-xl">Nuova Password</label>
@@ -39,9 +40,10 @@
 
                
                 @if ($errors->first('nuovaPassword'))
-                <ul class="errors">
-                    <li><strong>{{ $message }}</strong></li>
-                </ul>
+                    {{$errors->get('nuovaPassword') as $message}}
+                    <ul class="errors">
+                        <li><strong>{{ $message }}</strong></li>
+                    </ul>
                 @endif
 
                 <label for="confermaPwd" class="block text-gray-700 font-semibold text-xl">Conferma Nuova Password</label>
@@ -54,9 +56,10 @@
 
                 
                 @if ($errors->first('confermaPassword'))
-                <ul class="errors">
-                    <li><strong>{{ $message }}</strong></li>
-                </ul>
+                    {{$errors->get('confermaPassword') as $message}}
+                    <ul class="errors">
+                        <li><strong>{{ $message }}</strong></li>
+                    </ul>
                 @endif
 
                 <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
@@ -68,5 +71,4 @@
     </div>
 
 
-    @endsection
-    
+    @endsectionz
