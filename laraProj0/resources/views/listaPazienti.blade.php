@@ -60,7 +60,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         elem_id = "back_button";
-        rotta = "{{ route('listaPazienti') }}";
+        rotta = "{{ route('homeClinico') }}";
         sovrascriviOnClick(elem_id,rotta);
     })
 </script>
