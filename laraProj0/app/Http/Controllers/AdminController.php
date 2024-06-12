@@ -75,8 +75,7 @@ class AdminController extends Controller
     {
         $pazienti=$this->pazientiModel->getPazienti();
         #return view('listaPaz')->with('pazienti',$pazienti);
-        return response()
-        ->view('listaPaz', ['pazienti' => $pazienti]);
+        return response()->view('listaPaz')->with('pazienti', $pazienti);
         
     } 
 
