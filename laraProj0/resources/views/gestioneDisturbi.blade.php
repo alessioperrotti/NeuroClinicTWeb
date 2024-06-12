@@ -98,6 +98,11 @@
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
     $(document).ready(function() {
+
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
+
         function resetForm(formId, fields) {
             $(formId).hide();
             fields.forEach(field => $(field).val(''));
