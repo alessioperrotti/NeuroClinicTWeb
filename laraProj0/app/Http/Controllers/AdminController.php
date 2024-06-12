@@ -144,7 +144,7 @@ class AdminController extends Controller
     // Elimina un clinico
     public function eliminaClinico($id): RedirectResponse
     {
-        if(!$this->cliniciModel->deleteClinico($id))        
+        if($this->cliniciModel->deleteClinico($id))        
             return redirect()->back()->with('success', 'Clinico eliminato con successo.');
         else
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
