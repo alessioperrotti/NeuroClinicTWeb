@@ -222,39 +222,49 @@
         rotta = "{{ route('homeAdmin') }}";
         sovrascriviOnClick(elem_id,rotta);
 
-        //script per farmaci
+        
         function resetForm(formId, fields) {
-            $(formId).hide();
-            fields.forEach(field => $(field).val(''));
+            $(formId).hide(); //nasconde il form
+            fields.forEach(field => $(field).val('')); //imposta il valore di ogni campo con una stringa vuota
         }
 
-        function toggleForms(showFormId, hideFormId) {
-            $(showFormId).show();
-            $(hideFormId).hide();
-        }
+        function toggleForms(showId, hideId) {
+            $(showId).show();
+            $(hideId).hide();
+        } //mostra un elemento e nasconde l'altro
 
-        $('#btnAggiungiFarmaco').on('click', function() {
+
+        
+        //script per farmaci
+        $('#btnAggiungiFarmaco').on('click', function() { //quando si preme il tasto per aggiumgere un farmaco 
+            //il form nuovo farmaco compare e nasconde il tasto per aggiungere un farmaco
             toggleForms('#formNuovoFarmaco', '#btnAggiungiFarmaco');
         });
 
-        $('#btnAnnullaFarmaco').on('click', function() {
+
+        $('#btnAnnullaFarmaco').on('click', function() {   
+            //quando si preme il tasto annulla, il form nuovo farmaco scompare e riappare il tasto per aggiungere un farmaco
             resetForm('#formNuovoFarmaco', ['#nomeFarmaco', '#descrFarmaco']);
             $('#btnAggiungiFarmaco').show();
         });
 
-        $(document).on('click', '.btnModificaFarmaco', function() {
+        //ho messo la classe  e non l'id perche ci sono piu tasti modifica farmaco e questa funzione deve valere per tutti i tasti
+        $(document).on('click', '.btnModificaFarmaco', function() {  
+            //estrae i valori del tasto btnModifica 
             const id = $(this).data('id');
             const nome = $(this).data('nome');
             const categoria = $(this).data('descr');
-
+            //assegna i valori
             $('#nomeFarmacoMod').val(nome);
             $('#descrFarmacoMod').val(categoria);
             $('#idFarmacoMod').val(id);
 
+            //mostra il form modifica farmaco e nasconde il form nuovo farmaco se attivo 
             toggleForms('#formModificaFarmaco', '#formNuovoFarmaco');
-            resetForm('#formNuovoFarmaco', ['#nomeFarmaco', '#descrFarmaco']);
-            $("#btnAggiungiFarmaco").hide();
+            resetForm('#formNuovoFarmaco', ['#nomeFarmaco', '#descrFarmaco']); //resetta i campi del form nuovo farmaco
+            $("#btnAggiungiFarmaco").hide(); //nasconde il tasto per aggiungere un farmaco
         });
+
 
         $("#btnAnnullaModFarmaco").on("click", function() {
             resetForm('#formModificaFarmaco', ['#nomeFarmaco', '#descrFarmaco']);
@@ -299,24 +309,13 @@
         });
 
 
-        //funzione per vedere gli id degli elementi (seleziona tutti gli elementi con id)
-        $('[id]').each(function() {
-            var id = this.id;
-            var tagName = this.tagName;
-            var form = $(this).closest('form');
-            var isInForm = form.length > 0;
-            var formId = isInForm ? form[0].id : 'N/A';
-            var indent = isInForm ? '    ' : '';
-            console.log(indent + tagName + ', ID: ' + id);
-
-        });
 
         function cercaElemento(inputId, elementClass, textClass) {
             $(inputId).on('input', function() {
-                var ricerca = $(inputId).val().toLowerCase();
+                var ricerca = $(inputId).val().toLowerCase(); //prende la parola inserita nel campo di ricerca
                 $(elementClass).each(function() {
-                    var nome = $(this).find(textClass).text().toLowerCase();
-                    if (nome.indexOf(ricerca) != -1) {
+                    var nome = $(this).find(textClass).text().toLowerCase();  //trova il testo del nome del farmaco/attivita
+                    if (nome.indexOf(ricerca) != -1) {   //se il nome del farmaco/attivita contiene la parola inserita
                         $(this).show();
                     } else {
                         $(this).hide();
