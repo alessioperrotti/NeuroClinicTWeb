@@ -98,8 +98,6 @@
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
     $(document).ready(function() {
-
-
         function resetForm(formId, fields) {
             $(formId).hide();
             fields.forEach(field => $(field).val(''));
@@ -113,11 +111,9 @@
         //codice per l'aggiunta del disturbo
         $('#btnAggiungiDisturbo').on('click', function() {
             toggleForms('#formNuovoDisturbo', '#btnAggiungiDisturbo');
-            window.scrollTo(0, document.body.scrollHeight);
         });
 
         $('#btnAnnulla').on('click', function() {
-
             resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
             $('#btnAggiungiDisturbo').show();
         });
@@ -135,19 +131,15 @@
             $('#idMod').val(id);
 
             //mostra il form
-
             toggleForms('#formModificaDisturbo', '#formNuovoDisturbo');
             resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
             $("#btnAggiungiDisturbo").hide();
-
         });
 
         $("#btnAnnullaMod").on("click", function() {
             resetForm('#formModificaDisturbo', ['#nomeMod', '#categoriaMod']);
             $('#btnAggiungiDisturbo').show();
         });
-
-
 
         // Funzione che implementa il cerca disturbo
         $("#cercaDisturbo").on('input', function() {
@@ -162,38 +154,32 @@
             });
         });
 
-
-
         //per la validazione della modifica con ajax
-        $(function() {
-            var actionUrl = "{{ route('gestioneDisturbi.update') }}";
-            var formId = 'modificaDisturboForm'; //a questa assegnamo l'id della form
-            $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-                //quando mi sposto su un altro elemento di input, estraggo l'id
-                var formElementId = $(this).attr('id');
-                var inputName = $(this).attr('name');
-                doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
-            });
-            $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
-                event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-                doFormValidation(actionUrl, formId); //valida l'intera form
-            });
+        var modActionUrl = "{{ route('gestioneDisturbi.update') }}";
+        var modFormId = 'modificaDisturboForm'; //a questa assegnamo l'id della form
+        $("#" + modFormId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            var inputName = $(this).attr('name');
+            doElemValidation(formElementId, modActionUrl, modFormId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#" + modFormId).on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(modActionUrl, modFormId); //valida l'intera form
         });
 
         //per la validazione dell'inserimento con ajax
-        $(function() {
-            var actionUrl = "{{ route('gestioneDisturbi.store') }}";
-            var formId = 'nuovoDisturboForm'; //a questa assegnamo l'id della form
-            $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-                //quando mi sposto su un altro elemento di input, estraggo l'id
-                var formElementId = $(this).attr('id');
-                var inputName = $(this).attr('name');
-                doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
-            });
-            $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
-                event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-                doFormValidation(actionUrl, formId); //valida l'intera form
-            });
+        var newActionUrl = "{{ route('gestioneDisturbi.store') }}";
+        var newFormId = 'nuovoDisturboForm'; //a questa assegnamo l'id della form
+        $("#" + newFormId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            var inputName = $(this).attr('name');
+            doElemValidation(formElementId, newActionUrl, newFormId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#" + newFormId).on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(newActionUrl, newFormId); //valida l'intera form
         });
     });
 </script>
