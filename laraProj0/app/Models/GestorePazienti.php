@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Resources\Terapia;
+use App\Models\GestoreMessaggi;
 
 class GestorePazienti extends Model
 {
+    protected $gestMsgModel;
+
+    public function __construct()
+    {
+        $this->gestMsgModel = new GestoreMessaggi;
+    }
 
     public function getPazienti(): Collection
     {
@@ -28,8 +35,14 @@ class GestorePazienti extends Model
 
     public  function eliminaPaz($username) : bool
     {
+
+        $this->gestMsgModel->deleteMessaggiByUser($username);
+
         $paziente = Paziente::findOrFail($username);
+        $user = User::findOrFail($username);
         $paziente->delete();
+        $user->delete();
+
         return true;
     }
     

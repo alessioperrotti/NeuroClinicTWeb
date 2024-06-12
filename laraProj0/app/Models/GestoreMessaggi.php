@@ -165,4 +165,17 @@ class GestoreMessaggi extends Model
         }
         return true;
     }
+
+    public function deleteMessaggiByUser($username) {
+
+        $messaggi = Messaggio::where('mittente', $username)->orWhere('destin', $username)->get();
+
+        foreach($messaggi as $msg) {
+            
+            $msg->delete();
+        }
+        
+    }
+
+
 }
