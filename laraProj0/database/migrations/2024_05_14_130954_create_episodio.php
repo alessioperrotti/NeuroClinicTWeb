@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('durata')->unsigned();
             $table->integer('intensita')->unsigned();
             $table->string('paziente', 20)->references('username')->on('paziente');
-            $table->integer('disturbo')->references('id')->on('distmotorio');
+            $table->unsignedBigInteger('disturbo');
+            $table->foreing('disturbo')->references('id')->on('distmotorio')->onDelete('cascade');
         });
     }
 

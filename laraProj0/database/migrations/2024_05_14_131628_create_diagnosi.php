@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('diagnosi', function (Blueprint $table) {
             $table->id('id');
             $table->string('paziente', 20)->references('username')->on('paziente');
-            $table->integer('disturbo')->references('id')->on('distmotorio');
+            $table->unsignedBigInteger('disturbo')->references('id')->on('distmotorio');
+            $table->foreign('disturbo')->references('id')->on('distmotorio')->onDelete('cascade');
             $table->datetime('data');
         });
     }

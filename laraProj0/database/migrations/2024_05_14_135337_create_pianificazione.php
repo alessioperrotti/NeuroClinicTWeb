@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id('ID');
             $table->string('freq', 40);
             $table->integer('terapia')->references('id')->on('terapia');
-            $table->integer('attivita')->references('id')->on('attivita');
+            $table->unsignedBigInteger('attivita');
+            $table->foreign('attivita')->references('id')->on('attivita')->onDelete('cascade');
         });
     }
 
