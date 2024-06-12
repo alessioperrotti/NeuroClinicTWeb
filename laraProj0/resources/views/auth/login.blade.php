@@ -46,6 +46,15 @@
     </div>
     <img src="{{ asset('images/star3d.png')}}" class="h-[700px] z-0" alt="Sfondo Login">
 </div>
+
+<script src="{{ asset('js/functions.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        elem_id = "back_button";
+        rotta = "{{ route('home') }}";
+        sovrascriviOnClick(elem_id,rotta);
+    });
+</script>
 @endsection
 
 
