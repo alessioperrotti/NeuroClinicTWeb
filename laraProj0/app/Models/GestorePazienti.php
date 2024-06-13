@@ -95,7 +95,7 @@ class GestorePazienti extends Model
         $numeroEpisodi = $paziente->episodi()->whereIn('disturbo', $disturboIds)->count();
         
         if ($numeroDisturbi > 0) {
-            $mediaEventiDiDisturbi = ($numeroEpisodi + $numeroDisturbi) / 2;
+            $mediaEventiDiDisturbi = $numeroEpisodi / $numeroDisturbi;
         } else {
             $mediaEventiDiDisturbi = 0; 
         }
