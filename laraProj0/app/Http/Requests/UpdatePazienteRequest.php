@@ -36,7 +36,7 @@ class UpdatePazienteRequest extends FormRequest
             'civico' => 'required|string|max:5',
             'citta' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'prov' => 'required|max:2',
-            'telefono' => 'required|min:9|max:15|regex:/^(\+39)?[0-9]{10}$/',
+            'telefono' => 'required|min:9|max:15|regex:/^(\+39)?\s?3\d{2}\s?\d{6,7}$/',
             'email' => [
                 'required',
                 'email',

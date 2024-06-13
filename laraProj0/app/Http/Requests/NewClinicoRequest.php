@@ -30,7 +30,7 @@ class NewClinicoRequest extends FormRequest
         return [
             'nome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'cognome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
-            'dataNasc' => 'required|date|before:today|date_format:Y-m-d|after:1900-01-01',
+            'dataNasc' => 'required|date|before:2006-01-01|date_format:Y-m-d|after:1900-01-01',
             'ruolo' => 'required|max:20',
             'username' => 'required|max:20|unique:user,username',
             'specializ' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
