@@ -25,8 +25,8 @@
                 <div>
                     <label class="block text-gray-700">Ruolo</label>
                     <select id= "ruolo" name="ruolo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                        <option value="medico">Medico</option>
-                        <option value="fisioterapia">Fisioterapia</option>
+                        <option value="Medico">Medico</option>
+                        <option value="Fisioterapia">Fisioterapia</option>
                     </select>
                 </div>
                 <div>
