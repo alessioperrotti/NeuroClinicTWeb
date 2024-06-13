@@ -26,7 +26,7 @@ class NewEventoRequest extends FormRequest
         return [
             'data' => 'required|date|before:tomorrow|after:2000-01-01|date_format:Y-m-d',
             'ora' => 'required|date_format:H:i',
-            'durata' => 'required|integer|min:1|digits_between:1,120',
+            'durata' => 'required|integer|min:1|between:1,600',
             'intensita' => 'required|integer|min:1|max:10',
             'disturbo' => 'required',
             'paziente' => 'required',
