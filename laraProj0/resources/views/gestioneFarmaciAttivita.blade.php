@@ -58,8 +58,6 @@
 
                     <label for="nomeFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
                     <input type="hidden" id="idFarmacoMod" name="id">
-
-
                     <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <label for="descrFarmacoMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
                     <textarea id="descrFarmacoMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 resize-none leading-tight focus:outline-none focus:shadow-outline resize-none">
@@ -88,12 +86,15 @@
 
             <div class="bg-white p-4 rounded-lg mt-3">
                 <div class=" mb-6 mx-3 ">
-
-                    <label for="nomeFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                    <input type="text" id="nomeFarmaco" name="nome" placeholder="Nome" class="shadow  appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <h1 class="text-sm mb-7 text-gray-600"> Il nome del farmaco deve essere seguito dalla grammatura</h1>
-                    <label for="descrFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
+                    <div>
+                        <label for="nomeFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                        <input type="text" id="nomeFarmaco" name="nome" placeholder="Nome" class="shadow  appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div>
+                        <h1 class="text-sm mb-7 text-gray-600"> Il nome del farmaco deve essere seguito dalla grammatura</h1>
+                        <label for="descrFarmaco" class="block text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                        <textarea id="descrFarmaco" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
+                    </div>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaFarmaco" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
@@ -177,8 +178,10 @@
                     <label for="nomeAttivitaMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
                     <input type="text" id="nomeAttivitaMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
+
                     <label for="descrAttivitaMod" class="block mt-3 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
                     <textarea id="descrAttivitaMod" name="descr" placeholder="Descrizione" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
+
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaModAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla Modifiche</button>
@@ -193,15 +196,17 @@
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
         <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Aggiungi attivita</h1>
         <div class="bg-white p-4 rounded-lg mt-3">
-            <form id="nuovaAttivitaForm"action="{{route('gestioneAttivita.store')}}" method="post">
+            <form id="nuovaAttivitaForm" action="{{route('gestioneAttivita.store')}}" method="post">
                 @csrf
                 <div class=" mb-6 mx-3 ">
-
-                    <label for="nomeAttivita" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
-                    <input type="text" id="nomeAttivita" placeholder="Nome" name="nome" class="shadow mb-1 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-
-                    <label for="descrAttivita" class="block mt-2 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
-                    <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
+                    <div>
+                        <label for="nomeAttivita" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                        <input type="text" id="nomeAttivita" placeholder="Nome" name="nome" class="shadow mb-1 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div>
+                        <label for="descrAttivita" class="block mt-2 text-gray-700 text-sm font-bold mb-2">Descrizione</label>
+                        <textarea id="descrAttivita" placeholder="Descrizione" name="descr" class="shadow appearance-none border rounded h-28 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"></textarea>
+                    </div>
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaAttivita" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded mr-2">Annulla</button>
@@ -216,14 +221,13 @@
 
 <script src="{{ asset('js/functions.js') }}"></script>
 <script>
-    
     $(document).ready(function() {
 
         elem_id = "back_button";
         rotta = "{{ route('homeAdmin') }}";
-        sovrascriviOnClick(elem_id,rotta);
+        sovrascriviOnClick(elem_id, rotta);
 
-        
+
         function resetForm(formId, fields) {
             $(formId).hide(); //nasconde il form
             fields.forEach(field => $(field).val('')); //imposta il valore di ogni campo con una stringa vuota
@@ -235,7 +239,7 @@
         } //mostra un elemento e nasconde l'altro
 
 
-        
+
         //script per farmaci
         $('#btnAggiungiFarmaco').on('click', function() { //quando si preme il tasto per aggiumgere un farmaco 
             //il form nuovo farmaco compare e nasconde il tasto per aggiungere un farmaco
@@ -243,14 +247,14 @@
         });
 
 
-        $('#btnAnnullaFarmaco').on('click', function() {   
+        $('#btnAnnullaFarmaco').on('click', function() {
             //quando si preme il tasto annulla, il form nuovo farmaco scompare e riappare il tasto per aggiungere un farmaco
             resetForm('#formNuovoFarmaco', ['#nomeFarmaco', '#descrFarmaco']);
             $('#btnAggiungiFarmaco').show();
         });
 
         //ho messo la classe  e non l'id perche ci sono piu tasti modifica farmaco e questa funzione deve valere per tutti i tasti
-        $(document).on('click', '.btnModificaFarmaco', function() {  
+        $(document).on('click', '.btnModificaFarmaco', function() {
             //estrae i valori del tasto btnModifica 
             const id = $(this).data('id');
             const nome = $(this).data('nome');
@@ -315,8 +319,8 @@
             $(inputId).on('input', function() {
                 var ricerca = $(inputId).val().toLowerCase(); //prende la parola inserita nel campo di ricerca
                 $(elementClass).each(function() {
-                    var nome = $(this).find(textClass).text().toLowerCase();  //trova il testo del nome del farmaco/attivita
-                    if (nome.indexOf(ricerca) != -1) {   //se il nome del farmaco/attivita contiene la parola inserita
+                    var nome = $(this).find(textClass).text().toLowerCase(); //trova il testo del nome del farmaco/attivita
+                    if (nome.indexOf(ricerca) != -1) { //se il nome del farmaco/attivita contiene la parola inserita
                         $(this).show();
                     } else {
                         $(this).hide();
@@ -344,7 +348,7 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(modActionUrlF, modFormIdF); //valida l'intera form
         });
-        
+
 
         //per la validazione dell'inserimento del Farmaco con ajax
         var newActionUrlF = "{{ route('gestioneFarmaci.store') }}";
@@ -355,13 +359,13 @@
             console.log(formElementId);
             var inputName = $(this).attr('name'); //estraggo il nome dell'input
 
-            doElemValidation(formElementId, newActionUrlF, newFormIdF, inputName ); //questa funzione fa la validazione. funzione definita sul file function.js
+            doElemValidation(formElementId, newActionUrlF, newFormIdF, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
         });
         $("#" + newFormIdF).on('submit', function(event) { //sarebbe l id della form. 
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(newActionUrlF, newFormIdF); //valida l'intera form
         });
-        
+
 
 
         //per la validazione della modifica della Attivita con ajax
@@ -378,7 +382,7 @@
             event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
             doFormValidation(modActionUrlA, modFormIdA); //valida l'intera form
         });
-        
+
 
 
         //per la validazione del inserimento di una Attivita con ajax
@@ -398,7 +402,6 @@
 
 
     });
-    
 </script>
 
 
