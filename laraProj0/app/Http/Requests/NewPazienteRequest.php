@@ -37,7 +37,7 @@ class NewPazienteRequest extends FormRequest
             'prov' => 'required|max:2',
             'telefono' => 'required|min:10|max:15|regex:/^(\+39)?\s?3\d{2}\s?\d{6,7}$/',
             'email' => 'required|email|max:50|unique:paziente,email',
-            'username' => 'required|max:20|unique:paziente,username',
+            'username' => 'required|max:20|unique:user,username',
             'clinico' => 'required',
         ];
     }
