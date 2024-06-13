@@ -35,8 +35,8 @@ class NewPazienteRequest extends FormRequest
             'civico' => 'required|string|max:5',
             'citta' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'prov' => 'required|max:2',
-            'telefono' => 'required|min:10|max:13|regex:/^(\+39)?[0-9]{10}$/',
-            'email' => 'required|email|max:40|unique:paziente,email',
+            'telefono' => 'required|regex:/^(\+39)?\s?3\d{2}\s?\d{6,7}$',
+            'email' => 'required|email|max:50|regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$|unique:paziente,email',
             'username' => 'required|max:20|unique:paziente,username',
             'clinico' => 'required',
         ];
