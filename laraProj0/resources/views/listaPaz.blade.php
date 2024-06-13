@@ -18,7 +18,7 @@
                 <li class="paziente flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                     <span class="font-bold">{{ $paziente->nome . " " . $paziente->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
-                        <form action="{{ route('eliminaPaziente', $paziente->username) }}" method="POST" class="delete-form">
+                        <form action="{{ route('eliminaPaziente', $paziente->username) }}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo paziente?');">
                             @csrf
                             <button type="submit">
                                 <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
