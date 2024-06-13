@@ -19,6 +19,7 @@
 
             @isset($farmaci)
             @foreach($farmaci as $farmaco)
+            @if($farmaco)
             <div class="farmaco flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                 <span class="nomeFarmaco font-bold">{{$farmaco->nome}}</span>
                 <div class="flex mr-2 gap-x-4">
@@ -37,6 +38,7 @@
 
                 </div>
             </div>
+            @endif
             @endforeach
             @endisset
 
@@ -128,6 +130,7 @@
 
             @isset($attivita)
             @foreach($attivita as $attivitasing)
+            @if($attivitasing)
             <div class="attivita flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                 <span class="nomeAttivita font-bold">{{$attivitasing->nome}}</span>
                 <div class="flex mr-2 gap-x-4">
@@ -146,6 +149,7 @@
 
                 </div>
             </div>
+            @endif
             @endforeach
             @endisset
 

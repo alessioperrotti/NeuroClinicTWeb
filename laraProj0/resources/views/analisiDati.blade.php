@@ -15,16 +15,22 @@ Analisi Dati
         <div class='bg-white text-lg w-1/2 py-2 px-5 border rounded border-gray-300 h-80 overflow-y-auto'>
             <div class='flex justify-between px-5 gap-x-4 py-4'>
                 <h2 class='w-1/3 font-semibold'>Media pazienti per clinico</h2>
+                @isset($mediaPazientiPerClinico)
                 <h2>{{$mediaPazientiPerClinico}}</h2>
+                @endisset
             </div>
             <hr class="mb-8">
             <div class='flex justify-between px-5 gap-x-4 py-4'>
                 <h2 class='w-1/3 font-semibold'>Disturbo motorio</h2>
                 <select id="disturboSelect">
                     <option value="" disabled selected>Seleziona un disturbo</option>
-                    @foreach($disturbiMotori as $disturbo)
-                        <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option>
-                    @endforeach
+                    @isset($disturbiMotori)
+                        @foreach($disturbiMotori as $disturbo)
+                            @if($disturbo)
+                            <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option>
+                            @endif
+                        @endforeach
+                    @endisset
                 </select>
             </div>
             <div class='flex justify-between px-5 gap-x-4 py-4 items-center'>
@@ -47,13 +53,17 @@ Analisi Dati
                         </tr>
                     </thead>
                     <tbody>
+                        @isset($pazienti)
                         @foreach($pazienti as $paziente)
+                            @if($paziente)
                             <tr class="paziente">
                                 <td class="px-4 py-2"> {{ $paziente->nome }} {{ $paziente->cognome }}</td>
                                 <td class="px-4 py-2">{{ $paziente->numeroCambiTerapia }}</td>
                                 <td class="px-4 py-2">{{ $paziente->mediaEventiDiDisturbi }}</td>
                             </tr>
+                            @endif
                         @endforeach
+                        @endisset
                     </tbody>
                 </table>
             </div>

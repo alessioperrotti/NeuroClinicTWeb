@@ -31,15 +31,17 @@
         
         @isset($faqs)
         @foreach($faqs as $faq)
-        <div name="card" class="faq bg-white shadow rounded-2xl my-3 mr-8 p-6 flex flex-col">
-            <div class="items-center justify-between flex flex-row">
-                <h2 class="font-semibold text-gray-800">{{$faq->domanda}}</h2>
-                <img src="{{ asset('images/down.png')}}" id="arrow" class="h-8 cursor-pointer" alt="Down Arrow">
+        @if($faq)
+            <div name="card" class="faq bg-white shadow rounded-2xl my-3 mr-8 p-6 flex flex-col">
+                <div class="items-center justify-between flex flex-row">
+                    <h2 class="font-semibold text-gray-800">{{$faq->domanda}}</h2>
+                    <img src="{{ asset('images/down.png')}}" id="arrow" class="h-8 cursor-pointer" alt="Down Arrow">
+                </div>
+                <div id="answer" class="hidden mt-2">
+                    <p class="text-gray-500">{{$faq->risposta}}</p>
+                </div>
             </div>
-            <div id="answer" class="hidden mt-2">
-                <p class="text-gray-500">{{$faq->risposta}}</p>
-            </div>
-        </div>
+        @endif
         @endforeach
         @endisset
     </div>

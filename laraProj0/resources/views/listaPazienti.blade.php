@@ -41,6 +41,7 @@
 
     @isset($pazienti)
     @foreach ($pazienti as $paziente)
+    @if($paziente)
         
         <div class="paziente flex justify-between items-center bg-white pl-6 pr-4 py-4 rounded-lg mb-2">
             <span class="font-bold">{{ $paziente->nome . " " . $paziente->cognome }}</span>
@@ -51,6 +52,7 @@
             </div>
         </div>
 
+    @endif
     @endforeach
     @endisset()
     

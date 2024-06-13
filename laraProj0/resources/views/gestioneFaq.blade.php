@@ -12,6 +12,7 @@
         <ul id="listaFaq" class="mb-4 list-none">
             @isset($faqs)
                 @foreach ($faqs as $faq)
+                @if($faq)
                     <li class="faq bg-white p-4 rounded-lg shadow-md mb-2">
                         <div class="flex justify-between items-center cursor-pointer" onclick="toggleAccordion(this)">
                             <h2 class="text-base font-semibold">{{$faq->domanda}}</h2>
@@ -32,6 +33,7 @@
                                 </div>
                         </div>
                     </li>
+                @endif
                 @endforeach
             @endisset
         </ul>

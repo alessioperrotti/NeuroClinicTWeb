@@ -57,9 +57,11 @@
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
             @isset($farmaci)
-                @foreach($farmaci as $farmaco)   
-                <li class="mb-4"><p class="font-semibold">{{ $farmaco['farmaco']->nome ." (". $farmaco['freq'] . ")"}}</p>
-                    <p class="text-gray-500">{{ $farmaco['farmaco']->descr}}</p>
+                @foreach($farmaci as $farmaco)
+                    @if($farmaco)   
+                    <li class="mb-4"><p class="font-semibold">{{ $farmaco['farmaco']->nome ." (". $farmaco['freq'] . ")"}}</p>
+                        <p class="text-gray-500">{{ $farmaco['farmaco']->descr}}</p>
+                    @endif
                 @endforeach
             @endisset
 
@@ -69,8 +71,10 @@
             
             @isset($attivita)
                 @foreach($attivita as $att)
-                <li class="mb-4"><p class="font-semibold">{{ $att['attivita']->nome ." (". $att['freq'] . ")"}}</p>
-                    <p class="text-gray-500">{{ $att['attivita']->descr}}</p>
+                    @if($att)
+                    <li class="mb-4"><p class="font-semibold">{{ $att['attivita']->nome ." (". $att['freq'] . ")"}}</p>
+                        <p class="text-gray-500">{{ $att['attivita']->descr}}</p>
+                    @endif
                 @endforeach
             @endisset
 
@@ -103,7 +107,9 @@
         <select name="filtroDisturbo[]" multiple class="inline bg-white rounded-md h-min min-w-[100px] p-1 border border-cyan-600" size=2>
             @isset($disturbiSel)
                 @foreach($disturbiSel as $disturboSel)
-                    <option value="{{ $disturboSel->nome}}">{{ $disturboSel->nome}}</option>
+                    @if($disturboSel)
+                        <option value="{{ $disturboSel->nome}}">{{ $disturboSel->nome}}</option>
+                    @endif
                 @endforeach
             @endisset
         </select>
@@ -148,6 +154,7 @@
 
     @isset($episodi)
     @foreach ($episodi as $episodio)
+    @if($episodio)
         <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2" data-disturbo="{{$episodio->disturbo->nome}}" data-intensita="{{$episodio->intensita}}">
             <div class="flex flex-row space-x-2">
                 <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
@@ -155,6 +162,7 @@
             </div>
             <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
         </div>
+    @endif
     @endforeach
     @endisset
     @endif

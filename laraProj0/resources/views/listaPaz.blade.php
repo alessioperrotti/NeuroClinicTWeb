@@ -15,6 +15,7 @@
     <ul id="listaPazienti" class="mb-4 list-none">
         @isset($pazienti)
             @foreach ($pazienti as $paziente)
+            @if($paziente)
                 <li class="paziente flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                     <span class="font-bold">{{ $paziente->nome . " " . $paziente->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
@@ -26,6 +27,7 @@
                         </form>
                     </div>
                 </li>
+            @endif
             @endforeach
         @endisset
     </ul>

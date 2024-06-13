@@ -112,26 +112,28 @@
             @endif
             @isset($messaggiRic)
             @foreach($messaggiRic as $msgR)
-            <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
-                <div class="flex flex-row justify-between px-4 pt-1">
-                    <div class="flex">
-                        <h3 class="font-semibold">Da: {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
+                @if($msgR)
+                <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
+                    <div class="flex flex-row justify-between px-4 pt-1">
+                        <div class="flex">
+                            <h3 class="font-semibold">Da: {{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}</h3>
+                        </div>
+                        <div class="flex">
+                            <p class="text-gray-500">{{ $msgR->created_at}}</p>
+                            <button class="a_nuovo_risp mx-2" data-idRisp="{{$msgR->id}}" data-Mitt='{{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}' data-idData="{{ $msgR->created_at}}" data-idMitt='{{$msgR->mittente->username}}'> Rispondi </button>
+                            <p>|</p>
+                            <form method="POST" action="{{ route('messaggioClinico.delete', $msgR->id)}}">
+                            @csrf
+                                <button type="submit" class="mx-2">Elimina</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="flex">
-                        <p class="text-gray-500">{{ $msgR->created_at}}</p>
-                        <button class="a_nuovo_risp mx-2" data-idRisp="{{$msgR->id}}" data-Mitt='{{ $msgR->mittente->nome . " " . $msgR->mittente->cognome}}' data-idData="{{ $msgR->created_at}}" data-idMitt='{{$msgR->mittente->username}}'> Rispondi </button>
-                        <p>|</p>
-                        <form method="POST" action="{{ route('messaggioClinico.delete', $msgR->id)}}">
-                        @csrf
-                            <button type="submit" class="mx-2">Elimina</button>
-                        </form>
-                    </div>
+                    @if($msgR->risposta != null)
+                        <h3 class="text-gray-400 px-3">{{"[Risposta al tuo messaggio del " . $msgR->risposta->created_at . "]"}}</h3>
+                    @endif
+                    <p class="text-gray-600 px-4 mt-1">{{ $msgR->contenuto}}</p>
                 </div>
-                @if($msgR->risposta != null)
-                    <h3 class="text-gray-400 px-3">{{"[Risposta al tuo messaggio del " . $msgR->risposta->created_at . "]"}}</h3>
                 @endif
-                <p class="text-gray-600 px-4 mt-1">{{ $msgR->contenuto}}</p>
-            </div>
             @endforeach
 
 
@@ -146,24 +148,26 @@
             @endif
             @isset($messaggiInv)
             @foreach($messaggiInv as $msgI)
-            <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
-                <div class="flex flex-row justify-between px-4 pt-1">
-                    <div class="flex">
-                        <h3 class="font-semibold">A: {{ $msgI->destin->nome . " " . $msgI->destin->cognome}}</h3>
+            @if($msgI)
+                <div class="bg-gray-50 rounded-lg shadow-md pb-1 mb-2">
+                    <div class="flex flex-row justify-between px-4 pt-1">
+                        <div class="flex">
+                            <h3 class="font-semibold">A: {{ $msgI->destin->nome . " " . $msgI->destin->cognome}}</h3>
+                        </div>
+                        <div class="flex">
+                            <p class="text-gray-500">{{ $msgI->created_at}}</p>
+                            <form method="POST" action="{{ route('messaggioClinico.delete', $msgI->id)}}">
+                            @csrf
+                                <button type="submit" class="mx-2">Elimina</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="flex">
-                        <p class="text-gray-500">{{ $msgI->created_at}}</p>
-                        <form method="POST" action="{{ route('messaggioClinico.delete', $msgI->id)}}">
-                        @csrf
-                            <button type="submit" class="mx-2">Elimina</button>
-                        </form>
-                    </div>
+                    @if($msgI->risposta != null)
+                    <h3 class="text-gray-400 px-3">{{"[Risposta al messaggio di " . $msgI->risposta->mittente->nome . " del " . $msgI->risposta->created_at . "]"}}</h3>
+                    @endif
+                    <p class="text-gray-600 px-4 mt-1">{{ $msgI->contenuto}}</p>
                 </div>
-                @if($msgI->risposta != null)
-                <h3 class="text-gray-400 px-3">{{"[Risposta al messaggio di " . $msgI->risposta->mittente->nome . " del " . $msgI->risposta->created_at . "]"}}</h3>
-                @endif
-                <p class="text-gray-600 px-4 mt-1">{{ $msgI->contenuto}}</p>
-            </div>
+            @endif
             @endforeach
             @endisset
         </div>
@@ -175,7 +179,9 @@
                     <select id="destin" name="destin" class="mt-1 block w-full p-2 border border-gray-300 rounded-md mb-4">
                         @isset($pazienti)
                             @foreach($pazienti as $paziente)
-                            <option value={{$paziente->username}} class="text-gray-700">{{$paziente->nome . " " . $paziente->cognome}}</option>
+                            @if($paziente)
+                                <option value={{$paziente->username}} class="text-gray-700">{{$paziente->nome . " " . $paziente->cognome}}</option>
+                            @endif
                             @endforeach
                         @endisset
                         @if($pazienti->isEmpty())

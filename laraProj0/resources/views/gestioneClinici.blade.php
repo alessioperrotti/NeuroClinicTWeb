@@ -15,6 +15,7 @@
      <ul id="listaClinici" class="mb-4 list-none">
         @isset($clinici)
             @foreach ($clinici as $clinico)
+            @if($clinico)
                 <li class="clinico flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                     <span class=" font-bold">{{ $clinico->nome . " " . $clinico->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
@@ -39,6 +40,7 @@
                         @endif
                     </div>
                 </li>
+            @endif
             @endforeach
         @endisset
     </ul>
