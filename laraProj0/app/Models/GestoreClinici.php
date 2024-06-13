@@ -73,18 +73,15 @@ class GestoreClinici extends Model
     {
         DB::beginTransaction();
         try{
-            Log::info('Sto salvando il clinico');
             $user = new User([
                 'username' => $validatedData['username'],
                 'password' => Hash::make('stdpassword'),
                 'usertype' => 'C'
             ]);
             $user->save();
-            log::info('Utente salvato');
             $clinico = New Clinico;
             $clinico->fill($validatedData);
             $clinico->save();
-            log::info('Clinico salvato');
             DB::commit();
         }
         catch (\Exception $e) {

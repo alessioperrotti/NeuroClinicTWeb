@@ -28,7 +28,6 @@ class FarmacoRequest extends FormRequest
      */
     public function rules(): array
     {
-        Log::info('FarmacoRequest');
         return [
             'nome' => 'required|max:30',
             'descr' => 'required|max:200',

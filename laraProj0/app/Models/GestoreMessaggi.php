@@ -58,18 +58,10 @@ class GestoreMessaggi extends Model
 
 
                 if ($msg->risposta != null) {
-                    Log::info("Risposta non nulla");
 
                     $risposta = Messaggio::find($msg->risposta);
-
-                    Log::info($risposta);
                     $mittente = $this->trovaPersona($risposta->mittente);
-
-                    Log::info($mittente);
                     $risposta->mittente = $mittente;
-
-                    Log::info($risposta);
-
                     $msg->risposta = $risposta;
                 }
 
@@ -139,8 +131,6 @@ class GestoreMessaggi extends Model
 
     public function sendMessaggio($validatedData): bool
     {
-
-        Log::info($validatedData);
         $messaggio = new Messaggio(
             [
                 'mittente' => Auth::user()->username,

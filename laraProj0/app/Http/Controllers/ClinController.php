@@ -174,7 +174,6 @@ class ClinController extends Controller
     public function storeDiagnosi($userPaz) : RedirectResponse {
 
         $validatedData = $_POST; //avrò i value delle checkbox checked, quindi gli id dei disturbi diagnosticati
-        Log::info($validatedData);
 
         if ($this->gestTerModel->storeDiagnosi($userPaz, $validatedData)) {
             return redirect()->action([ClinController::class, 'showCartClinica'], ['userPaz' => $userPaz]);
@@ -197,7 +196,6 @@ class ClinController extends Controller
         $userClin = Auth::user()->clinico->username;
         
         if($this->gestClinModel->updateClinico($validatedData, $userClin)) {
-            Log::info('Clinico aggiornato');
             return response()->json(['redirect' => route('homeClinico')]);
         }
         else {
