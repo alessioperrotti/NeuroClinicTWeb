@@ -36,11 +36,11 @@ class UpdatePazienteRequest extends FormRequest
             'civico' => 'required|string|max:5',
             'citta' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'prov' => 'required|max:2',
-            'telefono' => 'required|min:10|max:13|regex:/^(\+39)?[0-9]{10}$/',
+            'telefono' => 'required|min:9|max:15|regex:/^(\+39)?[0-9]{10}$/',
             'email' => [
                 'required',
                 'email',
-                'max:40',
+                'max:50',
                 Rule::unique('paziente', 'email')->ignore($username, 'username')
             ],
         ];
