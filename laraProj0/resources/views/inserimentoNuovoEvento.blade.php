@@ -13,9 +13,13 @@
                     <label class="block text-gray-700 font-semibold">Disturbo</label>
                     <select id="disturbo" name="disturbo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                         @isset($disturbi)
-                        @foreach($disturbi as $disturbo)
-                        <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option> <!-- Adatta id e name ai tuoi attributi -->
-                        @endforeach
+                        @if(!$disturbi->isEmpty())
+                            @foreach($disturbi as $disturbo)
+                                @if($disturbo)
+                                <option value="{{ $disturbo->id }}">{{ $disturbo->nome }}</option> <!-- Adatta id e name ai tuoi attributi -->
+                                @endif
+                            @endforeach
+                        @endif
                         @endisset
                     </select>
                 </div>
@@ -63,28 +67,29 @@
 
     @isset($episodi)
     @foreach ($episodi as $episodio)
-    <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2" data-disturbo="{{$episodio->disturbo->nome}}" data-intensita="{{$episodio->intensita}}">
-        <div class="flex flex-row space-x-2">
-            <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
-            <p class="text-gray-500 font-semibold">{{"(Intensità:" . $episodio->intensita . ")"}}</p>
+        @if($episodio)
+        <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2" data-disturbo="{{$episodio->disturbo->nome}}" data-intensita="{{$episodio->intensita}}">
+            <div class="flex flex-row space-x-2">
+                <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
+                <p class="text-gray-500 font-semibold">{{"(Intensità:" . $episodio->intensita . ")"}}</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
+                <form action="{{route('episodio.elimina', $episodio->id)}}" method="POST" class="delete-form inline" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?');">
+                    @csrf
+                    <button type="submit">
+                        <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                    </button>
+                </form>
+            </div>
         </div>
-        <div class="flex items-center space-x-4">
-            <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
-            <form action="{{route('episodio.elimina', $episodio->id)}}" method="POST" class="delete-form inline" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?');">
-                @csrf
-                <button type="submit">
-                    <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
-                </button>
-            </form>
-        </div>
-    </div>
+        @endif
     @endforeach
     @endisset
 
-    @if($episodi == null)
-    <li>
-        <p class="font-semibold">Non ci sono episodi segnalati.</p>
-        @endif
+    @if($episodi == null || $episodi->isEmpty())
+        <p class="font-semibold text-center mb-10">Non ci sono episodi segnalati.</p>
+    @endif
 
 </div>
 

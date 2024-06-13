@@ -166,7 +166,7 @@
                 <div>
                     <input type="hidden" name="destin" value="{{$clinico->username}}">
                     <label for="messaggio" class="font-semibold mt-4">Messaggio</label>
-                    <textarea id="contenuto" name="contenuto" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
+                    <textarea id="contenuto" name="contenuto" maxlength="1000" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
                     <div class="flex flex-col justify-center items-center">
                         <input id="submit" type="submit" class="bg-cyan-600 hover:bg-cyan-500 rounded-md mt-6 w-[150px] h-[35px] text-white cursor-pointer" value="Invia Messaggio">
                         <input id="reset" type="reset" class="bg-gray-500 hover:bg-gray-400 rounded-md mt-4 w-[150px] h-[35px] text-white cursor-pointer" value="Annulla">
@@ -182,7 +182,7 @@
                 <label id="risposta_rif" class="font-semibold mt-4"></label>
                 <input id="destin_risp" type="hidden" name="destin" class="mt-1 block w-full p-2 border border-gray-300 rounded-md mb-4" value="">
                 <label for="messaggio" class="font-semibold mt-4">Messaggio</label>
-                <textarea id="contenuto_risp" name="contenuto" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
+                <textarea id="contenuto_risp" name="contenuto" maxlength="1000" class="mt-1 block w-full p-2 border border-gray-300 rounded-md h-[150px] resize-none" placeholder="Scrivi qui il tuo messaggio"></textarea>
                 <input id="risposta" name="risposta" type="hidden" value="">
                 <div class="flex flex-col justify-center items-center">
                     <input id="submit_risp" type="submit" class="bg-cyan-600 hover:bg-cyan-500 rounded-md mt-6 w-[150px] h-[35px] text-white cursor-pointer" value="Invia Messaggio">
