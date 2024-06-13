@@ -101,15 +101,11 @@
         <p class="h-min text-lg font-semibold">Filtra per disturbo: </p>
 
         <select name="filtroDisturbo[]" multiple class="inline bg-white rounded-md h-min min-w-[100px] p-1 border border-cyan-600" size=2>
-            @isset($disturbi)
-                @foreach($disturbi as $disturbo)
-                <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
+            @isset($disturbiSel)
+                @foreach($disturbiSel as $disturboSel)
+                    <option value="{{ $disturboSel->nome}}">{{ $disturboSel->nome}}</option>
                 @endforeach
             @endisset
-
-            @if($disturbi == null)
-                <li><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
-            @endif
         </select>
     </div>
     <div name="filtro2" class="space-x-2 flex items-center">

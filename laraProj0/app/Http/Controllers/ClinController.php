@@ -19,6 +19,7 @@ use App\Models\GestoreMessaggi;
 use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class ClinController extends Controller
@@ -122,12 +123,25 @@ class ClinController extends Controller
             $disturbi = null;
         }
 
+        $disturbiSel = new Collection;  /* disturbi per la select di filtro episodi (sono i disturbi 
+                                                            associati agli episodi del paziente) */
+
+        if(!$episodi->isEmpty()) {
+            foreach($episodi as $episodio) {
+                $disturbo = $episodio->disturbo;
+                $disturbiSel->add($disturbo);
+            }
+
+            $disturbiSel = $disturbiSel->unique('id');
+        }
+
         return view('cartellaClin2')
                 ->with('paziente', $paziente)
                 ->with('episodi', $episodi)
                 ->with('disturbi', $disturbi)
                 ->with('farmaci', $farmaci)
-                ->with('attivita', $attivita);
+                ->with('attivita', $attivita)
+                ->with('disturbiSel', $disturbiSel);
     }
 
     public function showModTerapia($userPaz) : View {
