@@ -121,7 +121,7 @@
             <a href="{{ route('inserimentoNuovoEvento')}}">
                 <img src="{{ asset('images\nuovo_evento.png') }}" alt="Nuovo evento" class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md cursor-pointer">
             </a>
-            <p class=" mt-1 text-center text-2xl text-black">Nuovo evento</p>
+            <p class=" mt-1 text-center text-2xl text-black">Eventi</p>
         </div>
     </div>
 
