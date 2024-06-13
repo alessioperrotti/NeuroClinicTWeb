@@ -1,11 +1,17 @@
 
 
 
-function sovrascriviOnClick(elem_id, rotta){
+function findInputByName(formId, inputName) {
+    var inputValue = $('#' + formId + ' :input[name="' + inputName + '"]').attr('id');
+    return inputValue;
+}
+
+
+function sovrascriviOnClick(elem_id, rotta) {
     var elem = document.getElementById(elem_id);
-        elem.onclick = function() {
-            window.location.href = rotta;
-        };
+    elem.onclick = function () {
+        window.location.href = rotta;
+    };
 }
 
 function getErrorHtml(elemErrors) {
@@ -45,7 +51,7 @@ function doElemValidation(id, actionUrl, formId, inputName) {
                     // $("#" + id).find('.errors').html(' '); //risaliamo al parent e cerchiamo una classe .errors. poi cancelliamo gli errori vecchi
                     $("#" + id).next('.errors').html(' '); //non cancelliamo tutti gli errori perche poi non possiamo vedere gli errori di tutti gli elementi
                     $("#" + id).after(getErrorHtml(errMsgs[inputName])); //con after passiamo l'errore dell'id che stiamo analizando
-                    
+
                 }
             },
             contentType: false,
@@ -78,9 +84,13 @@ function doFormValidation(actionUrl, formId) {
         error: function (data) {
             if (data.status === 422) {
                 var errMsgs = JSON.parse(data.responseText);
-                $.each(errMsgs, function (id) {
+                
+                //gli errMsgs sono un oggetto con chiave il nome dell'input e valore un array di errori
+                $.each(errMsgs, function (name) {
+                    id = findInputByName(formId, name);
                     $("#" + id).parent().find('.errors').html(' ');
-                    $("#" + id).after(getErrorHtml(errMsgs[id]));
+                    $("#" + id).after(getErrorHtml(errMsgs[name]));
+                    console.log(getErrorHtml(errMsgs[name]));
                 });
                 console.log("tutto male");
             } else {
@@ -99,6 +109,8 @@ function doFormValidation(actionUrl, formId) {
     console.log("doFormValidationFine");
 
 }
+
+
 
 
 
