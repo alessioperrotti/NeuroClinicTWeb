@@ -23,11 +23,20 @@
                                 <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                             </button>
                         </form>
+                        @if($clinico->pazienti->count() != 0)  <!-- se il clinico aveva pazienti -->
                         <a href="{{ route('nuoveAssociazioni', $clinico->username) }}"> 
                             <button type="submit">
                                 <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                             </button>
                         </a>
+                        @else <!-- se il clinico non aveva pazienti lo eliminiamo direttamente -->
+                        <form action="{{ route('clinico.elimina', $clinico->username) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler eliminare questo clinico?');">
+                            @csrf
+                            <button type="submit">
+                                <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                            </button>
+                        </form>
+                        @endif
                     </div>
                 </li>
             @endforeach

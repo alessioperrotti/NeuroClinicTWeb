@@ -42,17 +42,19 @@ class GestoreClinici extends Model
 
             $pazienti = $this->getPazientiByClin($id);
 
-            foreach($pazienti as $paz) {
-                $paz->clinico = $_POST[$paz->username];
-                $paz->save();
+            if($pazienti->count() > 0) {
+                foreach($pazienti as $paz) {
+                    $paz->clinico = $_POST[$paz->username];
+                    $paz->save();
+                }
             }
 
+            // elim messaggi
             $this->gestMsgModel->deleteMessaggiByUser($id);
 
             $clinico = Clinico::findOrFail($id);
             $user = User::findOrFail($id);
-
-            // elim messaggi
+            
             $clinico->delete();
             $user->delete();
 
