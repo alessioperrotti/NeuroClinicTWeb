@@ -12,9 +12,11 @@
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
             @isset($terapia['farmaci'])
-                @foreach($terapia['farmaci'] as $farmaco)   
-                <li class="mb-4"><p class="font-semibold">{{ $farmaco['farmaco']->nome ." (". $farmaco['freq'] . ")"}}</p>
-                    <p class="text-gray-500">{{ $farmaco['farmaco']->descr}}</p>
+                @foreach($terapia['farmaci'] as $farmaco)
+                    @if($farmaco)   
+                    <li class="mb-4"><p class="font-semibold">{{ $farmaco['farmaco']->nome ." (". $farmaco['freq'] . ")"}}</p>
+                        <p class="text-gray-500">{{ $farmaco['farmaco']->descr}}</p>
+                    @endif
                 @endforeach
             @endisset
 
@@ -24,8 +26,10 @@
             
             @isset($terapia['attivita'])
                 @foreach($terapia['attivita'] as $att)
-                <li class="mb-4"><p class="font-semibold">{{ $att['attivita']->nome ." (". $att['freq'] . ")"}}</p>
-                    <p class="text-gray-500">{{ $att['attivita']->descr}}</p>
+                    @if($att)
+                    <li class="mb-4"><p class="font-semibold">{{ $att['attivita']->nome ." (". $att['freq'] . ")"}}</p>
+                        <p class="text-gray-500">{{ $att['attivita']->descr}}</p>
+                    @endif
                 @endforeach
             @endisset
 
