@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('civico', 5);
             $table->string('citta', 30);
             $table->string('prov', 2);
-            $table->string('telefono', 15);
-            $table->string('email', 50);
+            $table->string('telefono', 13);
+            $table->string('email', 40);
             $table->string('clinico', 20)->nullable();
             $table->foreign('clinico')->references('username')->on('clinico')->onDelete('set null');
             $table->boolean('terCambiata'); // true se la terapia è stata cambiata e non ancora visualizzata
