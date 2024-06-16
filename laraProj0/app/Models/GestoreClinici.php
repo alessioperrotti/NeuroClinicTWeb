@@ -44,6 +44,7 @@ class GestoreClinici extends Model
 
             if($pazienti->count() > 0) {
                 foreach($pazienti as $paz) {
+                    //$_POST[$paz->username] resituisce l'username del clinico 
                     $paz->clinico = $_POST[$paz->username];
                     $paz->save();
                 }

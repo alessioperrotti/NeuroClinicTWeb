@@ -85,7 +85,7 @@ Analisi Dati
         // Gestore di eventi per la selezione del disturbo
         document.getElementById('disturboSelect').addEventListener('change', function() {
             var disturboId = this.value;
-            fetch("{{ route('episodi.disturbo', ':id') }}".replace(':id', disturboId))
+            fetch("{{ route('episodi.disturbo', ':id') }}".replace(':id', disturboId))//richiesta fetch
                 .then(response => response.json()) // Se il fetch è andato a buon fine, trasformo la risposta in formato JSON
                 .then(data => {                    // Data è una funzione di callback che prende i dati JSON ottenuti dalla risposta della richiesta.
                     document.getElementById('numEpisodi').textContent = data.numeroEpisodi;

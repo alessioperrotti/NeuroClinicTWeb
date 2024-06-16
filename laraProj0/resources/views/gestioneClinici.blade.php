@@ -19,14 +19,11 @@
                 <li class="clinico flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                     <span class=" font-bold">{{ $clinico->nome . " " . $clinico->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
-                        <form action="{{ route('aggiornaClinicoAdmin', $clinico->username) }}" method="GET">
-                            <button type="reset" id="btnModifica">
+                        <a href="{{ route('aggiornaClinicoAdmin', $clinico->username) }}">
+                            <button id="btnModifica">
                                 <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                             </button>
-                            <button type="submit">
-                                ciao
-                            </button>
-                        </form>
+                        </a>
                         @if($clinico->pazienti->count() != 0)  <!-- se il clinico aveva pazienti -->
                         <a href="{{ route('nuoveAssociazioni', $clinico->username) }}"> 
                             <button type="submit">
