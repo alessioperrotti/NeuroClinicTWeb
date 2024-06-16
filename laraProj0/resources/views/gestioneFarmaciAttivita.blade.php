@@ -271,11 +271,12 @@
             //mostra il form modifica farmaco e nasconde il form nuovo farmaco se attivo 
             toggleForms('#formModificaFarmaco', '#formNuovoFarmaco');
             resetForm('#formNuovoFarmaco', ['#nomeFarmaco', '#descrFarmaco']); //resetta i campi del form nuovo farmaco
-            $("#btnAggiungiFarmaco").hide(); //nasconde il tasto per aggiungere un farmaco
+            $("#btnAggiungiFarmaco").hide(); //nasconde il tasto per aggiungere un farmaco (verde)
         });
 
 
         $("#btnAnnullaModFarmaco").on("click", function() {
+            // chiude e nasconde
             resetForm('#formModificaFarmaco', ['#nomeFarmaco', '#descrFarmaco']);
             $('#btnAggiungiFarmaco').show();
         });
@@ -294,20 +295,21 @@
             $('#btnAggiungiAttivita').show();
         });
 
-        $(document).on('click', '.btnModificaAttivita', function() {
+        $(document).on('click', '.btnModificaAttivita', function() { // usiamo la classe perche ci sono piu bottoni
+            
+            // prendiamo i dati dal bottone
             const id = $(this).data('id');
             const nome = $(this).data('nome');
             const descrizione = $(this).data('descr');
 
+            // assegnamo i dati al form per poi modificarli eventualmente
             $('#nomeAttivitaMod').val(nome);
             $('#descrAttivitaMod').val(descrizione);
             $('#idAttivitaMod').val(id);
 
-
-
-
-
+            //mostra il form di modifica attivita e nasconde il form di inserimento attivita
             toggleForms('#formModificaAttivita', '#formNuovaAttivita');
+            // resetta i campi del form di inserimento attivita
             resetForm('#formNuovaAttivita', ['#nomeAttivita', '#descrAttivita']);
             $("#btnAggiungiAttivita").hide();
         });
@@ -324,7 +326,7 @@
                 var ricerca = $(inputId).val().toLowerCase(); //prende la parola inserita nel campo di ricerca
                 $(elementClass).each(function() {
                     var nome = $(this).find(textClass).text().toLowerCase(); //trova il testo del nome del farmaco/attivita
-                    if (nome.indexOf(ricerca) != -1) { //se il nome del farmaco/attivita contiene la parola inserita
+                    if (nome.indexOf(ricerca) != -1) { //se il nome del farmaco/attivita contiene la parola inserita (prende l'indice dei char nella stringa)
                         $(this).show();
                     } else {
                         $(this).hide();
