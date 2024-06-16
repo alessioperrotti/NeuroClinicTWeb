@@ -98,11 +98,14 @@ function doFormValidation(actionUrl, formId) {
         },
         success: function (data) { //se non c'è una condizione di errore il server reindirizza al processo di errore
             alert('Operazione andata a buon fine');
+
+            //window.location restituisce la pagina corrente
             window.location.replace(data.redirect);
         },
 
         contentType: false,
         processData: false
+
     });
 
 }

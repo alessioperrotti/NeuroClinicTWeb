@@ -284,15 +284,16 @@ class AdminController extends Controller
         return view('gestioneFarmaciAttivita')->with('farmaci', $farmaci)->with('attivita',$attivita);
 
     }
-    
 
     public function storeFarmaco(FarmacoRequest $request): JsonResponse
     {
+
         $validatedData = $request->validated();
         $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
 
         if ($riuscito) {
             return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
+            //valorizza il data.redirect nel doFormValidation
 
         } else {
             return response()->json(['error' => 'Errore durante l\'aggiunta del farmaco.'], 422);

@@ -30,6 +30,8 @@
 
                     <form action="{{route('gestioneFarmaci.delete' , $farmaco->id)}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
                         @csrf
+                        <!-- //inserisce un input hidden che ha come valore un token che serve per questione di sicurezza per evitare lattacco csrf (evita linserimento di dati pericolosi per il server).
+                          (non ce qualcuno tra me e il server perche non ha il token) -->
                         <button type="submit" class="btnEliminaFarmaco">
                             <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                         </button>
@@ -236,6 +238,7 @@
             $(formId).hide(); //nasconde il form
             fields.forEach(field => $(field).val('')); //imposta il valore di ogni campo con una stringa vuota
         }
+
 
         function toggleForms(showId, hideId) {
             $(showId).show();

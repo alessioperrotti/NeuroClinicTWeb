@@ -20,8 +20,11 @@
                     <span class=" font-bold">{{ $clinico->nome . " " . $clinico->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
                         <form action="{{ route('aggiornaClinicoAdmin', $clinico->username) }}" method="GET">
-                            <button id="btnModifica">
+                            <button type="reset" id="btnModifica">
                                 <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
+                            </button>
+                            <button type="submit">
+                                ciao
                             </button>
                         </form>
                         @if($clinico->pazienti->count() != 0)  <!-- se il clinico aveva pazienti -->
