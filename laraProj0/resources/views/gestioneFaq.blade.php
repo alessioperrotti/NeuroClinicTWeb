@@ -87,6 +87,7 @@
             }
         }
         // Assegna il listener per il click a tutti gli elementi accordion (elem con con classe flex e figli di elem con classe faq)
+        // (in realtà c'è già l'onclick)
         document.querySelectorAll('.faq > .flex').forEach(function(element) {
             element.addEventListener('click', function() {
                 toggleAccordion(this);

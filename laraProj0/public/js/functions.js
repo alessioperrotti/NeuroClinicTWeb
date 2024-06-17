@@ -88,7 +88,7 @@ function doFormValidation(actionUrl, formId) {
                 //gli errMsgs sono un oggetto con chiave il nome dell'input e valore un array di errori
                 $.each(errMsgs, function (name) {
                     id = findInputByName(formId, name);
-                    $("#" + id).parent().find('.errors').html(' ');
+                    $("#" + id).parent().find('.errors').html(' '); // svuota gli errori vecchi
                     $("#" + id).after(getErrorHtml(errMsgs[name]));
                     console.log(getErrorHtml(errMsgs[name]));
                 });

@@ -89,7 +89,7 @@ class ClinController extends Controller
 
         if ($this->gestPazModel->storePaziente($validatedData)) {
 
-            //return redirect()->action([ClinController::class, 'index']);
+            // valorizza il 'data.redirect' visto nel doFormValidation
             return response()->json(['redirect' => route('homeClinico')]);
         }
         else {
