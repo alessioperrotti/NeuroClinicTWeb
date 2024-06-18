@@ -42,6 +42,7 @@
         distDiagnosi.forEach(function(dist) {
             $('input[type="checkbox"][value= "' + dist.id + '"]').prop('checked', true);
         })
+
     })
 </script>
 @endsection

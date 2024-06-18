@@ -214,9 +214,12 @@
                 } else {
                     $(this).hide();
                 }
+
             })
             
         }
+
+        // NB: per Firefox e Safari bisogna usare cmd per deselezionare nella select!
 
 
         disturbiSelect.change(filtraEpisodi);
