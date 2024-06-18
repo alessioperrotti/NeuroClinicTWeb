@@ -6,6 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Dettaglio estetico safari -->
+        <meta name="theme-color" content="#0891b2" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#0891b2" media="(prefers-color-scheme: dark)">
+        <!-- -->
         <script src="https://cdn.tailwindcss.com"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <title>NeuroClinic | Home Clinico </title>
@@ -29,6 +33,7 @@
                     <a href="{{ route('listaPazienti')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">CARTELLE CLINICHE</a>
                     <a href="{{ route('nuovoPaziente')}}" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">REGISTRA PAZIENTE</a>
                     @auth
+                        <!-- non potendo fare una richieste post con un ancora, dobbiamo inserirne una che fa una submit di una form "fittizia" -->
                         <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:bg-cyan-500 p-1 rounded-lg cursor-pointer ">LOGOUT</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                         @csrf
@@ -113,7 +118,6 @@
         <div class="max-w-[200px] float-right mb-10 ">
             <button class="bg-cyan-100 border-2 border-cyan-600 shadow-xl rounded-md">
                 <a href="{{ route('nuovoPaziente')}}">
-                    <!-- cambiare immagine -->
                     <img src="{{ asset('images/aggiungi_paziente.png')}}" alt="Nuovo evento">
                 </a>
             </button>
