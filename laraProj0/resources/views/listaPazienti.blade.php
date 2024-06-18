@@ -11,18 +11,18 @@
 
             
             // Filtro per cognome jQuery
-            $('#cognomePaziente').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomePaziente
-                                                        //l'evento input si verifica quando il contenuto dell'elemento input cambia.
-                var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
+            $('#cognomePaziente').on('input', function() { 
+                                                        
+                var filter = $(this).val().toLowerCase();  
                 
-                $('.paziente').each(function() {        //per ogni elemento con classe "paziente" esguo questa funzione
-                    var fullName = $(this).find('span').text().toLowerCase(); //estraggo il nome completo che so essere nell'elemento span
-                                                                            // all'interno dell'elemento con classe paziente 
+                $('.paziente').each(function() {        
+                    var fullName = $(this).find('span').text().toLowerCase(); 
+                                                                            
                     
-                    var cognome = fullName.split(' ').pop(); // Prende l'ultimo elemento come cognome così anche se il paziente ha 2 nomi trova comunque il cognome
+                    var cognome = fullName.split(' ').pop(); 
                     $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il paziente in base al filtro
-                });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
-            });                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
+                });                                             
+            });                                 
         }); 
 </script>
 @endsection
@@ -37,7 +37,6 @@
     class=" bg-cyan-50 mb-6 appearance-none w-full py-2 px-3
     border-0 border-b-2 border-gray-300 focus:border-black
      text-gray-700 leading-tight  focus:outline-none" >
-    <!-- gestire con javascript/jquery il meccanismo di ricerca -->
 
     @isset($pazienti)
     @foreach ($pazienti as $paziente)

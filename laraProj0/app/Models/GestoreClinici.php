@@ -100,7 +100,8 @@ class GestoreClinici extends Model
 
 
     public function updateClinico($validatedData, $userClin): bool {
-        DB::beginTransaction();
+
+        DB::beginTransaction(); // transazione non necessaria
         try {
             $clinico = Clinico::findOrFail($userClin);
             $clinico->fill($validatedData);

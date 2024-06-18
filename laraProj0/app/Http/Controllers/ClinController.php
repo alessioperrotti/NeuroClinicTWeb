@@ -117,6 +117,7 @@ class ClinController extends Controller
         $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
 
         // se non ci sono disturbi, li setto a null piuttosto che mandare una collection vuota
+        // every() ritorna true se tutti gli elementi soddisfano la condizione
         if ($disturbi->every(function ($value) {
             return is_null($value);
         })) {
@@ -132,7 +133,8 @@ class ClinController extends Controller
                 $disturbiSel->add($disturbo);
             }
 
-            $disturbiSel = $disturbiSel->unique('id');
+            $disturbiSel = $disturbiSel->unique('id');  /* i disturbi potrebbero essere duplicati 
+                                                        (se ci sono più episodi per lo stesso disturbo) */
         }
 
         return view('cartellaClin2')
@@ -153,6 +155,7 @@ class ClinController extends Controller
         $terId = $terapia->id;
         $farmTer = $this->gestTerModel->getFarmaciFreqByTer($terId);
         $attTer = $this->gestTerModel->getAttivitaFreqByTer($terId);
+
         return view('modificaTerapia')
                 ->with('paziente', $paziente)
                 ->with('farmaci', $farmaci)
@@ -163,7 +166,7 @@ class ClinController extends Controller
 
     public function storeTerapia($userPaz) : RedirectResponse {
 
-        $validatedData = $_POST;
+        $validatedData = $_POST; // essendo checkbox, non ci sono problemi di validazione
 
         if ($this->gestTerModel->storeTerapia($userPaz, $validatedData)) {
             return redirect()->action([ClinController::class, 'showCartClinica'], ['userPaz' => $userPaz]);
@@ -179,6 +182,7 @@ class ClinController extends Controller
         $paziente = Paziente::find($userPaz);
         $distDiagnosi = $this->gestCartModel->getDisturbiByPaz($userPaz);
         $disturbi = $this->gestDistModel->getDisturbi();
+        
         return view('modificaDiagnosi')
                 ->with('paziente', $paziente)
                 ->with('distDiagnosi', $distDiagnosi)
