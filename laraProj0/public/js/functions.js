@@ -31,7 +31,7 @@ function doElemValidation(id, actionUrl, formId, inputName) {
     //dick prende in input l'id dell'elemento, url, lid della form
     var formElems;
 
-    //mandiamo al server il token e l'elemento da validare.
+    //mandiamo al server il token CSRF e l'elemento da validare.
     //
     function addFormToken() {
         var tokenVal = $("#" + formId + " input[name=_token]").val();
@@ -74,7 +74,7 @@ function doElemValidation(id, actionUrl, formId, inputName) {
 function doFormValidation(actionUrl, formId) {
     var form = new FormData(document.getElementById(formId));
     for (var pair of form.entries()) {
-        console.log(pair[0] + ': ' + pair[1]);
+        console.log(pair[0] + ': ' + pair[1]);//Cicla attraverso le coppie chiave-valore del FormData e le stampa nella console per debug.
     }
     $.ajax({
         type: 'POST',
