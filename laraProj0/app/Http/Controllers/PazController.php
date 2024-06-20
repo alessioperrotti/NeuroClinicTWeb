@@ -101,8 +101,9 @@ class PazController extends Controller
         if (!$riuscito) {
             return response()->json(['error' => 'Errore durante l\'aggiornamento dei dati del paziente.'], 422);
         }
-        $paziente->refresh();
-        return response()->json(['redirect' => route('homePaziente')]);
+        $paziente->refresh(); // in questo caso non è necessario (si può fare a meno della variabile $paziente)
+
+        return response()->json(['redirect' => route('homePaziente')]); // valorizza data.redirect
     }
 
 
@@ -143,8 +144,9 @@ class PazController extends Controller
     public function showNuovoEpisodio(): View
     {
         $userPaz = Auth::user()->paziente->username;
-        $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
-        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('disturbo');
+        $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz); // per metterli nella select
+        $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('disturbo'); // per metterli nella lista 
+        
         return view('inserimentoNuovoEvento')
             ->with('disturbi', $disturbi)
             ->with('userPaz', $userPaz)

@@ -86,11 +86,18 @@ Analisi Dati
         document.getElementById('disturboSelect').addEventListener('change', function() {
             var disturboId = this.value;
             fetch("{{ route('episodi.disturbo', ':id') }}".replace(':id', disturboId))
+            // la rotta episodi.disturbo richiede l'id del disturbo come parametro
+            // (si sta facendo una richiesta GET a /episodi/disturbo/{id} per ottenere il numero di episodi associati a quel disturbo) 
+
                 .then(response => response.json()) // Se il fetch è andato a buon fine, trasformo la risposta in formato JSON
+
                 .then(data => {                    // Data è una funzione di callback che prende i dati JSON ottenuti dalla risposta della richiesta.
                     document.getElementById('numEpisodi').textContent = data.numeroEpisodi;
                 })
                 .catch(error => console.error('Errore:', error));
+
+            /* NB: la fetch implementa un'interazione asincrona con il server, quindi il codice successivo 
+                a fetch() non aspetta la risposta del server (è una promise) */
         });
     });
 </script>

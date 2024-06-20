@@ -8,7 +8,7 @@
     <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12 mb-12">
         <form id="evento-form" method="POST" action="{{ route('inserimentoNuovoEvento.store') }}">
             @csrf
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
+            <div class="grid grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700 font-semibold">Disturbo</label>
                     <select id="disturbo" name="disturbo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">

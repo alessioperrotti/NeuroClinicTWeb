@@ -211,6 +211,8 @@ class AdminController extends Controller
             ->with('disturbiMotori',$disturbiMotori)
             ->with('pazienti', $pazienti);
     }
+
+    
     public function getEpisodiDisturbo($id)
     {
         $numeroEpisodi = Episodio::where('disturbo', $id)->count();

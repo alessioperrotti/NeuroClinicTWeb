@@ -212,10 +212,11 @@
             });
         }
 
-        $(function() {
-            var actionUrl = "{{ route('paziente.update',  $paziente->username) }}";
-            var formId = 'aggiorna-form';
-            setupValidation(actionUrl, formId);
-        });
+    $(function() {
+        var actionUrl = "{{ route('paziente.update',  $paziente->username) }}";
+        var formId = 'aggiorna-form';
+        setupValidation(actionUrl, formId);
+    });
+    
 </script>
 @endsection
