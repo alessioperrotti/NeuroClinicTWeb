@@ -25,6 +25,7 @@ class PasswordController extends Controller
             'confermaPassword' => 'required'
         ]);
 
+        /** @var \App\Models\User $user */
         $user = Auth::user(); //recupero l'utente autenticato   
 
         //controllo se la password attuale è corretta

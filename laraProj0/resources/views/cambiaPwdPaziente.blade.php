@@ -8,7 +8,7 @@
 <div class="flex flex-col items-center justify-center gap-y-2">
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Modifica password</h1>
     <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12">
-        <div class="card-body">
+        <div>
 
             <form method="POST" action="{{ route('password.update')}}" class="mb-10">
                 @csrf
@@ -22,7 +22,7 @@
                 </div>
 
 
-
+                <!-- la variabile $errors viene eventualmente passata dai redirect 'withErrors' del controller  -->
                 @if ($errors->first('vecchiaPassword'))
                 <ul class="errors">
                     <li><strong>{{ $errors->first('vecchiaPassword') }}</strong></li>

@@ -41,7 +41,7 @@
 
 
         $(".a_nuovo_risp").click(function() {
-            $("#nuovo").addClass("hidden").removeClass("basis-2/6");
+            $("#nuovo").addClass("hidden").removeClass("basis-2/6"); // nascondo il form standard di nuovo messaggio
             $("#nuovo_risp").removeClass("hidden").addClass("basis-2/6");
             $("#ricevuti, #inviati").removeClass("flex-grow").addClass("basis-4/6");
             var idRisp = $(this).data('idrisp');
@@ -49,7 +49,7 @@
             var idData = $(this).data('iddata');
             var idMitt = $(this).data('idmitt');
 
-            $("#destin_risp").val(idMitt);
+            $("#destin_risp").val(idMitt); // il destinatario della risposta sarà il mittente del messaggio ricevuto
             $("#risposta_rif").text("Rispondi al messaggio di " + Mitt + " del " + idData);
             $("#risposta").val(idRisp);
 
@@ -74,7 +74,7 @@
             $("#ricevuti, #inviati").addClass("flex-grow").removeClass("basis-4/6");
         });
 
-        $("#submit_risp").click(function() {
+        $("#submit_risp").click(function() {        // event handler per una proto-validazione del form di risposta
             if ($("#contenuto_risp").val() == "") {
                 alert("Compila tutti i campi!");
                 return false;

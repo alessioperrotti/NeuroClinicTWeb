@@ -142,7 +142,8 @@ class GestoreMessaggi extends Model
         $messaggio->letto = false;
         $messaggio->eliminatoClin = false;
         $messaggio->eliminatoPaz = false;
-        if (isset($validatedData['risposta'])) {
+
+        if (isset($validatedData['risposta'])) { // se il messaggio è una risposta
             $messaggio->risposta = $validatedData['risposta'];
         }
 
