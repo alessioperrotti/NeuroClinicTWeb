@@ -6,10 +6,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <!-- Dettaglio estetico safari -->
-        <meta name="theme-color" content="#0891b2" media="(prefers-color-scheme: light)">
-        <meta name="theme-color" content="#0891b2" media="(prefers-color-scheme: dark)">
-        <!-- -->
         <script src="https://cdn.tailwindcss.com"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <title>NeuroClinic | Home Clinico </title>

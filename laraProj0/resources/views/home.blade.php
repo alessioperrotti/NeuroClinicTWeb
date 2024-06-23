@@ -7,10 +7,6 @@
     <!-- vite('resources/css/app.css') -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Dettaglio estetico safari -->
-    <meta name="theme-color" content="#0891b2" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0891b2" media="(prefers-color-scheme: dark)">
-    <!-- -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

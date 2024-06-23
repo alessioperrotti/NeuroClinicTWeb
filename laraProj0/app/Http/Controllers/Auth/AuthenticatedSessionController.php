@@ -28,13 +28,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->authenticate(); // metodo predefinito in LoginRequest
 
         $request->session()->regenerate();
 
         $user = Auth::user();
-
-        // return redirect()->intended(RouteServiceProvider::HOME);
 
         $role = auth()->user()->usertype;
 
@@ -46,7 +44,6 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('homeAdmin');
                 break;
             case 'P':
-                $paziente = auth()->user()->paziente;
                 return redirect()->route('homePaziente');
                 break;
             case 'C':
