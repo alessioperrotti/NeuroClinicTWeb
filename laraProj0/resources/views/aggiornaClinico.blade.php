@@ -61,7 +61,7 @@
                     <input id="specializ" name="specializ" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{$clinico->specializ}}">
                 </div>
             </div>
-            <div class="flex justify-center mt-4 gap-y-4 4  gap-x-24">
+            <div class="flex justify-center mt-4 gap-y-4 gap-x-24">
                 <a href="{{ route('homeClinico') }}">
                     <button type="button" class="bg-gray-500 hover:bg-gray-400 text-white py-2 px-4 rounded-md">Annulla Modifica</button>
                 </a>
