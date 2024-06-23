@@ -54,7 +54,7 @@
                     <input id="paziente" name="paziente" hidden value={{$userPaz}}>
                 </div>
             </div>
-            <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">
+            <div class="flex justify-center mt-8 gap-y-4 gap-x-24">
                 <input name="annulla" type="reset" value="Annulla Inserimento" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
                 <input id="submit" name="conferma" type="submit" value="Conferma Inserimento" class="bg-cyan-600 text-white py-2 px-4 rounded-md hover:bg-cyan-500 cursor-pointer "></input>
             </div>

@@ -34,6 +34,7 @@
     <h1 class="p-10 text-5xl font-bold">Benvenuto, Admin</h1>
     <div class="flex justify-center">
         <div class="m-8 ">
+            <!-- il /15 dopo il bg indica l'opacità del colore -->
             <div class="bg-[#0097B2]/15 border-2 border-black rounded-md aspect-square size-60 ">
                 <a href="{{route('gestioneFaq')}}">
                     <img src="{{ asset('images/question.svg')}}" class="size-60" alt="Clinici">
