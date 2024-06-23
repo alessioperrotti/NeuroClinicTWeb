@@ -12,7 +12,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>NeuroClinic | Home </title>
     <style>
-        .anchor::before {
+        .anchor::before {  /* Prima delle ancore mettiamo uno spazio vuoto alto quanto l'header */
             content: "";
             display: block;
             height: 140px;

@@ -28,11 +28,10 @@ function getErrorHtml(elemErrors) {
 }
 
 function doElemValidation(id, actionUrl, formId, inputName) {
-    //dick prende in input l'id dell'elemento, url, lid della form
+
     var formElems;
 
     //mandiamo al server il token e l'elemento da validare.
-    //
     function addFormToken() {
         var tokenVal = $("#" + formId + " input[name=_token]").val();
         console.log(tokenVal);
@@ -98,6 +97,8 @@ function doFormValidation(actionUrl, formId) {
         },
         success: function (data) { //se non c'è una condizione di errore il server reindirizza al processo di errore
             alert('Operazione andata a buon fine');
+
+            // data.redirect viene valorizzato dalle redirect()->json dei controller
             window.location.replace(data.redirect);
         },
 

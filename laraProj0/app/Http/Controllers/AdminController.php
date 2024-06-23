@@ -316,11 +316,15 @@ class AdminController extends Controller
     public function updateFarmaco(FarmacoRequest $request): JsonResponse
     {
         $validated = $request->validated();
+        
+        //prendiamo l'id dal campo hidden popolato dal js (lo aggiungiamo a $validated)
         $validated['id'] = $request->input('id');
 
         $riuscito = $this->farmaciModel->updateFarmaco($validated);
 
-        if ($riuscito) {    
+        if ($riuscito) {   
+             
+            // valorizza il 'data.redirect' visto nel doFormValidation
             return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
         } else {
             return response()->json(['error' => 'Errore durante la modifica del farmaco.'], 422);

@@ -23,11 +23,13 @@
             <div class="farmaco flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                 <span class="nomeFarmaco font-bold">{{$farmaco->nome}}</span>
                 <div class="flex mr-2 gap-x-4">
+
+                    <!-- Bottone per mostrare la form di modifica del farmaco (in basso) -->
                     <button class="btnModificaFarmaco" data-id="{{$farmaco->id}}" data-nome="{{$farmaco->nome}}" data-descr="{{$farmaco->descr}}">
                         <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
 
-
+                    <!-- Pseudo form per l'eliminazione del farmaco -->
                     <form action="{{route('gestioneFarmaci.delete' , $farmaco->id)}}" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo farmaco?')">
                         @csrf
                         <button type="submit" class="btnEliminaFarmaco">
@@ -51,13 +53,14 @@
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
 
         <h1 class="text-lg font-bold ml-5 mt-5 mb-8 ">Modifica farmaco selezionato</h1>
+        <!-- la form per la modifica del farmaco è unica -->
         <form id="modificaFarmacoForm" action="{{route('gestioneFarmaci.update')}}" method="post">
             @csrf
             <div class="bg-white p-4 rounded-lg mt-3">
 
                 <div class=" mb-6 mx-3 ">
 
-
+                    <!-- i campi di input verranno popolati dall'event handler -->
                     <label for="nomeFarmacoMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
                     <input type="hidden" id="idFarmacoMod" name="id">
                     <input type="text" id="nomeFarmacoMod" name="nome" placeholder="Nome" class="shadow mb-2 appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
@@ -79,7 +82,8 @@
         <button id="btnAggiungiFarmaco" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg ">Aggiungi Farmaco</button>
     </div>
 
-    <!-- Contenitore per il form di inserimento nuovo Farmaco, inizialmente nascosto -->
+    <!-- Contenitore per il form di inserimento nuovo Farmaco, inizialmente nascosto (viene mostrato al click
+        di btnAggiungiFarmaco) -->
     <div id="formNuovoFarmaco" class="mt-4 " style="display: none;">
         <hr class=" h-0.5 my-8 bg-cyan-600 border-0 ">
         <h1 class='text-lg font-bold ml-5 mt-5 mb-8 '>Aggiungi Farmaco</h1>
@@ -111,6 +115,7 @@
 
 </div>
 
+<!-- funzionamento perfettamente analogo per le attività -->
 <div class="flex justify-center ">
     <hr class=" h-0.5 my-12 bg-cyan-600 border-0 w-full max-w-6xl ">
 </div>
@@ -177,6 +182,7 @@
 
                 <div class=" mb-6 mx-3 ">
 
+                    <!-- i campi di input verranno popolati dall'event handler -->
                     <input type="hidden" id="idAttivitaMod" name="id">
 
                     <label for="nomeAttivitaMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
@@ -284,7 +290,7 @@
 
 
 
-        //script per attivita
+        //script per attivita (analoghi a quelli per i farmaci)
 
         $('#btnAggiungiAttivita').on('click', function() {
             toggleForms('#formNuovaAttivita', '#btnAggiungiAttivita');
@@ -320,7 +326,7 @@
         });
 
 
-
+        // per il filtraggio degli elementi con la barra di ricerca
         function cercaElemento(inputId, elementClass, textClass) {
             $(inputId).on('input', function() {
                 var ricerca = $(inputId).val().toLowerCase(); //prende la parola inserita nel campo di ricerca
