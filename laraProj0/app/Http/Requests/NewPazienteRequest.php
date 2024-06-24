@@ -29,7 +29,7 @@ class NewPazienteRequest extends FormRequest
         return [
             'nome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'cognome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
-            'dataNasc' => 'required|date|before:today|after:1900-01-01',
+            'dataNasc' => 'required|date|before:today|after:1900-01-01|date_format:Y-m-d',
             'genere' => 'required|min:0|max:1',
             'via' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'civico' => 'required|string|max:5',
