@@ -10,7 +10,8 @@ class Attivita extends Model
     protected $table = 'attivita';
     public $timestamps = false;
     protected $fillable = ['nome', 'descr'];
-    
+
+    // refuso
     public function terapie()
     {
         return $this->hasMany(Terapia::class, 'terapia', 'id');

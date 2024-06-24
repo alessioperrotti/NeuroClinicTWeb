@@ -9,6 +9,7 @@
 </div>
 <div id="app" class="text-lg container mx-auto p-4 w-full max-w-4xl">
     
+    <!-- appereance-none resetta la visualizzazione default del browser -->
     <input type="text" id="cognomePaziente" placeholder="Cerca per cognome" class="bg-cyan-50 my-6 appearance-none w-full py-2 px-3
     border-0 border-b-2 border-gray-300 focus:border-black text-gray-700 leading-tight focus:outline-none">
 

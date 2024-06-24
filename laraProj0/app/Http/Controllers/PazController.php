@@ -212,9 +212,10 @@ class PazController extends Controller
         $paziente = Auth::user()->paziente;
         $userPaz = $paziente->username;
         $terapie = $this->gestTerModel->getTerapieByPaz($userPaz)->sortByDesc('data');
-        $terIds = $terapie->pluck('id');
+        $terIds = $terapie->pluck('id'); // array con gli id delle terapie
         $terAssoc = array();
 
+        // per ogni terapia genero un array associativo con farmaci, attività e data
         foreach($terIds as $terId) {
             $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
             $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);

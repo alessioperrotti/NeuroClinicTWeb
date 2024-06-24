@@ -39,6 +39,8 @@
     $(document).ready(function() {
 
         var distDiagnosi = @json($distDiagnosi);
+
+        // per ogni disturbo già diagnosticato, imposto la checkbox come checked
         distDiagnosi.forEach(function(dist) {
             $('input[type="checkbox"][value= "' + dist.id + '"]').prop('checked', true);
         })
