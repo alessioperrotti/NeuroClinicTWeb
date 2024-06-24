@@ -246,6 +246,7 @@ class AdminController extends Controller
 
     public function deleteDisturbo(Request $request)
     {
+        // bastava semplicemente passare l'id all'action
         $validated = $request->validate([
             'idDel' => 'required',
         ]);

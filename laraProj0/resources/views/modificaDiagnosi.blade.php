@@ -45,6 +45,8 @@
             $('input[type="checkbox"][value= "' + dist.id + '"]').prop('checked', true);
         })
 
+        // andava sovrascritto il back_button
+
     })
 </script>
 @endsection
