@@ -16,21 +16,23 @@
     <div class="max-h-96 overflow-y-auto">
         @isset($disturbi)
         @foreach($disturbi as $disturbo)
-        <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
-            <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
-            <div class="flex mr-2 gap-x-4">
-                <button type="button" class="btnModifica" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
-                    <img src="{{ url('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
-                </button>
-                <form action="{{ route('gestioneDisturbi.delete') }}" method="POST" class="inline-block" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?')">
-                    @csrf
-                    <input type="hidden" name="idDel" value="{{$disturbo->id}}">
-                    <button type="submit" id="btnElimina">
-                        <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+            @if($disturbo)
+            <div class="disturbo flex justify-between items-center bg-white p-2 rounded-lg mb-2">
+                <span class="nomeDisturbo font-bold">{{$disturbo->nome}}</span>
+                <div class="flex mr-2 gap-x-4">
+                    <button type="button" class="btnModifica" data-id="{{$disturbo->id}}" data-nome="{{ $disturbo->nome }}" data-categoria="{{$disturbo->categoria}}">
+                        <img src="{{ asset('images/btnModifica.jpeg') }}" alt="Modifica" class="w-6 h-6 inline-block">
                     </button>
-                </form>
+                    <form action="{{ route('gestioneDisturbi.delete') }}" method="POST" class="inline-block" onsubmit="return confirm('Sei sicuro di voler eliminare questo disturbo?')">
+                        @csrf
+                        <input type="hidden" name="idDel" value="{{$disturbo->id}}">
+                        <button type="submit" id="btnElimina">
+                            <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
+            @endif
         @endforeach
         @endisset
 
@@ -61,7 +63,7 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnulla" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla</button>
-                    <button type="submit" id="btnAggiungi" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
+                    <button type="submit" id="btnAggiungi" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded">Conferma inserimento</button>
                 </div>
             </div>
         </form>
@@ -73,8 +75,8 @@
 
             <hr class="h-0.5 my-8 bg-cyan-600 border-0">
             <h1 class='text-lg font-bold ml-5 mt-5 mb-8 '>Modifica disturbo selezionato</h1>
-            <div class="bg-white p-4 rounded">
-                <div class="mb-6 flex justify-between">
+            <div class="bg-white p-4 rounded mb-10">
+                <div class="mb-6 flex justify-between mx-14">
                     <input type="hidden" id="idMod" name="id" value="">
                     <div>
                         <label for="nomeMod" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
@@ -87,121 +89,106 @@
                 </div>
                 <div class="flex justify-center gap-x-14">
                     <button type="button" id="btnAnnullaMod" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Annulla Modifica</button>
-                    <button type="submit" id="btnEffettuaMod" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifica Disturbo</button>
+                    <button type="submit" id="btnEffettuaMod" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded">Modifica Disturbo</button>
                 </div>
             </div>
         </form>
     </div>
 
-    <script src="{{ asset('js/functions.js') }}"></script>
-    <script>
-        $(document).ready(function() {
+</div>
 
 
-            function resetForm(formId, fields) {
-                $(formId).hide();
-                fields.forEach(field => $(field).val(''));
-            }
+<script src="{{ asset('js/functions.js') }}"></script>
+<script>
+    $(document).ready(function() {
 
-            function toggleForms(showFormId, hideFormId) {
-                $(showFormId).show();
-                $(hideFormId).hide();
-            }
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
 
-            //codice per l'aggiunta del disturbo
-            $('#btnAggiungiDisturbo').on('click', function() {
-                toggleForms('#formNuovoDisturbo', '#btnAggiungiDisturbo');
+        function resetForm(formId, fields) {
+            $(formId).hide();
+            fields.forEach(field => $(field).val(''));
+        }
 
-            });
+        function toggleForms(showFormId, hideFormId) {
+            $(showFormId).show();
+            $(hideFormId).hide();
+        }
 
-            $('#btnAnnulla').on('click', function() {
+        //codice per l'aggiunta del disturbo
+        $('#btnAggiungiDisturbo').on('click', function() {
+            toggleForms('#formNuovoDisturbo', '#btnAggiungiDisturbo');
+        });
 
-                resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
-                $('#btnAggiungiDisturbo').show();
-            });
+        $('#btnAnnulla').on('click', function() {
+            resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
+            $('#btnAggiungiDisturbo').show();
+        });
 
-            //codice per la modifica del disturbo
-            $(document).on('click', '.btnModifica', function() {
-                //estrae i valori del tasto btnModifica
-                const id = $(this).data('id');
-                const nome = $(this).data('nome');
-                const categoria = $(this).data('categoria');
+        //codice per la modifica del disturbo
+        $(document).on('click', '.btnModifica', function() {
+            //estrae i valori del tasto btnModifica
+            const id = $(this).data('id');
+            const nome = $(this).data('nome');
+            const categoria = $(this).data('categoria');
 
-                //riempe i campi del form
-                $('#nomeMod').val(nome);
-                $('#categoriaMod').val(categoria);
-                $('#idMod').val(id);
+            //riempe i campi del form
+            $('#nomeMod').val(nome);
+            $('#categoriaMod').val(categoria);
+            $('#idMod').val(id);
 
-                //mostra il form
+            //mostra il form
+            toggleForms('#formModificaDisturbo', '#formNuovoDisturbo');
+            resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
+            $("#btnAggiungiDisturbo").hide();
+        });
 
-                toggleForms('#formModificaDisturbo', '#formNuovoDisturbo');
-                resetForm('#formNuovoDisturbo', ['#nomeDisturboNuovo', '#categoriaDisturboNuovo']);
-                $("#btnAggiungiDisturbo").hide();
+        $("#btnAnnullaMod").on("click", function() {
+            resetForm('#formModificaDisturbo', ['#nomeMod', '#categoriaMod']);
+            $('#btnAggiungiDisturbo').show();
+        });
 
-            });
-
-            $("#btnAnnullaMod").on("click", function() {
-                resetForm('#formModificaDisturbo', ['#nomeMod', '#categoriaMod']);
-                $('#btnAggiungiDisturbo').show();
-            });
-
-
-
-
-
-
-
-
-
-
-
-            // Funzione che implementa il cerca disturbo
-            $("#cercaDisturbo").on('input', function() {
-                var ricerca = $("#cercaDisturbo").val().toLowerCase(); // Prende la parola inserita nel campo di ricerca
-                $(".disturbo").each(function() {
-                    var nome = $(this).find(".nomeDisturbo").text().toLowerCase(); // Trova il testo del nome del disturbo
-                    if (nome.indexOf(ricerca) != -1) {
-                        $(this).show(); // Mostra l'elemento se corrisponde alla ricerca
-                    } else {
-                        $(this).hide(); // Nasconde l'elemento se non corrisponde alla ricerca
-                    }
-                });
-            });
-
-
-
-            //per la validazione della modifica con ajax
-            $(function() {
-                var actionUrl = "{{ route('gestioneDisturbi.update') }}";
-                var formId = 'modificaDisturboForm'; //a questa assegnamo l'id della form
-                $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-                    //quando mi sposto su un altro elemento di input, estraggo l'id
-                    var formElementId = $(this).attr('id');
-                    var inputName = $(this).attr('name');
-                    doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
-                });
-                $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
-                    event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-                    doFormValidation(actionUrl, formId); //valida l'intera form
-                });
-            });
-
-            //per la validazione dell'inserimento con ajax
-            $(function() {
-                var actionUrl = "{{ route('gestioneDisturbi.store') }}";
-                var formId = 'nuovoDisturboForm'; //a questa assegnamo l'id della form
-                $("#" + formId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
-                    //quando mi sposto su un altro elemento di input, estraggo l'id
-                    var formElementId = $(this).attr('id');
-                    var inputName = $(this).attr('name');
-                    doElemValidation(formElementId, actionUrl, formId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
-                });
-                $("#" + formId).on('submit', function(event) { //sarebbe l id della form. 
-                    event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
-                    doFormValidation(actionUrl, formId); //valida l'intera form
-                });
+        // Funzione che implementa il cerca disturbo
+        $("#cercaDisturbo").on('input', function() {
+            var ricerca = $("#cercaDisturbo").val().toLowerCase(); // Prende la parola inserita nel campo di ricerca
+            $(".disturbo").each(function() {
+                var nome = $(this).find(".nomeDisturbo").text().toLowerCase(); // Trova il testo del nome del disturbo
+                if (nome.indexOf(ricerca) != -1) {
+                    $(this).show(); // Mostra l'elemento se corrisponde alla ricerca
+                } else {
+                    $(this).hide(); // Nasconde l'elemento se non corrisponde alla ricerca
+                }
             });
         });
-    </script>
-</div>
+
+        //per la validazione della modifica con ajax
+        var modActionUrl = "{{ route('gestioneDisturbi.update') }}";
+        var modFormId = 'modificaDisturboForm'; //a questa assegnamo l'id della form
+        $("#" + modFormId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            var inputName = $(this).attr('name');
+            doElemValidation(formElementId, modActionUrl, modFormId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#" + modFormId).on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(modActionUrl, modFormId); //valida l'intera form
+        });
+
+        //per la validazione dell'inserimento con ajax
+        var newActionUrl = "{{ route('gestioneDisturbi.store') }}";
+        var newFormId = 'nuovoDisturboForm'; //a questa assegnamo l'id della form
+        $("#" + newFormId + " :input").on('blur', function(event) { //tutti gli elementi di tipo input, 
+            //quando mi sposto su un altro elemento di input, estraggo l'id
+            var formElementId = $(this).attr('id');
+            var inputName = $(this).attr('name');
+            doElemValidation(formElementId, newActionUrl, newFormId, inputName); //questa funzione fa la validazione. funzione definita sul file function.js
+        });
+        $("#" + newFormId).on('submit', function(event) { //sarebbe l id della form. 
+            event.preventDefault(); //blocca il meccanismo standard, deve inviarae solo dopo la validazione
+            doFormValidation(newActionUrl, newFormId); //valida l'intera form
+        });
+    });
+</script>
 @endsection

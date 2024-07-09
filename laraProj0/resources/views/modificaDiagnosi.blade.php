@@ -15,6 +15,7 @@
         <ul style="list-style-type: disc" class="ml-6 mt-6 flex flex-wrap">
             @isset($disturbi)
                 @foreach($disturbi as $disturbo)
+                @if($disturbo)
                 <li class="mb-4 w-1/2">
                     <div class="space-x-4">
                         <label class="text-base font-semibold text-gray-800">{{ $disturbo->nome}}</label>
@@ -22,6 +23,7 @@
                     </div>
                     <p class="my-2 text-gray-600 text-sm">Categoria: {{$disturbo->categoria}}</p>
                 </li>
+                @endif
                 @endforeach
             @endisset
         </ul>

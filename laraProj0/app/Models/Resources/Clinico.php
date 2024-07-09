@@ -20,4 +20,9 @@ class Clinico extends Model
     {
         return $this->belongsTo(User::class, 'username', 'username');
     }
+
+    public function pazienti()
+    {
+        return $this->HasMany(Paziente::class, 'clinico', 'username');
+    }
 }

@@ -20,12 +20,11 @@ class GestoreAttivita extends Model
         return $attivita;
     }
 
-    public function deleteAttivita($data): Bool
+    public function deleteAttivita($id): Bool
     {
 
         DB::beginTransaction();
         try {
-            $id = $data['idDel'];
             $attivita = Attivita::findOrFail($id);
             $attivita->delete();
 

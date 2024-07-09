@@ -12,43 +12,77 @@ use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\GestoreMessaggi;
 
 class GestoreClinici extends Model
 {
+
+    protected $gestMsgModel;
+
+    public function __construct()
+    {
+        $this->gestMsgModel = new GestoreMessaggi;
+    }
+
     public function getClinici() : Collection {
         $clinici = Clinico::all();
         return $clinici;
     }
+
+    public function getCliniciExcept($userClin) : Collection {
+        $clinici = Clinico::where('username', '!=', $userClin)->get();
+        return $clinici;
+    }
+
+
     public function deleteClinico($id) : bool {
+
         DB::beginTransaction();
         try {
+
+            $pazienti = $this->getPazientiByClin($id);
+
+            if($pazienti->count() > 0) {
+                foreach($pazienti as $paz) {
+                    //$_POST[$paz->username] resituisce l'username del clinico 
+                    $paz->clinico = $_POST[$paz->username];
+                    $paz->save();
+                }
+            }
+
+            // elim messaggi
+            $this->gestMsgModel->deleteMessaggiByUser($id);
+
             $clinico = Clinico::findOrFail($id);
+            $user = User::findOrFail($id);
+            
             $clinico->delete();
+            $user->delete();
 
             DB::commit();
+            return true;
+            
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Errore durante l\'eliminazione del clinico: ' . $e->getMessage());
             return false;   
         }
-        return true;
     }
+
+
     public function storeClinico($validatedData): bool
     {
         DB::beginTransaction();
         try{
-            Log::info('Sto salvando il clinico');
             $user = new User([
                 'username' => $validatedData['username'],
                 'password' => Hash::make('stdpassword'),
                 'usertype' => 'C'
             ]);
             $user->save();
-            log::info('Utente salvato');
             $clinico = New Clinico;
             $clinico->fill($validatedData);
             $clinico->save();
-            log::info('Clinico salvato');
             DB::commit();
         }
         catch (\Exception $e) {
@@ -58,10 +92,14 @@ class GestoreClinici extends Model
         }
         return true;
     }
+
+
     public function getClinico($userClin) {
         $clinico = Clinico::findOrFail($userClin);
         return $clinico;
     }
+
+
     public function updateClinico($validatedData, $userClin): bool {
         DB::beginTransaction();
         try {
@@ -76,6 +114,7 @@ class GestoreClinici extends Model
         }
         return true;
     }
+
     public function mediaPazientiPerClinico(){
         $numeroClinici = Clinico::count();
         $numeroPazienti = Paziente::count();
@@ -85,6 +124,16 @@ class GestoreClinici extends Model
         }
     
         $media = $numeroPazienti / $numeroClinici;
-        return $media;
+        return round($media, 2);
+    }
+
+    public function getPazientiByClin($userClin) : Collection {
+        
+        $clinico = Clinico::findOrFail($userClin);
+        $pazienti = new Collection;
+        foreach($clinico->pazienti as $paz) {
+            $pazienti->add($paz);
+        }
+        return $pazienti;
     }
 }

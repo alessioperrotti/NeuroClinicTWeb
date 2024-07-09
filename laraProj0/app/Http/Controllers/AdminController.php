@@ -31,10 +31,12 @@ use App\Models\GestoreClinici;
 use App\Models\Resources\Episodio;
 use App\Models\Resources\Terapia;
 use App\Models\Resources\Clinico;
-use App\Http\Requests\NewFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use App\Http\Requests\NewClinicoRequest;
 use App\Http\Requests\UpdateClinicoRequest;
+use App\Models\GestoreCartelleClin;
+use App\Http\Requests\FaqRequest;
+use Illuminate\View\View;
 
 
 class AdminController extends Controller
@@ -45,12 +47,10 @@ class AdminController extends Controller
     protected $pazientiModel;
     protected $cliniciModel;
     protected $faqModel;
+    protected $cartelleModel;
 
     public function __construct()
     {
-
-        Log::info('AdminController inizializzato');
-        #$this->middleware('can:isAdmin');
         $this->middleware('can:isAdmin');
         $this->disturbiModel = new GestoreDisturbi;
         $this->farmaciModel = new GestoreFarmaci;
@@ -58,6 +58,7 @@ class AdminController extends Controller
         $this->pazientiModel= new GestorePazienti;
         $this->cliniciModel= new GestoreClinici;
         $this->faqModel= new GestoreFaq;
+        $this->cartelleModel= new GestoreCartelleClin;
           
     }
 
@@ -67,63 +68,64 @@ class AdminController extends Controller
         $admin = $user->paziente;
         return view('homeAdmin'); 
     }
+
+
 ################################################################################################
     #SEZIONE PAZIENTI   
     public function mostraPazienti()
     {
         $pazienti=$this->pazientiModel->getPazienti();
         #return view('listaPaz')->with('pazienti',$pazienti);
-        return response()
-        ->view('listaPaz', ['pazienti' => $pazienti]);
+        return view('listaPaz')->with('pazienti', $pazienti);
         
     } 
+
+
     public function eliminaPaziente($username)
     {
-        $this->pazientiModel->eliminaPaz($username);
-        $pazienti = $this->pazientiModel->getPazienti();  #non funziona se chiamo $this->mostraPazienti(); 
+        $this->pazientiModel->eliminaPaz($username); 
         return redirect()->route('listaPaz');   
     }
-   #SEZIONA FAQ
+
+
+   #SEZIONE FAQ
     public function viewGestioneFaq()
     {
         $faqs=$this->faqModel->getFaqs();
         return view('gestioneFaq')->with('faqs',$faqs); 
     }
+
+
     public function eliminaFaq($id)
     {
         $this->faqModel->deleteFaq($id);
         return redirect()->route('gestioneFaq');
     }
 
-    public function storeFaq(NewFaqRequest $request): JsonResponse
+
+    public function storeFaq(FaqRequest $request): JsonResponse
     {
-        Log::info('metodo storeFaq attivato');
         $validatedData = $request->validated();
 
         if ($this->faqModel->storeFaq($validatedData)){
-            Log::info('FAQ salvata correttamente, reindirizzamento a gestioneFaq');
             return response()->json(['redirect' => route('gestioneFaq')]); 
         }
         else{
-            Log::error('Errore durante l\'aggiunta della FAQ');
             return response()->json(['error' => 'Regole non rispettate.'], 422);
         }
         
     }
 
-    public function updateFaq(NewFaqRequest $request, $id): JsonResponse
+    public function updateFaq(FaqRequest $request, $id): JsonResponse
     {
-        Log::info('metodo updateFaq attivato');
         $validatedData = $request->validated();
        
         if($this->faqModel->updateFaq($validatedData, $id))
         {
-            Log::info('FAQ modificata correttamente, reindirizzamento a gestioneFaq');
             return response()->json(['redirect' => route('gestioneFaq')]); 
         } 
        else
        {
-            Log::error('Errore durante la modifica della FAQ');
             return response()->json(['error' => 'Regole non rispettate.'], 422);
         }
     }
@@ -134,44 +136,63 @@ class AdminController extends Controller
         $clinici=$this->cliniciModel->getClinici();
         return view('gestioneClinici')->with('clinici',$clinici); 
     }
+
     //AGGIUNGI CLINICO
     public function viewNuovoClinico()
     {
         return view('newClinico');
     }
+
+
     // Elimina un clinico
-    public function eliminaClinico($id): RedirectResponse
+    public function eliminaClinico($userClin): RedirectResponse
     {
-        if(!$this->cliniciModel->deleteClinico($id))        
-            return redirect()->back()->with('success', 'Clinico eliminato con successo.');
-        else
+        if($this->cliniciModel->deleteClinico($userClin)) {   
+            
+            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+        }
+        else {
             return redirect()->back()->with('error', 'Errore durante l\'eliminazione del clinico.');
+        }
         
     }
-    public function storeClinico(NewClinicoRequest $request): RedirectResponse
-    {
-        log::info('metodo storeClinico del controller attivato');
-        $validatedData = $request->validated();
-        if($this->cliniciModel->storeClinico($validatedData))
-            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
-        else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante il salvataggio del clinico.');
+
+    public function viewNuoveAssociazioni($userClin) : View {
+
+        $clinici = $this->cliniciModel->getCliniciExcept($userClin);
+        $pazienti = $this->cliniciModel->getPazientiByClin($userClin);
+
+        return view('nuoveAssocClinico')
+            ->with('userClin', $userClin)
+            ->with('clinici', $clinici)
+            ->with('pazienti', $pazienti);
     }
+
+
+    public function storeClinico(NewClinicoRequest $request): JsonResponse
+    {
+        $validatedData = $request->validated();
+        if($this->cliniciModel->storeClinico($validatedData)){
+            return response()->json(['redirect' => route('gestioneClinici')]);
+        }else
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
+    }
+
+
     public function viewAggiornaClinico($userClin)
     {
         $clinico = $this->cliniciModel->getClinico($userClin);
         return view('editClinico')->with('clinico', $clinico);
     }
-    public function updateClinico(UpdateClinicoRequest  $request ,$userClin)
+
+
+    public function updateClinico(UpdateClinicoRequest  $request ,$userClin):JsonResponse
     {
-        
-        log::info('metodo updateClinico del controller attivato');
         $validatedData = $request->validated();
-        log::info("dati validati");
         if($this->cliniciModel->updateClinico($validatedData, $userClin))
-            return redirect()->action([AdminController::class, 'viewGestioneClinici']);
+            return response()->json(['redirect' => route('gestioneClinici')]);
         else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
+            return response()->json(['error' => 'Regole non rispettate.'], 422);
     }
 
     #ANALISI DEI DATI
@@ -179,14 +200,14 @@ class AdminController extends Controller
     {
         $pazienti = $this->pazientiModel->getPazienti();
         foreach ($pazienti as $paziente) {
-            $paziente->numeroCambiTerapia = $this->getNumeroCambiTerapia($paziente->username);
+            $paziente->numeroCambiTerapia = $this->pazientiModel->getNumeroCambiTerapia($paziente->username);
+            $disturbi=                      $this->cartelleModel->getDisturbiByPaz($paziente->username);
+            $paziente->mediaEventiDiDisturbi = $this->pazientiModel->mediaEventiDiDisturbi($paziente,$disturbi);
         }
         $mediaPazientiPerClinico = $this->cliniciModel->mediaPazientiPerClinico();
-        $mediaDisturbiPerPaziente = $this->pazientiModel->mediaDisturbiMotoriPerPaziente();
         $disturbiMotori = $this->disturbiModel->getDisturbi();
         return view('analisiDati')
             ->with('mediaPazientiPerClinico',$mediaPazientiPerClinico)
-            ->with('mediaDisturbiPerPaziente',$mediaDisturbiPerPaziente)
             ->with('disturbiMotori',$disturbiMotori)
             ->with('pazienti', $pazienti);
     }
@@ -195,27 +216,18 @@ class AdminController extends Controller
         $numeroEpisodi = Episodio::where('disturbo', $id)->count();
         return response()->json(['numeroEpisodi' => $numeroEpisodi]);
     }
-    public function getNumeroCambiTerapia($username) {
-        $numeroTerapie = Terapia::where('paziente', $username)->count();
-        $numeroCambiTerapia = $numeroTerapie - 1;
-        return $numeroCambiTerapia;
-    }
 
 ####################################################################################################################
 
     //DISTURBI
     public function viewDisturbi()
     {
-        Log::info('metodo viewDisturbo attivato');
         $disturbi = $this->disturbiModel->getDisturbi();
         return view('gestioneDisturbi')->with('disturbi', $disturbi);
     }
 
     public function storeDisturbo(DisturboRequest $request): JsonResponse
     {
-
-
-        Log::info('metodo storeDisturbo attivato');
         $validatedData = $request->validated();
 
 
@@ -250,6 +262,7 @@ class AdminController extends Controller
     public function updateDisturbo(DisturboRequest $request): JsonResponse
     {
         $validated = $request->validated();
+        $validated['id'] = $request->input('id');
 
         $riuscito = $this->disturbiModel->updateDisturbo($validated);
 
@@ -271,29 +284,26 @@ class AdminController extends Controller
         return view('gestioneFarmaciAttivita')->with('farmaci', $farmaci)->with('attivita',$attivita);
 
     }
-    
 
     public function storeFarmaco(FarmacoRequest $request): JsonResponse
     {
+
         $validatedData = $request->validated();
-        Log::info('metodo storeFarmaco attivato');
         $riuscito = $this->farmaciModel->storeFarmaco($validatedData);
 
         if ($riuscito) {
             return response()->json(['redirect' => route('gestioneFarmaciAttivita')]); 
+            //valorizza il data.redirect nel doFormValidation
 
         } else {
             return response()->json(['error' => 'Errore durante l\'aggiunta del farmaco.'], 422);
         }
     }    
 
-    public function deleteFarmaco(Request $request)
+    public function deleteFarmaco($farmId)
     {
-        $validated = $request->validate([
-            'idDel' => 'required',
-        ]);
-
-        $riuscito = $this->farmaciModel->deleteFarmaco($validated);
+        
+        $riuscito = $this->farmaciModel->deleteFarmaco($farmId);
 
         if ($riuscito) {
             return redirect()->route('gestioneFarmaciAttivita');
@@ -305,6 +315,7 @@ class AdminController extends Controller
     public function updateFarmaco(FarmacoRequest $request): JsonResponse
     {
         $validated = $request->validated();
+        $validated['id'] = $request->input('id');
 
         $riuscito = $this->farmaciModel->updateFarmaco($validated);
 
@@ -320,10 +331,8 @@ class AdminController extends Controller
     //attivita
     
     public function storeAttivita(AttivitaRequest $request):JsonResponse{
-        Log::info($request);
+        
         $validatedData = $request->validated();
-        Log::info('metodo storeAttivita attivato');
-
         $riuscito = $this->attivitaModel->storeAttivita($validatedData);
 
         if ($riuscito) {
@@ -333,13 +342,10 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteAttivita(Request $request)
+    public function deleteAttivita($attId)
     {
-        $validated = $request->validate([
-            'idDel' => 'required',
-        ]);
-
-        $riuscito = $this->attivitaModel->deleteAttivita($validated);
+        
+        $riuscito = $this->attivitaModel->deleteAttivita($attId);
 
         if ($riuscito) {
             return redirect()->route('gestioneFarmaciAttivita');
@@ -350,8 +356,8 @@ class AdminController extends Controller
 
     public function updateAttivita(AttivitaRequest $request):JsonResponse
     {
-        Log::info($request);
         $validated = $request->validated();
+        $validated['id'] = $request->input('id');
 
         $riuscito = $this->attivitaModel->updateAttivita($validated);
 

@@ -7,9 +7,9 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Resources\Paziente;
+use Illuminate\Validation\Rule;
 
-
-class NewPazienteRequest extends FormRequest
+class UpdatePazienteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,23 +26,26 @@ class NewPazienteRequest extends FormRequest
      */
     public function rules(): array
     {
+        $username = $this->route('username');
         return [
             'nome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'cognome' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
-            'dataNasc' => 'required|date|before:today|after:1900-01-01|date_format:Y-m-d',
+            'dataNasc' => 'required|date|before:today|after:1900-01-01',
             'genere' => 'required|min:0|max:1',
             'via' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'civico' => 'required|string|max:5',
             'citta' => 'required|max:30|regex:/^[A-Za-zÀ-ÿ\s]+$/',
             'prov' => 'required|max:2',
-            'telefono' => 'required|min:10|max:15|regex:/^(\+39)?\s?3\d{2}\s?\d{6,7}$/',
-            'email' => 'required|email|max:50|unique:paziente,email',
-            'username' => 'required|max:20|unique:user,username',
-            'clinico' => 'required',
+            'telefono' => 'required|min:9|max:15|regex:/^(\+39)?\s?3\d{2}\s?\d{6,7}$/',
+            'email' => [
+                'required',
+                'email',
+                'max:50',
+                Rule::unique('paziente', 'email')->ignore($username, 'username')
+            ],
         ];
     }
-
-
+    
     protected function failedValidation(Validator $validator): HttpResponseException
     {
         throw new HttpResponseException(response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY));

@@ -15,32 +15,32 @@
     <ul id="listaPazienti" class="mb-4 list-none">
         @isset($pazienti)
             @foreach ($pazienti as $paziente)
+            @if($paziente)
                 <li class="paziente flex justify-between items-center bg-white p-2 rounded-lg mb-2">
                     <span class="font-bold">{{ $paziente->nome . " " . $paziente->cognome }}</span>
                     <div class="flex mr-2 gap-x-4">
-                        <form action="{{ route('eliminaPaziente', $paziente->username) }}" method="POST" class="delete-form">
+                        <form action="{{ route('eliminaPaziente', $paziente->username) }}" method="POST" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo paziente?');">
                             @csrf
                             <button type="submit">
-                                <img src="{{ url('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
+                                <img src="{{ asset('images/btnElimina.png') }}" alt="Elimina" class="w-6 h-6 inline-block">
                             </button>
                         </form>
                     </div>
                 </li>
+            @endif
             @endforeach
         @endisset
     </ul>
 </div>
 
+<script src="{{ asset('js/functions.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Sovrascrive il pulsante "Indietro"
-        //Prendo l'elemento con Id=back_button, a questo elemento sovrascrivo  
-        //l'attributo onclick in modo che quando viene cliccato eseguo la funzione
-        //che imposta window.location.href sulla route {{ route('homeAdmin') }} (window.location.href è una proprietà in JavaScript che rappresenta l'URL della pagina corrente)
-        var backButton = document.getElementById('back_button');
-        backButton.onclick = function() {
-            window.location.href = "{{ route('homeAdmin') }}";
-        };
+        elem_id = "back_button";
+        rotta = "{{ route('homeAdmin') }}";
+        sovrascriviOnClick(elem_id,rotta);
+        
 
         // Conferma per l'eliminazione del paziente:
         //prendo l'elemento form con classe delete-form e gli aggiungo un gestore degli eventi 
@@ -51,9 +51,9 @@
                 event.preventDefault();
             }
         });
-        $(document).ready(function() {
-            // Filtro per cognome jQuery
-            $('#cognomePaziente').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomePaziente
+        
+        // Filtro per cognome jQuery
+        $('#cognomePaziente').on('input', function() { // assegno un gestore di eventi sul campo di input con l'ID cognomePaziente
                                                         //l'evento input si verifica quando il contenuto dell'elemento input cambia.
                 var filter = $(this).val().toLowerCase(); //cognome che sto cercando, lo estraggo dall'input 
                 $('.paziente').each(function() {        //per ogni elemento con classe "paziente" esguo questa funzione
@@ -63,8 +63,10 @@
                     $(this).toggle(cognome.startsWith(filter)); // Mostra o nasconde il paziente in base al filtro
                 });                                             // se per es. cognome.startsWith(filter) restituisce false perchè il cognome 
             }); 
-        });                                                // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
-    });                                                     // preso all'inizio
+                                                       // non inizia per "filter" con $(this).toggle(false) nascondo l'elemento 
+                                                         // preso all'inizio
+    });
+            
 </script>
 
 @endsection

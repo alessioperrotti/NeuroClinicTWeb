@@ -1,20 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\NewMessaggioRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\NewPazienteRequest;
 use App\Models\Resources\Paziente;
+use App\Models\Resources\Messaggio;
 use App\Models\GestoreClinici;
 use App\Models\GestorePazienti;
 use App\Models\GestoreCartelleClin;
 use App\Models\GestoreTerapie;
 use App\Models\GestoreDisturbi;
+use App\Models\GestoreMessaggi;
 use App\Http\Requests\UpdateClinicoRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class ClinController extends Controller
@@ -24,6 +29,7 @@ class ClinController extends Controller
     protected $gestCartModel;
     protected $gestTerModel;
     protected $gestDistModel;
+    protected $gestMsgModel;
 
     public function __construct()
     {
@@ -32,21 +38,35 @@ class ClinController extends Controller
         $this->gestCartModel = new GestoreCartelleClin;
         $this->gestTerModel = new GestoreTerapie;
         $this->gestDistModel = new GestoreDisturbi;
+        $this->gestMsgModel = new GestoreMessaggi;
+
     }
 
     public function index(): View {
         $user = Auth::user();
         $clinico = $user->clinico;
-        if ($user->password == Hash::make('stdpassword')) {  /* se la password è quella di 
+        if (Hash::check('stdpassword', $user->password)) {  /* se la password è quella di 
                                                                 default si mostrerà un alert */
-            $changed = true;
+            $changed = false;
         } 
         else {
-            $changed = false;
+            $changed = true;
         }
+
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti(Auth::user()->username);
+        $nuoviMsg = 0;
+
+        foreach($messaggiRic as $msg) {
+            if(!$msg->letto){
+                $nuoviMsg += 1;
+            }
+        }
+
+
         return view('homeClinico')
             ->with('clinico', $clinico)
-            ->with('changed', $changed);
+            ->with('changed', $changed)
+            ->with('nuoviMsg', $nuoviMsg);
     }
 
     public function addPaziente(): View {
@@ -91,17 +111,37 @@ class ClinController extends Controller
         $paziente = Paziente::find($userPaz);
         $episodi = $this->gestCartModel->getEpisodiByPaz($userPaz)->sortByDesc('data');
         $disturbi = $this->gestCartModel->getDisturbiByPaz($userPaz);
-        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terapia = $this->gestTerModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
         $farmaci = $this->gestTerModel->getFarmaciFreqByTer($terId);
         $attivita = $this->gestTerModel->getAttivitaFreqByTer($terId);
+
+        // se non ci sono disturbi, li setto a null piuttosto che mandare una collection vuota
+        if ($disturbi->every(function ($value) {
+            return is_null($value);
+        })) {
+            $disturbi = null;
+        }
+
+        $disturbiSel = new Collection;  /* disturbi per la select di filtro episodi (sono i disturbi 
+                                                            associati agli episodi del paziente) */
+
+        if(!$episodi->isEmpty()) {
+            foreach($episodi as $episodio) {
+                $disturbo = $episodio->disturbo;
+                $disturbiSel->add($disturbo);
+            }
+
+            $disturbiSel = $disturbiSel->unique('id');
+        }
 
         return view('cartellaClin2')
                 ->with('paziente', $paziente)
                 ->with('episodi', $episodi)
                 ->with('disturbi', $disturbi)
                 ->with('farmaci', $farmaci)
-                ->with('attivita', $attivita);
+                ->with('attivita', $attivita)
+                ->with('disturbiSel', $disturbiSel);
     }
 
     public function showModTerapia($userPaz) : View {
@@ -109,7 +149,7 @@ class ClinController extends Controller
         $paziente = Paziente::find($userPaz);
         $farmaci = $this->gestTerModel->getFarmaci();
         $attivita = $this->gestTerModel->getAttivita();
-        $terapia = $this->gestCartModel->getTerapiaAttivaByPaz($userPaz);
+        $terapia = $this->gestTerModel->getTerapiaAttivaByPaz($userPaz);
         $terId = $terapia->id;
         $farmTer = $this->gestTerModel->getFarmaciFreqByTer($terId);
         $attTer = $this->gestTerModel->getAttivitaFreqByTer($terId);
@@ -147,8 +187,7 @@ class ClinController extends Controller
 
     public function storeDiagnosi($userPaz) : RedirectResponse {
 
-        $validatedData = $_POST;
-        Log::info($validatedData);
+        $validatedData = $_POST; //avrò i value delle checkbox checked, quindi gli id dei disturbi diagnosticati
 
         if ($this->gestTerModel->storeDiagnosi($userPaz, $validatedData)) {
             return redirect()->action([ClinController::class, 'showCartClinica'], ['userPaz' => $userPaz]);
@@ -165,20 +204,67 @@ class ClinController extends Controller
                 ->with('clinico', $clinico);
     }
 
-    public function updateClinico(UpdateClinicoRequest  $request) : RedirectResponse
-    {
+    public function updateClinico(UpdateClinicoRequest  $request) : JsonResponse {
         
         $validatedData = $request->validated();
         $userClin = Auth::user()->clinico->username;
         
-        if($this->gestClinModel->updateClinico($validatedData, $userClin))
-            return redirect()->action([ClinController::class, 'index']);
-        else
-            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'aggiornamento del clinico.');
+        if($this->gestClinModel->updateClinico($validatedData, $userClin)) {
+            return response()->json(['redirect' => route('homeClinico')]);
+        }
+        else {
+            return response()->json(['error' => 'Errore durante l\'aggiunta del paziente.'], 422);
+        }
     }
 
     public function showPassChange () : View {
         
         return view('cambiaPwdClinico');
+    }
+
+    public function showMessaggi() : View {
+
+        $userClin = Auth::user()->username;
+        $messaggiRic = $this->gestMsgModel->getMsgRicevuti($userClin)->sortByDesc('created_at');
+        $messaggiInv = $this->gestMsgModel->getMsgInviati($userClin)->sortByDesc('created_at');
+        $pazienti = $this->gestClinModel->getPazientiByClin($userClin);
+
+        foreach($messaggiRic as $msg) {
+            $messaggio = Messaggio::find($msg->id);
+            $messaggio->segnaLetto();
+        }
+        
+        return view('messaggiClinico')
+            ->with('messaggiRic', $messaggiRic)
+            ->with('messaggiInv', $messaggiInv)
+            ->with('pazienti', $pazienti);
+        
+            
+    }
+
+    public function sendMessaggio(NewMessaggioRequest $request) : RedirectResponse {
+        $validatedData = $request->validated();
+        
+        if ($this->gestMsgModel->sendMessaggio($validatedData)) {
+            return redirect()->action([ClinController::class, 'showMessaggi']);
+        }
+        else {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante l\'invio del messaggio.');
+        }
+    }
+
+    public function deleteMessaggio($msgId) : RedirectResponse {
+        
+        $msg = Messaggio::find($msgId);
+        $msg->eliminatoClin = true;
+
+        if($msg->eliminatoPaz) {  // se è stato eliminato anche dal paziente lo elimino dal db
+            $msg->delete();
+        }
+        else {
+            $msg->save();
+        }
+
+        return redirect()->action([ClinController::class, 'showMessaggi']);
     }
 }

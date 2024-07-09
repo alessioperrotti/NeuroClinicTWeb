@@ -1,17 +1,12 @@
 <?php
 
 namespace App\Http\Requests;
-
-
-use Illuminate\Foundation\Http\FormRequest;
-// Aggiunti per response JSON
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Support\Facades\Log;
-use Psy\Readline\Hoa\Console;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 
-class FarmacoRequest extends FormRequest
+class NewEventoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +24,12 @@ class FarmacoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:30',
-            'descr' => 'required|max:200',
+            'data' => 'required|date|before:tomorrow|after:2000-01-01|date_format:Y-m-d',
+            'ora' => 'required|date_format:H:i',
+            'durata' => 'required|integer|min:1|between:1,600',
+            'intensita' => 'required|integer|min:1|max:10',
+            'disturbo' => 'required',
+            'paziente' => 'required',
         ];
     }
 

@@ -36,6 +36,25 @@ class GestoreTerapie extends Model
         $attivita = Attivita::all();
         return $attivita;
     }
+    
+    public function getTerapiaAttivaByPaz($userPaz): Terapia {
+
+        $terapia = Terapia::where('paziente', $userPaz)->orderBy('data', 'desc')->first();
+
+        if($terapia != null) {  
+            return $terapia;
+        }
+        else {  // se non esiste terapia attiva (perchè il paziente è nuovo), ne creiamo una "vuota"
+            $data = Carbon::now()->toDateTimeString();
+            $terapia = new Terapia([
+                'data' => $data,
+                'paziente' => $userPaz
+            ]);
+            $terapia->save();
+            return $terapia;
+        }
+        
+    }
 
     public function getFarmaciFreqByTer ($terId) : array {  // restituisce farmaci con frequenza
 
@@ -132,11 +151,22 @@ class GestoreTerapie extends Model
     
             DB::beginTransaction();
             try{
-                foreach($validatedData['disturbo'] as $item){
+
+                if(isset($validatedData['disturbo'])) {
+                    foreach($validatedData['disturbo'] as $item){
+                        $diagnosi = new Diagnosi([
+                            'data' => $data,
+                            'paziente' => $userPaz,
+                            'disturbo' => $item
+                        ]);
+                        $diagnosi->save();
+                    }
+                } else {
+                    
                     $diagnosi = new Diagnosi([
                         'data' => $data,
                         'paziente' => $userPaz,
-                        'disturbo' => $item
+                        'disturbo' => null
                     ]);
                     $diagnosi->save();
                 }
@@ -148,6 +178,12 @@ class GestoreTerapie extends Model
                     DB::rollBack();
                     return false;
             }
+    }
+
+    public function getTerapieByPaz($userPaz) : Collection {
+        
+        $terapie = Terapia::where('paziente', $userPaz)->get();
+        return $terapie;
     }
     
 }

@@ -692,12 +692,51 @@ class DatabaseSeeder extends Seeder
             ['paziente' => 'clarkkent', 'disturbo' => 8, 'data' => '2024-05-01 12:00:00'],
             ['paziente' => 'brucewayne', 'disturbo' => 3, 'data' => '2024-03-01 13:15:00'],
             ['paziente' => 'pazipazi', 'disturbo' => 2, 'data' => '2024-04-01 14:30:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 3, 'data' => '2024-04-01 14:30:00'],
+            ['paziente' => 'pazipazi', 'disturbo' => 1, 'data' => '2024-04-01 14:30:00'],
             ['paziente' => 'dianaprince', 'disturbo' => 14, 'data' => '2024-01-01 15:45:00'],
             ['paziente' => 'peterparker', 'disturbo' => 4, 'data' => '2024-04-01 09:50:00'],
             ['paziente' => 'maryjane', 'disturbo' => 8, 'data' => '2024-02-01 11:05:00'],
             ['paziente' => 'clarkkent', 'disturbo' => 3, 'data' => '2024-03-01 12:20:00'],
             ['paziente' => 'brucewayne', 'disturbo' => 2, 'data' => '2024-05-01 13:35:00'],
             ['paziente' => 'pazipazi', 'disturbo' => 14, 'data' => '2024-01-01 14:50:00'],
+        ]);
+
+
+        DB::table('faq')->insert([
+            
+            [
+                'domanda' => 'Che tipo di trattamenti offrite per i pazienti con ictus?',
+                'risposta' => 'Offriamo trattamenti personalizzati che includono terapia fisica, terapia occupazionale e logopedia per migliorare la mobilità, la funzionalità e la comunicazione.'
+            ],
+            [
+                'domanda' => 'Quali qualifiche hanno i vostri terapisti?',
+                'risposta' => 'I nostri terapisti sono tutti laureati in fisioterapia, terapia occupazionale o logopedia e hanno specializzazioni in riabilitazione neurologica.'
+            ],
+            [
+                'domanda' => 'Quanto durano generalmente le riabilitazioni?',
+                'risposta' => 'Le sessioni di riabilitazione durano generalmente da due a dodici mesi, a seconda delle necessità specifiche del paziente.'
+            ],
+            [
+                'domanda' => 'Quali sono i benefici della riabilitazione neurologica?',
+                'risposta' => 'La riabilitazione neurologica aiuta a migliorare la mobilità, la forza, la coordinazione e la qualità della vita dei pazienti con lesioni o malattie neurologiche.'
+            ],
+            [
+                'domanda' => 'Come posso prenotare una visita?',
+                'risposta' => "Può prenotare una visita chiamando il nostro numero di telefono o contattandoci all'indirizzo e-mail indicato sul nostro sito web."
+            ],
+            [
+                'domanda' => 'Quali servizi offrite per i pazienti con sclerosi multipla?',
+                'risposta' => 'Offriamo programmi di esercizi personalizzati, terapia occupazionale e supporto psicologico per aiutare i pazienti con sclerosi multipla a gestire i sintomi e migliorare la qualità della vita.'
+            ],
+            [
+                'domanda' => 'Avete programmi specifici per i bambini?',
+                'risposta' => 'Sì, abbiamo programmi di riabilitazione specifici per bambini con disturbi neurologici, inclusi terapia fisica, occupazionale e logopedia.'
+            ],
+            [
+                'domanda' => 'Quali tecnologie innovative utilizzate?',
+                'risposta' => 'Utilizziamo tecnologie innovative come la realtà virtuale, la robotica riabilitativa e l\'elettrostimolazione per ottimizzare i risultati della riabilitazione.'
+            ]
         ]);
         
         

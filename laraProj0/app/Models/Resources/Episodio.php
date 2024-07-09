@@ -11,6 +11,16 @@ class Episodio extends Model
     protected $table = 'episodio';
     public $timestamps = false;
 
+    protected $fillable = [
+        'id',
+        'data',
+        'ora',
+        'durata',
+        'intensita',
+        'paziente',
+        'disturbo',
+    ];
+
     public function paziente()
     {
         return $this->belongsTo(Paziente::class, 'paziente', 'username');

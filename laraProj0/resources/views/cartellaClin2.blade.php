@@ -41,22 +41,27 @@
         <h3 class="text-2xl mt-10 font-semibold">Disturbi diagnosticati</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
-            @isset($disturbi)
-                @foreach($disturbi as $disturbo)
-                <li class="mb-4">{{ $disturbo->nome}}
-                @endforeach
-            @endisset
-            @if($disturbi->isEmpty())
+
+            @if($disturbi == null)
                 <li ><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
+            @else
+                @foreach($disturbi as $disturbo)
+                    @if($disturbo)
+                        <li class="mb-4">{{ $disturbo->nome}}
+                    @endif
+                @endforeach
             @endif
+            
         </ul>
         <h3 class="text-2xl font-semibold mt-10">Terapia attiva</h3>
         <hr class="h-0.5 my-2 bg-cyan-600">
         <ul style="list-style-type: disc" class="ml-6">
             @isset($farmaci)
-                @foreach($farmaci as $farmaco)   
-                <li class="mb-4"><p class="font-semibold">{{ $farmaco['farmaco']->nome ." (". $farmaco['freq'] . ")"}}</p>
-                    <p class="text-gray-500">{{ $farmaco['farmaco']->descr}}</p>
+                @foreach($farmaci as $farmaco)
+                    @if($farmaco)   
+                    <li class="mb-4"><p class="font-semibold">{{ $farmaco['farmaco']->nome ." (". $farmaco['freq'] . ")"}}</p>
+                        <p class="text-gray-500">{{ $farmaco['farmaco']->descr}}</p>
+                    @endif
                 @endforeach
             @endisset
 
@@ -66,13 +71,15 @@
             
             @isset($attivita)
                 @foreach($attivita as $att)
-                <li class="mb-4"><p class="font-semibold">{{ $att['attivita']->nome ." (". $att['freq'] . ")"}}</p>
-                    <p class="text-gray-500">{{ $att['attivita']->descr}}</p>
+                    @if($att)
+                    <li class="mb-4"><p class="font-semibold">{{ $att['attivita']->nome ." (". $att['freq'] . ")"}}</p>
+                        <p class="text-gray-500">{{ $att['attivita']->descr}}</p>
+                    @endif
                 @endforeach
             @endisset
 
             @if($attivita == null)
-                <li><p class="font-semibold mt-2">Non ci sono attvità pianificate.</p>
+                <li><p class="font-semibold mt-2">Non ci sono attività pianificate.</p>
             @endif
         </ul>
     </div>
@@ -90,21 +97,21 @@
     </div>
 </div>
 <hr class="h-1 my-10 bg-cyan-600 m-28">
+
+@if(!$episodi->isEmpty())
 <h2 class="text-3xl font-bold ml-5 mt-5 mb-8">Episodi registrati</h2>
 <div class="flex mx-[15%] justify-between">
     <div name="filtro1" class="space-x-2 flex items-center">
         <p class="h-min text-lg font-semibold">Filtra per disturbo: </p>
 
         <select name="filtroDisturbo[]" multiple class="inline bg-white rounded-md h-min min-w-[100px] p-1 border border-cyan-600" size=2>
-            @isset($disturbi)
-                @foreach($disturbi as $disturbo)
-                <option value="{{ $disturbo->nome}}">{{ $disturbo->nome}}</option>
+            @isset($disturbiSel)
+                @foreach($disturbiSel as $disturboSel)
+                    @if($disturboSel)
+                        <option value="{{ $disturboSel->nome}}">{{ $disturboSel->nome}}</option>
+                    @endif
                 @endforeach
             @endisset
-
-            @if($disturbi == null)
-                <li><p class="font-semibold">Non ci sono disturbi diagnosticati.</p>
-            @endif
         </select>
     </div>
     <div name="filtro2" class="space-x-2 flex items-center">
@@ -147,6 +154,7 @@
 
     @isset($episodi)
     @foreach ($episodi as $episodio)
+    @if($episodio)
         <div class="flex justify-between items-center bg-white p-4 rounded-lg mb-2" data-disturbo="{{$episodio->disturbo->nome}}" data-intensita="{{$episodio->intensita}}">
             <div class="flex flex-row space-x-2">
                 <p class="font-bold">{{ $episodio->disturbo->nome }}</p>
@@ -154,21 +162,29 @@
             </div>
             <p class="text-gray-500">del {{\Carbon\Carbon::parse($episodio->data)->format('d-m-Y')}} alle {{\Carbon\Carbon::parse($episodio->ora)->format('H:i')}}</p>
         </div>
+    @endif
     @endforeach
     @endisset
-
-    @if($episodi == null)
-        <li><p class="font-semibold">Non ci sono episodi segnalati.</p>
     @endif
 
+    @if($episodi->isEmpty())
+    <div class="flex justify-center">
+        <h2 class="text-2xl font-bold ml-5 mt-2 mb-12">Gli episodi registrati verranno mostrati qui</h2>
+    </div>
+    @endif
+
+    
+
 </div>
+
+<script src="{{ asset('js/functions.js') }}"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
-        var backButton = document.getElementById('back_button');
-        backButton.onclick = function() {
-            window.location.href = "{{ route('listaPazienti') }}";
-        };
+
+        elem_id = "back_button";
+        rotta = "{{ route('listaPazienti') }}";
+        sovrascriviOnClick(elem_id,rotta);
 
         // -- Meccanismo di filtro --
         var disturbiSelect = $('select[name="filtroDisturbo[]"]');

@@ -6,57 +6,31 @@
     <h1 class="text-black font-bold text-5xl mx-8 mt-4">Aggiorna dati</h1>
     <div class="p-8 max-w-3xl mx-auto bg-white rounded-xl shadow-lg mt-12">
 
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('paziente.update', $paziente->username)}}">
+        <form id="aggiorna-form" method="POST" action="{{ route('paziente.update', $paziente->username)}}">
             @csrf
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
                 <div>
                     <label class="block text-gray-700 font-semibold">Nome</label>
                     <input id="nome" name="nome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->nome}}" >
-                    @if ($errors->first('nome'))
-                    <ul class="errors">
-                        @foreach ($errors->get('nome') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Cognome</label>
                     <input id="cognome" name="cognome" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->cognome}}" >
-                    @if ($errors->first('cognome'))
-                    <ul class="errors">
-                        @foreach ($errors->get('cognome') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Data di nascita</label>
                     <input id="dataNasc" name="dataNasc" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->dataNasc}}" >
-                    @if ($errors->first('dataNasc'))
-                    <ul class="errors">
-                        @foreach ($errors->get('dataNasc') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
+                    
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Genere</label>
                     <select id="genere" name="genere" size="1" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" >
-                        <option value="M"  {{ $paziente->genere == 'M' ? 'selected' : '' }}>Maschio</option>
-                        <option value="F"  {{ $paziente->genere == 'F' ? 'selected' : '' }}>Femmina</option>
+                        <option value="M"  {{ $paziente->genere == 'M' ? 'selected' : '' }}>Uomo</option>
+                        <option value="F"  {{ $paziente->genere == 'F' ? 'selected' : '' }}>Donna</option>
                         <option value="A"  {{ $paziente->genere == 'A' ? 'selected' : '' }}>Altro</option>
                     </select>
                 </div>
@@ -64,37 +38,19 @@
                 <div>
                     <label class="block text-gray-700">Via</label>
                     <input id="via" name="via" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->via}}" >
-                    @if ($errors->first('via'))
-                    <ul class="errors">
-                        @foreach ($errors->get('via') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
+                    
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Civico</label>
                     <input id="civico" name="civico" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->civico}}" >
-                    @if ($errors->first('civico'))
-                    <ul class="errors">
-                        @foreach ($errors->get('civico') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
+                    
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Città</label>
                     <input id="citta" name="citta" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->citta}}" >
-                    @if ($errors->first('citta'))
-                    <ul class="errors">
-                        @foreach ($errors->get('citta') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
+                    
                 </div>
 
                 <div>
@@ -216,26 +172,14 @@
                 <div>
                     <label class="block text-gray-700">Telefono</label>
                     <input id="telefono" name="telefono" type="tel" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->telefono}}">
-                    @if ($errors->first('telefono'))
-                    <ul class="errors">
-                        @foreach ($errors->get('telefono') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
+                    
                 </div>
 
                 <div>
                     <label class="block text-gray-700">E-Mail</label>
                     <input id="email" name="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" value="{{ $paziente->email}}">
-                    @if ($errors->first('email'))
-                    <ul class="errors">
-                        @foreach ($errors->get('email') as $message)
-                        <li class="text-red">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
-                </div>
+                    
+                </div>                
             </div>
             <div class="flex justify-center mt-8 gap-y-4 4  gap-x-24">
                 <input name="annulla" type="reset" value="Annulla Modifiche" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-400 cursor-pointer"></input>
@@ -244,4 +188,34 @@
         </form>
     </div>
 </div>    
+
+<script src="{{ asset('js/functions.js') }}"></script>
+
+<script>
+    
+    function setupValidation(actionUrl, formId) {
+            // Aggiunge un listener per l'evento 'blur' a tutti gli input del form
+            $("#" + formId + " :input").on('blur', function() {
+                // Ottiene l'ID e il nome dell'input attualmente in focus
+                var formElementId = $(this).attr('id');
+                var inputName = $(this).attr('name');
+                // Chiama la funzione di validazione per l'elemento corrente
+                doElemValidation(formElementId, actionUrl, formId, inputName);
+            });
+            
+            // Aggiunge un listener per l'evento 'submit' del form
+            $("#" + formId).on('submit', function(event) {
+            // Previene l'invio predefinito del form
+            event.preventDefault();
+            // Chiama la funzione di validazione per l'intero form
+            doFormValidation(actionUrl, formId);
+            });
+        }
+
+        $(function() {
+            var actionUrl = "{{ route('paziente.update',  $paziente->username) }}";
+            var formId = 'aggiorna-form';
+            setupValidation(actionUrl, formId);
+        });
+</script>
 @endsection

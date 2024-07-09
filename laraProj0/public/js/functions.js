@@ -1,5 +1,20 @@
 
 
+//trova l'id dell'elemento con nome inputName all'interno del form con id formId
+function findInputByName(formId, inputName) {
+    var inputValue = $('#' + formId + ' :input[name="' + inputName + '"]').attr('id');
+    return inputValue;
+}
+
+
+//funzione per sovrascrivere l'evento onclick di un elemento
+function sovrascriviOnClick(elem_id, rotta) {
+    var elem = document.getElementById(elem_id);
+    elem.onclick = function () {
+        window.location.href = rotta;
+    };
+}
+
 
 function getErrorHtml(elemErrors) {
     if ((typeof (elemErrors) === 'undefined') || (elemErrors.length < 1)) //guarda se ci sono elementi da visualizzare 
@@ -16,7 +31,7 @@ function doElemValidation(id, actionUrl, formId, inputName) {
     //dick prende in input l'id dell'elemento, url, lid della form
     var formElems;
 
-    //mandiamo al server il token e l'elemento da validare.
+    //mandiamo al server il token CSRF e l'elemento da validare.
     //
     function addFormToken() {
         var tokenVal = $("#" + formId + " input[name=_token]").val();
@@ -25,7 +40,7 @@ function doElemValidation(id, actionUrl, formId, inputName) {
     }
 
     function sendAjaxReq() {
-        console.log("richiesta ajax");
+       
         $.ajax({
             type: 'POST',
             url: actionUrl,
@@ -35,10 +50,8 @@ function doElemValidation(id, actionUrl, formId, inputName) {
                 if (data.status === 422) { //codice per errori di validazione. è sempre una condizione di errore
                     var errMsgs = JSON.parse(data.responseText); //definiamo il messaggio di errore.
                     var inputName = $("#" + id).attr('name');
-                    // $("#" + id).find('.errors').html(' '); //risaliamo al parent e cerchiamo una classe .errors. poi cancelliamo gli errori vecchi
-                    $("#" + id).next('.errors').html(' '); //non cancelliamo tutti gli errori perche poi non possiamo vedere gli errori di tutti gli elementi
+                    $("#" + id).next('.errors').html(' '); //cancelliamo gli errori vecchi di questo elemento
                     $("#" + id).after(getErrorHtml(errMsgs[inputName])); //con after passiamo l'errore dell'id che stiamo analizando
-                    
                 }
             },
             contentType: false,
@@ -57,11 +70,11 @@ function doElemValidation(id, actionUrl, formId, inputName) {
 
 }
 
+//funzione per validare un form
 function doFormValidation(actionUrl, formId) {
-    console.log("doFormValidationInizio");
     var form = new FormData(document.getElementById(formId));
     for (var pair of form.entries()) {
-        console.log(pair[0] + ': ' + pair[1]);
+        console.log(pair[0] + ': ' + pair[1]);//Cicla attraverso le coppie chiave-valore del FormData e le stampa nella console per debug.
     }
     $.ajax({
         type: 'POST',
@@ -71,26 +84,33 @@ function doFormValidation(actionUrl, formId) {
         error: function (data) {
             if (data.status === 422) {
                 var errMsgs = JSON.parse(data.responseText);
-                $.each(errMsgs, function (id) {
+                
+                //gli errMsgs sono un oggetto con chiave il nome dell'input e valore un array di errori
+                $.each(errMsgs, function (name) {
+                    id = findInputByName(formId, name);
                     $("#" + id).parent().find('.errors').html(' ');
-                    $("#" + id).after(getErrorHtml(errMsgs[id]));
+                    $("#" + id).after(getErrorHtml(errMsgs[name]));
+                    console.log(getErrorHtml(errMsgs[name]));
                 });
-                console.log("tutto male");
             } else {
                 console.log("Errore con status diverso da 422: ", data);
             }
         },
         success: function (data) { //se non c'è una condizione di errore il server reindirizza al processo di errore
-            console.log("tutto bene");
+            alert('Operazione andata a buon fine');
+
+            //window.location restituisce la pagina corrente
             window.location.replace(data.redirect);
         },
 
         contentType: false,
         processData: false
+
     });
-    console.log("doFormValidationFine");
 
 }
+
+
 
 
 

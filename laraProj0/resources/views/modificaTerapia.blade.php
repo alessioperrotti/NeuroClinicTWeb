@@ -15,28 +15,30 @@
         <div class="flex-col mb-4">
             <ul style="list-style-type: disc" class="ml-6">
             @foreach($farmaci as $farmaco)
-            <li class="mb-2">
-            <div class="space-x-4">
-                <label class="text-base text-gray-800">{{ $farmaco->nome}}</label>
-                <input id={{'f'.$farmaco->id}} type="checkbox" name="farmaco[]" value="{{ $farmaco->nome}}">
-            </div>
-            <!-- div che deve comparire con JavaScript -->
-            <div id="{{'divf'.$farmaco->id}}" class="flex-row space-x-1 hidden my-2">
-                <select disabled name={{"nvolteF".$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
-                    <option value="1 volta">1 volta</option>
-                    <option value="2 volte">2 volte</option>
-                    <option value="3 volte">3 volte</option>
-                    <option value="4 volte">4 volte</option>
-                    <option value="5 volte">5 volte</option>
-                    <option value="6 volte">6 volte</option>
-                </select>
-                <select disabled name={{'periodoF'.$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
-                
-                    <option value="al giorno">al giorno</option>
-                    <option value="a settimana">a settimana</option>
-                </select>
-            </div>
-            </li>
+                @if($farmaco)
+                <li class="mb-2">
+                <div class="space-x-4">
+                    <label class="text-base text-gray-800">{{ $farmaco->nome}}</label>
+                    <input id={{'f'.$farmaco->id}} type="checkbox" name="farmaco[]" value="{{ $farmaco->nome}}">
+                </div>
+                <!-- div che deve comparire con JavaScript -->
+                <div id="{{'divf'.$farmaco->id}}" class="flex-row space-x-1 hidden my-2">
+                    <select disabled name={{"nvolteF".$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                        <option value="1 volta">1 volta</option>
+                        <option value="2 volte">2 volte</option>
+                        <option value="3 volte">3 volte</option>
+                        <option value="4 volte">4 volte</option>
+                        <option value="5 volte">5 volte</option>
+                        <option value="6 volte">6 volte</option>
+                    </select>
+                    <select disabled name={{'periodoF'.$farmaco->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                    
+                        <option value="al giorno">al giorno</option>
+                        <option value="a settimana">a settimana</option>
+                    </select>
+                </div>
+                </li>
+                @endif
             @endforeach
             </ul>
         </div>
@@ -48,26 +50,28 @@
         <div class="flex-col mb-4">
             <ul style="list-style-type: disc" class="ml-6">
             @foreach($attivita as $att)
-            <li class="mb-2">
-                <div class="space-x-4">
-                <label class="text-base text-gray-800">{{ $att->nome}}</label>
-                <input id={{'a'.$att->id}} type="checkbox" name="attivita[]" value="{{ $att->nome}}">
-            </div>
-            <div id="{{'diva'.$att->id}}" class="flex-row space-x-1 hidden my-2">
-                <select disabled name={{"nvolteA".$att->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
-                    <option value="1 volta">1 volta</option>
-                    <option value="2 volte">2 volte</option>
-                    <option value="3 volte">3 volte</option>
-                    <option value="4 volte">4 volte</option>
-                    <option value="5 volte">5 volte</option>
-                    <option value="6 volte">6 volte</option>
-                </select>
-                <select disabled name={{"periodoA".$att->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
-                    <option value="al giorno">al giorno</option>
-                    <option value="a settimana">a settimana</option>
-                </select>
-            </div>
-            </li>
+                @if($att)
+                <li class="mb-2">
+                    <div class="space-x-4">
+                    <label class="text-base text-gray-800">{{ $att->nome}}</label>
+                    <input id={{'a'.$att->id}} type="checkbox" name="attivita[]" value="{{ $att->nome}}">
+                </div>
+                <div id="{{'diva'.$att->id}}" class="flex-row space-x-1 hidden my-2">
+                    <select disabled name={{"nvolteA".$att->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                        <option value="1 volta">1 volta</option>
+                        <option value="2 volte">2 volte</option>
+                        <option value="3 volte">3 volte</option>
+                        <option value="4 volte">4 volte</option>
+                        <option value="5 volte">5 volte</option>
+                        <option value="6 volte">6 volte</option>
+                    </select>
+                    <select disabled name={{"periodoA".$att->id}} class="bg-white inline h-min rounded-md p-1 w-min border border-cyan-600 text-center text-xs">
+                        <option value="al giorno">al giorno</option>
+                        <option value="a settimana">a settimana</option>
+                    </select>
+                </div>
+                </li>
+                @endif
             @endforeach
             </ul>
         </div>

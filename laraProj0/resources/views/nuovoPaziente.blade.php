@@ -101,7 +101,9 @@
                     <select id="clinico" name="clinico" size="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                     @isset($clinici)
                         @foreach($clinici as $clinico)
-                        <option value={{$clinico->username}}>{{$clinico->nome . " " . $clinico->cognome}}</option>
+                            @if($clinico)
+                            <option value={{$clinico->username}}>{{$clinico->nome . " " . $clinico->cognome}}</option>
+                            @endif
                         @endforeach
                     @endisset
                     </select>
